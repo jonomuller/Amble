@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A451CC2E52FC12A3D87D96B6 /* Pods_amble_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB1E6A936296F9D7F4B87E02 /* Pods_amble_iosUITests.framework */; };
 		AFB938AE1E5B2C0000BA3923 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB938AD1E5B2C0000BA3923 /* AppDelegate.swift */; };
 		AFB938B01E5B2C0000BA3923 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB938AF1E5B2C0000BA3923 /* FirstViewController.swift */; };
 		AFB938B21E5B2C0000BA3923 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB938B11E5B2C0000BA3923 /* SecondViewController.swift */; };
@@ -15,6 +16,8 @@
 		AFB938BA1E5B2C0100BA3923 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFB938B81E5B2C0100BA3923 /* LaunchScreen.storyboard */; };
 		AFB938C51E5B2C0100BA3923 /* amble_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB938C41E5B2C0100BA3923 /* amble_iosTests.swift */; };
 		AFB938D01E5B2C0100BA3923 /* amble_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB938CF1E5B2C0100BA3923 /* amble_iosUITests.swift */; };
+		BABE4E1A858C88B49E23D040 /* Pods_amble_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 198EA19E9C3FB8DC4D152762 /* Pods_amble_iosTests.framework */; };
+		DE9F9040BD6A4F2034B3828D /* Pods_amble_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B58CAFB1B39C8534F0C1919D /* Pods_amble_ios.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +38,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		198EA19E9C3FB8DC4D152762 /* Pods_amble_iosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_amble_iosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D39026309A2941CD584AB0A /* Pods-amble-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-amble-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-amble-ios/Pods-amble-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		7C1C1F85E095435FDA9C236A /* Pods-amble-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-amble-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-amble-ios/Pods-amble-ios.release.xcconfig"; sourceTree = "<group>"; };
+		8008B78F5C57D21C5B74C754 /* Pods-amble-iosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-amble-iosTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-amble-iosTests/Pods-amble-iosTests.debug.xcconfig"; sourceTree = "<group>"; };
+		87D2BC0CF3058112E934142B /* Pods-amble-iosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-amble-iosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-amble-iosTests/Pods-amble-iosTests.release.xcconfig"; sourceTree = "<group>"; };
+		9C33EE0FF79A930B6C51BC66 /* Pods-amble-iosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-amble-iosUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-amble-iosUITests/Pods-amble-iosUITests.release.xcconfig"; sourceTree = "<group>"; };
 		AFB938AA1E5B2C0000BA3923 /* amble-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "amble-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB938AD1E5B2C0000BA3923 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AFB938AF1E5B2C0000BA3923 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +58,9 @@
 		AFB938CB1E5B2C0100BA3923 /* amble-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "amble-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB938CF1E5B2C0100BA3923 /* amble_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = amble_iosUITests.swift; sourceTree = "<group>"; };
 		AFB938D11E5B2C0100BA3923 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B58CAFB1B39C8534F0C1919D /* Pods_amble_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_amble_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA3AAFCA03C42F025ED91D63 /* Pods-amble-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-amble-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-amble-iosUITests/Pods-amble-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		FB1E6A936296F9D7F4B87E02 /* Pods_amble_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_amble_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE9F9040BD6A4F2034B3828D /* Pods_amble_ios.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BABE4E1A858C88B49E23D040 /* Pods_amble_iosTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,12 +84,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A451CC2E52FC12A3D87D96B6 /* Pods_amble_iosUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A60990461250D669FF0785A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3D39026309A2941CD584AB0A /* Pods-amble-ios.debug.xcconfig */,
+				7C1C1F85E095435FDA9C236A /* Pods-amble-ios.release.xcconfig */,
+				8008B78F5C57D21C5B74C754 /* Pods-amble-iosTests.debug.xcconfig */,
+				87D2BC0CF3058112E934142B /* Pods-amble-iosTests.release.xcconfig */,
+				EA3AAFCA03C42F025ED91D63 /* Pods-amble-iosUITests.debug.xcconfig */,
+				9C33EE0FF79A930B6C51BC66 /* Pods-amble-iosUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		AFB938A11E5B2C0000BA3923 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +111,8 @@
 				AFB938C31E5B2C0100BA3923 /* amble-iosTests */,
 				AFB938CE1E5B2C0100BA3923 /* amble-iosUITests */,
 				AFB938AB1E5B2C0000BA3923 /* Products */,
+				4A60990461250D669FF0785A /* Pods */,
+				C94B737784ECBF4FA5B8F120 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -128,6 +158,16 @@
 			path = "amble-iosUITests";
 			sourceTree = "<group>";
 		};
+		C94B737784ECBF4FA5B8F120 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B58CAFB1B39C8534F0C1919D /* Pods_amble_ios.framework */,
+				198EA19E9C3FB8DC4D152762 /* Pods_amble_iosTests.framework */,
+				FB1E6A936296F9D7F4B87E02 /* Pods_amble_iosUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +175,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AFB938D41E5B2C0100BA3923 /* Build configuration list for PBXNativeTarget "amble-ios" */;
 			buildPhases = (
+				E1BEAEAA9DC52AC29FE7F295 /* [CP] Check Pods Manifest.lock */,
 				AFB938A61E5B2C0000BA3923 /* Sources */,
 				AFB938A71E5B2C0000BA3923 /* Frameworks */,
 				AFB938A81E5B2C0000BA3923 /* Resources */,
+				6184450DEE754D875A03138A /* [CP] Embed Pods Frameworks */,
+				DBA7A0A7973AA01091C24520 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -152,9 +195,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AFB938D71E5B2C0100BA3923 /* Build configuration list for PBXNativeTarget "amble-iosTests" */;
 			buildPhases = (
+				33CD139F940073ECF4BA1C8C /* [CP] Check Pods Manifest.lock */,
 				AFB938BC1E5B2C0100BA3923 /* Sources */,
 				AFB938BD1E5B2C0100BA3923 /* Frameworks */,
 				AFB938BE1E5B2C0100BA3923 /* Resources */,
+				A5B1C13A1E339CCDBBCEF1B4 /* [CP] Embed Pods Frameworks */,
+				6DA674622DE0BEF2BBC17AF6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -170,9 +216,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AFB938DA1E5B2C0100BA3923 /* Build configuration list for PBXNativeTarget "amble-iosUITests" */;
 			buildPhases = (
+				01111BEE2F8F9DCF3BFBA5C3 /* [CP] Check Pods Manifest.lock */,
 				AFB938C71E5B2C0100BA3923 /* Sources */,
 				AFB938C81E5B2C0100BA3923 /* Frameworks */,
 				AFB938C91E5B2C0100BA3923 /* Resources */,
+				3A257B13A065B0362FF0500D /* [CP] Embed Pods Frameworks */,
+				069700A11620C6642B038090 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -259,6 +308,144 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		01111BEE2F8F9DCF3BFBA5C3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		069700A11620C6642B038090 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-amble-iosUITests/Pods-amble-iosUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		33CD139F940073ECF4BA1C8C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3A257B13A065B0362FF0500D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-amble-iosUITests/Pods-amble-iosUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6184450DEE754D875A03138A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-amble-ios/Pods-amble-ios-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6DA674622DE0BEF2BBC17AF6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-amble-iosTests/Pods-amble-iosTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A5B1C13A1E339CCDBBCEF1B4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-amble-iosTests/Pods-amble-iosTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DBA7A0A7973AA01091C24520 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-amble-ios/Pods-amble-ios-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E1BEAEAA9DC52AC29FE7F295 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AFB938A61E5B2C0000BA3923 /* Sources */ = {
@@ -417,6 +604,7 @@
 		};
 		AFB938D51E5B2C0100BA3923 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D39026309A2941CD584AB0A /* Pods-amble-ios.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = QJQGH9NF7F;
@@ -430,6 +618,7 @@
 		};
 		AFB938D61E5B2C0100BA3923 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7C1C1F85E095435FDA9C236A /* Pods-amble-ios.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = QJQGH9NF7F;
@@ -443,6 +632,7 @@
 		};
 		AFB938D81E5B2C0100BA3923 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8008B78F5C57D21C5B74C754 /* Pods-amble-iosTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -458,6 +648,7 @@
 		};
 		AFB938D91E5B2C0100BA3923 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 87D2BC0CF3058112E934142B /* Pods-amble-iosTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -473,6 +664,7 @@
 		};
 		AFB938DB1E5B2C0100BA3923 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EA3AAFCA03C42F025ED91D63 /* Pods-amble-iosUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = QJQGH9NF7F;
@@ -487,6 +679,7 @@
 		};
 		AFB938DC1E5B2C0100BA3923 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9C33EE0FF79A930B6C51BC66 /* Pods-amble-iosUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = QJQGH9NF7F;
