@@ -4,6 +4,8 @@ target 'amble-ios' do
   use_frameworks!
 
   # Pods for amble-ios
+  pod 'SwiftyJSON'
+  pod 'Alamofire', '~> 4.4'
 
   target 'amble-iosTests' do
     inherit! :search_paths
