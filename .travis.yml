@@ -3,6 +3,7 @@ osx_image: xcode8.2
 
 before_install:
   - gem install cocoapods -v '1.2.0'
+  - pod repo update
 
 script:
   - xcodebuild -workspace amble-ios.xcworkspace -scheme amble-ios -sdk iphonesimulator
