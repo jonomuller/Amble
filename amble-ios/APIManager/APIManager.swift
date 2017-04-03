@@ -12,6 +12,5 @@ import SwiftyJSON
 
 class APIManager: NSObject {
     
-    
-
+    let baseURL = "http://amble-api.herokuapp.com/api/"
 }
