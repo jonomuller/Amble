@@ -11,7 +11,16 @@ import Alamofire
 import SwiftyJSON
 
 class APIManager: NSObject {
+  
+  public static let sharedInstance = APIManager()
+  
+  public func login(with details: [String: Any], completion: @escaping (JSON, NSError?) -> Void) {
     
-    
-    
+    Alamofire.request(Router.login(details: details))
+      .validate()
+      .responseJSON { (response) in
+        completion(JSON(response.result.value!), nil)
+    }
+  }
+  
 }
