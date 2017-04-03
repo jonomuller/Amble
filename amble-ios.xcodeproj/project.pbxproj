@@ -18,9 +18,6 @@
 		AFB938D01E5B2C0100BA3923 /* amble_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB938CF1E5B2C0100BA3923 /* amble_iosUITests.swift */; };
 		AFC3EDE11E927A1100159679 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC3EDE01E927A1100159679 /* Alamofire.framework */; };
 		AFC3EDE31E927A1600159679 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC3EDE21E927A1600159679 /* SwiftyJSON.framework */; };
-		AFC3EDF51E928D8600159679 /* APIManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC3EDEC1E928D8600159679 /* APIManager.framework */; };
-		AFC3EE011E928D8600159679 /* APIManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC3EDEC1E928D8600159679 /* APIManager.framework */; };
-		AFC3EE021E928D8600159679 /* APIManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AFC3EDEC1E928D8600159679 /* APIManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AFC3EE0F1E928F6A00159679 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC3EE0E1E928F6A00159679 /* APIManager.swift */; };
 		BABE4E1A858C88B49E23D040 /* Pods_amble_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 198EA19E9C3FB8DC4D152762 /* Pods_amble_iosTests.framework */; };
 		DE9F9040BD6A4F2034B3828D /* Pods_amble_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B58CAFB1B39C8534F0C1919D /* Pods_amble_ios.framework */; };
@@ -41,27 +38,6 @@
 			remoteGlobalIDString = AFB938A91E5B2C0000BA3923;
 			remoteInfo = "amble-ios";
 		};
-		AFC3EDF61E928D8600159679 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AFB938A21E5B2C0000BA3923 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AFC3EDEB1E928D8600159679;
-			remoteInfo = APIManager;
-		};
-		AFC3EDF81E928D8600159679 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AFB938A21E5B2C0000BA3923 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AFB938A91E5B2C0000BA3923;
-			remoteInfo = "amble-ios";
-		};
-		AFC3EDFF1E928D8600159679 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AFB938A21E5B2C0000BA3923 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AFC3EDEB1E928D8600159679;
-			remoteInfo = APIManager;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -71,7 +47,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				AFC3EE021E928D8600159679 /* APIManager.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -101,8 +76,6 @@
 		AFB938D11E5B2C0100BA3923 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFC3EDE01E927A1100159679 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/amble-ios-duvhxqoqscperhekbelpwlhfjuzr/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
 		AFC3EDE21E927A1600159679 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/amble-ios-duvhxqoqscperhekbelpwlhfjuzr/Build/Products/Debug-iphonesimulator/SwiftyJSON/SwiftyJSON.framework"; sourceTree = "<group>"; };
-		AFC3EDEC1E928D8600159679 /* APIManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = APIManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AFC3EDF41E928D8600159679 /* APIManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = APIManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFC3EE0E1E928F6A00159679 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		B58CAFB1B39C8534F0C1919D /* Pods_amble_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_amble_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA3AAFCA03C42F025ED91D63 /* Pods-amble-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-amble-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-amble-iosUITests/Pods-amble-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -115,7 +88,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFC3EDE31E927A1600159679 /* SwiftyJSON.framework in Frameworks */,
-				AFC3EE011E928D8600159679 /* APIManager.framework in Frameworks */,
 				AFC3EDE11E927A1100159679 /* Alamofire.framework in Frameworks */,
 				DE9F9040BD6A4F2034B3828D /* Pods_amble_ios.framework in Frameworks */,
 			);
@@ -134,21 +106,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A451CC2E52FC12A3D87D96B6 /* Pods_amble_iosUITests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AFC3EDE81E928D8600159679 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AFC3EDF11E928D8600159679 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AFC3EDF51E928D8600159679 /* APIManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,8 +143,6 @@
 				AFB938AA1E5B2C0000BA3923 /* amble-ios.app */,
 				AFB938C01E5B2C0100BA3923 /* amble-iosTests.xctest */,
 				AFB938CB1E5B2C0100BA3923 /* amble-iosUITests.xctest */,
-				AFC3EDEC1E928D8600159679 /* APIManager.framework */,
-				AFC3EDF41E928D8600159679 /* APIManagerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -247,16 +202,6 @@
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		AFC3EDE91E928D8600159679 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
 		AFB938A91E5B2C0000BA3923 /* amble-ios */ = {
 			isa = PBXNativeTarget;
@@ -273,7 +218,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				AFC3EE001E928D8600159679 /* PBXTargetDependency */,
 			);
 			name = "amble-ios";
 			productName = "amble-ios";
@@ -322,43 +266,6 @@
 			productReference = AFB938CB1E5B2C0100BA3923 /* amble-iosUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		AFC3EDEB1E928D8600159679 /* APIManager */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AFC3EE031E928D8600159679 /* Build configuration list for PBXNativeTarget "APIManager" */;
-			buildPhases = (
-				AFC3EDE71E928D8600159679 /* Sources */,
-				AFC3EDE81E928D8600159679 /* Frameworks */,
-				AFC3EDE91E928D8600159679 /* Headers */,
-				AFC3EDEA1E928D8600159679 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = APIManager;
-			productName = APIManager;
-			productReference = AFC3EDEC1E928D8600159679 /* APIManager.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		AFC3EDF31E928D8600159679 /* APIManagerTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AFC3EE071E928D8600159679 /* Build configuration list for PBXNativeTarget "APIManagerTests" */;
-			buildPhases = (
-				AFC3EDF01E928D8600159679 /* Sources */,
-				AFC3EDF11E928D8600159679 /* Frameworks */,
-				AFC3EDF21E928D8600159679 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				AFC3EDF71E928D8600159679 /* PBXTargetDependency */,
-				AFC3EDF91E928D8600159679 /* PBXTargetDependency */,
-			);
-			name = APIManagerTests;
-			productName = APIManagerTests;
-			productReference = AFC3EDF41E928D8600159679 /* APIManagerTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -386,17 +293,6 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = AFB938A91E5B2C0000BA3923;
 					};
-					AFC3EDEB1E928D8600159679 = {
-						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = QJQGH9NF7F;
-						ProvisioningStyle = Automatic;
-					};
-					AFC3EDF31E928D8600159679 = {
-						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = QJQGH9NF7F;
-						ProvisioningStyle = Automatic;
-						TestTargetID = AFB938A91E5B2C0000BA3923;
-					};
 				};
 			};
 			buildConfigurationList = AFB938A51E5B2C0000BA3923 /* Build configuration list for PBXProject "amble-ios" */;
@@ -415,8 +311,6 @@
 				AFB938A91E5B2C0000BA3923 /* amble-ios */,
 				AFB938BF1E5B2C0100BA3923 /* amble-iosTests */,
 				AFB938CA1E5B2C0100BA3923 /* amble-iosUITests */,
-				AFC3EDEB1E928D8600159679 /* APIManager */,
-				AFC3EDF31E928D8600159679 /* APIManagerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -440,20 +334,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		AFB938C91E5B2C0100BA3923 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AFC3EDEA1E928D8600159679 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AFC3EDF21E928D8600159679 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -628,20 +508,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AFC3EDE71E928D8600159679 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AFC3EDF01E928D8600159679 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -654,21 +520,6 @@
 			isa = PBXTargetDependency;
 			target = AFB938A91E5B2C0000BA3923 /* amble-ios */;
 			targetProxy = AFB938CC1E5B2C0100BA3923 /* PBXContainerItemProxy */;
-		};
-		AFC3EDF71E928D8600159679 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AFC3EDEB1E928D8600159679 /* APIManager */;
-			targetProxy = AFC3EDF61E928D8600159679 /* PBXContainerItemProxy */;
-		};
-		AFC3EDF91E928D8600159679 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AFB938A91E5B2C0000BA3923 /* amble-ios */;
-			targetProxy = AFC3EDF81E928D8600159679 /* PBXContainerItemProxy */;
-		};
-		AFC3EE001E928D8600159679 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AFC3EDEB1E928D8600159679 /* APIManager */;
-			targetProxy = AFC3EDFF1E928D8600159679 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -877,76 +728,6 @@
 			};
 			name = Release;
 		};
-		AFC3EE041E928D8600159679 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = QJQGH9NF7F;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = APIManager/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = jonomuller.APIManager;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		AFC3EE051E928D8600159679 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = QJQGH9NF7F;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = APIManager/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = jonomuller.APIManager;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		AFC3EE081E928D8600159679 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEVELOPMENT_TEAM = QJQGH9NF7F;
-				INFOPLIST_FILE = APIManagerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = jonomuller.APIManagerTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/amble-ios.app/amble-ios";
-			};
-			name = Debug;
-		};
-		AFC3EE091E928D8600159679 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEVELOPMENT_TEAM = QJQGH9NF7F;
-				INFOPLIST_FILE = APIManagerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = jonomuller.APIManagerTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/amble-ios.app/amble-ios";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -982,24 +763,6 @@
 			buildConfigurations = (
 				AFB938DB1E5B2C0100BA3923 /* Debug */,
 				AFB938DC1E5B2C0100BA3923 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AFC3EE031E928D8600159679 /* Build configuration list for PBXNativeTarget "APIManager" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AFC3EE041E928D8600159679 /* Debug */,
-				AFC3EE051E928D8600159679 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AFC3EE071E928D8600159679 /* Build configuration list for PBXNativeTarget "APIManagerTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AFC3EE081E928D8600159679 /* Debug */,
-				AFC3EE091E928D8600159679 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
