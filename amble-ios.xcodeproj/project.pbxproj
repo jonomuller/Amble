@@ -16,6 +16,9 @@
 		AFB938BA1E5B2C0100BA3923 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFB938B81E5B2C0100BA3923 /* LaunchScreen.storyboard */; };
 		AFB938C51E5B2C0100BA3923 /* amble_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB938C41E5B2C0100BA3923 /* amble_iosTests.swift */; };
 		AFB938D01E5B2C0100BA3923 /* amble_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB938CF1E5B2C0100BA3923 /* amble_iosUITests.swift */; };
+		AFC3EDE11E927A1100159679 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC3EDE01E927A1100159679 /* Alamofire.framework */; };
+		AFC3EDE31E927A1600159679 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC3EDE21E927A1600159679 /* SwiftyJSON.framework */; };
+		AFC3EDE61E927AB600159679 /* APIManager in Resources */ = {isa = PBXBuildFile; fileRef = AFC3EDE51E927AB600159679 /* APIManager */; };
 		BABE4E1A858C88B49E23D040 /* Pods_amble_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 198EA19E9C3FB8DC4D152762 /* Pods_amble_iosTests.framework */; };
 		DE9F9040BD6A4F2034B3828D /* Pods_amble_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B58CAFB1B39C8534F0C1919D /* Pods_amble_ios.framework */; };
 /* End PBXBuildFile section */
@@ -58,6 +61,9 @@
 		AFB938CB1E5B2C0100BA3923 /* amble-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "amble-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB938CF1E5B2C0100BA3923 /* amble_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = amble_iosUITests.swift; sourceTree = "<group>"; };
 		AFB938D11E5B2C0100BA3923 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AFC3EDE01E927A1100159679 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/amble-ios-duvhxqoqscperhekbelpwlhfjuzr/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
+		AFC3EDE21E927A1600159679 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/amble-ios-duvhxqoqscperhekbelpwlhfjuzr/Build/Products/Debug-iphonesimulator/SwiftyJSON/SwiftyJSON.framework"; sourceTree = "<group>"; };
+		AFC3EDE51E927AB600159679 /* APIManager */ = {isa = PBXFileReference; lastKnownFileType = folder; path = APIManager; sourceTree = "<group>"; };
 		B58CAFB1B39C8534F0C1919D /* Pods_amble_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_amble_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA3AAFCA03C42F025ED91D63 /* Pods-amble-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-amble-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-amble-iosUITests/Pods-amble-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		FB1E6A936296F9D7F4B87E02 /* Pods_amble_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_amble_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,6 +74,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFC3EDE31E927A1600159679 /* SwiftyJSON.framework in Frameworks */,
+				AFC3EDE11E927A1100159679 /* Alamofire.framework in Frameworks */,
 				DE9F9040BD6A4F2034B3828D /* Pods_amble_ios.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -108,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				AFB938AC1E5B2C0000BA3923 /* amble-ios */,
+				AFC3EDE51E927AB600159679 /* APIManager */,
 				AFB938C31E5B2C0100BA3923 /* amble-iosTests */,
 				AFB938CE1E5B2C0100BA3923 /* amble-iosUITests */,
 				AFB938AB1E5B2C0000BA3923 /* Products */,
@@ -161,6 +170,8 @@
 		C94B737784ECBF4FA5B8F120 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AFC3EDE21E927A1600159679 /* SwiftyJSON.framework */,
+				AFC3EDE01E927A1100159679 /* Alamofire.framework */,
 				B58CAFB1B39C8534F0C1919D /* Pods_amble_ios.framework */,
 				198EA19E9C3FB8DC4D152762 /* Pods_amble_iosTests.framework */,
 				FB1E6A936296F9D7F4B87E02 /* Pods_amble_iosUITests.framework */,
@@ -290,6 +301,7 @@
 				AFB938BA1E5B2C0100BA3923 /* LaunchScreen.storyboard in Resources */,
 				AFB938B71E5B2C0100BA3923 /* Assets.xcassets in Resources */,
 				AFB938B51E5B2C0000BA3923 /* Main.storyboard in Resources */,
+				AFC3EDE61E927AB600159679 /* APIManager in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -711,6 +723,7 @@
 				AFB938D61E5B2C0100BA3923 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AFB938D71E5B2C0100BA3923 /* Build configuration list for PBXNativeTarget "amble-iosTests" */ = {
 			isa = XCConfigurationList;
@@ -719,6 +732,7 @@
 				AFB938D91E5B2C0100BA3923 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AFB938DA1E5B2C0100BA3923 /* Build configuration list for PBXNativeTarget "amble-iosUITests" */ = {
 			isa = XCConfigurationList;
@@ -727,6 +741,7 @@
 				AFB938DC1E5B2C0100BA3923 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
