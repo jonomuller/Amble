@@ -42,4 +42,10 @@ class APIManager: NSObject {
     }
   }
   
+  public func register(with details: [String: Any], completion: @escaping (JSON, NSError?) -> Void) {
+    request(router: Router.register(details: details)) { (json, error) in
+      completion(json, error)
+    }
+  }
+  
 }
