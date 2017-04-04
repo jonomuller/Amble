@@ -15,7 +15,11 @@ class FirstViewController: UIViewController {
     // Do any additional setup after loading the view, typically from a nib.
     
     APIManager.sharedInstance.login(with: ["username": "jonomuller", "password": "amble4lyfe"]) { (json, error) in
-      print(json)
+      if (error != nil) {
+        print("Error: \(error!.localizedDescription)")
+      } else {
+        print("JWT: \(json["jwt"])")
+      }
     }
   }
   

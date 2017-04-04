@@ -14,12 +14,25 @@ class APIManager: NSObject {
   
   public static let sharedInstance = APIManager()
   
+  // MARK: /auth API calls
+  
   public func login(with details: [String: Any], completion: @escaping (JSON, NSError?) -> Void) {
-    
     Alamofire.request(Router.login(details: details))
       .validate()
-      .responseJSON { (response) in
-        completion(JSON(response.result.value!), nil)
+      .responseJSON { response in
+        switch response.result {
+        case .success(let value):
+          completion(JSON(value), nil)
+        case .failure:
+          if let data = response.data {
+            let json = JSON(data)
+            let message = json["error"].stringValue
+            let error = NSError(domain: "amble-ios",
+                                code: (response.response?.statusCode)!,
+                                userInfo: [NSLocalizedDescriptionKey: message])
+            completion(json, error)
+          }
+        }
     }
   }
   
