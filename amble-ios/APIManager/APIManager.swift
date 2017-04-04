@@ -14,10 +14,8 @@ class APIManager: NSObject {
   
   public static let sharedInstance = APIManager()
   
-  // MARK: /auth API calls
-  
-  public func login(with details: [String: Any], completion: @escaping (JSON, NSError?) -> Void) {
-    Alamofire.request(Router.login(details: details))
+  private func request(router: Router, completion: @escaping (JSON, NSError?) -> Void) {
+    Alamofire.request(router)
       .validate()
       .responseJSON { response in
         switch response.result {
@@ -33,6 +31,14 @@ class APIManager: NSObject {
             completion(json, error)
           }
         }
+    }
+  }
+  
+  // MARK: /auth API calls
+  
+  public func login(with details: [String: Any], completion: @escaping (JSON, NSError?) -> Void) {
+    request(router: Router.login(details: details)) { (json, error) in
+      completion(json, error)
     }
   }
   
