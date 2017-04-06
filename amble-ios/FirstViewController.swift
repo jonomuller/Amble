@@ -14,11 +14,11 @@ class FirstViewController: UIViewController {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     
-    APIManager.sharedInstance.register(with: ["username": "jonomuller2",
-                                              "password": "amble4lyfe",
-                                               "email": "jonomuller2@gmail.com",
-                                               "firstName": "Jono",
-                                               "lastName": "Muller"]) { (json, error) in
+    APIManager.sharedInstance.register(username: "jonomuller2",
+                                       email: "jonomuller2@gmail.com",
+                                       password: "amble4lyfe",
+                                       firstName: "Jono",
+                                       lastName: "Muller") { (json, error) in
       if (error != nil) {
         print("Error: \(error!.localizedDescription)")
       } else {
