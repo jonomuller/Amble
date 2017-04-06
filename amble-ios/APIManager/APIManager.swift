@@ -36,15 +36,15 @@ class APIManager: NSObject {
   
   // MARK: /auth API calls
   
-  public func login(with details: [String: Any], completion: @escaping (JSON, NSError?) -> Void) {
+  public func login(with details: [String: Any], completion: ((JSON, NSError?) -> Void)?) {
     request(router: Router.login(details: details)) { (json, error) in
-      completion(json, error)
+      completion?(json, error)
     }
   }
   
-  public func register(with details: [String: Any], completion: @escaping (JSON, NSError?) -> Void) {
+  public func register(with details: [String: Any], completion: ((JSON, NSError?) -> Void)?) {
     request(router: Router.register(details: details)) { (json, error) in
-      completion(json, error)
+      completion?(json, error)
     }
   }
   
