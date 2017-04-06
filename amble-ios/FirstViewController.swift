@@ -22,7 +22,7 @@ class FirstViewController: UIViewController {
       if (error != nil) {
         print("Error: \(error!.localizedDescription)")
       } else {
-        print("JWT: \(json["jwt"])")
+        print("JWT: \(json?["jwt"])")
       }
     }
   }
