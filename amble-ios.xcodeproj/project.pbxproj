@@ -14,8 +14,10 @@
 		AFB938B51E5B2C0000BA3923 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFB938B31E5B2C0000BA3923 /* Main.storyboard */; };
 		AFB938B71E5B2C0100BA3923 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFB938B61E5B2C0100BA3923 /* Assets.xcassets */; };
 		AFB938BA1E5B2C0100BA3923 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFB938B81E5B2C0100BA3923 /* LaunchScreen.storyboard */; };
-		AFB938C51E5B2C0100BA3923 /* amble_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB938C41E5B2C0100BA3923 /* amble_iosTests.swift */; };
 		AFB938D01E5B2C0100BA3923 /* amble_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB938CF1E5B2C0100BA3923 /* amble_iosUITests.swift */; };
+		AFC3EE0F1E928F6A00159679 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC3EE0E1E928F6A00159679 /* APIManager.swift */; };
+		AFC3EE131E92995E00159679 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC3EE121E92995E00159679 /* Router.swift */; };
+		AFC3EE151E94187300159679 /* APIManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC3EE141E94187300159679 /* APIManagerTests.swift */; };
 		BABE4E1A858C88B49E23D040 /* Pods_amble_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 198EA19E9C3FB8DC4D152762 /* Pods_amble_iosTests.framework */; };
 		DE9F9040BD6A4F2034B3828D /* Pods_amble_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B58CAFB1B39C8534F0C1919D /* Pods_amble_ios.framework */; };
 /* End PBXBuildFile section */
@@ -37,6 +39,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		AFC3EE061E928D8600159679 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		198EA19E9C3FB8DC4D152762 /* Pods_amble_iosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_amble_iosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D39026309A2941CD584AB0A /* Pods-amble-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-amble-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-amble-ios/Pods-amble-ios.debug.xcconfig"; sourceTree = "<group>"; };
@@ -53,11 +68,16 @@
 		AFB938B91E5B2C0100BA3923 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AFB938BB1E5B2C0100BA3923 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFB938C01E5B2C0100BA3923 /* amble-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "amble-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		AFB938C41E5B2C0100BA3923 /* amble_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = amble_iosTests.swift; sourceTree = "<group>"; };
 		AFB938C61E5B2C0100BA3923 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFB938CB1E5B2C0100BA3923 /* amble-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "amble-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB938CF1E5B2C0100BA3923 /* amble_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = amble_iosUITests.swift; sourceTree = "<group>"; };
 		AFB938D11E5B2C0100BA3923 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AFC3EDE01E927A1100159679 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/amble-ios-duvhxqoqscperhekbelpwlhfjuzr/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
+		AFC3EDE21E927A1600159679 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/amble-ios-duvhxqoqscperhekbelpwlhfjuzr/Build/Products/Debug-iphonesimulator/SwiftyJSON/SwiftyJSON.framework"; sourceTree = "<group>"; };
+		AFC3EE0E1E928F6A00159679 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		AFC3EE121E92995E00159679 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Router.swift; path = Router/Router.swift; sourceTree = "<group>"; };
+		AFC3EE141E94187300159679 /* APIManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManagerTests.swift; sourceTree = "<group>"; };
+		AFC3EE161E980C7800159679 /* Mockingjay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mockingjay.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/amble-ios-duvhxqoqscperhekbelpwlhfjuzr/Build/Products/Debug-iphonesimulator/Mockingjay/Mockingjay.framework"; sourceTree = "<group>"; };
 		B58CAFB1B39C8534F0C1919D /* Pods_amble_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_amble_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA3AAFCA03C42F025ED91D63 /* Pods-amble-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-amble-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-amble-iosUITests/Pods-amble-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		FB1E6A936296F9D7F4B87E02 /* Pods_amble_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_amble_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,9 +130,9 @@
 				AFB938AC1E5B2C0000BA3923 /* amble-ios */,
 				AFB938C31E5B2C0100BA3923 /* amble-iosTests */,
 				AFB938CE1E5B2C0100BA3923 /* amble-iosUITests */,
-				AFB938AB1E5B2C0000BA3923 /* Products */,
-				4A60990461250D669FF0785A /* Pods */,
 				C94B737784ECBF4FA5B8F120 /* Frameworks */,
+				4A60990461250D669FF0785A /* Pods */,
+				AFB938AB1E5B2C0000BA3923 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -129,13 +149,14 @@
 		AFB938AC1E5B2C0000BA3923 /* amble-ios */ = {
 			isa = PBXGroup;
 			children = (
+				AFC3EE0D1E928F5400159679 /* APIManager */,
 				AFB938AD1E5B2C0000BA3923 /* AppDelegate.swift */,
-				AFB938AF1E5B2C0000BA3923 /* FirstViewController.swift */,
-				AFB938B11E5B2C0000BA3923 /* SecondViewController.swift */,
-				AFB938B31E5B2C0000BA3923 /* Main.storyboard */,
 				AFB938B61E5B2C0100BA3923 /* Assets.xcassets */,
-				AFB938B81E5B2C0100BA3923 /* LaunchScreen.storyboard */,
+				AFB938AF1E5B2C0000BA3923 /* FirstViewController.swift */,
 				AFB938BB1E5B2C0100BA3923 /* Info.plist */,
+				AFB938B81E5B2C0100BA3923 /* LaunchScreen.storyboard */,
+				AFB938B31E5B2C0000BA3923 /* Main.storyboard */,
+				AFB938B11E5B2C0000BA3923 /* SecondViewController.swift */,
 			);
 			path = "amble-ios";
 			sourceTree = "<group>";
@@ -143,8 +164,8 @@
 		AFB938C31E5B2C0100BA3923 /* amble-iosTests */ = {
 			isa = PBXGroup;
 			children = (
-				AFB938C41E5B2C0100BA3923 /* amble_iosTests.swift */,
 				AFB938C61E5B2C0100BA3923 /* Info.plist */,
+				AFC3EE141E94187300159679 /* APIManagerTests.swift */,
 			);
 			path = "amble-iosTests";
 			sourceTree = "<group>";
@@ -152,15 +173,35 @@
 		AFB938CE1E5B2C0100BA3923 /* amble-iosUITests */ = {
 			isa = PBXGroup;
 			children = (
-				AFB938CF1E5B2C0100BA3923 /* amble_iosUITests.swift */,
 				AFB938D11E5B2C0100BA3923 /* Info.plist */,
+				AFB938CF1E5B2C0100BA3923 /* amble_iosUITests.swift */,
 			);
 			path = "amble-iosUITests";
+			sourceTree = "<group>";
+		};
+		AFC3EE0D1E928F5400159679 /* APIManager */ = {
+			isa = PBXGroup;
+			children = (
+				AFC3EE0E1E928F6A00159679 /* APIManager.swift */,
+				AFC3EE101E9298AD00159679 /* Router */,
+			);
+			path = APIManager;
+			sourceTree = "<group>";
+		};
+		AFC3EE101E9298AD00159679 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				AFC3EE121E92995E00159679 /* Router.swift */,
+			);
+			name = Router;
 			sourceTree = "<group>";
 		};
 		C94B737784ECBF4FA5B8F120 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AFC3EE161E980C7800159679 /* Mockingjay.framework */,
+				AFC3EDE21E927A1600159679 /* SwiftyJSON.framework */,
+				AFC3EDE01E927A1100159679 /* Alamofire.framework */,
 				B58CAFB1B39C8534F0C1919D /* Pods_amble_ios.framework */,
 				198EA19E9C3FB8DC4D152762 /* Pods_amble_iosTests.framework */,
 				FB1E6A936296F9D7F4B87E02 /* Pods_amble_iosUITests.framework */,
@@ -181,6 +222,7 @@
 				AFB938A81E5B2C0000BA3923 /* Resources */,
 				6184450DEE754D875A03138A /* [CP] Embed Pods Frameworks */,
 				DBA7A0A7973AA01091C24520 /* [CP] Copy Pods Resources */,
+				AFC3EE061E928D8600159679 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -452,7 +494,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFC3EE0F1E928F6A00159679 /* APIManager.swift in Sources */,
 				AFB938B21E5B2C0000BA3923 /* SecondViewController.swift in Sources */,
+				AFC3EE131E92995E00159679 /* Router.swift in Sources */,
 				AFB938AE1E5B2C0000BA3923 /* AppDelegate.swift in Sources */,
 				AFB938B01E5B2C0000BA3923 /* FirstViewController.swift in Sources */,
 			);
@@ -462,7 +506,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AFB938C51E5B2C0100BA3923 /* amble_iosTests.swift in Sources */,
+				AFC3EE151E94187300159679 /* APIManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,6 +540,7 @@
 				AFB938B41E5B2C0000BA3923 /* Base */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		AFB938B81E5B2C0100BA3923 /* LaunchScreen.storyboard */ = {
@@ -504,6 +549,7 @@
 				AFB938B91E5B2C0100BA3923 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -532,6 +578,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEBUG_ACTIVITY_MODE = disable;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -582,6 +629,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEBUG_ACTIVITY_MODE = "";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -711,6 +759,7 @@
 				AFB938D61E5B2C0100BA3923 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AFB938D71E5B2C0100BA3923 /* Build configuration list for PBXNativeTarget "amble-iosTests" */ = {
 			isa = XCConfigurationList;
@@ -719,6 +768,7 @@
 				AFB938D91E5B2C0100BA3923 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AFB938DA1E5B2C0100BA3923 /* Build configuration list for PBXNativeTarget "amble-iosUITests" */ = {
 			isa = XCConfigurationList;
@@ -727,6 +777,7 @@
 				AFB938DC1E5B2C0100BA3923 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

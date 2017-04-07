@@ -9,17 +9,29 @@
 import UIKit
 
 class FirstViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    // Do any additional setup after loading the view, typically from a nib.
+    
+    APIManager.sharedInstance.register(username: "jonomuller2",
+                                       email: "jonomuller2@gmail.com",
+                                       password: "amble4lyfe",
+                                       firstName: "Jono",
+                                       lastName: "Muller") { (json, error) in
+      if (error != nil) {
+        print("Error: \(error!.localizedDescription)")
+      } else {
+        print("JWT: \(json?["jwt"])")
+      }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
+  }
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
+  
+  
 }
 
