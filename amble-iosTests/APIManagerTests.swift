@@ -8,55 +8,107 @@
 
 import XCTest
 import SwiftyJSON
+import Mockingjay
 @testable import amble_ios
 
 class APIManagerTests: XCTestCase {
   
+  struct TestUser {
+    var username: String
+    var email: String
+    var password: String
+    var firstName: String
+    var lastName: String
+  }
+  
+  var testUser: TestUser!
+  
   override func setUp() {
     super.setUp()
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    testUser = TestUser(username: "bob123", email: "bob@bobson.com", password: "amble4lyfe", firstName: "Bob", lastName: "Bobson")
   }
   
   override func tearDown() {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
+    testUser = nil
     super.tearDown()
   }
   
   // MARK: POST /login
   
-  func testLoginWithDetailsMissingReturnsError() {
-    let exp = expectation(description: "POST /login no details")
+  func testValidLogin() {
+    // Mock API call to return successful login
+    let matcher = http(.post, uri: Router.baseURLPath + "/auth/login")
+    let builder = json(["success": "true",
+                        "user": testUser.username,
+                        "jwt": "_jwt"], status: 200, headers: [:])
     
-    APIManager.sharedInstance.login(username: "", password: "password") { (json, error) in
-      XCTAssertNil(json, "JSON is not nil")
-      XCTAssertNotNil(error, "Error is nil")
-      XCTAssert(error?.localizedDescription == "Please enter your username.")
+    stub(matcher, builder)
+    
+    let exp = expectation(description: "POST /login valid")
+    
+    APIManager.sharedInstance.login(username: testUser.username, password: testUser.password) { (json, error) in
+      XCTAssertNotNil(json, "JSON is nil")
+      XCTAssertNil(error, "Error is not nil")
+      XCTAssertTrue((json?["success"].boolValue)!, "Success value is false")
+      XCTAssertEqual(json?["user"].stringValue, self.testUser.username, "User returned is not the same")
+      
       exp.fulfill()
     }
     
     waitForExpectations(timeout: 5, handler: nil)
   }
+  
+  func testLoginWithMissingDetailsReturnsError() {
+    let exp = expectation(description: "POST /login no details")
+    
+    APIManager.sharedInstance.login(username: "", password: testUser.username) { (json, error) in
+      XCTAssertNil(json, "JSON is not nil")
+      XCTAssertNotNil(error, "Error is nil")
+      XCTAssertEqual(error?.localizedDescription, "Please enter your username.", "Incorrect error message")
+      
+      exp.fulfill()
+    }
+    
+    waitForExpectations(timeout: 5, handler: nil)
+  }
+  
   
   // MARK: POST /register
   
-  func testRegisterWithDetailsMissingReturnsError() {
-    let exp = expectation(description: "POST /register no details")
+  func testValidRegister() {
+    // Mock API call to return successful registration
+    let matcher = http(.post, uri: Router.baseURLPath + "/auth/register")
+    let builder = json(["success": "true",
+                        "user": testUser.username,
+                        "jwt": "_jwt"], status: 201, headers: [:])
     
-    APIManager.sharedInstance.register(username: "bob", email: "", password: "password", firstName: "Bob", lastName: "Bobson") { (json, error) in
-      XCTAssertNil(json, "JSON is not nil")
-      XCTAssertNotNil(error, "Error is nil")
-      XCTAssert(error?.localizedDescription == "Please enter your email.")
+    stub(matcher, builder)
+    
+    let exp = expectation(description: "POST /register valid")
+    
+    APIManager.sharedInstance.register(username: testUser.username, email: testUser.email, password: testUser.password, firstName: testUser.firstName, lastName: testUser.lastName) { (json, error) in
+      XCTAssertNotNil(json, "JSON is nil")
+      XCTAssertNil(error, "Error is not nil")
+      XCTAssertTrue((json?["success"].boolValue)!, "Success value is false")
+      XCTAssertEqual(json?["user"].stringValue, self.testUser.username, "User returned is not the same")
+      
       exp.fulfill()
     }
     
     waitForExpectations(timeout: 5, handler: nil)
   }
   
-  func testPerformanceExample() {
-    // This is an example of a performance test case.
-    self.measure {
-      // Put the code you want to measure the time of here.
+  func testRegisterWithMissingDetailsReturnsError() {
+    let exp = expectation(description: "POST /register no details")
+    
+    APIManager.sharedInstance.register(username: testUser.username, email: "", password: testUser.password, firstName: testUser.firstName, lastName: testUser.lastName) { (json, error) in
+      XCTAssertNil(json, "JSON is not nil")
+      XCTAssertNotNil(error, "Error is nil")
+      XCTAssertEqual(error?.localizedDescription, "Please enter your email.", "Incorrect error message")
+      
+      exp.fulfill()
     }
+    
+    waitForExpectations(timeout: 5, handler: nil)
   }
-  
 }
