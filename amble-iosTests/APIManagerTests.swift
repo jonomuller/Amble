@@ -24,15 +24,13 @@ class APIManagerTests: XCTestCase {
   
   // MARK: POST /login
   
-  func testLoginWithNoDetailsReturnsError() {
+  func testLoginWithDetailsMissingReturnsError() {
     let exp = expectation(description: "POST /login no details")
     
-    APIManager.sharedInstance.login(with: [:]) { (json, error) in
-      XCTAssert(type(of: json) == JSON.self, "Data returned is not of type JSON")
-      XCTAssert(error != nil, "Error is nil")
-      let success = json["success"].boolValue
-      XCTAssert(!success, "Success value is true")
-      XCTAssert(error?.localizedDescription == "Missing credentials")
+    APIManager.sharedInstance.login(username: "", password: "password") { (json, error) in
+      XCTAssertNil(json, "JSON is not nil")
+      XCTAssertNotNil(error, "Error is nil")
+      XCTAssert(error?.localizedDescription == "Please enter your username.")
       exp.fulfill()
     }
     
@@ -41,15 +39,13 @@ class APIManagerTests: XCTestCase {
   
   // MARK: POST /register
   
-  func testRegisterWithNoDetailsReturnsError() {
+  func testRegisterWithDetailsMissingReturnsError() {
     let exp = expectation(description: "POST /register no details")
     
-    APIManager.sharedInstance.register(with: [:]) { (json, error) in
-      XCTAssert(type(of: json) == JSON.self, "Data returned is not of type JSON")
-      XCTAssert(error != nil, "Error is nil")
-      let success = json["success"].boolValue
-      XCTAssert(!success, "Success value is true")
-      XCTAssert(error?.localizedDescription == "Please enter your username.")
+    APIManager.sharedInstance.register(username: "bob", email: "", password: "password", firstName: "Bob", lastName: "Bobson") { (json, error) in
+      XCTAssertNil(json, "JSON is not nil")
+      XCTAssertNotNil(error, "Error is nil")
+      XCTAssert(error?.localizedDescription == "Please enter your email.")
       exp.fulfill()
     }
     

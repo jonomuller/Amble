@@ -33,7 +33,7 @@ class APIManager: NSObject {
             let error = NSError(domain: "amble-ios",
                                 code: (response.response?.statusCode)!,
                                 userInfo: [NSLocalizedDescriptionKey: message])
-            completion(json, error)
+            completion(nil, error)
           }
         }
     }
