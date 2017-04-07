@@ -22,14 +22,20 @@ class APIManagerTests: XCTestCase {
   }
   
   var testUser: TestUser!
+  var mockedResponse: ([String: String])!
   
   override func setUp() {
     super.setUp()
     testUser = TestUser(username: "bob123", email: "bob@bobson.com", password: "amble4lyfe", firstName: "Bob", lastName: "Bobson")
+    
+    mockedResponse = ["success": "true",
+                      "user": testUser.username,
+                      "jwt": "_jwt"]
   }
   
   override func tearDown() {
     testUser = nil
+    mockedResponse = nil
     super.tearDown()
   }
   
@@ -38,9 +44,7 @@ class APIManagerTests: XCTestCase {
   func testValidLogin() {
     // Mock API call to return successful login
     let matcher = http(.post, uri: Router.baseURLPath + "/auth/login")
-    let builder = json(["success": "true",
-                        "user": testUser.username,
-                        "jwt": "_jwt"], status: 200, headers: [:])
+    let builder = json(mockedResponse, status: 200, headers: [:])
     
     stub(matcher, builder)
     
@@ -78,9 +82,7 @@ class APIManagerTests: XCTestCase {
   func testValidRegister() {
     // Mock API call to return successful registration
     let matcher = http(.post, uri: Router.baseURLPath + "/auth/register")
-    let builder = json(["success": "true",
-                        "user": testUser.username,
-                        "jwt": "_jwt"], status: 201, headers: [:])
+    let builder = json(mockedResponse, status: 201, headers: [:])
     
     stub(matcher, builder)
     
