@@ -10,6 +10,29 @@ import UIKit
 
 class LoginViewController: UIViewController {
   
+  enum Selection {
+    case select
+    case deselect
+    
+    var color: CGColor {
+      switch self {
+      case .select:
+        return UIColor.red.cgColor
+      case .deselect:
+        return UIColor.darkGray.cgColor
+      }
+    }
+    
+    var height: CGFloat {
+      switch self {
+      case .select:
+        return CGFloat(2.0)
+      case .deselect:
+        return CGFloat(1.0)
+      }
+    }
+  }
+  
   @IBOutlet var tableView: UITableView!
   
   override func viewDidLoad() {
@@ -37,6 +60,12 @@ class LoginViewController: UIViewController {
    }
    */
   
+  func updateBottomLine(cell: LoginTableViewCell, selection: Selection) {
+    let height = selection.height
+    cell.line.frame = CGRect(x: 0, y: cell.frame.size.height - height, width: cell.frame.size.width, height: height)
+    cell.line.borderColor = selection.color
+    cell.line.borderWidth = height
+  }
 }
 
 extension LoginViewController: UITableViewDataSource, UITableViewDelegate {
@@ -45,46 +74,46 @@ extension LoginViewController: UITableViewDataSource, UITableViewDelegate {
     return 2
   }
   
-  
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "loginCell", for: indexPath) as! LoginTableViewCell
     
-    // Configure the cell...
-    
-//    cell.textLabel?.text = "test"
+    cell.selectionStyle = .none
+    cell.line = CALayer()
+    updateBottomLine(cell: cell, selection: .deselect)
+    cell.layer.addSublayer(cell.line)
     
     return cell
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let cell = tableView.cellForRow(at: indexPath) as! LoginTableViewCell
-    
-    let height = CGFloat(1.5)
-    cell.line.borderColor = UIColor.white.cgColor
-    cell.line.borderWidth = height
-    cell.line.frame = CGRect(x: 0, y: cell.frame.size.height - height, width: cell.frame.size.width, height: height)
-    
-//    tableView.reloadData()
+    cell.textField.becomeFirstResponder()
+    updateBottomLine(cell: cell, selection: .select)
   }
   
   func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
     let cell = tableView.cellForRow(at: indexPath) as! LoginTableViewCell
-    
-    let height = CGFloat(1.0)
-    cell.line.borderColor = UIColor.white.cgColor
-    cell.line.borderWidth = height
-    cell.line.frame = CGRect(x: 0, y: cell.frame.size.height - height, width: cell.frame.size.width, height: height)
+    cell.textField.resignFirstResponder()
+    updateBottomLine(cell: cell, selection: .deselect)
   }
 }
 
 extension LoginViewController: UITextFieldDelegate {
   
+  func getCellFromTextField(textField: UITextField) -> LoginTableViewCell {
+    let location = textField.convert(textField.frame.origin, to: tableView)
+    let indexPath = tableView.indexPathForRow(at: location)
+    return tableView.cellForRow(at: indexPath!) as! LoginTableViewCell
+  }
+  
   func textFieldDidBeginEditing(_ textField: UITextField) {
-    
+    let cell = getCellFromTextField(textField: textField)
+    updateBottomLine(cell: cell, selection: .select)
   }
   
   func textFieldDidEndEditing(_ textField: UITextField) {
-    //    code
+    let cell = getCellFromTextField(textField: textField)
+    updateBottomLine(cell: cell, selection: .deselect)
   }
   
 }

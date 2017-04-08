@@ -15,13 +15,7 @@ class LoginTableViewCell: UITableViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    
-    let height = CGFloat(1.0)
-    line = CALayer()
-    line.frame = CGRect(x: 0, y: self.frame.size.height - height, width: self.frame.size.width, height: height)
-    line.borderColor = UIColor.darkGray.cgColor
-    line.borderWidth = height
-    self.layer.addSublayer(line)
+    // Initialization code
   }
   
   override func setSelected(_ selected: Bool, animated: Bool) {

@@ -177,7 +177,11 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7pg-RB-gHP">
-                                                    <rect key="frame" x="43" y="0.0" width="300" height="59.5"/>
+                                                    <rect key="frame" x="43" y="0.0" width="300" height="60"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="300" id="09w-1N-cE0"/>
+                                                        <constraint firstAttribute="height" constant="60" id="KMg-RI-Ucr"/>
+                                                    </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
@@ -187,10 +191,14 @@
                                                 </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="7pg-RB-gHP" secondAttribute="bottom" id="8Jg-BH-vx1"/>
-                                                <constraint firstItem="7pg-RB-gHP" firstAttribute="leading" secondItem="Twz-9O-dwb" secondAttribute="leadingMargin" constant="35" id="JCC-PR-UbL"/>
-                                                <constraint firstAttribute="trailing" secondItem="7pg-RB-gHP" secondAttribute="trailing" id="Nri-yd-tRf"/>
-                                                <constraint firstItem="7pg-RB-gHP" firstAttribute="top" secondItem="Twz-9O-dwb" secondAttribute="top" id="XhS-Id-2MQ"/>
+                                                <constraint firstAttribute="trailing" secondItem="7pg-RB-gHP" secondAttribute="trailing" id="Bdg-iW-B6w"/>
+                                                <constraint firstItem="7pg-RB-gHP" firstAttribute="leading" secondItem="Twz-9O-dwb" secondAttribute="leadingMargin" constant="35" id="HOs-mW-lBc"/>
+                                                <constraint firstItem="7pg-RB-gHP" firstAttribute="top" secondItem="Twz-9O-dwb" secondAttribute="top" id="SDh-e9-QV3"/>
+                                                <constraint firstAttribute="trailing" secondItem="7pg-RB-gHP" secondAttribute="trailing" id="SHf-At-XaK"/>
+                                                <constraint firstItem="7pg-RB-gHP" firstAttribute="leading" secondItem="Twz-9O-dwb" secondAttribute="leading" constant="43" id="SOd-Rm-Lz9"/>
+                                                <constraint firstItem="7pg-RB-gHP" firstAttribute="centerY" secondItem="Twz-9O-dwb" secondAttribute="centerY" id="VFv-Au-H65"/>
+                                                <constraint firstItem="7pg-RB-gHP" firstAttribute="top" secondItem="Twz-9O-dwb" secondAttribute="top" id="nn6-xL-8yQ"/>
+                                                <constraint firstAttribute="bottom" secondItem="7pg-RB-gHP" secondAttribute="bottom" constant="-1" id="pn1-fp-jcY"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -200,7 +208,7 @@
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="x3D-js-Adg" id="AUI-rG-Sp7"/>
-                                    <outlet property="delegate" destination="x3D-js-Adg" id="Arb-fj-iKO"/>
+                                    <outlet property="delegate" destination="x3D-js-Adg" id="vIG-tl-XjX"/>
                                 </connections>
                             </tableView>
                         </subviews>
