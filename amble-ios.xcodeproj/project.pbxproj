@@ -10,7 +10,7 @@
 		A451CC2E52FC12A3D87D96B6 /* Pods_amble_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB1E6A936296F9D7F4B87E02 /* Pods_amble_iosUITests.framework */; };
 		AFB938AE1E5B2C0000BA3923 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB938AD1E5B2C0000BA3923 /* AppDelegate.swift */; };
 		AFB938B01E5B2C0000BA3923 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB938AF1E5B2C0000BA3923 /* FirstViewController.swift */; };
-		AFB938B21E5B2C0000BA3923 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB938B11E5B2C0000BA3923 /* SecondViewController.swift */; };
+		AFB938B21E5B2C0000BA3923 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB938B11E5B2C0000BA3923 /* ProfileViewController.swift */; };
 		AFB938B51E5B2C0000BA3923 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFB938B31E5B2C0000BA3923 /* Main.storyboard */; };
 		AFB938B71E5B2C0100BA3923 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFB938B61E5B2C0100BA3923 /* Assets.xcassets */; };
 		AFB938BA1E5B2C0100BA3923 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFB938B81E5B2C0100BA3923 /* LaunchScreen.storyboard */; };
@@ -18,6 +18,8 @@
 		AFC3EE0F1E928F6A00159679 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC3EE0E1E928F6A00159679 /* APIManager.swift */; };
 		AFC3EE131E92995E00159679 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC3EE121E92995E00159679 /* Router.swift */; };
 		AFC3EE151E94187300159679 /* APIManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC3EE141E94187300159679 /* APIManagerTests.swift */; };
+		AFEF4BC31E987B3600F7DEBA /* LoginTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEF4BC21E987B3600F7DEBA /* LoginTableViewController.swift */; };
+		AFEF4BC51E987B4400F7DEBA /* RegisterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEF4BC41E987B4400F7DEBA /* RegisterTableViewController.swift */; };
 		BABE4E1A858C88B49E23D040 /* Pods_amble_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 198EA19E9C3FB8DC4D152762 /* Pods_amble_iosTests.framework */; };
 		DE9F9040BD6A4F2034B3828D /* Pods_amble_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B58CAFB1B39C8534F0C1919D /* Pods_amble_ios.framework */; };
 /* End PBXBuildFile section */
@@ -62,7 +64,7 @@
 		AFB938AA1E5B2C0000BA3923 /* amble-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "amble-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB938AD1E5B2C0000BA3923 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AFB938AF1E5B2C0000BA3923 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		AFB938B11E5B2C0000BA3923 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		AFB938B11E5B2C0000BA3923 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		AFB938B41E5B2C0000BA3923 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AFB938B61E5B2C0100BA3923 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AFB938B91E5B2C0100BA3923 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -78,6 +80,8 @@
 		AFC3EE121E92995E00159679 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Router.swift; path = Router/Router.swift; sourceTree = "<group>"; };
 		AFC3EE141E94187300159679 /* APIManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManagerTests.swift; sourceTree = "<group>"; };
 		AFC3EE161E980C7800159679 /* Mockingjay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mockingjay.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/amble-ios-duvhxqoqscperhekbelpwlhfjuzr/Build/Products/Debug-iphonesimulator/Mockingjay/Mockingjay.framework"; sourceTree = "<group>"; };
+		AFEF4BC21E987B3600F7DEBA /* LoginTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginTableViewController.swift; sourceTree = "<group>"; };
+		AFEF4BC41E987B4400F7DEBA /* RegisterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterTableViewController.swift; sourceTree = "<group>"; };
 		B58CAFB1B39C8534F0C1919D /* Pods_amble_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_amble_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA3AAFCA03C42F025ED91D63 /* Pods-amble-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-amble-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-amble-iosUITests/Pods-amble-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		FB1E6A936296F9D7F4B87E02 /* Pods_amble_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_amble_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -156,7 +160,9 @@
 				AFB938BB1E5B2C0100BA3923 /* Info.plist */,
 				AFB938B81E5B2C0100BA3923 /* LaunchScreen.storyboard */,
 				AFB938B31E5B2C0000BA3923 /* Main.storyboard */,
-				AFB938B11E5B2C0000BA3923 /* SecondViewController.swift */,
+				AFEF4BC21E987B3600F7DEBA /* LoginTableViewController.swift */,
+				AFEF4BC41E987B4400F7DEBA /* RegisterTableViewController.swift */,
+				AFB938B11E5B2C0000BA3923 /* ProfileViewController.swift */,
 			);
 			path = "amble-ios";
 			sourceTree = "<group>";
@@ -495,10 +501,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFC3EE0F1E928F6A00159679 /* APIManager.swift in Sources */,
-				AFB938B21E5B2C0000BA3923 /* SecondViewController.swift in Sources */,
+				AFB938B21E5B2C0000BA3923 /* ProfileViewController.swift in Sources */,
+				AFEF4BC51E987B4400F7DEBA /* RegisterTableViewController.swift in Sources */,
 				AFC3EE131E92995E00159679 /* Router.swift in Sources */,
 				AFB938AE1E5B2C0000BA3923 /* AppDelegate.swift in Sources */,
 				AFB938B01E5B2C0000BA3923 /* FirstViewController.swift in Sources */,
+				AFEF4BC31E987B3600F7DEBA /* LoginTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
