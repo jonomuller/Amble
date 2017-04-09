@@ -49,7 +49,19 @@ class LoginViewController: UIViewController {
   }
   
   @IBAction func loginButtonPressed(_ sender: Any) {
+    let usernameCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! LoginTableViewCell
+    let passwordCell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! LoginTableViewCell
     
+    let username = usernameCell.textField.text
+    let password = passwordCell.textField.text
+    
+    APIManager.sharedInstance.login(username: username!, password: password!) { (json, error) in
+      if (error != nil) {
+        print("Error: \(error!.localizedDescription)")
+      } else {
+        print("JWT: \(json?["jwt"])")
+      }
+    }
   }
   
   @IBAction func textFieldChanged(_ sender: Any) {
