@@ -18,6 +18,7 @@ class LoginViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     loginButton.layer.cornerRadius = loginButton.frame.size.height / 2
+    self.addKeyboardDismisser()
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -27,6 +28,7 @@ class LoginViewController: UIViewController {
   }
   
   override func viewWillAppear(_ animated: Bool) {
+    // Set transparent navigation bar
     self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
     self.navigationController?.navigationBar.shadowImage = UIImage()
     self.navigationController?.navigationBar.isTranslucent = true
@@ -54,29 +56,6 @@ class LoginViewController: UIViewController {
     cell.line.borderColor = selection.color
     cell.line.borderWidth = height
   }
-  
-  enum Selection {
-    case select
-    case deselect
-    
-    var color: CGColor {
-      switch self {
-      case .select:
-        return UIColor.white.cgColor
-      case .deselect:
-        return UIColor.lightGray.cgColor
-      }
-    }
-    
-    var height: CGFloat {
-      switch self {
-      case .select:
-        return CGFloat(2.0)
-      case .deselect:
-        return CGFloat(1.0)
-      }
-    }
-  }
 }
 
 
@@ -100,8 +79,6 @@ extension LoginViewController: UITableViewDataSource, UITableViewDelegate {
     
     cell.textField.attributedPlaceholder = NSAttributedString(string: sections[indexPath.row],
                                                               attributes: [NSForegroundColorAttributeName: UIColor.lightGray])
-//    cell.textField.placeholder = sections[indexPath.row]
-    
     return cell
   }
   
@@ -150,4 +127,49 @@ extension LoginViewController: UITextFieldDelegate {
     return false
   }
   
+}
+
+/*
+ Extension to adjust the colour and thickness of the bottom line of a UITableViewCell
+ */
+extension UIViewController {
+  enum Selection {
+    case select
+    case deselect
+    
+    var color: CGColor {
+      switch self {
+      case .select:
+        return UIColor.white.cgColor
+      case .deselect:
+        return UIColor.lightGray.cgColor
+      }
+    }
+    
+    var height: CGFloat {
+      switch self {
+      case .select:
+        return CGFloat(2.0)
+      case .deselect:
+        return CGFloat(1.0)
+      }
+    }
+  }
+}
+
+/*
+ Extension to dismiss the keyboard whenver the user presses off the keyboard anywhere on the view
+ */
+extension UIViewController {
+  func addKeyboardDismisser() {
+    let viewTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    view.addGestureRecognizer(viewTap)
+    
+    let navTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    self.navigationController?.navigationBar.addGestureRecognizer(navTap)
+  }
+  
+  func dismissKeyboard() {
+    view.endEditing(true)
+  }
 }
