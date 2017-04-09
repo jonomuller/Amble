@@ -20,6 +20,13 @@ class LoginViewController: UIViewController {
     loginButton.layer.cornerRadius = 8
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+    self.navigationController?.navigationBar.shadowImage = UIImage()
+    self.navigationController?.navigationBar.isTranslucent = true
+    self.navigationController?.view.backgroundColor = UIColor.clear
+  }
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
