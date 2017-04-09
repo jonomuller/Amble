@@ -20,6 +20,12 @@ class LoginViewController: UIViewController {
     loginButton.layer.cornerRadius = loginButton.frame.size.height / 2
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    // Bring up keyboard for first text field
+    let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! LoginTableViewCell
+    cell.textField.becomeFirstResponder()
+  }
+  
   override func viewWillAppear(_ animated: Bool) {
     self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
     self.navigationController?.navigationBar.shadowImage = UIImage()
@@ -135,8 +141,8 @@ extension LoginViewController: UITextFieldDelegate {
     let indexPath = tableView.indexPathForRow(at: location)
     
     if (indexPath?.row)! < sections.count - 1 {
-      let nextIndexPath = NSIndexPath(row: (indexPath?.row)! + 1, section: (indexPath?.section)!)
-      let cell = tableView.cellForRow(at: nextIndexPath as IndexPath) as! LoginTableViewCell
+      let nextIndexPath = IndexPath(row: (indexPath?.row)! + 1, section: (indexPath?.section)!)
+      let cell = tableView.cellForRow(at: nextIndexPath) as! LoginTableViewCell
       cell.textField.becomeFirstResponder()
     } else {
       textField.resignFirstResponder()
