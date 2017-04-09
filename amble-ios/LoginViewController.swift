@@ -163,9 +163,11 @@ extension UIViewController {
 extension UIViewController {
   func addKeyboardDismisser() {
     let viewTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    viewTap.cancelsTouchesInView = false
     view.addGestureRecognizer(viewTap)
     
     let navTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    navTap.cancelsTouchesInView = false
     self.navigationController?.navigationBar.addGestureRecognizer(navTap)
   }
   
