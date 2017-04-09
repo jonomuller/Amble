@@ -17,8 +17,11 @@ class LoginViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     loginButton.layer.cornerRadius = loginButton.frame.size.height / 2
     self.addKeyboardDismisser()
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardChanged), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -33,6 +36,10 @@ class LoginViewController: UIViewController {
     self.navigationController?.navigationBar.shadowImage = UIImage()
     self.navigationController?.navigationBar.isTranslucent = true
     self.navigationController?.view.backgroundColor = UIColor.clear
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    NotificationCenter.default.removeObserver(self)
   }
   
   override func didReceiveMemoryWarning() {
@@ -55,6 +62,17 @@ class LoginViewController: UIViewController {
     cell.line.frame = CGRect(x: 0, y: cell.frame.size.height - height, width: cell.frame.size.width, height: height)
     cell.line.borderColor = selection.color
     cell.line.borderWidth = height
+  }
+  
+  func keyboardChanged(notification: NSNotification) {
+    if let keyboardRect = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect {
+      UIView.animate(withDuration: 0.1, animations: {
+        self.loginButton.frame = CGRect(x: self.loginButton.frame.origin.x,
+                                        y: keyboardRect.origin.y - self.loginButton.frame.height - 20,
+                                        width: self.loginButton.frame.width,
+                                        height: self.loginButton.frame.height)
+      })
+    }
   }
 }
 
