@@ -10,39 +10,14 @@ import UIKit
 
 class LoginViewController: UIViewController {
   
-  enum Selection {
-    case select
-    case deselect
-    
-    var color: CGColor {
-      switch self {
-      case .select:
-        return UIColor.red.cgColor
-      case .deselect:
-        return UIColor.darkGray.cgColor
-      }
-    }
-    
-    var height: CGFloat {
-      switch self {
-      case .select:
-        return CGFloat(2.0)
-      case .deselect:
-        return CGFloat(1.0)
-      }
-    }
-  }
-  
   @IBOutlet var tableView: UITableView!
+  @IBOutlet var loginButton: UIButton!
+  
+  let sections: [String] = ["username", "password"]
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = false
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    loginButton.layer.cornerRadius = 8
   }
   
   override func didReceiveMemoryWarning() {
@@ -66,12 +41,36 @@ class LoginViewController: UIViewController {
     cell.line.borderColor = selection.color
     cell.line.borderWidth = height
   }
+  
+  enum Selection {
+    case select
+    case deselect
+    
+    var color: CGColor {
+      switch self {
+      case .select:
+        return UIColor.white.cgColor
+      case .deselect:
+        return UIColor.lightGray.cgColor
+      }
+    }
+    
+    var height: CGFloat {
+      switch self {
+      case .select:
+        return CGFloat(2.0)
+      case .deselect:
+        return CGFloat(1.0)
+      }
+    }
+  }
 }
+
 
 extension LoginViewController: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 2
+    return sections.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -81,6 +80,8 @@ extension LoginViewController: UITableViewDataSource, UITableViewDelegate {
     cell.line = CALayer()
     updateBottomLine(cell: cell, selection: .deselect)
     cell.layer.addSublayer(cell.line)
+    
+    cell.textField.placeholder = sections[indexPath.row]
     
     return cell
   }

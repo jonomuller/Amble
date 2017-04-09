@@ -100,7 +100,7 @@
                                     <constraint firstAttribute="height" constant="53" id="8tm-CR-ZMv"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <state key="normal" title="Login"/>
+                                <state key="normal" title="Log in"/>
                                 <connections>
                                     <segue destination="x3D-js-Adg" kind="show" id="IRy-v3-qpe"/>
                                 </connections>
@@ -148,7 +148,7 @@
         <!--Login View Controller-->
         <scene sceneID="v33-OO-O12">
             <objects>
-                <viewController id="x3D-js-Adg" customClass="LoginViewController" customModule="amble_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="x3D-js-Adg" customClass="LoginViewController" customModule="amble_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uGv-gX-8JA"/>
                         <viewControllerLayoutGuide type="bottom" id="oTE-bS-P6K"/>
@@ -157,17 +157,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cmg-IK-X7d">
-                                <rect key="frame" x="144" y="307" width="87" height="53"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="87" id="B6n-Ps-eka"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <state key="normal" title="Login"/>
-                            </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mMd-z6-qR7">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mMd-z6-qR7">
                                 <rect key="frame" x="16" y="117" width="343" height="120"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.29803921568627451" green="0.6470588235294118" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="Ep9-QW-vSm"/>
+                                    <constraint firstAttribute="width" constant="343" id="Wqg-Ee-1j7"/>
+                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="loginCell" id="p29-xw-FRa" customClass="LoginTableViewCell" customModule="amble_ios" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="343" height="60"/>
@@ -182,7 +178,7 @@
                                                         <constraint firstAttribute="width" constant="300" id="09w-1N-cE0"/>
                                                         <constraint firstAttribute="height" constant="60" id="KMg-RI-Ucr"/>
                                                     </constraints>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                                                     <connections>
@@ -201,6 +197,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="7pg-RB-gHP" secondAttribute="bottom" constant="-1" id="pn1-fp-jcY"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.29803921568627451" green="0.64313725490196083" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="textField" destination="7pg-RB-gHP" id="cpz-D3-abM"/>
                                         </connections>
@@ -211,19 +208,31 @@
                                     <outlet property="delegate" destination="x3D-js-Adg" id="vIG-tl-XjX"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cmg-IK-X7d">
+                                <rect key="frame" x="16" y="258" width="343" height="53"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="53" id="5cE-4o-SgM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="23"/>
+                                <color key="tintColor" red="0.29803921568627451" green="0.6470588235294118" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Log in"/>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.24521874494290696" green="0.64723813134572272" blue="0.15160031366418572" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="cmg-IK-X7d" firstAttribute="top" secondItem="uGv-gX-8JA" secondAttribute="bottom" constant="243" id="3uf-76-Sub"/>
-                            <constraint firstItem="cmg-IK-X7d" firstAttribute="centerY" secondItem="C9G-Ko-6Ib" secondAttribute="centerY" id="92X-fG-1Wf"/>
-                            <constraint firstItem="mMd-z6-qR7" firstAttribute="bottom" secondItem="oTE-bS-P6K" secondAttribute="top" constant="-430" id="Iah-GH-jc6"/>
-                            <constraint firstItem="mMd-z6-qR7" firstAttribute="leading" secondItem="C9G-Ko-6Ib" secondAttribute="leading" constant="16" id="ReL-7E-pq8"/>
-                            <constraint firstItem="mMd-z6-qR7" firstAttribute="centerX" secondItem="cmg-IK-X7d" secondAttribute="centerX" id="VDs-MN-0CS"/>
-                            <constraint firstAttribute="trailing" secondItem="mMd-z6-qR7" secondAttribute="trailing" constant="16" id="ewg-9i-8NN"/>
-                            <constraint firstItem="mMd-z6-qR7" firstAttribute="top" secondItem="uGv-gX-8JA" secondAttribute="bottom" constant="53" id="yDD-2k-5d4"/>
+                            <constraint firstItem="oTE-bS-P6K" firstAttribute="top" secondItem="cmg-IK-X7d" secondAttribute="bottom" constant="356" id="8Sz-fZ-H9x"/>
+                            <constraint firstItem="cmg-IK-X7d" firstAttribute="trailing" secondItem="mMd-z6-qR7" secondAttribute="trailing" id="BTB-uz-yDY"/>
+                            <constraint firstItem="mMd-z6-qR7" firstAttribute="top" secondItem="uGv-gX-8JA" secondAttribute="bottom" constant="53" id="RwK-AK-04u"/>
+                            <constraint firstItem="mMd-z6-qR7" firstAttribute="leading" secondItem="C9G-Ko-6Ib" secondAttribute="leadingMargin" id="fBS-FD-X2R"/>
+                            <constraint firstItem="cmg-IK-X7d" firstAttribute="top" secondItem="mMd-z6-qR7" secondAttribute="bottom" constant="21" id="hvg-Wz-Fij"/>
+                            <constraint firstItem="cmg-IK-X7d" firstAttribute="leading" secondItem="mMd-z6-qR7" secondAttribute="leading" id="nSJ-cF-SVX"/>
+                            <constraint firstItem="mMd-z6-qR7" firstAttribute="trailing" secondItem="C9G-Ko-6Ib" secondAttribute="trailingMargin" id="saP-4I-NYi"/>
+                            <constraint firstItem="mMd-z6-qR7" firstAttribute="centerX" secondItem="C9G-Ko-6Ib" secondAttribute="centerX" id="ubw-l5-dZW"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="loginButton" destination="cmg-IK-X7d" id="V6c-DY-ycU"/>
                         <outlet property="tableView" destination="mMd-z6-qR7" id="XSD-NV-9bM"/>
                     </connections>
                 </viewController>
