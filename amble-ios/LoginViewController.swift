@@ -67,21 +67,10 @@ class LoginViewController: UIViewController {
   }
   
   @IBAction func textFieldChanged(_ sender: Any) {
-    var emptyCell = false
-    
-    // Check if any of the text fields are empty
-    if let indexPaths = tableView.indexPathsForVisibleRows {
-      for indexPath in indexPaths {
-        let cell = tableView.cellForRow(at: indexPath) as! LoginTableViewCell
-        if (cell.textField.text?.isEmpty)! {
-          emptyCell = true
-        }
-      }
-    }
-    
     // Enable login button if none of the text fields are empty
-    loginButton.isEnabled = !emptyCell
+    loginButton.isEnabled = noEmptyTextFields()
   }
+  
   /*
    // MARK: - Navigation
    
@@ -91,6 +80,8 @@ class LoginViewController: UIViewController {
    // Pass the selected object to the new view controller.
    }
    */
+  
+  // MARK: helper functions
   
   func updateBottomLine(cell: LoginTableViewCell, selection: Selection) {
     let height = selection.height
@@ -108,6 +99,22 @@ class LoginViewController: UIViewController {
                                         height: self.loginButton.frame.height)
       })
     }
+  }
+  
+  func noEmptyTextFields() -> Bool {
+    var noEmptyCells = true
+    
+    // Check if any of the text fields are empty
+    if let indexPaths = tableView.indexPathsForVisibleRows {
+      for indexPath in indexPaths {
+        let cell = tableView.cellForRow(at: indexPath) as! LoginTableViewCell
+        if (cell.textField.text?.isEmpty)! {
+          noEmptyCells = false
+        }
+      }
+    }
+    
+    return noEmptyCells
   }
 }
 
@@ -178,7 +185,7 @@ extension LoginViewController: UITextFieldDelegate {
       let nextIndexPath = IndexPath(row: (indexPath?.row)! + 1, section: (indexPath?.section)!)
       let cell = tableView.cellForRow(at: nextIndexPath) as! LoginTableViewCell
       cell.textField.becomeFirstResponder()
-    } else {
+    } else if noEmptyTextFields() {
       loginButtonPressed(self)
     }
     return false
