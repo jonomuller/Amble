@@ -57,7 +57,9 @@ class LoginViewController: UIViewController {
     
     APIManager.sharedInstance.login(username: username!, password: password!) { (json, error) in
       if (error != nil) {
-        print("Error: \(error!.localizedDescription)")
+        let alertView = UIAlertController(title: "Log in error", message: error?.localizedDescription, preferredStyle: .alert)
+        alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alertView, animated: true, completion: nil)
       } else {
         print("JWT: \(json?["jwt"])")
       }
@@ -127,6 +129,7 @@ extension LoginViewController: UITableViewDataSource, UITableViewDelegate {
     
     if indexPath.row == sections.count - 1 {
       cell.textField.returnKeyType = .go
+      cell.textField.isSecureTextEntry = true
     }
     
     cell.textField.attributedPlaceholder = NSAttributedString(string: sections[indexPath.row],
@@ -176,7 +179,7 @@ extension LoginViewController: UITextFieldDelegate {
       let cell = tableView.cellForRow(at: nextIndexPath) as! LoginTableViewCell
       cell.textField.becomeFirstResponder()
     } else {
-      textField.resignFirstResponder()
+      loginButtonPressed(self)
     }
     return false
   }
