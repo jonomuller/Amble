@@ -17,7 +17,7 @@ class LoginViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    loginButton.layer.cornerRadius = 8
+    loginButton.layer.cornerRadius = loginButton.frame.size.height / 2
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -88,7 +88,9 @@ extension LoginViewController: UITableViewDataSource, UITableViewDelegate {
     updateBottomLine(cell: cell, selection: .deselect)
     cell.layer.addSublayer(cell.line)
     
-    cell.textField.placeholder = sections[indexPath.row]
+    cell.textField.attributedPlaceholder = NSAttributedString(string: sections[indexPath.row],
+                                                              attributes: [NSForegroundColorAttributeName: UIColor.lightGray])
+//    cell.textField.placeholder = sections[indexPath.row]
     
     return cell
   }
