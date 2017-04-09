@@ -88,6 +88,10 @@ extension LoginViewController: UITableViewDataSource, UITableViewDelegate {
     updateBottomLine(cell: cell, selection: .deselect)
     cell.layer.addSublayer(cell.line)
     
+    if indexPath.row == sections.count - 1 {
+      cell.textField.returnKeyType = .go
+    }
+    
     cell.textField.attributedPlaceholder = NSAttributedString(string: sections[indexPath.row],
                                                               attributes: [NSForegroundColorAttributeName: UIColor.lightGray])
 //    cell.textField.placeholder = sections[indexPath.row]
@@ -124,6 +128,20 @@ extension LoginViewController: UITextFieldDelegate {
   func textFieldDidEndEditing(_ textField: UITextField) {
     let cell = getCellFromTextField(textField: textField)
     updateBottomLine(cell: cell, selection: .deselect)
+  }
+  
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    let location = textField.convert(textField.frame.origin, to: tableView)
+    let indexPath = tableView.indexPathForRow(at: location)
+    
+    if (indexPath?.row)! < sections.count - 1 {
+      let nextIndexPath = NSIndexPath(row: (indexPath?.row)! + 1, section: (indexPath?.section)!)
+      let cell = tableView.cellForRow(at: nextIndexPath as IndexPath) as! LoginTableViewCell
+      cell.textField.becomeFirstResponder()
+    } else {
+      textField.resignFirstResponder()
+    }
+    return false
   }
   
 }
