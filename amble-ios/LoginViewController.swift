@@ -18,8 +18,9 @@ class LoginViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    loginButton.layer.cornerRadius = loginButton.frame.size.height / 2
     self.addKeyboardDismisser()
+    
+    loginButton.layer.cornerRadius = loginButton.frame.size.height / 2
     
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardChanged), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
   }
@@ -47,6 +48,26 @@ class LoginViewController: UIViewController {
     // Dispose of any resources that can be recreated.
   }
   
+  @IBAction func loginButtonPressed(_ sender: Any) {
+    
+  }
+  
+  @IBAction func textFieldChanged(_ sender: Any) {
+    var emptyCell = false
+    
+    // Check if any of the text fields are empty
+    if let indexPaths = tableView.indexPathsForVisibleRows {
+      for indexPath in indexPaths {
+        let cell = tableView.cellForRow(at: indexPath) as! LoginTableViewCell
+        if (cell.textField.text?.isEmpty)! {
+          emptyCell = true
+        }
+      }
+    }
+    
+    // Enable login button if none of the text fields are empty
+    loginButton.isEnabled = !emptyCell
+  }
   /*
    // MARK: - Navigation
    
@@ -76,6 +97,7 @@ class LoginViewController: UIViewController {
   }
 }
 
+// MARK: - Table view data source + delegate
 
 extension LoginViewController: UITableViewDataSource, UITableViewDelegate {
   
@@ -113,6 +135,8 @@ extension LoginViewController: UITableViewDataSource, UITableViewDelegate {
   }
 }
 
+// MARK: - Text field delegate
+
 extension LoginViewController: UITextFieldDelegate {
   
   func getCellFromTextField(textField: UITextField) -> LoginTableViewCell {
@@ -144,8 +168,9 @@ extension LoginViewController: UITextFieldDelegate {
     }
     return false
   }
-  
 }
+
+// MARK: Custom view controller extensions
 
 /*
  Extension to adjust the colour and thickness of the bottom line of a UITableViewCell
@@ -182,11 +207,11 @@ extension UIViewController {
   func addKeyboardDismisser() {
     let viewTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
     viewTap.cancelsTouchesInView = false
-    view.addGestureRecognizer(viewTap)
+//    view.addGestureRecognizer(viewTap)
     
     let navTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
     navTap.cancelsTouchesInView = false
-    self.navigationController?.navigationBar.addGestureRecognizer(navTap)
+//    self.navigationController?.navigationBar.addGestureRecognizer(navTap)
   }
   
   func dismissKeyboard() {

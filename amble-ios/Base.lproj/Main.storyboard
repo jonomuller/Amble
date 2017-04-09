@@ -182,6 +182,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
                                                     <connections>
+                                                        <action selector="textFieldChanged:" destination="x3D-js-Adg" eventType="editingChanged" id="T0e-Kz-Lka"/>
                                                         <outlet property="delegate" destination="x3D-js-Adg" id="daI-zl-dL9"/>
                                                     </connections>
                                                 </textField>
@@ -208,7 +209,7 @@
                                     <outlet property="delegate" destination="x3D-js-Adg" id="vIG-tl-XjX"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cmg-IK-X7d">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cmg-IK-X7d">
                                 <rect key="frame" x="16" y="594" width="343" height="53"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -217,6 +218,9 @@
                                 <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="23"/>
                                 <color key="tintColor" red="0.29803921568627451" green="0.6470588235294118" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Log in"/>
+                                <connections>
+                                    <action selector="loginButtonPressed:" destination="x3D-js-Adg" eventType="touchUpInside" id="oE9-Di-W9C"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.24521874494290696" green="0.64723813134572272" blue="0.15160031366418572" alpha="1" colorSpace="calibratedRGB"/>
