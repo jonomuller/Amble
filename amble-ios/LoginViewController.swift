@@ -85,7 +85,7 @@ class LoginViewController: UIViewController {
   
   func updateBottomLine(cell: LoginTableViewCell, selection: Selection) {
     let height = selection.height
-    cell.line.frame = CGRect(x: 0, y: cell.frame.size.height - height, width: cell.frame.size.width, height: height)
+    cell.line.frame = CGRect(x: cell.innerView.frame.origin.x, y: cell.innerView.frame.size.height - height, width: cell.innerView.frame.size.width, height: height)
     cell.line.borderColor = selection.color
     cell.line.borderWidth = height
   }

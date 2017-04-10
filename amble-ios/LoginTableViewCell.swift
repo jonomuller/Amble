@@ -10,6 +10,7 @@ import UIKit
 
 class LoginTableViewCell: UITableViewCell {
   
+  @IBOutlet var innerView: UIView!
   @IBOutlet var textField: UITextField!
   var line: CALayer!
   

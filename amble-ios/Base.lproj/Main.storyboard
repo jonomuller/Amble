@@ -67,7 +67,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DPz-t9-IvH" id="c9Z-dk-u1H">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -159,7 +159,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mMd-z6-qR7">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" red="0.29803921568627451" green="0.6470588235294118" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.29803921568627451" green="0.64313725490196083" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="GV7-bb-RmC">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="127"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -173,27 +173,40 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7pg-RB-gHP">
-                                                    <rect key="frame" x="43" y="0.0" width="300" height="60"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
-                                                    <connections>
-                                                        <action selector="textFieldChanged:" destination="x3D-js-Adg" eventType="editingChanged" id="T0e-Kz-Lka"/>
-                                                        <outlet property="delegate" destination="x3D-js-Adg" id="daI-zl-dL9"/>
-                                                    </connections>
-                                                </textField>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XBp-XJ-AyM">
+                                                    <rect key="frame" x="19" y="0.0" width="336" height="60"/>
+                                                    <subviews>
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7pg-RB-gHP">
+                                                            <rect key="frame" x="48" y="0.0" width="288" height="60"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
+                                                            <connections>
+                                                                <action selector="textFieldChanged:" destination="x3D-js-Adg" eventType="editingChanged" id="T0e-Kz-Lka"/>
+                                                                <outlet property="delegate" destination="x3D-js-Adg" id="daI-zl-dL9"/>
+                                                            </connections>
+                                                        </textField>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.29803921568627451" green="0.64313725490196083" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstItem="7pg-RB-gHP" firstAttribute="leading" secondItem="XBp-XJ-AyM" secondAttribute="leading" constant="48" id="OVZ-Hu-Z9Y"/>
+                                                        <constraint firstAttribute="bottom" secondItem="7pg-RB-gHP" secondAttribute="bottom" id="ffx-DO-cp0"/>
+                                                        <constraint firstAttribute="trailing" secondItem="7pg-RB-gHP" secondAttribute="trailing" id="o8G-Ml-L91"/>
+                                                        <constraint firstItem="7pg-RB-gHP" firstAttribute="top" secondItem="XBp-XJ-AyM" secondAttribute="top" id="wvS-IA-oi6"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="7pg-RB-gHP" secondAttribute="trailing" constant="24" id="5ft-hL-b7Z"/>
-                                                <constraint firstItem="7pg-RB-gHP" firstAttribute="top" secondItem="Twz-9O-dwb" secondAttribute="top" id="BXr-WR-Rq8"/>
-                                                <constraint firstAttribute="bottom" secondItem="7pg-RB-gHP" secondAttribute="bottom" id="UVE-N5-fZY"/>
-                                                <constraint firstItem="7pg-RB-gHP" firstAttribute="leading" secondItem="Twz-9O-dwb" secondAttribute="leadingMargin" constant="35" id="bQU-cP-V9q"/>
+                                                <constraint firstItem="XBp-XJ-AyM" firstAttribute="trailing" secondItem="Twz-9O-dwb" secondAttribute="trailingMargin" constant="-12" id="9Gd-Ie-ys5"/>
+                                                <constraint firstItem="XBp-XJ-AyM" firstAttribute="leading" secondItem="Twz-9O-dwb" secondAttribute="leadingMargin" constant="11" id="Dh7-Kr-4m4"/>
+                                                <constraint firstItem="XBp-XJ-AyM" firstAttribute="top" secondItem="Twz-9O-dwb" secondAttribute="top" id="UoQ-aT-afx"/>
+                                                <constraint firstAttribute="bottom" secondItem="XBp-XJ-AyM" secondAttribute="bottom" id="bwv-bn-zGf"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.29803921568627451" green="0.64313725490196083" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <outlet property="textField" destination="7pg-RB-gHP" id="cpz-D3-abM"/>
+                                            <outlet property="innerView" destination="XBp-XJ-AyM" id="LV6-3s-GNv"/>
+                                            <outlet property="textField" destination="7pg-RB-gHP" id="jm7-Ya-6LN"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -247,7 +260,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BIK-Rt-A7X" id="sga-3c-inu">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
