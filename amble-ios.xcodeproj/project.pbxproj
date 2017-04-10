@@ -296,7 +296,7 @@
 				TargetAttributes = {
 					AFB938A91E5B2C0000BA3923 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = QJQGH9NF7F;
+						DevelopmentTeam = VWR855X7M3;
 						ProvisioningStyle = Automatic;
 					};
 					AFB938BF1E5B2C0100BA3923 = {
@@ -608,7 +608,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -653,7 +653,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -667,7 +667,7 @@
 			baseConfigurationReference = 3D39026309A2941CD584AB0A /* Pods-amble-ios.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = QJQGH9NF7F;
+				DEVELOPMENT_TEAM = VWR855X7M3;
 				INFOPLIST_FILE = "amble-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jonomuller.amble-ios";
@@ -681,7 +681,7 @@
 			baseConfigurationReference = 7C1C1F85E095435FDA9C236A /* Pods-amble-ios.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = QJQGH9NF7F;
+				DEVELOPMENT_TEAM = VWR855X7M3;
 				INFOPLIST_FILE = "amble-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jonomuller.amble-ios";
