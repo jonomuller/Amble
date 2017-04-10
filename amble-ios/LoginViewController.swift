@@ -63,11 +63,12 @@ class LoginViewController: UIViewController {
       } else {
         let user = User(username: (json?["user"].stringValue)!, jwt: (json?["jwt"].stringValue)!)
         
+        // Save user data to keychain
         do {
-          try user.deleteFromSecureStore()
-          print("Deleted \(user.username) from keychain")
+          try user.createInSecureStore()
+          print("Login successful")
         } catch {
-          print ("Error deleting in keychain: \(error)")
+          print("Error saving to keychain: \(error)")
         }
       }
     }
