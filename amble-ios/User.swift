@@ -14,13 +14,14 @@ struct User: ReadableSecureStorable, CreateableSecureStorable, DeleteableSecureS
   let username: String
   let jwt: String
   
-  var service: String = "Amble"
+  let service: String = "Amble"
   
   var account: String {
-    return username
+    return service
   }
   
   var data: [String : Any] {
-    return ["jwt": jwt]
+    return ["username": username,
+            "jwt": jwt]
   }
 }

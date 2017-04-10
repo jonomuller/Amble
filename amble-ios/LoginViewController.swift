@@ -61,7 +61,14 @@ class LoginViewController: UIViewController {
         alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alertView, animated: true, completion: nil)
       } else {
-        print("JWT: \(json?["jwt"])")
+        let user = User(username: (json?["user"].stringValue)!, jwt: (json?["jwt"].stringValue)!)
+        
+        do {
+          try user.deleteFromSecureStore()
+          print("Deleted \(user.username) from keychain")
+        } catch {
+          print ("Error deleting in keychain: \(error)")
+        }
       }
     }
   }
