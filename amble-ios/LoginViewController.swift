@@ -72,6 +72,12 @@ class LoginViewController: UIViewController {
         } catch {
           print("Error saving to keychain: \(error)")
         }
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "profileViewController")
+        let navController = UINavigationController(rootViewController: vc)
+        
+        self.present(navController, animated: true, completion: nil)
       }
     }
   }

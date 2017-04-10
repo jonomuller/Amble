@@ -32,7 +32,7 @@
         <!--Profile View Controller-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
-                <viewController id="8rJ-Kc-sve" customClass="ProfileViewController" customModule="amble_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="profileViewController" id="8rJ-Kc-sve" customClass="ProfileViewController" customModule="amble_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="L7p-HK-0SC"/>
                         <viewControllerLayoutGuide type="bottom" id="Djb-ko-YwX"/>
@@ -180,7 +180,7 @@
                                                             <rect key="frame" x="48" y="0.0" width="288" height="60"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
+                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                                                             <connections>
                                                                 <action selector="textFieldChanged:" destination="x3D-js-Adg" eventType="editingChanged" id="T0e-Kz-Lka"/>
                                                                 <outlet property="delegate" destination="x3D-js-Adg" id="daI-zl-dL9"/>
