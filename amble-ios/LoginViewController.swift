@@ -13,14 +13,14 @@ class LoginViewController: UIViewController {
   @IBOutlet var tableView: UITableView!
   @IBOutlet var loginButton: UIButton!
   
+  let LOGIN_CELL_IDENTIFIER = "loginCell"
   let sections: [String] = ["username", "password"]
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     self.addKeyboardDismisser()
-    
-    loginButton.layer.cornerRadius = loginButton.frame.size.height / 2
+    loginButton.layer.cornerRadius = loginButton.frame.height / 2
     
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardChanged), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
   }
@@ -47,6 +47,8 @@ class LoginViewController: UIViewController {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
+  
+  // MARK: IBAction methods
   
   @IBAction func loginButtonPressed(_ sender: Any) {
     let usernameCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! LoginTableViewCell
@@ -77,6 +79,15 @@ class LoginViewController: UIViewController {
   @IBAction func textFieldChanged(_ sender: Any) {
     // Enable login button if none of the text fields are empty
     loginButton.isEnabled = noEmptyTextFields()
+    
+    // Enable tick next to text field when not empty
+    let indexPath = indexPathFromTextField(textField: sender as! UITextField)
+    let cell = tableView.cellForRow(at: indexPath) as! LoginTableViewCell
+    if (cell.textField.text?.isEmpty)! {
+      cell.textField.rightViewMode = .never
+    } else {
+      cell.textField.rightViewMode = .always
+    }
   }
   
   /*
@@ -135,7 +146,7 @@ extension LoginViewController: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "loginCell", for: indexPath) as! LoginTableViewCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: LOGIN_CELL_IDENTIFIER, for: indexPath) as! LoginTableViewCell
     
     cell.selectionStyle = .none
     cell.line = CALayer()
@@ -146,6 +157,10 @@ extension LoginViewController: UITableViewDataSource, UITableViewDelegate {
       cell.textField.returnKeyType = .go
       cell.textField.isSecureTextEntry = true
     }
+    
+    let checkmark = UIImage(named: "checkmark")
+    cell.textField.rightView = UIImageView(image: checkmark)
+    cell.textField.rightViewMode = .never
     
     cell.textField.attributedPlaceholder = NSAttributedString(string: sections[indexPath.row],
                                                               attributes: [NSForegroundColorAttributeName: UIColor.lightGray])
@@ -169,28 +184,28 @@ extension LoginViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension LoginViewController: UITextFieldDelegate {
   
-  func getCellFromTextField(textField: UITextField) -> LoginTableViewCell {
+  func indexPathFromTextField(textField: UITextField) -> IndexPath {
     let location = textField.convert(textField.frame.origin, to: tableView)
-    let indexPath = tableView.indexPathForRow(at: location)
-    return tableView.cellForRow(at: indexPath!) as! LoginTableViewCell
+    return tableView.indexPathForRow(at: location)!
   }
   
   func textFieldDidBeginEditing(_ textField: UITextField) {
-    let cell = getCellFromTextField(textField: textField)
+    let indexPath = indexPathFromTextField(textField: textField)
+    let cell = tableView.cellForRow(at: indexPath) as! LoginTableViewCell
     updateBottomLine(cell: cell, selection: .select)
   }
   
   func textFieldDidEndEditing(_ textField: UITextField) {
-    let cell = getCellFromTextField(textField: textField)
+    let indexPath = indexPathFromTextField(textField: textField)
+    let cell = tableView.cellForRow(at: indexPath) as! LoginTableViewCell
     updateBottomLine(cell: cell, selection: .deselect)
   }
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    let location = textField.convert(textField.frame.origin, to: tableView)
-    let indexPath = tableView.indexPathForRow(at: location)
+    let indexPath = indexPathFromTextField(textField: textField)
     
-    if (indexPath?.row)! < sections.count - 1 {
-      let nextIndexPath = IndexPath(row: (indexPath?.row)! + 1, section: (indexPath?.section)!)
+    if indexPath.row < sections.count - 1 {
+      let nextIndexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
       let cell = tableView.cellForRow(at: nextIndexPath) as! LoginTableViewCell
       cell.textField.becomeFirstResponder()
     } else if noEmptyTextFields() {
