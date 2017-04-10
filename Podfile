@@ -17,6 +17,5 @@ target 'amble-ios' do
     inherit! :search_paths
     # Pods for testing
   end
-end
 
 end
