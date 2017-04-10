@@ -14,6 +14,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C7F727D48928BF47D913AFC48BB6A978"
+               BuildableName = "Locksmith.framework"
+               BlueprintName = "Locksmith"
+               ReferencedContainer = "container:Pods/Pods.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "5BAACC736A5215103E10E2DC0A74FDCD"
                BuildableName = "Mockingjay.framework"
                BlueprintName = "Mockingjay"
@@ -28,7 +42,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ACEC4658CB5817AB830F3035804345F1"
+               BlueprintIdentifier = "649244448C0458F807808DF4CFACE25B"
                BuildableName = "SwiftyJSON.framework"
                BlueprintName = "SwiftyJSON"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">

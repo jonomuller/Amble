@@ -18,6 +18,7 @@
 		AFC3EE0F1E928F6A00159679 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC3EE0E1E928F6A00159679 /* APIManager.swift */; };
 		AFC3EE131E92995E00159679 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC3EE121E92995E00159679 /* Router.swift */; };
 		AFC3EE151E94187300159679 /* APIManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC3EE141E94187300159679 /* APIManagerTests.swift */; };
+		AFD8E9C21E9BB9DD00B0919A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD8E9C11E9BB9DD00B0919A /* User.swift */; };
 		AFEF4BC31E987B3600F7DEBA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEF4BC21E987B3600F7DEBA /* LoginViewController.swift */; };
 		AFEF4BC51E987B4400F7DEBA /* RegisterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEF4BC41E987B4400F7DEBA /* RegisterTableViewController.swift */; };
 		AFEF4BCC1E99623600F7DEBA /* LoginTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEF4BCA1E99623600F7DEBA /* LoginTableViewCell.swift */; };
@@ -81,6 +82,7 @@
 		AFC3EE121E92995E00159679 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Router.swift; path = Router/Router.swift; sourceTree = "<group>"; };
 		AFC3EE141E94187300159679 /* APIManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManagerTests.swift; sourceTree = "<group>"; };
 		AFC3EE161E980C7800159679 /* Mockingjay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mockingjay.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/amble-ios-duvhxqoqscperhekbelpwlhfjuzr/Build/Products/Debug-iphonesimulator/Mockingjay/Mockingjay.framework"; sourceTree = "<group>"; };
+		AFD8E9C11E9BB9DD00B0919A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		AFEF4BC21E987B3600F7DEBA /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AFEF4BC41E987B4400F7DEBA /* RegisterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterTableViewController.swift; sourceTree = "<group>"; };
 		AFEF4BCA1E99623600F7DEBA /* LoginTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginTableViewCell.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				AFB938B31E5B2C0000BA3923 /* Main.storyboard */,
 				AFEF4BCA1E99623600F7DEBA /* LoginTableViewCell.swift */,
 				AFEF4BC21E987B3600F7DEBA /* LoginViewController.swift */,
+				AFD8E9C11E9BB9DD00B0919A /* User.swift */,
 				AFEF4BC41E987B4400F7DEBA /* RegisterTableViewController.swift */,
 				AFB938B11E5B2C0000BA3923 /* ProfileViewController.swift */,
 			);
@@ -508,6 +511,7 @@
 				AFEF4BC51E987B4400F7DEBA /* RegisterTableViewController.swift in Sources */,
 				AFC3EE131E92995E00159679 /* Router.swift in Sources */,
 				AFB938AE1E5B2C0000BA3923 /* AppDelegate.swift in Sources */,
+				AFD8E9C21E9BB9DD00B0919A /* User.swift in Sources */,
 				AFB938B01E5B2C0000BA3923 /* FirstViewController.swift in Sources */,
 				AFEF4BC31E987B3600F7DEBA /* LoginViewController.swift in Sources */,
 				AFEF4BCC1E99623600F7DEBA /* LoginTableViewCell.swift in Sources */,

@@ -6,6 +6,7 @@ target 'amble-ios' do
   # Pods for amble-ios
   pod 'SwiftyJSON'
   pod 'Alamofire', '~> 4.4'
+  pod 'Locksmith'
 
   target 'amble-iosTests' do
     inherit! :search_paths
