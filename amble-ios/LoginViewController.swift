@@ -15,12 +15,14 @@ class LoginViewController: UIViewController {
   
   let LOGIN_CELL_IDENTIFIER = "loginCell"
   let sections: [String] = ["username", "password"]
+  var loginButtonPosition: CGFloat!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     self.addKeyboardDismisser()
     loginButton.layer.cornerRadius = loginButton.frame.height / 2
+    loginButtonPosition = loginButton.frame.origin.y
     
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardChanged), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
   }
@@ -51,6 +53,16 @@ class LoginViewController: UIViewController {
   // MARK: IBAction methods
   
   @IBAction func loginButtonPressed(_ sender: Any) {
+    self.loginButton.setTitle("", for: .normal)
+    self.view.layoutIfNeeded()
+    
+    UIView.animate(withDuration: 0.25, animations: {
+      self.loginButton.frame = CGRect(x: self.loginButton.frame.midX - self.loginButton.frame.height / 2,
+                                      y: self.loginButton.frame.midY - self.loginButton.frame.height / 2,
+                                      width: self.loginButton.frame.height,
+                                      height: self.loginButton.frame.height)
+    })
+    
     let usernameCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! LoginTableViewCell
     let passwordCell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! LoginTableViewCell
     
@@ -118,10 +130,7 @@ class LoginViewController: UIViewController {
   func keyboardChanged(notification: NSNotification) {
     if let keyboardRect = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect {
       UIView.animate(withDuration: 0.1, animations: {
-        self.loginButton.frame = CGRect(x: self.loginButton.frame.origin.x,
-                                        y: keyboardRect.origin.y - self.loginButton.frame.height - 20,
-                                        width: self.loginButton.frame.width,
-                                        height: self.loginButton.frame.height)
+        self.loginButton.transform = CGAffineTransform(translationX: 0, y: keyboardRect.origin.y - self.loginButton.frame.height - 20 - self.loginButtonPosition)
       })
     }
   }
@@ -159,6 +168,10 @@ extension LoginViewController: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return sections.count
+  }
+  
+  func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    view.endEditing(true)
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -230,6 +243,7 @@ extension LoginViewController: UITextFieldDelegate {
     } else if noEmptyTextFields() {
       loginButtonPressed(self)
     }
+    
     return false
   }
 }
