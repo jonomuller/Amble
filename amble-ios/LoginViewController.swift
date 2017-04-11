@@ -13,16 +13,18 @@ class LoginViewController: UIViewController {
   @IBOutlet var tableView: UITableView!
   @IBOutlet var loginButton: UIButton!
   
-  let LOGIN_CELL_IDENTIFIER = "loginCell"
-  let sections: [String] = ["username", "password"]
-  var loginButtonPosition: CGFloat!
+  fileprivate let LOGIN_CELL_IDENTIFIER = "loginCell"
+  fileprivate let sections: [String] = ["username", "password"]
+  private var loginButtonYPos: CGFloat!
+  private var loginButtonWidth: CGFloat!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     self.addKeyboardDismisser()
     loginButton.layer.cornerRadius = loginButton.frame.height / 2
-    loginButtonPosition = loginButton.frame.origin.y
+    loginButtonYPos = loginButton.frame.origin.y
+    loginButtonWidth = loginButton.frame.width
     
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardChanged), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
   }
@@ -53,43 +55,43 @@ class LoginViewController: UIViewController {
   // MARK: IBAction methods
   
   @IBAction func loginButtonPressed(_ sender: Any) {
-    self.loginButton.setTitle("", for: .normal)
-    self.view.layoutIfNeeded()
+    loginButton.setTitle("", for: .normal)
+    view.layoutIfNeeded()
     
-    UIView.animate(withDuration: 0.25, animations: {
-      self.loginButton.frame = CGRect(x: self.loginButton.frame.midX - self.loginButton.frame.height / 2,
-                                      y: self.loginButton.frame.midY - self.loginButton.frame.height / 2,
-                                      width: self.loginButton.frame.height,
-                                      height: self.loginButton.frame.height)
-    })
+    let spinner = UIActivityIndicatorView(activityIndicatorStyle: .white)
     
-    let usernameCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! LoginTableViewCell
-    let passwordCell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! LoginTableViewCell
-    
-    let username = usernameCell.textField.text
-    let password = passwordCell.textField.text
-    
-    APIManager.sharedInstance.login(username: username!, password: password!) { (json, error) in
-      if (error != nil) {
-        let alertView = UIAlertController(title: "Log in error", message: error?.localizedDescription, preferredStyle: .alert)
-        alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alertView, animated: true, completion: nil)
-      } else {
-        let user = User(username: (json?["user"].stringValue)!, jwt: (json?["jwt"].stringValue)!)
+    loginButton.collapse(width: nil, spinner: spinner) { (success) in
+      let usernameCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! LoginTableViewCell
+      let passwordCell = self.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! LoginTableViewCell
+      
+      let username = usernameCell.textField.text
+      let password = passwordCell.textField.text
+      
+      APIManager.sharedInstance.login(username: username!, password: password!) { (json, error) in
+        self.loginButton.setTitle("Log in", for: .normal)
+        self.loginButton.expand(width: self.loginButtonWidth, spinner: spinner, completion: nil)
         
-        // Save user data to keychain
-        do {
-          try user.createInSecureStore()
-          print("Login successful")
-        } catch {
-          print("Error saving to keychain: \(error)")
+        if (error != nil) {
+          let alertView = UIAlertController(title: "Log in error", message: error?.localizedDescription, preferredStyle: .alert)
+          alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+          self.present(alertView, animated: true, completion: nil)
+        } else {
+          let user = User(username: (json?["user"].stringValue)!, jwt: (json?["jwt"].stringValue)!)
+          
+          // Save user data to keychain
+          do {
+            try user.createInSecureStore()
+            print("Login successful")
+          } catch {
+            print("Error saving to keychain: \(error)")
+          }
+          
+          let storyboard = UIStoryboard(name: "Main", bundle: nil)
+          let vc = storyboard.instantiateViewController(withIdentifier: "profileViewController")
+          let navController = UINavigationController(rootViewController: vc)
+          
+          self.present(navController, animated: true, completion: nil)
         }
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "profileViewController")
-        let navController = UINavigationController(rootViewController: vc)
-        
-        self.present(navController, animated: true, completion: nil)
       }
     }
   }
@@ -130,7 +132,7 @@ class LoginViewController: UIViewController {
   func keyboardChanged(notification: NSNotification) {
     if let keyboardRect = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect {
       UIView.animate(withDuration: 0.1, animations: {
-        self.loginButton.transform = CGAffineTransform(translationX: 0, y: keyboardRect.origin.y - self.loginButton.frame.height - 20 - self.loginButtonPosition)
+        self.loginButton.transform = CGAffineTransform(translationX: 0, y: keyboardRect.origin.y - self.loginButton.frame.height - 20 - self.loginButtonYPos)
       })
     }
   }
@@ -294,5 +296,46 @@ extension UIViewController {
   
   func dismissKeyboard() {
     view.endEditing(true)
+  }
+}
+
+
+extension UIButton {
+  func collapse(width: CGFloat?, spinner: UIActivityIndicatorView, completion: ((Bool) -> Void)?) {
+    animateFrame(width: width) { (success) in
+      spinner.frame = CGRect(x: 26.5 - spinner.frame.width / 2, y: 26.5 - spinner.frame.height / 2, width: spinner.frame.width, height: spinner.frame.height)
+      //      spinner.center = CGPoint(x: self.loginButton.frame.midX, y: self.loginButton.frame.midY)
+      spinner.color = .green
+      
+      self.addSubview(spinner)
+      spinner.startAnimating()
+      
+      completion!(true)
+    }
+  }
+  
+  func expand(width: CGFloat?, spinner: UIActivityIndicatorView, completion: ((Bool) -> Void)?) {
+    spinner.stopAnimating()
+    animateFrame(width: width, completion: nil)
+  }
+  
+  private func animateFrame(width: CGFloat?, completion: ((Bool) -> Void)?) {
+    let value: CGFloat!
+    if width != nil {
+      value = width
+    } else {
+      value = self.frame.height
+    }
+    
+    UIView.animate(withDuration: 0.2, animations: {
+      self.frame = CGRect(x: self.frame.midX - value / 2,
+                          y: self.frame.midY - self.frame.height / 2,
+                          width: value,
+                          height: self.frame.height)
+    }) { (success) in
+      if completion != nil {
+        completion!(true)
+      }
+    }
   }
 }
