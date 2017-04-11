@@ -12,16 +12,26 @@ import ChameleonFramework
 class LoginButton: UIButton {
   
   private var originalWidth: CGFloat!
+  private var originalText: String?
+  var spinner: UIActivityIndicatorView!
   
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
-    originalWidth = frame.width
-    layer.cornerRadius = frame.height / 2
-    backgroundColor = .white
-    tintColor = .flatGreenDark
-    titleLabel?.font = UIFont(name: "Avenir-Black", size: 23)
+    self.originalWidth = frame.width
+    self.layer.cornerRadius = frame.height / 2
+    self.backgroundColor = .white
+    self.tintColor = .flatGreenDark
+    self.titleLabel?.font = UIFont(name: "Avenir-Black", size: 23)
+    
+    spinner = UIActivityIndicatorView(activityIndicatorStyle: .white)
+    spinner.color = .flatGreenDark
+    self.addSubview(spinner)
   }
   
+  /*
+   Enum to determine what the width of the frame should be depending
+   on the animation
+   */
   enum AnimationType {
     case collapse
     case expand
@@ -36,24 +46,31 @@ class LoginButton: UIButton {
     }
   }
   
-  func collapse(spinner: UIActivityIndicatorView, completion: ((Bool) -> Void)?) {
+  func collapse(completion: ((Bool) -> Void)?) {
+    self.isEnabled = false
+    self.originalText = self.titleLabel?.text
+    self.setTitle("", for: .normal)
+    self.superview?.layoutIfNeeded()
     animateFrame(type: .collapse) { (success) in
-      spinner.frame = CGRect(x: 26.5 - spinner.frame.width / 2, y: 26.5 - spinner.frame.height / 2, width: spinner.frame.width, height: spinner.frame.height)
-      self.addSubview(spinner)
-      spinner.color = .flatGreenDark
-      spinner.startAnimating()
+      self.spinner.frame = CGRect(x: self.frame.width / 2 - self.spinner.frame.width / 2,
+                                  y: self.frame.height / 2 - self.spinner.frame.height / 2,
+                                  width: self.spinner.frame.width,
+                                  height: self.spinner.frame.height)
+      self.spinner.startAnimating()
       completion!(true)
     }
   }
   
-  func expand(spinner: UIActivityIndicatorView, completion: ((Bool) -> Void)?) {
-    spinner.stopAnimating()
-    animateFrame(type: .expand, completion: nil)
+  func expand(completion: ((Bool) -> Void)?) {
+    self.isEnabled = true
+    self.spinner.stopAnimating()
+    animateFrame(type: .expand) { (success) in
+      self.setTitle(self.originalText, for: .normal)
+    }
   }
   
   private func animateFrame(type: AnimationType, completion: ((Bool) -> Void)?) {
     let width = type.width(button: self)
-    
     UIView.animate(withDuration: 0.2, animations: {
       self.frame = CGRect(x: self.frame.midX - width / 2,
                           y: self.frame.midY - self.frame.height / 2,

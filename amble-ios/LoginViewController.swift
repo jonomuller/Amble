@@ -53,12 +53,7 @@ class LoginViewController: UIViewController {
   // MARK: IBAction methods
   
   @IBAction func loginButtonPressed(_ sender: Any) {
-    loginButton.setTitle("", for: .normal)
-    view.layoutIfNeeded()
-    
-    let spinner = UIActivityIndicatorView(activityIndicatorStyle: .white)
-    
-    loginButton.collapse(spinner: spinner) { (success) in
+    loginButton.collapse() { (success) in
       let usernameCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! LoginTableViewCell
       let passwordCell = self.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! LoginTableViewCell
       
@@ -66,8 +61,7 @@ class LoginViewController: UIViewController {
       let password = passwordCell.textField.text
       
       APIManager.sharedInstance.login(username: username!, password: password!) { (json, error) in
-        self.loginButton.setTitle("Log in", for: .normal)
-        self.loginButton.expand(spinner: spinner, completion: nil)
+        self.loginButton.expand(completion: nil)
         
         if (error != nil) {
           let alertView = UIAlertController(title: "Log in error", message: error?.localizedDescription, preferredStyle: .alert)
