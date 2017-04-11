@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A451CC2E52FC12A3D87D96B6 /* Pods_amble_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB1E6A936296F9D7F4B87E02 /* Pods_amble_iosUITests.framework */; };
+		AF87C9E21E9D310B005086FF /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF87C9E11E9D310B005086FF /* LoginButton.swift */; };
 		AFB938AE1E5B2C0000BA3923 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB938AD1E5B2C0000BA3923 /* AppDelegate.swift */; };
 		AFB938B01E5B2C0000BA3923 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB938AF1E5B2C0000BA3923 /* FirstViewController.swift */; };
 		AFB938B21E5B2C0000BA3923 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB938B11E5B2C0000BA3923 /* ProfileViewController.swift */; };
@@ -63,6 +64,7 @@
 		8008B78F5C57D21C5B74C754 /* Pods-amble-iosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-amble-iosTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-amble-iosTests/Pods-amble-iosTests.debug.xcconfig"; sourceTree = "<group>"; };
 		87D2BC0CF3058112E934142B /* Pods-amble-iosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-amble-iosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-amble-iosTests/Pods-amble-iosTests.release.xcconfig"; sourceTree = "<group>"; };
 		9C33EE0FF79A930B6C51BC66 /* Pods-amble-iosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-amble-iosUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-amble-iosUITests/Pods-amble-iosUITests.release.xcconfig"; sourceTree = "<group>"; };
+		AF87C9E11E9D310B005086FF /* LoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		AFB938AA1E5B2C0000BA3923 /* amble-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "amble-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB938AD1E5B2C0000BA3923 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AFB938AF1E5B2C0000BA3923 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				AFB938B31E5B2C0000BA3923 /* Main.storyboard */,
 				AFEF4BCA1E99623600F7DEBA /* LoginTableViewCell.swift */,
 				AFEF4BC21E987B3600F7DEBA /* LoginViewController.swift */,
+				AF87C9E11E9D310B005086FF /* LoginButton.swift */,
 				AFD8E9C11E9BB9DD00B0919A /* User.swift */,
 				AFEF4BC41E987B4400F7DEBA /* RegisterTableViewController.swift */,
 				AFB938B11E5B2C0000BA3923 /* ProfileViewController.swift */,
@@ -511,6 +514,7 @@
 				AFEF4BC51E987B4400F7DEBA /* RegisterTableViewController.swift in Sources */,
 				AFC3EE131E92995E00159679 /* Router.swift in Sources */,
 				AFB938AE1E5B2C0000BA3923 /* AppDelegate.swift in Sources */,
+				AF87C9E21E9D310B005086FF /* LoginButton.swift in Sources */,
 				AFD8E9C21E9BB9DD00B0919A /* User.swift in Sources */,
 				AFB938B01E5B2C0000BA3923 /* FirstViewController.swift in Sources */,
 				AFEF4BC31E987B3600F7DEBA /* LoginViewController.swift in Sources */,

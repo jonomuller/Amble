@@ -11,20 +11,16 @@ import UIKit
 class LoginViewController: UIViewController {
   
   @IBOutlet var tableView: UITableView!
-  @IBOutlet var loginButton: UIButton!
+  @IBOutlet var loginButton: LoginButton!
   
   fileprivate let LOGIN_CELL_IDENTIFIER = "loginCell"
   fileprivate let sections: [String] = ["username", "password"]
   private var loginButtonYPos: CGFloat!
-  private var loginButtonWidth: CGFloat!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.addKeyboardDismisser()
-    loginButton.layer.cornerRadius = loginButton.frame.height / 2
     loginButtonYPos = loginButton.frame.origin.y
-    loginButtonWidth = loginButton.frame.width
     
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardChanged), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
   }
@@ -60,7 +56,7 @@ class LoginViewController: UIViewController {
     
     let spinner = UIActivityIndicatorView(activityIndicatorStyle: .white)
     
-    loginButton.collapse(width: nil, spinner: spinner) { (success) in
+    loginButton.collapse(spinner: spinner) { (success) in
       let usernameCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! LoginTableViewCell
       let passwordCell = self.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! LoginTableViewCell
       
@@ -69,7 +65,7 @@ class LoginViewController: UIViewController {
       
       APIManager.sharedInstance.login(username: username!, password: password!) { (json, error) in
         self.loginButton.setTitle("Log in", for: .normal)
-        self.loginButton.expand(width: self.loginButtonWidth, spinner: spinner, completion: nil)
+        self.loginButton.expand(spinner: spinner, completion: nil)
         
         if (error != nil) {
           let alertView = UIAlertController(title: "Log in error", message: error?.localizedDescription, preferredStyle: .alert)
@@ -275,66 +271,6 @@ extension UIViewController {
         return CGFloat(2.0)
       case .deselect:
         return CGFloat(1.0)
-      }
-    }
-  }
-}
-
-/*
- Extension to dismiss the keyboard whenver the user presses off the keyboard anywhere on the view
- */
-extension UIViewController {
-  func addKeyboardDismisser() {
-    let viewTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-    viewTap.cancelsTouchesInView = false
-//    view.addGestureRecognizer(viewTap)
-    
-    let navTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-    navTap.cancelsTouchesInView = false
-//    self.navigationController?.navigationBar.addGestureRecognizer(navTap)
-  }
-  
-  func dismissKeyboard() {
-    view.endEditing(true)
-  }
-}
-
-
-extension UIButton {
-  func collapse(width: CGFloat?, spinner: UIActivityIndicatorView, completion: ((Bool) -> Void)?) {
-    animateFrame(width: width) { (success) in
-      spinner.frame = CGRect(x: 26.5 - spinner.frame.width / 2, y: 26.5 - spinner.frame.height / 2, width: spinner.frame.width, height: spinner.frame.height)
-      //      spinner.center = CGPoint(x: self.loginButton.frame.midX, y: self.loginButton.frame.midY)
-      spinner.color = .green
-      
-      self.addSubview(spinner)
-      spinner.startAnimating()
-      
-      completion!(true)
-    }
-  }
-  
-  func expand(width: CGFloat?, spinner: UIActivityIndicatorView, completion: ((Bool) -> Void)?) {
-    spinner.stopAnimating()
-    animateFrame(width: width, completion: nil)
-  }
-  
-  private func animateFrame(width: CGFloat?, completion: ((Bool) -> Void)?) {
-    let value: CGFloat!
-    if width != nil {
-      value = width
-    } else {
-      value = self.frame.height
-    }
-    
-    UIView.animate(withDuration: 0.2, animations: {
-      self.frame = CGRect(x: self.frame.midX - value / 2,
-                          y: self.frame.midY - self.frame.height / 2,
-                          width: value,
-                          height: self.frame.height)
-    }) { (success) in
-      if completion != nil {
-        completion!(true)
       }
     }
   }
