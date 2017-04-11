@@ -177,7 +177,7 @@
                                                     <rect key="frame" x="19" y="0.0" width="336" height="60"/>
                                                     <subviews>
                                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7pg-RB-gHP">
-                                                            <rect key="frame" x="48" y="0.0" width="288" height="60"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="336" height="60"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
@@ -189,7 +189,7 @@
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.29803921568627451" green="0.64313725490196083" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstItem="7pg-RB-gHP" firstAttribute="leading" secondItem="XBp-XJ-AyM" secondAttribute="leading" constant="48" id="OVZ-Hu-Z9Y"/>
+                                                        <constraint firstItem="7pg-RB-gHP" firstAttribute="leading" secondItem="XBp-XJ-AyM" secondAttribute="leading" id="OVZ-Hu-Z9Y"/>
                                                         <constraint firstAttribute="bottom" secondItem="7pg-RB-gHP" secondAttribute="bottom" id="ffx-DO-cp0"/>
                                                         <constraint firstAttribute="trailing" secondItem="7pg-RB-gHP" secondAttribute="trailing" id="o8G-Ml-L91"/>
                                                         <constraint firstItem="7pg-RB-gHP" firstAttribute="top" secondItem="XBp-XJ-AyM" secondAttribute="top" id="wvS-IA-oi6"/>

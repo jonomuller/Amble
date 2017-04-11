@@ -141,6 +141,16 @@ class LoginViewController: UIViewController {
     
     return noEmptyCells
   }
+  
+  func setTextFieldImage(cell: LoginTableViewCell, name: String) {
+    let image = UIImage(named: name)
+    let imageView = UIImageView(image: image)
+    let padding = CGRect(x: 0, y: 0, width: imageView.frame.width + 15, height: imageView.frame.height)
+    let paddingView = UIView(frame: padding)
+    paddingView.addSubview(imageView)
+    cell.textField.leftView = paddingView
+    cell.textField.leftViewMode = .always
+  }
 }
 
 // MARK: - Table view data source + delegate
@@ -159,7 +169,10 @@ extension LoginViewController: UITableViewDataSource, UITableViewDelegate {
     updateBottomLine(cell: cell, selection: .deselect)
     cell.layer.addSublayer(cell.line)
     
-    if indexPath.row == sections.count - 1 {
+    if indexPath.row == 0 {
+      setTextFieldImage(cell: cell, name: "user")
+    } else if indexPath.row == sections.count - 1 {
+      setTextFieldImage(cell: cell, name: "padlock")
       cell.textField.returnKeyType = .go
       cell.textField.isSecureTextEntry = true
     }
