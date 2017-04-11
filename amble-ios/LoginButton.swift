@@ -8,12 +8,13 @@
 
 import UIKit
 import ChameleonFramework
+import NVActivityIndicatorView
 
 class LoginButton: UIButton {
   
   private var originalWidth: CGFloat!
   private var originalText: String?
-  var spinner: UIActivityIndicatorView!
+  var spinner: NVActivityIndicatorView!
   
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
@@ -23,8 +24,9 @@ class LoginButton: UIButton {
     self.tintColor = .flatGreenDark
     self.titleLabel?.font = UIFont(name: "Avenir-Black", size: 23)
     
-    spinner = UIActivityIndicatorView(activityIndicatorStyle: .white)
-    spinner.color = .flatGreenDark
+    spinner = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 30, height: 30),
+                                      type: .ballScaleRippleMultiple,
+                                      color: .flatGreenDark)
     self.addSubview(spinner)
   }
   
@@ -77,9 +79,7 @@ class LoginButton: UIButton {
                           width: width,
                           height: self.frame.height)
     }) { (success) in
-      if completion != nil {
-        completion!(true)
-      }
+      completion?(true)
     }
   }
 }

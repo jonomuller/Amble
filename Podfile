@@ -8,6 +8,7 @@ target 'amble-ios' do
   pod 'Alamofire', '~> 4.4'
   pod 'Locksmith'
   pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
+  pod 'NVActivityIndicatorView'
 
   target 'amble-iosTests' do
     inherit! :search_paths
