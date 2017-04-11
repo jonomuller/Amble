@@ -21,8 +21,10 @@ class LoginViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    tableView.backgroundColor = GradientColor(.topToBottom, frame: tableView.frame, colors: [.flatGreenDark, .flatForestGreen])
+    self.view.backgroundColor = GradientColor(.topToBottom, frame: tableView.frame, colors: [.flatGreenDark, .flatForestGreen])
+    
     loginButtonYPos = loginButton.frame.origin.y
+    self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
     
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardChanged), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
   }
@@ -271,3 +273,17 @@ extension UIViewController {
     }
   }
 }
+
+extension UIButton {
+  func setBackgroundColor(color: UIColor, forState: UIControlState) {
+    UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
+    
+    if let context = UIGraphicsGetCurrentContext() {
+      context.setFillColor(color.cgColor)
+      context.fill(CGRect(x: 0, y: 0, width: 1, height: 1))
+    }
+
+    let image = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    self.setBackgroundImage(image, for: forState)
+  }}

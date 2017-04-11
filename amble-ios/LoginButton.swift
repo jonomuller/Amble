@@ -28,6 +28,9 @@ class LoginButton: UIButton {
                                       type: .ballScaleRippleMultiple,
                                       color: .flatGreenDark)
     self.addSubview(spinner)
+    
+    self.clipsToBounds = true
+    self.setBackgroundColor(color: .flatWhiteDark, forState: .highlighted)
   }
   
   /*
