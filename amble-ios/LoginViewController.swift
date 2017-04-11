@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ChameleonFramework
 
 class LoginViewController: UIViewController {
   
@@ -20,6 +21,7 @@ class LoginViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    tableView.backgroundColor = GradientColor(.topToBottom, frame: tableView.frame, colors: [.flatGreenDark, .flatForestGreen])
     loginButtonYPos = loginButton.frame.origin.y
     
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardChanged), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
@@ -193,7 +195,7 @@ extension LoginViewController: UITableViewDataSource, UITableViewDelegate {
     cell.textField.rightViewMode = .never
     
     cell.textField.attributedPlaceholder = NSAttributedString(string: sections[indexPath.row],
-                                                              attributes: [NSForegroundColorAttributeName: UIColor.lightGray])
+                                                              attributes: [NSForegroundColorAttributeName: UIColor.flatWhite])
     return cell
   }
   
@@ -261,7 +263,7 @@ extension UIViewController {
       case .select:
         return UIColor.white.cgColor
       case .deselect:
-        return UIColor.lightGray.cgColor
+        return UIColor.flatWhite.cgColor
       }
     }
     

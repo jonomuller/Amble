@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ChameleonFramework
 
 class LoginButton: UIButton {
   
@@ -17,7 +18,7 @@ class LoginButton: UIButton {
     originalWidth = frame.width
     layer.cornerRadius = frame.height / 2
     backgroundColor = .white
-    tintColor = .green
+    tintColor = .flatGreenDark
     titleLabel?.font = UIFont(name: "Avenir-Black", size: 23)
   }
   
@@ -38,12 +39,9 @@ class LoginButton: UIButton {
   func collapse(spinner: UIActivityIndicatorView, completion: ((Bool) -> Void)?) {
     animateFrame(type: .collapse) { (success) in
       spinner.frame = CGRect(x: 26.5 - spinner.frame.width / 2, y: 26.5 - spinner.frame.height / 2, width: spinner.frame.width, height: spinner.frame.height)
-      //      spinner.center = CGPoint(x: self.loginButton.frame.midX, y: self.loginButton.frame.midY)
-      spinner.color = .green
-      
       self.addSubview(spinner)
+      spinner.color = .flatGreenDark
       spinner.startAnimating()
-      
       completion!(true)
     }
   }

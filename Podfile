@@ -7,6 +7,7 @@ target 'amble-ios' do
   pod 'SwiftyJSON'
   pod 'Alamofire', '~> 4.4'
   pod 'Locksmith'
+  pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
 
   target 'amble-iosTests' do
     inherit! :search_paths
