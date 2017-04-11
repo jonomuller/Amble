@@ -16,17 +16,14 @@ class LoginViewController: UIViewController {
   
   fileprivate let LOGIN_CELL_IDENTIFIER = "loginCell"
   fileprivate let sections: [String] = ["username", "password"]
-  private var loginButtonYPos: CGFloat!
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     self.view.backgroundColor = GradientColor(.topToBottom, frame: tableView.frame, colors: [.flatGreenDark, .flatForestGreen])
     
-    loginButtonYPos = loginButton.frame.origin.y
-    self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-    
-    NotificationCenter.default.addObserver(self, selector: #selector(keyboardChanged), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+    // Call functions to animate the login button when the keyboard appears/disappears
+    NotificationCenter.default.addObserver(loginButton, selector: #selector(loginButton.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+    NotificationCenter.default.addObserver(loginButton, selector: #selector(loginButton.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -44,7 +41,7 @@ class LoginViewController: UIViewController {
   }
   
   override func viewWillDisappear(_ animated: Bool) {
-    NotificationCenter.default.removeObserver(self)
+    NotificationCenter.default.removeObserver(loginButton)
   }
   
   override func didReceiveMemoryWarning() {
@@ -121,14 +118,6 @@ class LoginViewController: UIViewController {
     cell.line.frame = CGRect(x: cell.innerView.frame.origin.x, y: cell.innerView.frame.size.height - height, width: cell.innerView.frame.size.width, height: height)
     cell.line.borderColor = selection.color
     cell.line.borderWidth = height
-  }
-  
-  func keyboardChanged(notification: NSNotification) {
-    if let keyboardRect = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect {
-      UIView.animate(withDuration: 0.1, animations: {
-        self.loginButton.transform = CGAffineTransform(translationX: 0, y: keyboardRect.origin.y - self.loginButton.frame.height - 20 - self.loginButtonYPos)
-      })
-    }
   }
   
   func noEmptyTextFields() -> Bool {
@@ -286,4 +275,28 @@ extension UIButton {
     let image = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
     self.setBackgroundImage(image, for: forState)
-  }}
+  }
+}
+
+extension UIButton {
+  func keyboardWillShow(notification: NSNotification) {
+    if let keyboardRectBegin = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? CGRect {
+      if let keyboardRectEnd = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect {
+        if keyboardRectBegin != keyboardRectEnd {
+          let transform = CGAffineTransform(translationX: 0, y: keyboardRectEnd.origin.y - self.frame.height - 20 - self.frame.origin.y)
+          transformButton(transform: transform)
+        }
+      }
+    }
+  }
+  
+  func keyboardWillHide() {
+    transformButton(transform: CGAffineTransform.identity)
+  }
+  
+  private func transformButton(transform: CGAffineTransform) {
+    UIView.animate(withDuration: 0.1, animations: {
+      self.transform = transform
+    })
+  }
+}
