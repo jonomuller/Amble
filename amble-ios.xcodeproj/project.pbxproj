@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A451CC2E52FC12A3D87D96B6 /* Pods_amble_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB1E6A936296F9D7F4B87E02 /* Pods_amble_iosUITests.framework */; };
+		AF2E759F1E9DC37800C548B6 /* UIButton+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2E759E1E9DC37800C548B6 /* UIButton+BackgroundColor.swift */; };
+		AF2E75A11E9DC3FA00C548B6 /* UIButton+KeyboardAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2E75A01E9DC3FA00C548B6 /* UIButton+KeyboardAnimation.swift */; };
 		AF87C9E21E9D310B005086FF /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF87C9E11E9D310B005086FF /* LoginButton.swift */; };
 		AFB938AE1E5B2C0000BA3923 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB938AD1E5B2C0000BA3923 /* AppDelegate.swift */; };
 		AFB938B01E5B2C0000BA3923 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB938AF1E5B2C0000BA3923 /* FirstViewController.swift */; };
@@ -64,6 +66,8 @@
 		8008B78F5C57D21C5B74C754 /* Pods-amble-iosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-amble-iosTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-amble-iosTests/Pods-amble-iosTests.debug.xcconfig"; sourceTree = "<group>"; };
 		87D2BC0CF3058112E934142B /* Pods-amble-iosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-amble-iosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-amble-iosTests/Pods-amble-iosTests.release.xcconfig"; sourceTree = "<group>"; };
 		9C33EE0FF79A930B6C51BC66 /* Pods-amble-iosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-amble-iosUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-amble-iosUITests/Pods-amble-iosUITests.release.xcconfig"; sourceTree = "<group>"; };
+		AF2E759E1E9DC37800C548B6 /* UIButton+BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+BackgroundColor.swift"; sourceTree = "<group>"; };
+		AF2E75A01E9DC3FA00C548B6 /* UIButton+KeyboardAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+KeyboardAnimation.swift"; sourceTree = "<group>"; };
 		AF87C9E11E9D310B005086FF /* LoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		AFB938AA1E5B2C0000BA3923 /* amble-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "amble-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB938AD1E5B2C0000BA3923 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -81,7 +85,7 @@
 		AFC3EDE01E927A1100159679 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/amble-ios-duvhxqoqscperhekbelpwlhfjuzr/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
 		AFC3EDE21E927A1600159679 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/amble-ios-duvhxqoqscperhekbelpwlhfjuzr/Build/Products/Debug-iphonesimulator/SwiftyJSON/SwiftyJSON.framework"; sourceTree = "<group>"; };
 		AFC3EE0E1E928F6A00159679 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
-		AFC3EE121E92995E00159679 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Router.swift; path = Router/Router.swift; sourceTree = "<group>"; };
+		AFC3EE121E92995E00159679 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		AFC3EE141E94187300159679 /* APIManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManagerTests.swift; sourceTree = "<group>"; };
 		AFC3EE161E980C7800159679 /* Mockingjay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mockingjay.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/amble-ios-duvhxqoqscperhekbelpwlhfjuzr/Build/Products/Debug-iphonesimulator/Mockingjay/Mockingjay.framework"; sourceTree = "<group>"; };
 		AFD8E9C11E9BB9DD00B0919A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -134,6 +138,25 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		AF2E759D1E9DC31200C548B6 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				AF87C9E11E9D310B005086FF /* LoginButton.swift */,
+				AFEF4BCA1E99623600F7DEBA /* LoginTableViewCell.swift */,
+				AFEF4BC21E987B3600F7DEBA /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		AF2E75A21E9DC77F00C548B6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AF2E759E1E9DC37800C548B6 /* UIButton+BackgroundColor.swift */,
+				AF2E75A01E9DC3FA00C548B6 /* UIButton+KeyboardAnimation.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		AFB938A11E5B2C0000BA3923 = {
 			isa = PBXGroup;
 			children = (
@@ -160,18 +183,17 @@
 			isa = PBXGroup;
 			children = (
 				AFC3EE0D1E928F5400159679 /* APIManager */,
+				AF2E75A21E9DC77F00C548B6 /* Extensions */,
+				AF2E759D1E9DC31200C548B6 /* Login */,
 				AFB938AD1E5B2C0000BA3923 /* AppDelegate.swift */,
 				AFB938B61E5B2C0100BA3923 /* Assets.xcassets */,
 				AFB938AF1E5B2C0000BA3923 /* FirstViewController.swift */,
 				AFB938BB1E5B2C0100BA3923 /* Info.plist */,
 				AFB938B81E5B2C0100BA3923 /* LaunchScreen.storyboard */,
 				AFB938B31E5B2C0000BA3923 /* Main.storyboard */,
-				AFEF4BCA1E99623600F7DEBA /* LoginTableViewCell.swift */,
-				AFEF4BC21E987B3600F7DEBA /* LoginViewController.swift */,
-				AF87C9E11E9D310B005086FF /* LoginButton.swift */,
-				AFD8E9C11E9BB9DD00B0919A /* User.swift */,
-				AFEF4BC41E987B4400F7DEBA /* RegisterTableViewController.swift */,
 				AFB938B11E5B2C0000BA3923 /* ProfileViewController.swift */,
+				AFEF4BC41E987B4400F7DEBA /* RegisterTableViewController.swift */,
+				AFD8E9C11E9BB9DD00B0919A /* User.swift */,
 			);
 			path = "amble-ios";
 			sourceTree = "<group>";
@@ -179,8 +201,8 @@
 		AFB938C31E5B2C0100BA3923 /* amble-iosTests */ = {
 			isa = PBXGroup;
 			children = (
-				AFB938C61E5B2C0100BA3923 /* Info.plist */,
 				AFC3EE141E94187300159679 /* APIManagerTests.swift */,
+				AFB938C61E5B2C0100BA3923 /* Info.plist */,
 			);
 			path = "amble-iosTests";
 			sourceTree = "<group>";
@@ -197,8 +219,8 @@
 		AFC3EE0D1E928F5400159679 /* APIManager */ = {
 			isa = PBXGroup;
 			children = (
-				AFC3EE0E1E928F6A00159679 /* APIManager.swift */,
 				AFC3EE101E9298AD00159679 /* Router */,
+				AFC3EE0E1E928F6A00159679 /* APIManager.swift */,
 			);
 			path = APIManager;
 			sourceTree = "<group>";
@@ -208,7 +230,7 @@
 			children = (
 				AFC3EE121E92995E00159679 /* Router.swift */,
 			);
-			name = Router;
+			path = Router;
 			sourceTree = "<group>";
 		};
 		C94B737784ECBF4FA5B8F120 /* Frameworks */ = {
@@ -514,10 +536,12 @@
 				AFEF4BC51E987B4400F7DEBA /* RegisterTableViewController.swift in Sources */,
 				AFC3EE131E92995E00159679 /* Router.swift in Sources */,
 				AFB938AE1E5B2C0000BA3923 /* AppDelegate.swift in Sources */,
+				AF2E759F1E9DC37800C548B6 /* UIButton+BackgroundColor.swift in Sources */,
 				AF87C9E21E9D310B005086FF /* LoginButton.swift in Sources */,
 				AFD8E9C21E9BB9DD00B0919A /* User.swift in Sources */,
 				AFB938B01E5B2C0000BA3923 /* FirstViewController.swift in Sources */,
 				AFEF4BC31E987B3600F7DEBA /* LoginViewController.swift in Sources */,
+				AF2E75A11E9DC3FA00C548B6 /* UIButton+KeyboardAnimation.swift in Sources */,
 				AFEF4BCC1E99623600F7DEBA /* LoginTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
