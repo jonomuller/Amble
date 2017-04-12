@@ -3,7 +3,7 @@ platform :ios, '9.0'
 target 'Amble' do
   use_frameworks!
 
-  # Pods for amble-ios
+  # Pods for Amble
   pod 'SwiftyJSON'
   pod 'Alamofire', '~> 4.4'
   pod 'Locksmith'

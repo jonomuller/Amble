@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:amble-ios.xcodeproj">
+      location = "self:Amble.xcodeproj">
    </FileRef>
 </Workspace>

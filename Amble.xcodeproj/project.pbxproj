@@ -35,14 +35,14 @@
 			containerPortal = AFB938A21E5B2C0000BA3923 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = AFB938A91E5B2C0000BA3923;
-			remoteInfo = "amble-ios";
+			remoteInfo = "Amble";
 		};
 		AFB938CC1E5B2C0100BA3923 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AFB938A21E5B2C0000BA3923 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = AFB938A91E5B2C0000BA3923;
-			remoteInfo = "amble-ios";
+			remoteInfo = "Amble";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -66,13 +66,13 @@
 		5C9B1C67E08B6DADBA77E2FF /* Pods_AmbleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AmbleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		893D85E238620BE016AD4072 /* Pods-Amble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Amble.release.xcconfig"; path = "Pods/Target Support Files/Pods-Amble/Pods-Amble.release.xcconfig"; sourceTree = "<group>"; };
 		AA688E5EFD6E86A42AFDF0A0 /* Pods-AmbleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AmbleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AmbleTests/Pods-AmbleTests.release.xcconfig"; sourceTree = "<group>"; };
-		AF2E759E1E9DC37800C548B6 /* UIButton+BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+BackgroundColor.swift"; sourceTree = "<group>"; };
-		AF2E75A01E9DC3FA00C548B6 /* UIButton+KeyboardAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+KeyboardAnimation.swift"; sourceTree = "<group>"; };
-		AF87C9E11E9D310B005086FF /* LoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
+		AF2E759E1E9DC37800C548B6 /* UIButton+BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "UIButton+BackgroundColor.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AF2E75A01E9DC3FA00C548B6 /* UIButton+KeyboardAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "UIButton+KeyboardAnimation.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AF87C9E11E9D310B005086FF /* LoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LoginButton.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AFB938AA1E5B2C0000BA3923 /* Amble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Amble.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		AFB938AD1E5B2C0000BA3923 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AFB938AF1E5B2C0000BA3923 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		AFB938B11E5B2C0000BA3923 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		AFB938AD1E5B2C0000BA3923 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AFB938AF1E5B2C0000BA3923 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FirstViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AFB938B11E5B2C0000BA3923 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ProfileViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AFB938B41E5B2C0000BA3923 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AFB938B61E5B2C0100BA3923 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AFB938B91E5B2C0100BA3923 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -80,18 +80,18 @@
 		AFB938C01E5B2C0100BA3923 /* AmbleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AmbleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB938C61E5B2C0100BA3923 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFB938CB1E5B2C0100BA3923 /* AmbleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AmbleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AFB938CF1E5B2C0100BA3923 /* amble_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = amble_iosUITests.swift; sourceTree = "<group>"; };
+		AFB938CF1E5B2C0100BA3923 /* amble_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = amble_iosUITests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AFB938D11E5B2C0100BA3923 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AFC3EDE01E927A1100159679 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/amble-ios-duvhxqoqscperhekbelpwlhfjuzr/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
-		AFC3EDE21E927A1600159679 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/amble-ios-duvhxqoqscperhekbelpwlhfjuzr/Build/Products/Debug-iphonesimulator/SwiftyJSON/SwiftyJSON.framework"; sourceTree = "<group>"; };
-		AFC3EE0E1E928F6A00159679 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
-		AFC3EE121E92995E00159679 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		AFC3EE141E94187300159679 /* APIManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManagerTests.swift; sourceTree = "<group>"; };
-		AFC3EE161E980C7800159679 /* Mockingjay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mockingjay.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/amble-ios-duvhxqoqscperhekbelpwlhfjuzr/Build/Products/Debug-iphonesimulator/Mockingjay/Mockingjay.framework"; sourceTree = "<group>"; };
-		AFD8E9C11E9BB9DD00B0919A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		AFEF4BC21E987B3600F7DEBA /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		AFEF4BC41E987B4400F7DEBA /* RegisterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterTableViewController.swift; sourceTree = "<group>"; };
-		AFEF4BCA1E99623600F7DEBA /* LoginTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginTableViewCell.swift; sourceTree = "<group>"; };
+		AFC3EDE01E927A1100159679 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Amble-duvhxqoqscperhekbelpwlhfjuzr/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
+		AFC3EDE21E927A1600159679 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Amble-duvhxqoqscperhekbelpwlhfjuzr/Build/Products/Debug-iphonesimulator/SwiftyJSON/SwiftyJSON.framework"; sourceTree = "<group>"; };
+		AFC3EE0E1E928F6A00159679 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = APIManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AFC3EE121E92995E00159679 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Router.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AFC3EE141E94187300159679 /* APIManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = APIManagerTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AFC3EE161E980C7800159679 /* Mockingjay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mockingjay.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Amble-duvhxqoqscperhekbelpwlhfjuzr/Build/Products/Debug-iphonesimulator/Mockingjay/Mockingjay.framework"; sourceTree = "<group>"; };
+		AFD8E9C11E9BB9DD00B0919A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = User.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AFEF4BC21E987B3600F7DEBA /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LoginViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AFEF4BC41E987B4400F7DEBA /* RegisterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RegisterTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AFEF4BCA1E99623600F7DEBA /* LoginTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LoginTableViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B37DD9D48B8010EE55C475F3 /* Pods-AmbleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AmbleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AmbleTests/Pods-AmbleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D78BD4F7B18EAACA674B1349 /* Pods-AmbleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AmbleUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AmbleUITests/Pods-AmbleUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D84250B2A0DA6EF4426313C1 /* Pods_Amble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Amble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -266,7 +266,7 @@
 			dependencies = (
 			);
 			name = Amble;
-			productName = "amble-ios";
+			productName = "Amble";
 			productReference = AFB938AA1E5B2C0000BA3923 /* Amble.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -287,7 +287,7 @@
 				AFB938C21E5B2C0100BA3923 /* PBXTargetDependency */,
 			);
 			name = AmbleTests;
-			productName = "amble-iosTests";
+			productName = "AmbleTests";
 			productReference = AFB938C01E5B2C0100BA3923 /* AmbleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
@@ -308,7 +308,7 @@
 				AFB938CD1E5B2C0100BA3923 /* PBXTargetDependency */,
 			);
 			name = AmbleUITests;
-			productName = "amble-iosUITests";
+			productName = "AmbleUITests";
 			productReference = AFB938CB1E5B2C0100BA3923 /* AmbleUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};

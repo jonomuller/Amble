@@ -1,6 +1,6 @@
 //
 //  APIManagerTests.swift
-//  amble-ios
+//  Amble
 //
 //  Created by Jono Muller on 04/04/2017.
 //  Copyright © 2017 Jonathan Muller. All rights reserved.
@@ -9,7 +9,7 @@
 import XCTest
 import SwiftyJSON
 import Mockingjay
-@testable import amble_ios
+@testable import Amble
 
 class APIManagerTests: XCTestCase {
   
