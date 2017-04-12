@@ -35,14 +35,14 @@
 			containerPortal = AFB938A21E5B2C0000BA3923 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = AFB938A91E5B2C0000BA3923;
-			remoteInfo = "Amble";
+			remoteInfo = Amble;
 		};
 		AFB938CC1E5B2C0100BA3923 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AFB938A21E5B2C0000BA3923 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = AFB938A91E5B2C0000BA3923;
-			remoteInfo = "Amble";
+			remoteInfo = Amble;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -266,7 +266,7 @@
 			dependencies = (
 			);
 			name = Amble;
-			productName = "Amble";
+			productName = Amble;
 			productReference = AFB938AA1E5B2C0000BA3923 /* Amble.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -287,7 +287,7 @@
 				AFB938C21E5B2C0100BA3923 /* PBXTargetDependency */,
 			);
 			name = AmbleTests;
-			productName = "AmbleTests";
+			productName = AmbleTests;
 			productReference = AFB938C01E5B2C0100BA3923 /* AmbleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
@@ -308,7 +308,7 @@
 				AFB938CD1E5B2C0100BA3923 /* PBXTargetDependency */,
 			);
 			name = AmbleUITests;
-			productName = "AmbleUITests";
+			productName = AmbleUITests;
 			productReference = AFB938CB1E5B2C0100BA3923 /* AmbleUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
@@ -401,7 +401,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		069700A11620C6642B038090 /* [CP] Copy Pods Resources */ = {
@@ -431,7 +431,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		3A257B13A065B0362FF0500D /* [CP] Embed Pods Frameworks */ = {
@@ -521,7 +521,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

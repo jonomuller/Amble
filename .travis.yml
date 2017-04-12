@@ -2,12 +2,12 @@ language: objective-c
 osx_image: xcode8.2
 
 before_install:
-  - gem install cocoapods -v '1.2.0'
-  - gem install xcpretty
-  - pod repo update
+  - gem install cocoapods
+  - gem install xcpretty --no-document --quiet
 
 script:
-  - xcodebuild test -workspace Amble.xcworkspace -scheme Amble -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 7 Plus,OS=10.2' | xcpretty --color && exit ${PIPESTATUS[0]}
+  - set -o pipefail
+  - xcodebuild test -workspace Amble.xcworkspace -scheme Amble -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 7 Plus,OS=10.2' | xcpretty --color
 
 notifications:
   email:
