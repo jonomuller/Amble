@@ -6,11 +6,14 @@ target 'amble-ios' do
   # Pods for amble-ios
   pod 'SwiftyJSON'
   pod 'Alamofire', '~> 4.4'
-  pod 'Mockingjay'
+  pod 'Locksmith'
+  pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
+  pod 'NVActivityIndicatorView'
 
   target 'amble-iosTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'Mockingjay'
   end
 
   target 'amble-iosUITests' do
