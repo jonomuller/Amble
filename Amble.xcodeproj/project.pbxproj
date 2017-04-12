@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A451CC2E52FC12A3D87D96B6 /* Pods_amble_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB1E6A936296F9D7F4B87E02 /* Pods_amble_iosUITests.framework */; };
+		0C9E13C997DFEEA29558749A /* Pods_AmbleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C9B1C67E08B6DADBA77E2FF /* Pods_AmbleTests.framework */; };
+		9F8A3D78E32F7EDAC3087EA0 /* Pods_Amble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84250B2A0DA6EF4426313C1 /* Pods_Amble.framework */; };
 		AF2E759F1E9DC37800C548B6 /* UIButton+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2E759E1E9DC37800C548B6 /* UIButton+BackgroundColor.swift */; };
 		AF2E75A11E9DC3FA00C548B6 /* UIButton+KeyboardAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2E75A01E9DC3FA00C548B6 /* UIButton+KeyboardAnimation.swift */; };
 		AF87C9E21E9D310B005086FF /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF87C9E11E9D310B005086FF /* LoginButton.swift */; };
@@ -25,8 +26,7 @@
 		AFEF4BC31E987B3600F7DEBA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEF4BC21E987B3600F7DEBA /* LoginViewController.swift */; };
 		AFEF4BC51E987B4400F7DEBA /* RegisterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEF4BC41E987B4400F7DEBA /* RegisterTableViewController.swift */; };
 		AFEF4BCC1E99623600F7DEBA /* LoginTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEF4BCA1E99623600F7DEBA /* LoginTableViewCell.swift */; };
-		BABE4E1A858C88B49E23D040 /* Pods_amble_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 198EA19E9C3FB8DC4D152762 /* Pods_amble_iosTests.framework */; };
-		DE9F9040BD6A4F2034B3828D /* Pods_amble_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B58CAFB1B39C8534F0C1919D /* Pods_amble_ios.framework */; };
+		EBCDE4FDD02E934EC9FDF426 /* Pods_AmbleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 184FD3A76701D8A22173A25D /* Pods_AmbleUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,16 +60,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		198EA19E9C3FB8DC4D152762 /* Pods_amble_iosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_amble_iosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3D39026309A2941CD584AB0A /* Pods-amble-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-amble-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-amble-ios/Pods-amble-ios.debug.xcconfig"; sourceTree = "<group>"; };
-		7C1C1F85E095435FDA9C236A /* Pods-amble-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-amble-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-amble-ios/Pods-amble-ios.release.xcconfig"; sourceTree = "<group>"; };
-		8008B78F5C57D21C5B74C754 /* Pods-amble-iosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-amble-iosTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-amble-iosTests/Pods-amble-iosTests.debug.xcconfig"; sourceTree = "<group>"; };
-		87D2BC0CF3058112E934142B /* Pods-amble-iosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-amble-iosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-amble-iosTests/Pods-amble-iosTests.release.xcconfig"; sourceTree = "<group>"; };
-		9C33EE0FF79A930B6C51BC66 /* Pods-amble-iosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-amble-iosUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-amble-iosUITests/Pods-amble-iosUITests.release.xcconfig"; sourceTree = "<group>"; };
+		184FD3A76701D8A22173A25D /* Pods_AmbleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AmbleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		44666F6EAB8515BB74DFC8BC /* Pods-Amble.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Amble.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Amble/Pods-Amble.debug.xcconfig"; sourceTree = "<group>"; };
+		45A325ED89FF15DF776A15A8 /* Pods-AmbleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AmbleUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AmbleUITests/Pods-AmbleUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		5C9B1C67E08B6DADBA77E2FF /* Pods_AmbleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AmbleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		893D85E238620BE016AD4072 /* Pods-Amble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Amble.release.xcconfig"; path = "Pods/Target Support Files/Pods-Amble/Pods-Amble.release.xcconfig"; sourceTree = "<group>"; };
+		AA688E5EFD6E86A42AFDF0A0 /* Pods-AmbleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AmbleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AmbleTests/Pods-AmbleTests.release.xcconfig"; sourceTree = "<group>"; };
 		AF2E759E1E9DC37800C548B6 /* UIButton+BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+BackgroundColor.swift"; sourceTree = "<group>"; };
 		AF2E75A01E9DC3FA00C548B6 /* UIButton+KeyboardAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+KeyboardAnimation.swift"; sourceTree = "<group>"; };
 		AF87C9E11E9D310B005086FF /* LoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
-		AFB938AA1E5B2C0000BA3923 /* amble-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "amble-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFB938AA1E5B2C0000BA3923 /* Amble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Amble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB938AD1E5B2C0000BA3923 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AFB938AF1E5B2C0000BA3923 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		AFB938B11E5B2C0000BA3923 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -77,9 +77,9 @@
 		AFB938B61E5B2C0100BA3923 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AFB938B91E5B2C0100BA3923 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AFB938BB1E5B2C0100BA3923 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AFB938C01E5B2C0100BA3923 /* amble-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "amble-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFB938C01E5B2C0100BA3923 /* AmbleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AmbleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB938C61E5B2C0100BA3923 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AFB938CB1E5B2C0100BA3923 /* amble-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "amble-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFB938CB1E5B2C0100BA3923 /* AmbleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AmbleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB938CF1E5B2C0100BA3923 /* amble_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = amble_iosUITests.swift; sourceTree = "<group>"; };
 		AFB938D11E5B2C0100BA3923 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFC3EDE01E927A1100159679 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/amble-ios-duvhxqoqscperhekbelpwlhfjuzr/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
@@ -92,9 +92,9 @@
 		AFEF4BC21E987B3600F7DEBA /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AFEF4BC41E987B4400F7DEBA /* RegisterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterTableViewController.swift; sourceTree = "<group>"; };
 		AFEF4BCA1E99623600F7DEBA /* LoginTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginTableViewCell.swift; sourceTree = "<group>"; };
-		B58CAFB1B39C8534F0C1919D /* Pods_amble_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_amble_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA3AAFCA03C42F025ED91D63 /* Pods-amble-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-amble-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-amble-iosUITests/Pods-amble-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		FB1E6A936296F9D7F4B87E02 /* Pods_amble_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_amble_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B37DD9D48B8010EE55C475F3 /* Pods-AmbleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AmbleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AmbleTests/Pods-AmbleTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D78BD4F7B18EAACA674B1349 /* Pods-AmbleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AmbleUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AmbleUITests/Pods-AmbleUITests.release.xcconfig"; sourceTree = "<group>"; };
+		D84250B2A0DA6EF4426313C1 /* Pods_Amble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Amble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE9F9040BD6A4F2034B3828D /* Pods_amble_ios.framework in Frameworks */,
+				9F8A3D78E32F7EDAC3087EA0 /* Pods_Amble.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,7 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BABE4E1A858C88B49E23D040 /* Pods_amble_iosTests.framework in Frameworks */,
+				0C9E13C997DFEEA29558749A /* Pods_AmbleTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,7 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A451CC2E52FC12A3D87D96B6 /* Pods_amble_iosUITests.framework in Frameworks */,
+				EBCDE4FDD02E934EC9FDF426 /* Pods_AmbleUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,12 +128,12 @@
 		4A60990461250D669FF0785A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3D39026309A2941CD584AB0A /* Pods-amble-ios.debug.xcconfig */,
-				7C1C1F85E095435FDA9C236A /* Pods-amble-ios.release.xcconfig */,
-				8008B78F5C57D21C5B74C754 /* Pods-amble-iosTests.debug.xcconfig */,
-				87D2BC0CF3058112E934142B /* Pods-amble-iosTests.release.xcconfig */,
-				EA3AAFCA03C42F025ED91D63 /* Pods-amble-iosUITests.debug.xcconfig */,
-				9C33EE0FF79A930B6C51BC66 /* Pods-amble-iosUITests.release.xcconfig */,
+				44666F6EAB8515BB74DFC8BC /* Pods-Amble.debug.xcconfig */,
+				893D85E238620BE016AD4072 /* Pods-Amble.release.xcconfig */,
+				B37DD9D48B8010EE55C475F3 /* Pods-AmbleTests.debug.xcconfig */,
+				AA688E5EFD6E86A42AFDF0A0 /* Pods-AmbleTests.release.xcconfig */,
+				45A325ED89FF15DF776A15A8 /* Pods-AmbleUITests.debug.xcconfig */,
+				D78BD4F7B18EAACA674B1349 /* Pods-AmbleUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -160,9 +160,9 @@
 		AFB938A11E5B2C0000BA3923 = {
 			isa = PBXGroup;
 			children = (
-				AFB938AC1E5B2C0000BA3923 /* amble-ios */,
-				AFB938C31E5B2C0100BA3923 /* amble-iosTests */,
-				AFB938CE1E5B2C0100BA3923 /* amble-iosUITests */,
+				AFB938AC1E5B2C0000BA3923 /* Amble */,
+				AFB938C31E5B2C0100BA3923 /* AmbleTests */,
+				AFB938CE1E5B2C0100BA3923 /* AmbleUITests */,
 				C94B737784ECBF4FA5B8F120 /* Frameworks */,
 				4A60990461250D669FF0785A /* Pods */,
 				AFB938AB1E5B2C0000BA3923 /* Products */,
@@ -172,14 +172,14 @@
 		AFB938AB1E5B2C0000BA3923 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AFB938AA1E5B2C0000BA3923 /* amble-ios.app */,
-				AFB938C01E5B2C0100BA3923 /* amble-iosTests.xctest */,
-				AFB938CB1E5B2C0100BA3923 /* amble-iosUITests.xctest */,
+				AFB938AA1E5B2C0000BA3923 /* Amble.app */,
+				AFB938C01E5B2C0100BA3923 /* AmbleTests.xctest */,
+				AFB938CB1E5B2C0100BA3923 /* AmbleUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AFB938AC1E5B2C0000BA3923 /* amble-ios */ = {
+		AFB938AC1E5B2C0000BA3923 /* Amble */ = {
 			isa = PBXGroup;
 			children = (
 				AFC3EE0D1E928F5400159679 /* APIManager */,
@@ -195,25 +195,25 @@
 				AFEF4BC41E987B4400F7DEBA /* RegisterTableViewController.swift */,
 				AFD8E9C11E9BB9DD00B0919A /* User.swift */,
 			);
-			path = "amble-ios";
+			path = Amble;
 			sourceTree = "<group>";
 		};
-		AFB938C31E5B2C0100BA3923 /* amble-iosTests */ = {
+		AFB938C31E5B2C0100BA3923 /* AmbleTests */ = {
 			isa = PBXGroup;
 			children = (
 				AFC3EE141E94187300159679 /* APIManagerTests.swift */,
 				AFB938C61E5B2C0100BA3923 /* Info.plist */,
 			);
-			path = "amble-iosTests";
+			path = AmbleTests;
 			sourceTree = "<group>";
 		};
-		AFB938CE1E5B2C0100BA3923 /* amble-iosUITests */ = {
+		AFB938CE1E5B2C0100BA3923 /* AmbleUITests */ = {
 			isa = PBXGroup;
 			children = (
 				AFB938D11E5B2C0100BA3923 /* Info.plist */,
 				AFB938CF1E5B2C0100BA3923 /* amble_iosUITests.swift */,
 			);
-			path = "amble-iosUITests";
+			path = AmbleUITests;
 			sourceTree = "<group>";
 		};
 		AFC3EE0D1E928F5400159679 /* APIManager */ = {
@@ -239,9 +239,9 @@
 				AFC3EE161E980C7800159679 /* Mockingjay.framework */,
 				AFC3EDE21E927A1600159679 /* SwiftyJSON.framework */,
 				AFC3EDE01E927A1100159679 /* Alamofire.framework */,
-				B58CAFB1B39C8534F0C1919D /* Pods_amble_ios.framework */,
-				198EA19E9C3FB8DC4D152762 /* Pods_amble_iosTests.framework */,
-				FB1E6A936296F9D7F4B87E02 /* Pods_amble_iosUITests.framework */,
+				D84250B2A0DA6EF4426313C1 /* Pods_Amble.framework */,
+				5C9B1C67E08B6DADBA77E2FF /* Pods_AmbleTests.framework */,
+				184FD3A76701D8A22173A25D /* Pods_AmbleUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -249,9 +249,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AFB938A91E5B2C0000BA3923 /* amble-ios */ = {
+		AFB938A91E5B2C0000BA3923 /* Amble */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AFB938D41E5B2C0100BA3923 /* Build configuration list for PBXNativeTarget "amble-ios" */;
+			buildConfigurationList = AFB938D41E5B2C0100BA3923 /* Build configuration list for PBXNativeTarget "Amble" */;
 			buildPhases = (
 				E1BEAEAA9DC52AC29FE7F295 /* [CP] Check Pods Manifest.lock */,
 				AFB938A61E5B2C0000BA3923 /* Sources */,
@@ -265,14 +265,14 @@
 			);
 			dependencies = (
 			);
-			name = "amble-ios";
+			name = Amble;
 			productName = "amble-ios";
-			productReference = AFB938AA1E5B2C0000BA3923 /* amble-ios.app */;
+			productReference = AFB938AA1E5B2C0000BA3923 /* Amble.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AFB938BF1E5B2C0100BA3923 /* amble-iosTests */ = {
+		AFB938BF1E5B2C0100BA3923 /* AmbleTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AFB938D71E5B2C0100BA3923 /* Build configuration list for PBXNativeTarget "amble-iosTests" */;
+			buildConfigurationList = AFB938D71E5B2C0100BA3923 /* Build configuration list for PBXNativeTarget "AmbleTests" */;
 			buildPhases = (
 				33CD139F940073ECF4BA1C8C /* [CP] Check Pods Manifest.lock */,
 				AFB938BC1E5B2C0100BA3923 /* Sources */,
@@ -286,14 +286,14 @@
 			dependencies = (
 				AFB938C21E5B2C0100BA3923 /* PBXTargetDependency */,
 			);
-			name = "amble-iosTests";
+			name = AmbleTests;
 			productName = "amble-iosTests";
-			productReference = AFB938C01E5B2C0100BA3923 /* amble-iosTests.xctest */;
+			productReference = AFB938C01E5B2C0100BA3923 /* AmbleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		AFB938CA1E5B2C0100BA3923 /* amble-iosUITests */ = {
+		AFB938CA1E5B2C0100BA3923 /* AmbleUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AFB938DA1E5B2C0100BA3923 /* Build configuration list for PBXNativeTarget "amble-iosUITests" */;
+			buildConfigurationList = AFB938DA1E5B2C0100BA3923 /* Build configuration list for PBXNativeTarget "AmbleUITests" */;
 			buildPhases = (
 				01111BEE2F8F9DCF3BFBA5C3 /* [CP] Check Pods Manifest.lock */,
 				AFB938C71E5B2C0100BA3923 /* Sources */,
@@ -307,9 +307,9 @@
 			dependencies = (
 				AFB938CD1E5B2C0100BA3923 /* PBXTargetDependency */,
 			);
-			name = "amble-iosUITests";
+			name = AmbleUITests;
 			productName = "amble-iosUITests";
-			productReference = AFB938CB1E5B2C0100BA3923 /* amble-iosUITests.xctest */;
+			productReference = AFB938CB1E5B2C0100BA3923 /* AmbleUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -341,7 +341,7 @@
 					};
 				};
 			};
-			buildConfigurationList = AFB938A51E5B2C0000BA3923 /* Build configuration list for PBXProject "amble-ios" */;
+			buildConfigurationList = AFB938A51E5B2C0000BA3923 /* Build configuration list for PBXProject "Amble" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -354,9 +354,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AFB938A91E5B2C0000BA3923 /* amble-ios */,
-				AFB938BF1E5B2C0100BA3923 /* amble-iosTests */,
-				AFB938CA1E5B2C0100BA3923 /* amble-iosUITests */,
+				AFB938A91E5B2C0000BA3923 /* Amble */,
+				AFB938BF1E5B2C0100BA3923 /* AmbleTests */,
+				AFB938CA1E5B2C0100BA3923 /* AmbleUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -416,7 +416,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-amble-iosUITests/Pods-amble-iosUITests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AmbleUITests/Pods-AmbleUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		33CD139F940073ECF4BA1C8C /* [CP] Check Pods Manifest.lock */ = {
@@ -446,7 +446,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-amble-iosUITests/Pods-amble-iosUITests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AmbleUITests/Pods-AmbleUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6184450DEE754D875A03138A /* [CP] Embed Pods Frameworks */ = {
@@ -461,7 +461,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-amble-ios/Pods-amble-ios-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Amble/Pods-Amble-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6DA674622DE0BEF2BBC17AF6 /* [CP] Copy Pods Resources */ = {
@@ -476,7 +476,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-amble-iosTests/Pods-amble-iosTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AmbleTests/Pods-AmbleTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A5B1C13A1E339CCDBBCEF1B4 /* [CP] Embed Pods Frameworks */ = {
@@ -491,7 +491,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-amble-iosTests/Pods-amble-iosTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AmbleTests/Pods-AmbleTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DBA7A0A7973AA01091C24520 /* [CP] Copy Pods Resources */ = {
@@ -506,7 +506,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-amble-ios/Pods-amble-ios-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Amble/Pods-Amble-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E1BEAEAA9DC52AC29FE7F295 /* [CP] Check Pods Manifest.lock */ = {
@@ -567,12 +567,12 @@
 /* Begin PBXTargetDependency section */
 		AFB938C21E5B2C0100BA3923 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AFB938A91E5B2C0000BA3923 /* amble-ios */;
+			target = AFB938A91E5B2C0000BA3923 /* Amble */;
 			targetProxy = AFB938C11E5B2C0100BA3923 /* PBXContainerItemProxy */;
 		};
 		AFB938CD1E5B2C0100BA3923 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AFB938A91E5B2C0000BA3923 /* amble-ios */;
+			target = AFB938A91E5B2C0000BA3923 /* Amble */;
 			targetProxy = AFB938CC1E5B2C0100BA3923 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -696,13 +696,13 @@
 		};
 		AFB938D51E5B2C0100BA3923 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3D39026309A2941CD584AB0A /* Pods-amble-ios.debug.xcconfig */;
+			baseConfigurationReference = 44666F6EAB8515BB74DFC8BC /* Pods-Amble.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = VWR855X7M3;
-				INFOPLIST_FILE = "amble-ios/Info.plist";
+				INFOPLIST_FILE = Amble/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "jonomuller.amble-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = jonomuller.Amble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -710,13 +710,13 @@
 		};
 		AFB938D61E5B2C0100BA3923 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7C1C1F85E095435FDA9C236A /* Pods-amble-ios.release.xcconfig */;
+			baseConfigurationReference = 893D85E238620BE016AD4072 /* Pods-Amble.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = VWR855X7M3;
-				INFOPLIST_FILE = "amble-ios/Info.plist";
+				INFOPLIST_FILE = Amble/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "jonomuller.amble-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = jonomuller.Amble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -724,70 +724,70 @@
 		};
 		AFB938D81E5B2C0100BA3923 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8008B78F5C57D21C5B74C754 /* Pods-amble-iosTests.debug.xcconfig */;
+			baseConfigurationReference = B37DD9D48B8010EE55C475F3 /* Pods-AmbleTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = QJQGH9NF7F;
-				INFOPLIST_FILE = "amble-iosTests/Info.plist";
+				INFOPLIST_FILE = AmbleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "jonomuller.amble-iosTests";
+				PRODUCT_BUNDLE_IDENTIFIER = jonomuller.AmbleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/amble-ios.app/amble-ios";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Amble.app/Amble";
 			};
 			name = Debug;
 		};
 		AFB938D91E5B2C0100BA3923 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 87D2BC0CF3058112E934142B /* Pods-amble-iosTests.release.xcconfig */;
+			baseConfigurationReference = AA688E5EFD6E86A42AFDF0A0 /* Pods-AmbleTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = QJQGH9NF7F;
-				INFOPLIST_FILE = "amble-iosTests/Info.plist";
+				INFOPLIST_FILE = AmbleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "jonomuller.amble-iosTests";
+				PRODUCT_BUNDLE_IDENTIFIER = jonomuller.AmbleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/amble-ios.app/amble-ios";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Amble.app/Amble";
 			};
 			name = Release;
 		};
 		AFB938DB1E5B2C0100BA3923 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EA3AAFCA03C42F025ED91D63 /* Pods-amble-iosUITests.debug.xcconfig */;
+			baseConfigurationReference = 45A325ED89FF15DF776A15A8 /* Pods-AmbleUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = QJQGH9NF7F;
-				INFOPLIST_FILE = "amble-iosUITests/Info.plist";
+				INFOPLIST_FILE = AmbleUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "jonomuller.amble-iosUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = jonomuller.AmbleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = "amble-ios";
+				TEST_TARGET_NAME = Amble;
 			};
 			name = Debug;
 		};
 		AFB938DC1E5B2C0100BA3923 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9C33EE0FF79A930B6C51BC66 /* Pods-amble-iosUITests.release.xcconfig */;
+			baseConfigurationReference = D78BD4F7B18EAACA674B1349 /* Pods-AmbleUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = QJQGH9NF7F;
-				INFOPLIST_FILE = "amble-iosUITests/Info.plist";
+				INFOPLIST_FILE = AmbleUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "jonomuller.amble-iosUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = jonomuller.AmbleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = "amble-ios";
+				TEST_TARGET_NAME = Amble;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AFB938A51E5B2C0000BA3923 /* Build configuration list for PBXProject "amble-ios" */ = {
+		AFB938A51E5B2C0000BA3923 /* Build configuration list for PBXProject "Amble" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AFB938D21E5B2C0100BA3923 /* Debug */,
@@ -796,7 +796,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AFB938D41E5B2C0100BA3923 /* Build configuration list for PBXNativeTarget "amble-ios" */ = {
+		AFB938D41E5B2C0100BA3923 /* Build configuration list for PBXNativeTarget "Amble" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AFB938D51E5B2C0100BA3923 /* Debug */,
@@ -805,7 +805,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AFB938D71E5B2C0100BA3923 /* Build configuration list for PBXNativeTarget "amble-iosTests" */ = {
+		AFB938D71E5B2C0100BA3923 /* Build configuration list for PBXNativeTarget "AmbleTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AFB938D81E5B2C0100BA3923 /* Debug */,
@@ -814,7 +814,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AFB938DA1E5B2C0100BA3923 /* Build configuration list for PBXNativeTarget "amble-iosUITests" */ = {
+		AFB938DA1E5B2C0100BA3923 /* Build configuration list for PBXNativeTarget "AmbleUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AFB938DB1E5B2C0100BA3923 /* Debug */,
