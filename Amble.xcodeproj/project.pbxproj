@@ -726,7 +726,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B37DD9D48B8010EE55C475F3 /* Pods-AmbleTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = QJQGH9NF7F;
 				INFOPLIST_FILE = AmbleTests/Info.plist;
@@ -742,7 +741,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AA688E5EFD6E86A42AFDF0A0 /* Pods-AmbleTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = QJQGH9NF7F;
 				INFOPLIST_FILE = AmbleTests/Info.plist;
@@ -758,7 +756,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 45A325ED89FF15DF776A15A8 /* Pods-AmbleUITests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = QJQGH9NF7F;
 				INFOPLIST_FILE = AmbleUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -773,7 +770,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D78BD4F7B18EAACA674B1349 /* Pods-AmbleUITests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = QJQGH9NF7F;
 				INFOPLIST_FILE = AmbleUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

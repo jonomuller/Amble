@@ -21,7 +21,7 @@ DEPENDENCIES:
   - Locksmith
   - Mockingjay
   - NVActivityIndicatorView
-  - SwiftyJSON (~> 3.1.4)
+  - SwiftyJSON
 
 EXTERNAL SOURCES:
   ChameleonFramework:
@@ -41,6 +41,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   URITemplate: 720b8a56a281494d7c2d31ee33183986eaed2c67
 
-PODFILE CHECKSUM: 724186690b0cbeb968dba7662cda8d57e3383265
+PODFILE CHECKSUM: 1ecce294304627518793d439f666bc104fd838ec
 
 COCOAPODS: 1.2.1
