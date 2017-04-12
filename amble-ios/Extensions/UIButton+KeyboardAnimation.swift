@@ -12,7 +12,7 @@ extension UIButton {
   func keyboardWillShow(notification: NSNotification) {
     if let keyboardRectBegin = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? CGRect {
       if let keyboardRectEnd = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect {
-        if keyboardRectBegin != keyboardRectEnd {
+        if abs(keyboardRectBegin.origin.y - keyboardRectEnd.origin.y) == keyboardRectBegin.height {
           let transform = CGAffineTransform(translationX: 0, y: keyboardRectEnd.origin.y - self.frame.height - 20 - self.frame.origin.y)
           transformButton(transform: transform)
         }
