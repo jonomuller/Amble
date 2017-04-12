@@ -1,6 +1,6 @@
 //
 //  UIButton+BackgroundColor.swift
-//  amble-ios
+//  Amble
 //
 //  Created by Jono Muller on 12/04/2017.
 //  Copyright © 2017 Jonathan Muller. All rights reserved.

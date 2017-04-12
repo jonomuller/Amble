@@ -1,6 +1,6 @@
 //
 //  APIManager.swift
-//  amble-ios
+//  Amble
 //
 //  Created by Jono Muller on 03/04/2017.
 //  Copyright © 2017 Jonathan Muller. All rights reserved.
@@ -30,7 +30,7 @@ class APIManager: NSObject {
           if let data = response.data {
             let json = JSON(data)
             let message = json["error"].stringValue
-            let error = NSError(domain: "amble-ios",
+            let error = NSError(domain: "Amble",
                                 code: (response.response?.statusCode)!,
                                 userInfo: [NSLocalizedDescriptionKey: message])
             completion(nil, error)
@@ -42,7 +42,7 @@ class APIManager: NSObject {
   private func containsEmptyElement(details: [String: String]) -> NSError? {
     for (key, value) in details {
       if value.isEmpty {
-        return NSError(domain: "amble-ios",
+        return NSError(domain: "Amble",
                        code: 400,
                        userInfo: [NSLocalizedDescriptionKey: "Please enter your \(key)."])
       }

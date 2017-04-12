@@ -99,9 +99,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AFB938A91E5B2C0000BA3923"
-               BuildableName = "amble-ios.app"
-               BlueprintName = "amble-ios"
-               ReferencedContainer = "container:amble-ios.xcodeproj">
+               BuildableName = "Amble.app"
+               BlueprintName = "Amble"
+               ReferencedContainer = "container:Amble.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -117,9 +117,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AFB938BF1E5B2C0100BA3923"
-               BuildableName = "amble-iosTests.xctest"
-               BlueprintName = "amble-iosTests"
-               ReferencedContainer = "container:amble-ios.xcodeproj">
+               BuildableName = "AmbleTests.xctest"
+               BlueprintName = "AmbleTests"
+               ReferencedContainer = "container:Amble.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -127,9 +127,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AFB938CA1E5B2C0100BA3923"
-               BuildableName = "amble-iosUITests.xctest"
-               BlueprintName = "amble-iosUITests"
-               ReferencedContainer = "container:amble-ios.xcodeproj">
+               BuildableName = "AmbleUITests.xctest"
+               BlueprintName = "AmbleUITests"
+               ReferencedContainer = "container:Amble.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -137,9 +137,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AFB938A91E5B2C0000BA3923"
-            BuildableName = "amble-ios.app"
-            BlueprintName = "amble-ios"
-            ReferencedContainer = "container:amble-ios.xcodeproj">
+            BuildableName = "Amble.app"
+            BlueprintName = "Amble"
+            ReferencedContainer = "container:Amble.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -160,9 +160,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AFB938A91E5B2C0000BA3923"
-            BuildableName = "amble-ios.app"
-            BlueprintName = "amble-ios"
-            ReferencedContainer = "container:amble-ios.xcodeproj">
+            BuildableName = "Amble.app"
+            BlueprintName = "Amble"
+            ReferencedContainer = "container:Amble.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
@@ -186,9 +186,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AFB938A91E5B2C0000BA3923"
-            BuildableName = "amble-ios.app"
-            BlueprintName = "amble-ios"
-            ReferencedContainer = "container:amble-ios.xcodeproj">
+            BuildableName = "Amble.app"
+            BlueprintName = "Amble"
+            ReferencedContainer = "container:Amble.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

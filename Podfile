@@ -1,22 +1,22 @@
 platform :ios, '9.0'
 
-target 'amble-ios' do
+target 'Amble' do
   use_frameworks!
 
-  # Pods for amble-ios
+  # Pods for Amble
   pod 'SwiftyJSON'
   pod 'Alamofire', '~> 4.4'
   pod 'Locksmith'
   pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
   pod 'NVActivityIndicatorView'
 
-  target 'amble-iosTests' do
+  target 'AmbleTests' do
     inherit! :search_paths
     # Pods for testing
     pod 'Mockingjay'
   end
 
-  target 'amble-iosUITests' do
+  target 'AmbleUITests' do
     inherit! :search_paths
     # Pods for testing
   end

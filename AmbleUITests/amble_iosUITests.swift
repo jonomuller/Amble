@@ -1,6 +1,6 @@
 //
-//  amble_iosUITests.swift
-//  amble-iosUITests
+//  AmbleUITests.swift
+//  AmbleUITests
 //
 //  Created by Jono Muller on 20/02/2017.
 //  Copyright © 2017 Jonathan Muller. All rights reserved.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-class amble_iosUITests: XCTestCase {
+class AmbleUITests: XCTestCase {
         
     override func setUp() {
         super.setUp()
