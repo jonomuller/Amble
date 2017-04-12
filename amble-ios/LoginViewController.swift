@@ -183,18 +183,6 @@ extension LoginViewController: UITableViewDataSource, UITableViewDelegate {
                                                               attributes: [NSForegroundColorAttributeName: UIColor.flatWhite])
     return cell
   }
-  
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let cell = tableView.cellForRow(at: indexPath) as! LoginTableViewCell
-    cell.textField.becomeFirstResponder()
-    updateBottomLine(cell: cell, selection: .select)
-  }
-  
-  func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-    let cell = tableView.cellForRow(at: indexPath) as! LoginTableViewCell
-    cell.textField.resignFirstResponder()
-    updateBottomLine(cell: cell, selection: .deselect)
-  }
 }
 
 // MARK: - Text field delegate

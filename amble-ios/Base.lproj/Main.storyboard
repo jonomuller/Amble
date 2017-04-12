@@ -67,7 +67,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DPz-t9-IvH" id="c9Z-dk-u1H">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -157,20 +157,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mMd-z6-qR7">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mMd-z6-qR7">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="GV7-bb-RmC">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="153"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="129"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="loginCell" id="p29-xw-FRa" customClass="LoginTableViewCell" customModule="amble_ios" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="181" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="157" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p29-xw-FRa" id="Twz-9O-dwb">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XBp-XJ-AyM">
@@ -180,7 +181,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="336" height="60"/>
                                                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                                                             <connections>
                                                                 <action selector="textFieldChanged:" destination="x3D-js-Adg" eventType="editingChanged" id="T0e-Kz-Lka"/>
@@ -190,18 +191,18 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstItem="7pg-RB-gHP" firstAttribute="leading" secondItem="XBp-XJ-AyM" secondAttribute="leading" id="OVZ-Hu-Z9Y"/>
-                                                        <constraint firstAttribute="bottom" secondItem="7pg-RB-gHP" secondAttribute="bottom" id="ffx-DO-cp0"/>
-                                                        <constraint firstAttribute="trailing" secondItem="7pg-RB-gHP" secondAttribute="trailing" id="o8G-Ml-L91"/>
-                                                        <constraint firstItem="7pg-RB-gHP" firstAttribute="top" secondItem="XBp-XJ-AyM" secondAttribute="top" id="wvS-IA-oi6"/>
+                                                        <constraint firstAttribute="trailing" secondItem="7pg-RB-gHP" secondAttribute="trailing" id="4wD-tz-mKK"/>
+                                                        <constraint firstItem="7pg-RB-gHP" firstAttribute="leading" secondItem="XBp-XJ-AyM" secondAttribute="leading" id="KDy-Zl-aX9"/>
+                                                        <constraint firstAttribute="bottom" secondItem="7pg-RB-gHP" secondAttribute="bottom" id="LrR-IY-3y9"/>
+                                                        <constraint firstItem="7pg-RB-gHP" firstAttribute="top" secondItem="XBp-XJ-AyM" secondAttribute="top" id="Ugm-6U-vWU"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="XBp-XJ-AyM" firstAttribute="trailing" secondItem="Twz-9O-dwb" secondAttribute="trailingMargin" constant="-12" id="9Gd-Ie-ys5"/>
-                                                <constraint firstItem="XBp-XJ-AyM" firstAttribute="leading" secondItem="Twz-9O-dwb" secondAttribute="leadingMargin" constant="11" id="Dh7-Kr-4m4"/>
-                                                <constraint firstItem="XBp-XJ-AyM" firstAttribute="top" secondItem="Twz-9O-dwb" secondAttribute="top" id="UoQ-aT-afx"/>
-                                                <constraint firstAttribute="bottom" secondItem="XBp-XJ-AyM" secondAttribute="bottom" id="bwv-bn-zGf"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="XBp-XJ-AyM" secondAttribute="bottom" constant="12" id="7wJ-fZ-OZX"/>
+                                                <constraint firstItem="XBp-XJ-AyM" firstAttribute="centerX" secondItem="Twz-9O-dwb" secondAttribute="centerX" id="BKO-ds-tvl"/>
+                                                <constraint firstItem="XBp-XJ-AyM" firstAttribute="top" secondItem="Twz-9O-dwb" secondAttribute="top" id="E4j-yI-Law"/>
+                                                <constraint firstItem="XBp-XJ-AyM" firstAttribute="leading" secondItem="Twz-9O-dwb" secondAttribute="leadingMargin" constant="11" id="zLL-Js-8wX"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -260,7 +261,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BIK-Rt-A7X" id="sga-3c-inu">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
