@@ -145,9 +145,9 @@
 			children = (
 				AF87C9E11E9D310B005086FF /* EntryButton.swift */,
 				AFEF4BCA1E99623600F7DEBA /* EntryTableViewCell.swift */,
+				AFADD05E1E9FD26600E8CBBE /* EntryViewController.swift */,
 				AFEF4BC21E987B3600F7DEBA /* LoginViewController.swift */,
 				AFADD0601E9FD35700E8CBBE /* RegisterViewController.swift */,
-				AFADD05E1E9FD26600E8CBBE /* EntryViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -222,8 +222,8 @@
 		AFC3EE0D1E928F5400159679 /* APIManager */ = {
 			isa = PBXGroup;
 			children = (
-				AFC3EE101E9298AD00159679 /* Router */,
 				AFC3EE0E1E928F6A00159679 /* APIManager.swift */,
+				AFC3EE101E9298AD00159679 /* Router */,
 			);
 			path = APIManager;
 			sourceTree = "<group>";

@@ -144,6 +144,8 @@ extension EntryViewController: UITextFieldDelegate {
       cell.textField.becomeFirstResponder()
     } else if textFieldsAreValid() {
       entryButtonPressed(self)
+    } else {
+      textField.resignFirstResponder()
     }
     
     return false
