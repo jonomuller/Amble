@@ -13,7 +13,7 @@
         <!--Walks-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController id="9pv-A4-QxB" customClass="FirstViewController" customModule="amble_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9pv-A4-QxB" customClass="FirstViewController" customModule="Amble" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
                         <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
@@ -32,7 +32,7 @@
         <!--Profile View Controller-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
-                <viewController storyboardIdentifier="profileViewController" id="8rJ-Kc-sve" customClass="ProfileViewController" customModule="amble_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="profileViewController" id="8rJ-Kc-sve" customClass="ProfileViewController" customModule="Amble" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="L7p-HK-0SC"/>
                         <viewControllerLayoutGuide type="bottom" id="Djb-ko-YwX"/>
@@ -114,7 +114,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <state key="normal" title="Sign up"/>
                                 <connections>
-                                    <segue destination="4yW-qS-ZLn" kind="show" id="WNJ-09-kfm"/>
+                                    <segue destination="DTf-mt-3A9" kind="show" id="0jB-ch-Omu"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AMBLE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F2Z-86-sLI">
@@ -148,7 +148,7 @@
         <!--Login View Controller-->
         <scene sceneID="v33-OO-O12">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="x3D-js-Adg" customClass="LoginViewController" customModule="amble_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="x3D-js-Adg" customClass="LoginViewController" customModule="Amble" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uGv-gX-8JA"/>
                         <viewControllerLayoutGuide type="bottom" id="oTE-bS-P6K"/>
@@ -167,7 +167,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="loginCell" id="p29-xw-FRa" customClass="LoginTableViewCell" customModule="amble_ios" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="loginCell" id="p29-xw-FRa" customClass="LoginTableViewCell" customModule="Amble" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="157" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p29-xw-FRa" id="Twz-9O-dwb">
@@ -217,7 +217,7 @@
                                     <outlet property="delegate" destination="x3D-js-Adg" id="vIG-tl-XjX"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cmg-IK-X7d" customClass="LoginButton" customModule="amble_ios" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cmg-IK-X7d" customClass="LoginButton" customModule="Amble" customModuleProvider="target">
                                 <rect key="frame" x="16" y="594" width="343" height="53"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="23"/>
@@ -247,34 +247,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LEa-lN-igl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-335.19999999999999" y="124.58770614692655"/>
-        </scene>
-        <!--Register Table View Controller-->
-        <scene sceneID="BRR-WO-If0">
-            <objects>
-                <tableViewController id="4yW-qS-ZLn" customClass="RegisterTableViewController" customModule="amble_ios" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="2A5-Fc-Kd7">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="BIK-Rt-A7X">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BIK-Rt-A7X" id="sga-3c-inu">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="4yW-qS-ZLn" id="aRS-Io-nVe"/>
-                            <outlet property="delegate" destination="4yW-qS-ZLn" id="igI-Pb-J8M"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Xa0-Aa-q94" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-335.19999999999999" y="901.79910044977521"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -352,6 +324,109 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mVW-hV-zAA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2140" y="462.8185907046477"/>
+        </scene>
+        <!--Register View Controller-->
+        <scene sceneID="gbr-2h-Ox8">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="DTf-mt-3A9" customClass="RegisterViewController" customModule="Amble" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nNp-fI-d2y"/>
+                        <viewControllerLayoutGuide type="bottom" id="ifB-jV-PQS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bzO-mE-dzp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8xA-gI-L8t">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="Qus-D3-aIY">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="129"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="loginCell" id="8cP-C2-8ET" customClass="LoginTableViewCell" customModule="Amble" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="157" width="375" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8cP-C2-8ET" id="3wW-H9-5pw">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VuG-b8-kxz">
+                                                    <rect key="frame" x="19" y="0.0" width="336" height="60"/>
+                                                    <subviews>
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nM1-NN-ohG">
+                                                            <rect key="frame" x="0.0" y="0.0" width="336" height="60"/>
+                                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
+                                                            <connections>
+                                                                <action selector="textFieldChanged:" destination="DTf-mt-3A9" eventType="editingChanged" id="WOO-XO-vmT"/>
+                                                                <outlet property="delegate" destination="DTf-mt-3A9" id="ldo-Cg-FPY"/>
+                                                            </connections>
+                                                        </textField>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="nM1-NN-ohG" secondAttribute="trailing" id="7yX-Ly-5u0"/>
+                                                        <constraint firstAttribute="bottom" secondItem="nM1-NN-ohG" secondAttribute="bottom" id="Fhv-cl-0nS"/>
+                                                        <constraint firstItem="nM1-NN-ohG" firstAttribute="leading" secondItem="VuG-b8-kxz" secondAttribute="leading" id="UAS-Vf-eL6"/>
+                                                        <constraint firstItem="nM1-NN-ohG" firstAttribute="top" secondItem="VuG-b8-kxz" secondAttribute="top" id="i6h-OB-u8N"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="VuG-b8-kxz" firstAttribute="leading" secondItem="3wW-H9-5pw" secondAttribute="leadingMargin" constant="11" id="2EE-S1-5KO"/>
+                                                <constraint firstItem="VuG-b8-kxz" firstAttribute="top" secondItem="3wW-H9-5pw" secondAttribute="top" id="NFH-kg-DND"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="VuG-b8-kxz" secondAttribute="bottom" constant="12" id="YXU-Ex-3GI"/>
+                                                <constraint firstItem="VuG-b8-kxz" firstAttribute="centerX" secondItem="3wW-H9-5pw" secondAttribute="centerX" id="mVk-UV-RjA"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="innerView" destination="VuG-b8-kxz" id="mq2-4I-wa1"/>
+                                            <outlet property="textField" destination="nM1-NN-ohG" id="vwZ-um-kpY"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="DTf-mt-3A9" id="d2e-LQ-dLt"/>
+                                    <outlet property="delegate" destination="DTf-mt-3A9" id="C6g-qE-M5x"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0hw-rC-Kd5" customClass="LoginButton" customModule="Amble" customModuleProvider="target">
+                                <rect key="frame" x="16" y="594" width="343" height="53"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="23"/>
+                                <color key="tintColor" red="0.29803921570000003" green="0.64705882349999999" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Log in"/>
+                                <connections>
+                                    <action selector="loginButtonPressed:" destination="DTf-mt-3A9" eventType="touchUpInside" id="dyU-X8-BSQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="0hw-rC-Kd5" firstAttribute="top" secondItem="nNp-fI-d2y" secondAttribute="bottom" constant="530" id="6oi-15-rGG"/>
+                            <constraint firstItem="8xA-gI-L8t" firstAttribute="top" secondItem="bzO-mE-dzp" secondAttribute="top" id="7Vv-eX-9Uq"/>
+                            <constraint firstItem="8xA-gI-L8t" firstAttribute="bottom" secondItem="ifB-jV-PQS" secondAttribute="top" id="Cuo-Of-ODG"/>
+                            <constraint firstItem="8xA-gI-L8t" firstAttribute="leading" secondItem="bzO-mE-dzp" secondAttribute="leading" id="Hqt-f4-7VO"/>
+                            <constraint firstItem="0hw-rC-Kd5" firstAttribute="leading" secondItem="bzO-mE-dzp" secondAttribute="leadingMargin" id="KGj-ul-aHv"/>
+                            <constraint firstAttribute="trailing" secondItem="8xA-gI-L8t" secondAttribute="trailing" id="WSH-1W-l7f"/>
+                            <constraint firstItem="8xA-gI-L8t" firstAttribute="centerX" secondItem="0hw-rC-Kd5" secondAttribute="centerX" id="qGa-XF-e1e"/>
+                            <constraint firstAttribute="bottom" secondItem="0hw-rC-Kd5" secondAttribute="bottom" constant="20" symbolic="YES" id="u2f-d4-aR7"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="loginButton" destination="0hw-rC-Kd5" id="Pki-fW-0d5"/>
+                        <outlet property="tableView" destination="8xA-gI-L8t" id="AJu-vP-zeX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e48-vZ-rBl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-335" y="872"/>
         </scene>
     </scenes>
 </document>
