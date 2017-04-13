@@ -192,6 +192,32 @@ extension EntryViewController {
     
     return details
   }
+  
+  func handleAPIResponse(response: APIResponse) {
+    entryButton.expand(completion: nil)
+    
+    switch response {
+    case .success(let json):
+      let user = User(username: (json["user"].stringValue), jwt: json["jwt"].stringValue)
+      
+      // Save user data to keychain
+      do {
+        try user.createInSecureStore()
+      } catch {
+        print("Error saving to keychain: \(error)")
+      }
+      
+      let storyboard = UIStoryboard(name: "Main", bundle: nil)
+      let vc = storyboard.instantiateViewController(withIdentifier: "profileViewController")
+      let navController = UINavigationController(rootViewController: vc)
+      
+      self.present(navController, animated: true, completion: nil)
+    case .failure(let error):
+      let alertView = UIAlertController(title: error.localizedDescription, message: error.localizedFailureReason, preferredStyle: .alert)
+      alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+      self.present(alertView, animated: true, completion: nil)
+    }
+  }
 }
 
 // MARK: Private helper functions

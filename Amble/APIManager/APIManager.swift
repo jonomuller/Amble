@@ -29,10 +29,11 @@ class APIManager: NSObject {
         case .failure:
           if let data = response.data {
             let json = JSON(data)
-            let message = json["error"].stringValue
+            let description = router.path.replacingOccurrences(of: "/auth/", with: "").capitalized + " error"
+            let reason = json["error"].stringValue
             let error = NSError(domain: "Amble",
                                 code: (response.response?.statusCode)!,
-                                userInfo: [NSLocalizedDescriptionKey: message])
+                                userInfo: [NSLocalizedDescriptionKey: description, NSLocalizedFailureReasonErrorKey: reason])
             completion(.failure(error: error))
           }
         }

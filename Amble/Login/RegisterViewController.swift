@@ -18,30 +18,7 @@ class RegisterViewController: EntryViewController {
     let details = getDataFromCells()
     
     APIManager.sharedInstance.register(username: details[sections[0]]!, email: details[sections[1]]!, password: details[sections[2]]!, firstName: details[sections[3]]!, lastName: details[sections[4]]!) { (response) in
-      self.entryButton.expand(completion: nil)
-      
-      switch response {
-      case .success(let json):
-        let user = User(username: (json["user"].stringValue), jwt: json["jwt"].stringValue)
-        
-        // Save user data to keychain
-        do {
-          try user.createInSecureStore()
-          print("Login successful")
-        } catch {
-          print("Error saving to keychain: \(error)")
-        }
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "profileViewController")
-        let navController = UINavigationController(rootViewController: vc)
-        
-        self.present(navController, animated: true, completion: nil)
-      case .failure(let error):
-        let alertView = UIAlertController(title: "Log in error", message: error.localizedDescription, preferredStyle: .alert)
-        alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alertView, animated: true, completion: nil)
-      }
+      self.handleAPIResponse(response: response)
     }
   }
   
