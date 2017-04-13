@@ -22,8 +22,16 @@ class RegisterViewController: EntryViewController {
     }
   }
   
-  override func textFieldsAreValid() -> Bool {
-    // check for no empty cells and valid email
-    return false
+  override func isValidTextField(textField: UITextField) -> Bool {
+    if textField.placeholder == sections[1] {
+      return isValidEmail(email: textField.text!)
+    }
+    
+    return !(textField.text?.isEmpty)!
+  }
+  
+  func isValidEmail(email: String) -> Bool {
+    let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+    return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: email)
   }
 }

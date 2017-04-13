@@ -16,7 +16,7 @@ import ChameleonFramework
 protocol EntryView {
   var sections: [String] { get }
   func entryButtonPressed()
-  func textFieldsAreValid() -> Bool
+  func isValidTextField(textField: UITextField) -> Bool
 }
 
 class EntryViewController: UIViewController {
@@ -54,10 +54,9 @@ class EntryViewController: UIViewController {
   }
   
   override func viewWillDisappear(_ animated: Bool) {
-    NotificationCenter.default.removeObserver(entryButton)
+    NotificationCenter.default.removeObserver(entryButton, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+    NotificationCenter.default.removeObserver(entryButton, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
   }
-  
-  
 }
 
 // Mark: Entry protocol
@@ -72,8 +71,8 @@ extension EntryViewController: EntryView {
     preconditionFailure(FAILURE_STRING)
   }
   
-  func textFieldsAreValid() -> Bool {
-    preconditionFailure(FAILURE_STRING)
+  func isValidTextField(textField: UITextField) -> Bool {
+    return !(textField.text?.isEmpty)!
   }
 }
 
@@ -174,10 +173,11 @@ extension EntryViewController {
     // Enable tick next to text field when not empty
     let indexPath = getIndexPathFromTextField(textField: sender as! UITextField)
     let cell = tableView.cellForRow(at: indexPath) as! EntryTableViewCell
-    if (cell.textField.text?.isEmpty)! {
-      cell.textField.rightViewMode = .never
-    } else {
+    
+    if isValidTextField(textField: cell.textField) {
       cell.textField.rightViewMode = .always
+    } else {
+      cell.textField.rightViewMode = .never
     }
   }
 }
@@ -229,8 +229,24 @@ extension EntryViewController {
 // MARK: Private helper functions
 
 private extension EntryViewController {
+  
   func getIndexPathFromTextField(textField: UITextField) -> IndexPath {
     let location = textField.convert(textField.frame.origin, to: tableView)
     return tableView.indexPathForRow(at: location)!
+  }
+  
+  func textFieldsAreValid() -> Bool {
+    var validCells = true
+    
+    if let indexPaths = tableView.indexPathsForVisibleRows {
+      for indexPath in indexPaths {
+        let cell = tableView.cellForRow(at: indexPath) as! EntryTableViewCell
+        if !isValidTextField(textField: cell.textField) {
+          validCells = false
+        }
+      }
+    }
+    
+    return validCells
   }
 }

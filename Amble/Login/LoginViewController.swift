@@ -21,20 +21,4 @@ class LoginViewController: EntryViewController {
       self.handleAPIResponse(response: response)
     }
   }
-  
-  override func textFieldsAreValid() -> Bool {
-    var noEmptyCells = true
-    
-    // Check if any of the text fields are empty
-    if let indexPaths = tableView.indexPathsForVisibleRows {
-      for indexPath in indexPaths {
-        let cell = tableView.cellForRow(at: indexPath) as! EntryTableViewCell
-        if (cell.textField.text?.isEmpty)! {
-          noEmptyCells = false
-        }
-      }
-    }
-    
-    return noEmptyCells
-  }
 }
