@@ -1,5 +1,5 @@
 //
-//  LoginTableViewCell.swift
+//  EntryTableViewCell.swift
 //  Amble
 //
 //  Created by Jono Muller on 08/04/2017.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginTableViewCell: UITableViewCell {
+class EntryTableViewCell: UITableViewCell {
   
   @IBOutlet var innerView: UIView!
   @IBOutlet var textField: UITextField!

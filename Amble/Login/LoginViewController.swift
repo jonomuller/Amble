@@ -15,14 +15,14 @@ class LoginViewController: EntryViewController {
   }
   
   override func entryButtonPressed() {
-    let usernameCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! LoginTableViewCell
-    let passwordCell = self.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! LoginTableViewCell
+    let usernameCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! EntryTableViewCell
+    let passwordCell = self.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! EntryTableViewCell
     
     let username = usernameCell.textField.text
     let password = passwordCell.textField.text
     
     APIManager.sharedInstance.login(username: username!, password: password!) { (json, error) in
-      self.loginButton.expand(completion: nil)
+      self.entryButton.expand(completion: nil)
       
       if (error != nil) {
         let alertView = UIAlertController(title: "Log in error", message: error?.localizedDescription, preferredStyle: .alert)
@@ -54,7 +54,7 @@ class LoginViewController: EntryViewController {
     // Check if any of the text fields are empty
     if let indexPaths = tableView.indexPathsForVisibleRows {
       for indexPath in indexPaths {
-        let cell = tableView.cellForRow(at: indexPath) as! LoginTableViewCell
+        let cell = tableView.cellForRow(at: indexPath) as! EntryTableViewCell
         if (cell.textField.text?.isEmpty)! {
           noEmptyCells = false
         }

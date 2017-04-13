@@ -22,9 +22,9 @@ protocol EntryView {
 class EntryViewController: UIViewController {
   
   @IBOutlet var tableView: UITableView!
-  @IBOutlet var loginButton: LoginButton!
+  @IBOutlet var entryButton: EntryButton!
   
-  fileprivate let LOGIN_CELL_IDENTIFIER = "loginCell"
+  fileprivate let ENTRY_CELL_IDENTIFIER = "entryCell"
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -35,7 +35,7 @@ class EntryViewController: UIViewController {
   
   override func viewDidAppear(_ animated: Bool) {
     // Bring up keyboard for first text field
-    if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? LoginTableViewCell {
+    if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? EntryTableViewCell {
       cell.textField.becomeFirstResponder()
     }
   }
@@ -48,12 +48,12 @@ class EntryViewController: UIViewController {
     self.navigationController?.view.backgroundColor = UIColor.clear
     
     // Call functions to animate the login button when the keyboard appears/disappears
-    NotificationCenter.default.addObserver(loginButton, selector: #selector(loginButton.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-    NotificationCenter.default.addObserver(loginButton, selector: #selector(loginButton.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    NotificationCenter.default.addObserver(entryButton, selector: #selector(entryButton.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+    NotificationCenter.default.addObserver(entryButton, selector: #selector(entryButton.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
   }
   
   override func viewWillDisappear(_ animated: Bool) {
-    NotificationCenter.default.removeObserver(loginButton)
+    NotificationCenter.default.removeObserver(entryButton)
   }
   
   
@@ -85,7 +85,7 @@ extension EntryViewController: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: LOGIN_CELL_IDENTIFIER, for: indexPath) as! LoginTableViewCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: ENTRY_CELL_IDENTIFIER, for: indexPath) as! EntryTableViewCell
     
     cell.selectionStyle = .none
     cell.line = CALayer()
@@ -125,13 +125,13 @@ extension EntryViewController: UITextFieldDelegate {
   
   func textFieldDidBeginEditing(_ textField: UITextField) {
     let indexPath = indexPathFromTextField(textField: textField)
-    let cell = tableView.cellForRow(at: indexPath) as! LoginTableViewCell
+    let cell = tableView.cellForRow(at: indexPath) as! EntryTableViewCell
     cell.updateBottomLine(selection: .select)
   }
   
   func textFieldDidEndEditing(_ textField: UITextField) {
     let indexPath = indexPathFromTextField(textField: textField)
-    let cell = tableView.cellForRow(at: indexPath) as! LoginTableViewCell
+    let cell = tableView.cellForRow(at: indexPath) as! EntryTableViewCell
     cell.updateBottomLine(selection: .deselect)
   }
   
@@ -140,10 +140,10 @@ extension EntryViewController: UITextFieldDelegate {
     
     if indexPath.row < sections.count - 1 {
       let nextIndexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
-      let cell = tableView.cellForRow(at: nextIndexPath) as! LoginTableViewCell
+      let cell = tableView.cellForRow(at: nextIndexPath) as! EntryTableViewCell
       cell.textField.becomeFirstResponder()
     } else if textFieldsAreValid() {
-      loginButtonPressed(self)
+      entryButtonPressed(self)
     }
     
     return false
@@ -154,19 +154,19 @@ extension EntryViewController: UITextFieldDelegate {
 
 extension EntryViewController {
   
-  @IBAction func loginButtonPressed(_ sender: Any) {
-    loginButton.collapse() { (success) in
+  @IBAction func entryButtonPressed(_ sender: Any) {
+    entryButton.collapse() { (success) in
       self.entryButtonPressed()
     }
   }
   
   @IBAction func textFieldChanged(_ sender: Any) {
     // Enable login button if none of the text fields are empty
-    loginButton.isEnabled = textFieldsAreValid()
+    entryButton.isEnabled = textFieldsAreValid()
     
     // Enable tick next to text field when not empty
     let indexPath = indexPathFromTextField(textField: sender as! UITextField)
-    let cell = tableView.cellForRow(at: indexPath) as! LoginTableViewCell
+    let cell = tableView.cellForRow(at: indexPath) as! EntryTableViewCell
     if (cell.textField.text?.isEmpty)! {
       cell.textField.rightViewMode = .never
     } else {

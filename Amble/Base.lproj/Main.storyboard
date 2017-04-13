@@ -167,7 +167,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="loginCell" id="p29-xw-FRa" customClass="LoginTableViewCell" customModule="Amble" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="entryCell" id="p29-xw-FRa" customClass="EntryTableViewCell" customModule="Amble" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="157" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p29-xw-FRa" id="Twz-9O-dwb">
@@ -217,14 +217,14 @@
                                     <outlet property="delegate" destination="x3D-js-Adg" id="vIG-tl-XjX"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cmg-IK-X7d" customClass="LoginButton" customModule="Amble" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cmg-IK-X7d" customClass="EntryButton" customModule="Amble" customModuleProvider="target">
                                 <rect key="frame" x="16" y="594" width="343" height="53"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="23"/>
                                 <color key="tintColor" red="0.29803921568627451" green="0.6470588235294118" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Log in"/>
                                 <connections>
-                                    <action selector="loginButtonPressed:" destination="x3D-js-Adg" eventType="touchUpInside" id="oE9-Di-W9C"/>
+                                    <action selector="entryButtonPressed:" destination="x3D-js-Adg" eventType="touchUpInside" id="yvq-bD-FMG"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -240,7 +240,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="loginButton" destination="cmg-IK-X7d" id="V6c-DY-ycU"/>
+                        <outlet property="entryButton" destination="cmg-IK-X7d" id="uQ8-Vc-ESg"/>
                         <outlet property="tableView" destination="mMd-z6-qR7" id="XSD-NV-9bM"/>
                     </connections>
                 </viewController>
@@ -347,7 +347,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="loginCell" id="8cP-C2-8ET" customClass="LoginTableViewCell" customModule="Amble" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="entryCell" id="8cP-C2-8ET" customClass="EntryTableViewCell" customModule="Amble" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="157" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8cP-C2-8ET" id="3wW-H9-5pw">
@@ -397,14 +397,14 @@
                                     <outlet property="delegate" destination="DTf-mt-3A9" id="C6g-qE-M5x"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0hw-rC-Kd5" customClass="LoginButton" customModule="Amble" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0hw-rC-Kd5" customClass="EntryButton" customModule="Amble" customModuleProvider="target">
                                 <rect key="frame" x="16" y="594" width="343" height="53"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="23"/>
                                 <color key="tintColor" red="0.29803921570000003" green="0.64705882349999999" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Create Account"/>
                                 <connections>
-                                    <action selector="loginButtonPressed:" destination="DTf-mt-3A9" eventType="touchUpInside" id="dyU-X8-BSQ"/>
+                                    <action selector="entryButtonPressed:" destination="DTf-mt-3A9" eventType="touchUpInside" id="TAI-Kl-D6s"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -420,7 +420,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="loginButton" destination="0hw-rC-Kd5" id="Pki-fW-0d5"/>
+                        <outlet property="entryButton" destination="0hw-rC-Kd5" id="8Sh-rn-hHG"/>
                         <outlet property="tableView" destination="8xA-gI-L8t" id="AJu-vP-zeX"/>
                     </connections>
                 </viewController>
