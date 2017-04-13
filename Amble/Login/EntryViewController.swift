@@ -25,6 +25,7 @@ class EntryViewController: UIViewController {
   @IBOutlet var entryButton: EntryButton!
   
   fileprivate let ENTRY_CELL_IDENTIFIER = "entryCell"
+  fileprivate let FAILURE_STRING = "This method must be overridden"
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -64,15 +65,15 @@ class EntryViewController: UIViewController {
 extension EntryViewController: EntryView {
   
   var sections: [String] {
-    preconditionFailure("This must be overriden")
+    preconditionFailure(FAILURE_STRING)
   }
   
   func entryButtonPressed() {
-    preconditionFailure("This must be overriden")
+    preconditionFailure(FAILURE_STRING)
   }
   
   func textFieldsAreValid() -> Bool {
-    preconditionFailure("This must be overidden")
+    preconditionFailure(FAILURE_STRING)
   }
 }
 
@@ -86,26 +87,31 @@ extension EntryViewController: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: ENTRY_CELL_IDENTIFIER, for: indexPath) as! EntryTableViewCell
+    let section = sections[indexPath.row]
     
     cell.selectionStyle = .none
     cell.line = CALayer()
     cell.updateBottomLine(selection: .deselect)
     cell.layer.addSublayer(cell.line)
+    cell.setTextFieldImage(name: section)
     
-    if indexPath.row == 0 {
-      cell.setTextFieldImage(name: "user")
-    } else if indexPath.row == sections.count - 1 {
-      cell.setTextFieldImage(name: "padlock")
-      cell.textField.returnKeyType = .go
+    if section == "email address" {
+      cell.textField.keyboardType = .emailAddress
+    } else if section == "password" {
       cell.textField.isSecureTextEntry = true
+    }
+    
+    if indexPath.row == sections.count - 1 {
+      cell.textField.returnKeyType = .go
     }
     
     let checkmark = UIImage(named: "checkmark")
     cell.textField.rightView = UIImageView(image: checkmark)
     cell.textField.rightViewMode = .never
     
-    cell.textField.attributedPlaceholder = NSAttributedString(string: sections[indexPath.row],
+    cell.textField.attributedPlaceholder = NSAttributedString(string: section,
                                                               attributes: [NSForegroundColorAttributeName: UIColor.flatWhite])
+    
     return cell
   }
 }
@@ -113,7 +119,6 @@ extension EntryViewController: UITableViewDataSource, UITableViewDelegate {
 // MARK: Scroll view delegate
 
 extension EntryViewController: UIScrollViewDelegate {
-  
   func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
     view.endEditing(true)
   }
@@ -180,6 +185,7 @@ extension EntryViewController {
 // MARK: Public helper functions
 
 extension EntryViewController {
+  
   func getDataFromCells() -> [String: String] {
     var details: [String: String] = [:]
     
