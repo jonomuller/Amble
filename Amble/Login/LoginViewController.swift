@@ -15,13 +15,9 @@ class LoginViewController: EntryViewController {
   }
   
   override func entryButtonPressed() {
-    let usernameCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! EntryTableViewCell
-    let passwordCell = self.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! EntryTableViewCell
+    let details = getDataFromCells()
     
-    let username = usernameCell.textField.text
-    let password = passwordCell.textField.text
-    
-    APIManager.sharedInstance.login(username: username!, password: password!) { (json, error) in
+    APIManager.sharedInstance.login(username: details[sections[0]]!, password: details[sections[1]]!) { (json, error) in
       self.entryButton.expand(completion: nil)
       
       if (error != nil) {

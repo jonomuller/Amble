@@ -124,19 +124,19 @@ extension EntryViewController: UIScrollViewDelegate {
 extension EntryViewController: UITextFieldDelegate {
   
   func textFieldDidBeginEditing(_ textField: UITextField) {
-    let indexPath = indexPathFromTextField(textField: textField)
+    let indexPath = getIndexPathFromTextField(textField: textField)
     let cell = tableView.cellForRow(at: indexPath) as! EntryTableViewCell
     cell.updateBottomLine(selection: .select)
   }
   
   func textFieldDidEndEditing(_ textField: UITextField) {
-    let indexPath = indexPathFromTextField(textField: textField)
+    let indexPath = getIndexPathFromTextField(textField: textField)
     let cell = tableView.cellForRow(at: indexPath) as! EntryTableViewCell
     cell.updateBottomLine(selection: .deselect)
   }
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    let indexPath = indexPathFromTextField(textField: textField)
+    let indexPath = getIndexPathFromTextField(textField: textField)
     
     if indexPath.row < sections.count - 1 {
       let nextIndexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
@@ -165,7 +165,7 @@ extension EntryViewController {
     entryButton.isEnabled = textFieldsAreValid()
     
     // Enable tick next to text field when not empty
-    let indexPath = indexPathFromTextField(textField: sender as! UITextField)
+    let indexPath = getIndexPathFromTextField(textField: sender as! UITextField)
     let cell = tableView.cellForRow(at: indexPath) as! EntryTableViewCell
     if (cell.textField.text?.isEmpty)! {
       cell.textField.rightViewMode = .never
@@ -175,10 +175,27 @@ extension EntryViewController {
   }
 }
 
-// MARK: Helper functions
+// MARK: Public helper functions
 
 extension EntryViewController {
-  func indexPathFromTextField(textField: UITextField) -> IndexPath {
+  func getDataFromCells() -> [String: String] {
+    var details: [String: String] = [:]
+    
+    if let indexPaths = tableView.indexPathsForVisibleRows {
+      for indexPath in indexPaths {
+        let cell = tableView.cellForRow(at: indexPath) as! EntryTableViewCell
+        details[cell.textField.placeholder!] = cell.textField.text
+      }
+    }
+    
+    return details
+  }
+}
+
+// MARK: Private helper functions
+
+private extension EntryViewController {
+  func getIndexPathFromTextField(textField: UITextField) -> IndexPath {
     let location = textField.convert(textField.frame.origin, to: tableView)
     return tableView.indexPathForRow(at: location)!
   }
