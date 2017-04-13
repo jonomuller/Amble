@@ -10,4 +10,16 @@ import UIKit
 
 class RegisterViewController: EntryViewController {
   
+  override var sections: [String] {
+    return ["username", "email address", "password", "first name", "last name"]
+  }
+  
+  override func entryButtonPressed() {
+    // register here
+  }
+  
+  override func textFieldsAreValid() -> Bool {
+    // check for no empty cells and valid email
+    return false
+  }
 }
