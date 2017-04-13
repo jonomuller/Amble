@@ -14,14 +14,6 @@ class APIManager: NSObject {
   
   public static let sharedInstance = APIManager()
   
-  /*
-   Define response from API as either returning JSON (success) or an error (failure)
-   */
-  enum APIResponse {
-    case success(json: JSON)
-    case failure(error: NSError)
-  }
-  
   private func request(router: Router, completion: @escaping (APIResponse) -> Void) {
     if let error = containsEmptyElement(details: router.parameters as! [String: String]) {
       completion(.failure(error: error))

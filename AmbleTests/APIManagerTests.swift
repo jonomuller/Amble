@@ -26,7 +26,11 @@ class APIManagerTests: XCTestCase {
   
   override func setUp() {
     super.setUp()
-    testUser = TestUser(username: "bob123", email: "bob@bobson.com", password: "amble4lyfe", firstName: "Bob", lastName: "Bobson")
+    testUser = TestUser(username: "bob123",
+                        email: "bob@bobson.com",
+                        password: "amble4lyfe",
+                        firstName: "Bob",
+                        lastName: "Bobson")
     
     mockedResponse = ["success": "true",
                       "user": testUser.username,
@@ -50,11 +54,13 @@ class APIManagerTests: XCTestCase {
     
     let exp = expectation(description: "POST /login valid")
     
-    APIManager.sharedInstance.login(username: testUser.username, password: testUser.password) { (json, error) in
+    APIManager.sharedInstance.login(username: testUser.username, password: testUser.password) { (response) in
+      XCTAssertTrue(response.success, "Response is false")
+      let json = response.value as! JSON
+      
       XCTAssertNotNil(json, "JSON is nil")
-      XCTAssertNil(error, "Error is not nil")
-      XCTAssertTrue((json?["success"].boolValue)!, "Success value is false")
-      XCTAssertEqual(json?["user"].stringValue, self.testUser.username, "User returned is not the same")
+      XCTAssertTrue((json["success"].boolValue), "Success value is false")
+      XCTAssertEqual(json["user"].stringValue, self.testUser.username, "User returned is not the same")
       
       exp.fulfill()
     }
@@ -65,10 +71,12 @@ class APIManagerTests: XCTestCase {
   func testLoginWithMissingDetailsReturnsError() {
     let exp = expectation(description: "POST /login no details")
     
-    APIManager.sharedInstance.login(username: "", password: testUser.username) { (json, error) in
-      XCTAssertNil(json, "JSON is not nil")
+    APIManager.sharedInstance.login(username: "", password: testUser.username) { (response) in
+      XCTAssertFalse(response.success, "Response is true")
+      let error = response.value as! NSError
+      
       XCTAssertNotNil(error, "Error is nil")
-      XCTAssertEqual(error?.localizedDescription, "Please enter your username.", "Incorrect error message")
+      XCTAssertEqual(error.localizedDescription, "Please enter your username.", "Incorrect error message")
       
       exp.fulfill()
     }
@@ -88,11 +96,13 @@ class APIManagerTests: XCTestCase {
     
     let exp = expectation(description: "POST /register valid")
     
-    APIManager.sharedInstance.register(username: testUser.username, email: testUser.email, password: testUser.password, firstName: testUser.firstName, lastName: testUser.lastName) { (json, error) in
+    APIManager.sharedInstance.register(username: testUser.username, email: testUser.email, password: testUser.password, firstName: testUser.firstName, lastName: testUser.lastName) { (response) in
+      XCTAssertTrue(response.success, "Response is false")
+      let json = response.value as! JSON
+      
       XCTAssertNotNil(json, "JSON is nil")
-      XCTAssertNil(error, "Error is not nil")
-      XCTAssertTrue((json?["success"].boolValue)!, "Success value is false")
-      XCTAssertEqual(json?["user"].stringValue, self.testUser.username, "User returned is not the same")
+      XCTAssertTrue((json["success"].boolValue), "Success value is false")
+      XCTAssertEqual(json["user"].stringValue, self.testUser.username, "User returned is not the same")
       
       exp.fulfill()
     }
@@ -103,10 +113,12 @@ class APIManagerTests: XCTestCase {
   func testRegisterWithMissingDetailsReturnsError() {
     let exp = expectation(description: "POST /register no details")
     
-    APIManager.sharedInstance.register(username: testUser.username, email: "", password: testUser.password, firstName: testUser.firstName, lastName: testUser.lastName) { (json, error) in
-      XCTAssertNil(json, "JSON is not nil")
+    APIManager.sharedInstance.register(username: testUser.username, email: "", password: testUser.password, firstName: testUser.firstName, lastName: testUser.lastName) { (response) in
+      XCTAssertFalse(response.success, "Response is true")
+      let error = response.value as! NSError
+      
       XCTAssertNotNil(error, "Error is nil")
-      XCTAssertEqual(error?.localizedDescription, "Please enter your email.", "Incorrect error message")
+      XCTAssertEqual(error.localizedDescription, "Please enter your email.", "Incorrect error message")
       
       exp.fulfill()
     }
