@@ -15,7 +15,7 @@ import ChameleonFramework
  */
 protocol EntryView {
   var sections: [String] { get }
-  func entryButtonPressed()
+  func entryButtonPressed(details: [String: String])
   func isValidTextField(textField: UITextField) -> Bool
 }
 
@@ -67,7 +67,7 @@ extension EntryViewController: EntryView {
     preconditionFailure(FAILURE_STRING)
   }
   
-  func entryButtonPressed() {
+  func entryButtonPressed(details: [String: String]) {
     preconditionFailure(FAILURE_STRING)
   }
   
@@ -162,7 +162,7 @@ extension EntryViewController {
   
   @IBAction func entryButtonPressed(_ sender: Any) {
     entryButton.collapse() { (success) in
-      self.entryButtonPressed()
+      self.entryButtonPressed(details: self.getDataFromCells())
     }
   }
   
@@ -185,20 +185,6 @@ extension EntryViewController {
 // MARK: Public helper functions
 
 extension EntryViewController {
-  
-  func getDataFromCells() -> [String: String] {
-    var details: [String: String] = [:]
-    
-    if let indexPaths = tableView.indexPathsForVisibleRows {
-      for indexPath in indexPaths {
-        let cell = tableView.cellForRow(at: indexPath) as! EntryTableViewCell
-        details[cell.textField.placeholder!] = cell.textField.text
-      }
-    }
-    
-    return details
-  }
-  
   func handleAPIResponse(response: APIResponse) {
     entryButton.expand(completion: nil)
     
@@ -248,5 +234,18 @@ private extension EntryViewController {
     }
     
     return validCells
+  }
+  
+  func getDataFromCells() -> [String: String] {
+    var details: [String: String] = [:]
+    
+    if let indexPaths = tableView.indexPathsForVisibleRows {
+      for indexPath in indexPaths {
+        let cell = tableView.cellForRow(at: indexPath) as! EntryTableViewCell
+        details[cell.textField.placeholder!] = cell.textField.text
+      }
+    }
+    
+    return details
   }
 }

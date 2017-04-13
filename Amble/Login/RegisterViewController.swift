@@ -14,10 +14,12 @@ class RegisterViewController: EntryViewController {
     return ["username", "email address", "password", "first name", "last name"]
   }
   
-  override func entryButtonPressed() {
-    let details = getDataFromCells()
-    
-    APIManager.sharedInstance.register(username: details[sections[0]]!, email: details[sections[1]]!, password: details[sections[2]]!, firstName: details[sections[3]]!, lastName: details[sections[4]]!) { (response) in
+  override func entryButtonPressed(details: [String: String]) {
+    APIManager.sharedInstance.register(username: details[sections[0]]!.lowercased(),
+                                       email: details[sections[1]]!.lowercased(),
+                                       password: details[sections[2]]!,
+                                       firstName: details[sections[3]]!.capitalized,
+                                       lastName: details[sections[4]]!.capitalized) { (response) in
       self.handleAPIResponse(response: response)
     }
   }
