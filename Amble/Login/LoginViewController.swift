@@ -17,15 +17,12 @@ class LoginViewController: EntryViewController {
   override func entryButtonPressed() {
     let details = getDataFromCells()
     
-    APIManager.sharedInstance.login(username: details[sections[0]]!, password: details[sections[1]]!) { (json, error) in
+    APIManager.sharedInstance.login(username: details[sections[0]]!, password: details[sections[1]]!) { (response) in
       self.entryButton.expand(completion: nil)
       
-      if (error != nil) {
-        let alertView = UIAlertController(title: "Log in error", message: error?.localizedDescription, preferredStyle: .alert)
-        alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alertView, animated: true, completion: nil)
-      } else {
-        let user = User(username: (json?["user"].stringValue)!, jwt: (json?["jwt"].stringValue)!)
+      switch response {
+      case .success(let json):
+        let user = User(username: (json["user"].stringValue), jwt: json["jwt"].stringValue)
         
         // Save user data to keychain
         do {
@@ -40,6 +37,10 @@ class LoginViewController: EntryViewController {
         let navController = UINavigationController(rootViewController: vc)
         
         self.present(navController, animated: true, completion: nil)
+      case .failure(let error):
+        let alertView = UIAlertController(title: "Log in error", message: error.localizedDescription, preferredStyle: .alert)
+        alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alertView, animated: true, completion: nil)
       }
     }
   }
