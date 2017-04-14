@@ -136,6 +136,7 @@ extension EntryViewController: UITableViewDataSource, UITableViewDelegate {
 // MARK: - Scroll view delegate
 
 extension EntryViewController: UIScrollViewDelegate {
+  
   func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
     self.navigationController?.navigationBar.shadowImage = UIColor.flatWhite.generateImage()
   }
@@ -154,14 +155,16 @@ extension EntryViewController: UITextFieldDelegate {
   func textFieldDidBeginEditing(_ textField: UITextField) {
     let indexPath = getIndexPathFromTextField(textField: textField)
     tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
-    let cell = tableView.cellForRow(at: indexPath) as! EntryTableViewCell
-    cell.updateBottomLine(selection: .select)
+    if let cell = tableView.cellForRow(at: indexPath) as? EntryTableViewCell {
+      cell.updateBottomLine(selection: .select)
+    }
   }
   
   func textFieldDidEndEditing(_ textField: UITextField) {
     let indexPath = getIndexPathFromTextField(textField: textField)
-    let cell = tableView.cellForRow(at: indexPath) as! EntryTableViewCell
-    cell.updateBottomLine(selection: .deselect)
+    if let cell = tableView.cellForRow(at: indexPath) as? EntryTableViewCell {
+      cell.updateBottomLine(selection: .deselect)
+    }
   }
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
