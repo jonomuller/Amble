@@ -42,7 +42,10 @@ class EntryTableViewCell: UITableViewCell {
   
   func updateBottomLine(selection: Selection) {
     let height = selection.height
-    self.line.frame = CGRect(x: self.innerView.frame.origin.x, y: self.innerView.frame.size.height - height, width: self.innerView.frame.size.width, height: height)
+    self.line.frame = CGRect(x: self.innerView.frame.origin.x,
+                             y: self.innerView.frame.size.height - height,
+                             width: self.innerView.frame.size.width,
+                             height: height)
     self.line.borderColor = selection.color
     self.line.borderWidth = height
   }
@@ -50,9 +53,24 @@ class EntryTableViewCell: UITableViewCell {
   func setTextFieldImage(name: String) {
     let image = UIImage(named: name)
     let imageView = UIImageView(image: image)
-    let padding = CGRect(x: 0, y: 0, width: imageView.frame.width + 15, height: imageView.frame.height)
+    setTextFieldLeftViewWithPadding(view: imageView)
+  }
+  
+  func setTextFieldImageFromText(text: String, size: CGFloat) {
+    let label = UILabel(frame: CGRect(origin: .zero, size: CGSize(width: 25, height: 25)))
+    label.font = UIFont(name: "Avenir-Black", size: size)
+    label.textColor = .white
+    label.text = text
+    let view = UIView(frame: label.frame)
+    view.bounds = CGRect(x: -2, y: 0, width: view.frame.width, height: view.frame.height)
+    view.addSubview(label)
+    setTextFieldLeftViewWithPadding(view: view)
+  }
+  
+  private func setTextFieldLeftViewWithPadding(view: UIView) {
+    let padding = CGRect(x: 0, y: 0, width: view.frame.width + 15, height: view.frame.height)
     let paddingView = UIView(frame: padding)
-    paddingView.addSubview(imageView)
+    paddingView.addSubview(view)
     self.textField.leftView = paddingView
     self.textField.leftViewMode = .always
   }

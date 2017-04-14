@@ -36,4 +36,17 @@ class RegisterViewController: EntryViewController {
     let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
     return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: email)
   }
+  
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = super.tableView(tableView, cellForRowAt: indexPath) as! EntryTableViewCell
+    let section = sections[indexPath.row]
+    
+    if section == sections[1] {
+      cell.setTextFieldImageFromText(text: "@", size: 25)
+    } else if section == sections[3] || section == sections[4] {
+      cell.setTextFieldImageFromText(text: "Aa", size: 18)
+    }
+    
+    return cell
+  }
 }
