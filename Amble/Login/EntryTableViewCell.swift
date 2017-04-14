@@ -62,7 +62,8 @@ class EntryTableViewCell: UITableViewCell {
     label.textColor = .white
     label.text = text
     let view = UIView(frame: label.frame)
-    view.bounds = CGRect(x: -2, y: 0, width: view.frame.width, height: view.frame.height)
+    let padding = CGFloat(text.characters.count - 4)
+    view.bounds = CGRect(x: padding, y: 0, width: view.frame.width, height: view.frame.height)
     view.addSubview(label)
     setTextFieldLeftViewWithPadding(view: view)
   }

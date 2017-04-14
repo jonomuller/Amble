@@ -49,13 +49,28 @@ class EntryViewController: UIViewController {
     self.navigationController?.view.backgroundColor = UIColor.clear
     
     // Call functions to animate the login button when the keyboard appears/disappears
-    NotificationCenter.default.addObserver(entryButton, selector: #selector(entryButton.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-    NotificationCenter.default.addObserver(entryButton, selector: #selector(entryButton.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
   }
   
   override func viewWillDisappear(_ animated: Bool) {
-    NotificationCenter.default.removeObserver(entryButton, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-    NotificationCenter.default.removeObserver(entryButton, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+  }
+  
+  func keyboardWillShow(notification: NSNotification) {
+    if let keyboardRectBegin = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? CGRect {
+      if let keyboardRectEnd = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect {
+        entryButton.keyboardWillShow(begin: keyboardRectBegin, end: keyboardRectEnd)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardRectEnd.height + entryButton.frame.height + 30, right: 0)
+        //        tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+      }
+    }
+  }
+  
+  func keyboardWillHide() {
+    tableView.contentInset = .zero
+    entryButton.keyboardWillHide()
   }
 }
 
@@ -115,20 +130,13 @@ extension EntryViewController: UITableViewDataSource, UITableViewDelegate {
   }
 }
 
-// MARK: Scroll view delegate
-
-extension EntryViewController: UIScrollViewDelegate {
-  func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-    view.endEditing(true)
-  }
-}
-
 // MARK: - Text field delegate
 
 extension EntryViewController: UITextFieldDelegate {
   
   func textFieldDidBeginEditing(_ textField: UITextField) {
     let indexPath = getIndexPathFromTextField(textField: textField)
+    tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
     let cell = tableView.cellForRow(at: indexPath) as! EntryTableViewCell
     cell.updateBottomLine(selection: .select)
   }
@@ -168,7 +176,13 @@ extension EntryViewController {
   
   @IBAction func textFieldChanged(_ sender: Any) {
     // Enable login button if none of the text fields are empty
-    entryButton.isEnabled = textFieldsAreValid()
+    let validTextFields = textFieldsAreValid()
+    entryButton.isEnabled = validTextFields
+    if validTextFields {
+      entryButton.alpha = 1
+    } else {
+      entryButton.alpha = 0.5
+    }
     
     // Enable tick next to text field when not empty
     let indexPath = getIndexPathFromTextField(textField: sender as! UITextField)
