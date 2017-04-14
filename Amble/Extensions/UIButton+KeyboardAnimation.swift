@@ -9,14 +9,11 @@
 import UIKit
 
 extension UIButton {
-  func keyboardWillShow(notification: NSNotification) {
-    if let keyboardRectBegin = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? CGRect {
-      if let keyboardRectEnd = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect {
-        if abs(keyboardRectBegin.origin.y - keyboardRectEnd.origin.y) == keyboardRectBegin.height {
-          let transform = CGAffineTransform(translationX: 0, y: keyboardRectEnd.origin.y - self.frame.height - 20 - self.frame.origin.y)
-          transformButton(transform: transform)
-        }
-      }
+  func keyboardWillShow(begin: CGRect, end: CGRect) {
+    if abs(begin.origin.y - end.origin.y) == begin.height {
+      let transform = CGAffineTransform(translationX: 0,
+                                        y: end.origin.y - self.frame.height - 20 - self.frame.origin.y)
+      transformButton(transform: transform)
     }
   }
   

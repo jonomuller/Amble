@@ -1,5 +1,5 @@
 //
-//  LoginButton.swift
+//  EntryButton.swift
 //  Amble
 //
 //  Created by Jono Muller on 11/04/2017.
@@ -10,7 +10,7 @@ import UIKit
 import ChameleonFramework
 import NVActivityIndicatorView
 
-class LoginButton: UIButton {
+class EntryButton: UIButton {
   
   private var originalWidth: CGFloat!
   private var originalText: String?
@@ -21,6 +21,7 @@ class LoginButton: UIButton {
     self.originalWidth = frame.width
     self.layer.cornerRadius = frame.height / 2
     self.backgroundColor = .white
+    self.alpha = 0.7
     self.tintColor = .flatGreenDark
     self.titleLabel?.font = UIFont(name: "Avenir-Black", size: 23)
     
@@ -41,7 +42,7 @@ class LoginButton: UIButton {
     case collapse
     case expand
     
-    func width(button: LoginButton) -> CGFloat {
+    func width(button: EntryButton) -> CGFloat {
       switch self {
       case .collapse:
         return button.frame.height

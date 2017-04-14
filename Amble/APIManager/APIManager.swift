@@ -14,26 +14,27 @@ class APIManager: NSObject {
   
   public static let sharedInstance = APIManager()
   
-  private func request(router: Router, completion: @escaping (JSON?, NSError?) -> Void) {
+  private func request(router: Router, completion: @escaping (APIResponse) -> Void) {
     if let error = containsEmptyElement(details: router.parameters as! [String: String]) {
-      completion(nil, error)
+      completion(.failure(error: error))
       return
     }
     
     Alamofire.request(router)
       .validate()
-      .responseJSON { response in
+      .responseJSON { (response) in
         switch response.result {
         case .success(let value):
-          completion(JSON(value), nil)
+          completion(.success(json: JSON(value)))
         case .failure:
           if let data = response.data {
             let json = JSON(data)
-            let message = json["error"].stringValue
+            let description = router.path.replacingOccurrences(of: "/auth/", with: "").capitalized + " error"
+            let reason = json["error"].stringValue
             let error = NSError(domain: "Amble",
                                 code: (response.response?.statusCode)!,
-                                userInfo: [NSLocalizedDescriptionKey: message])
-            completion(nil, error)
+                                userInfo: [NSLocalizedDescriptionKey: description, NSLocalizedFailureReasonErrorKey: reason])
+            completion(.failure(error: error))
           }
         }
     }
@@ -53,24 +54,24 @@ class APIManager: NSObject {
   
   // MARK: /auth API calls
   
-  public func login(username: String, password: String, completion: @escaping (JSON?, NSError?) -> Void) {
+  public func login(username: String, password: String, completion: @escaping (APIResponse) -> Void) {
     let details = ["username": username,
                    "password": password]
     
-    request(router: Router.login(details: details)) { (json, error) in
-      completion(json, error)
+    request(router: Router.login(details: details)) { (response) in
+      completion(response)
     }
   }
   
-  public func register(username: String, email: String, password: String, firstName: String, lastName: String, completion: @escaping (JSON?, NSError?) -> Void) {
+  public func register(username: String, email: String, password: String, firstName: String, lastName: String, completion: @escaping (APIResponse) -> Void) {
     let details = ["username": username,
                    "email": email,
                    "password": password,
                    "firstName": firstName,
                    "lastName": lastName]
     
-    request(router: Router.register(details: details)) { (json, error) in
-      completion(json, error)
+    request(router: Router.register(details: details)) { (response) in
+      completion(response)
     }
   }
   
