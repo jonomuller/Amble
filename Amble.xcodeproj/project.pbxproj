@@ -15,6 +15,7 @@
 		AFADD05F1E9FD26600E8CBBE /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFADD05E1E9FD26600E8CBBE /* EntryViewController.swift */; };
 		AFADD0611E9FD35700E8CBBE /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFADD0601E9FD35700E8CBBE /* RegisterViewController.swift */; };
 		AFADD0651EA00C8F00E8CBBE /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFADD0641EA00C8F00E8CBBE /* APIResponse.swift */; };
+		AFADD0691EA140E900E8CBBE /* UIColor+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFADD0681EA140E900E8CBBE /* UIColor+Image.swift */; };
 		AFB938AE1E5B2C0000BA3923 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB938AD1E5B2C0000BA3923 /* AppDelegate.swift */; };
 		AFB938B01E5B2C0000BA3923 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB938AF1E5B2C0000BA3923 /* FirstViewController.swift */; };
 		AFB938B21E5B2C0000BA3923 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB938B11E5B2C0000BA3923 /* ProfileViewController.swift */; };
@@ -74,6 +75,7 @@
 		AFADD05E1E9FD26600E8CBBE /* EntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 		AFADD0601E9FD35700E8CBBE /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		AFADD0641EA00C8F00E8CBBE /* APIResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
+		AFADD0681EA140E900E8CBBE /* UIColor+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Image.swift"; sourceTree = "<group>"; };
 		AFB938AA1E5B2C0000BA3923 /* Amble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Amble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB938AD1E5B2C0000BA3923 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AFB938AF1E5B2C0000BA3923 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FirstViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -159,6 +161,7 @@
 			children = (
 				AF2E759E1E9DC37800C548B6 /* UIButton+BackgroundColor.swift */,
 				AF2E75A01E9DC3FA00C548B6 /* UIButton+KeyboardAnimation.swift */,
+				AFADD0681EA140E900E8CBBE /* UIColor+Image.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -551,6 +554,7 @@
 				AFEF4BC31E987B3600F7DEBA /* LoginViewController.swift in Sources */,
 				AF2E75A11E9DC3FA00C548B6 /* UIButton+KeyboardAnimation.swift in Sources */,
 				AFEF4BCC1E99623600F7DEBA /* EntryTableViewCell.swift in Sources */,
+				AFADD0691EA140E900E8CBBE /* UIColor+Image.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -30,7 +30,7 @@ class EntryViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = GradientColor(.topToBottom,
-                                              frame: tableView.frame,
+                                              frame: view.frame,
                                               colors: [.flatGreenDark, .flatForestGreen])
   }
   
@@ -61,9 +61,11 @@ class EntryViewController: UIViewController {
   func keyboardWillShow(notification: NSNotification) {
     if let keyboardRectBegin = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? CGRect {
       if let keyboardRectEnd = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect {
+        tableView.contentInset = UIEdgeInsets(top: 0,
+                                              left: 0,
+                                              bottom: keyboardRectEnd.height + entryButton.frame.height + 30,
+                                              right: 0)
         entryButton.keyboardWillShow(begin: keyboardRectBegin, end: keyboardRectEnd)
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardRectEnd.height + entryButton.frame.height + 30, right: 0)
-        //        tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
       }
     }
   }
@@ -123,10 +125,25 @@ extension EntryViewController: UITableViewDataSource, UITableViewDelegate {
     cell.textField.rightView = UIImageView(image: checkmark)
     cell.textField.rightViewMode = .never
     
+    let color = UIColor.flatWhiteDark.lighten(byPercentage: 0.075)
     cell.textField.attributedPlaceholder = NSAttributedString(string: section,
-                                                              attributes: [NSForegroundColorAttributeName: UIColor.flatWhite])
+                                                              attributes: [NSForegroundColorAttributeName: color!])
     
     return cell
+  }
+}
+
+// MARK: - Scroll view delegate
+
+extension EntryViewController: UIScrollViewDelegate {
+  func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    self.navigationController?.navigationBar.shadowImage = UIColor.flatWhite.generateImage()
+  }
+  
+  func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    if targetContentOffset.pointee.y <= 0 {
+      self.navigationController?.navigationBar.shadowImage = UIImage()
+    }
   }
 }
 
@@ -164,7 +181,7 @@ extension EntryViewController: UITextFieldDelegate {
   }
 }
 
-// MARK: IBAction methods
+// MARK: - IBAction methods
 
 extension EntryViewController {
   
@@ -181,7 +198,7 @@ extension EntryViewController {
     if validTextFields {
       entryButton.alpha = 1
     } else {
-      entryButton.alpha = 0.5
+      entryButton.alpha = 0.7
     }
     
     // Enable tick next to text field when not empty
@@ -196,7 +213,7 @@ extension EntryViewController {
   }
 }
 
-// MARK: Public helper functions
+// MARK: - Public helper functions
 
 extension EntryViewController {
   func handleAPIResponse(response: APIResponse) {
@@ -226,7 +243,7 @@ extension EntryViewController {
   }
 }
 
-// MARK: Private helper functions
+// MARK: - Private helper functions
 
 private extension EntryViewController {
   

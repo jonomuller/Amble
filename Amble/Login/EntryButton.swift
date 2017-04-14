@@ -21,7 +21,7 @@ class EntryButton: UIButton {
     self.originalWidth = frame.width
     self.layer.cornerRadius = frame.height / 2
     self.backgroundColor = .white
-    self.alpha = 0.5
+    self.alpha = 0.7
     self.tintColor = .flatGreenDark
     self.titleLabel?.font = UIFont(name: "Avenir-Black", size: 23)
     

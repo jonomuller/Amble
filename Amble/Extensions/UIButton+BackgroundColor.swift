@@ -10,15 +10,7 @@ import UIKit
 
 extension UIButton {
   func setBackgroundColor(color: UIColor, forState: UIControlState) {
-    UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
-    
-    if let context = UIGraphicsGetCurrentContext() {
-      context.setFillColor(color.cgColor)
-      context.fill(CGRect(x: 0, y: 0, width: 1, height: 1))
-    }
-    
-    let image = UIGraphicsGetImageFromCurrentImageContext()
-    UIGraphicsEndImageContext()
+    let image = color.generateImage()
     self.setBackgroundImage(image, for: forState)
   }
 }
