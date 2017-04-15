@@ -27,6 +27,7 @@
 		AFC3EE131E92995E00159679 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC3EE121E92995E00159679 /* Router.swift */; };
 		AFC3EE151E94187300159679 /* APIManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC3EE141E94187300159679 /* APIManagerTests.swift */; };
 		AFD8E9C21E9BB9DD00B0919A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD8E9C11E9BB9DD00B0919A /* User.swift */; };
+		AFDCD17F1EA1B8C7007E0990 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDCD17E1EA1B8C7007E0990 /* InitialViewController.swift */; };
 		AFEF4BC31E987B3600F7DEBA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEF4BC21E987B3600F7DEBA /* LoginViewController.swift */; };
 		AFEF4BCC1E99623600F7DEBA /* EntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEF4BCA1E99623600F7DEBA /* EntryTableViewCell.swift */; };
 		EBCDE4FDD02E934EC9FDF426 /* Pods_AmbleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 184FD3A76701D8A22173A25D /* Pods_AmbleUITests.framework */; };
@@ -96,6 +97,7 @@
 		AFC3EE141E94187300159679 /* APIManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = APIManagerTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AFC3EE161E980C7800159679 /* Mockingjay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mockingjay.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Amble-duvhxqoqscperhekbelpwlhfjuzr/Build/Products/Debug-iphonesimulator/Mockingjay/Mockingjay.framework"; sourceTree = "<group>"; };
 		AFD8E9C11E9BB9DD00B0919A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = User.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AFDCD17E1EA1B8C7007E0990 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		AFEF4BC21E987B3600F7DEBA /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LoginViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AFEF4BCA1E99623600F7DEBA /* EntryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EntryTableViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B37DD9D48B8010EE55C475F3 /* Pods-AmbleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AmbleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AmbleTests/Pods-AmbleTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				AFADD05E1E9FD26600E8CBBE /* EntryViewController.swift */,
 				AFEF4BC21E987B3600F7DEBA /* LoginViewController.swift */,
 				AFADD0601E9FD35700E8CBBE /* RegisterViewController.swift */,
+				AFDCD17E1EA1B8C7007E0990 /* InitialViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -555,6 +558,7 @@
 				AF2E75A11E9DC3FA00C548B6 /* UIButton+KeyboardAnimation.swift in Sources */,
 				AFEF4BCC1E99623600F7DEBA /* EntryTableViewCell.swift in Sources */,
 				AFADD0691EA140E900E8CBBE /* UIColor+Image.swift in Sources */,
+				AFDCD17F1EA1B8C7007E0990 /* InitialViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

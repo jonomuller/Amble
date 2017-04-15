@@ -29,6 +29,7 @@ class EntryViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    entryButton.alpha = 0.7
     self.view.backgroundColor = GradientColor(.topToBottom,
                                               frame: view.frame,
                                               colors: [.flatGreenDark, .flatForestGreen])

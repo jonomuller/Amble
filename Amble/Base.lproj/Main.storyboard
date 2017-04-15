@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9Ve-SF-V3a">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9Ve-SF-V3a">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -67,7 +67,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DPz-t9-IvH" id="c9Z-dk-u1H">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -82,10 +82,10 @@
             </objects>
             <point key="canvasLocation" x="2710" y="1110"/>
         </scene>
-        <!--View Controller-->
+        <!--Initial View Controller-->
         <scene sceneID="mzK-LN-cDT">
             <objects>
-                <viewController id="95L-dV-X0L" sceneMemberID="viewController">
+                <viewController id="95L-dV-X0L" customClass="InitialViewController" customModule="Amble" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qLD-0W-Ifq"/>
                         <viewControllerLayoutGuide type="bottom" id="Iph-H5-hip"/>
@@ -94,27 +94,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5bD-oB-No0">
-                                <rect key="frame" x="144" y="449" width="87" height="53"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVC-NI-YMx" customClass="EntryButton" customModule="Amble" customModuleProvider="target">
+                                <rect key="frame" x="17" y="449" width="343" height="53"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="53" id="8tm-CR-ZMv"/>
+                                    <constraint firstAttribute="height" constant="53" id="WsT-8T-zjE"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <state key="normal" title="Log in"/>
+                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="23"/>
+                                <color key="tintColor" red="0.29803921570000003" green="0.64705882349999999" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Log In"/>
                                 <connections>
-                                    <segue destination="x3D-js-Adg" kind="show" id="IRy-v3-qpe"/>
+                                    <segue destination="x3D-js-Adg" kind="show" id="Q7W-v9-0zb"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="msX-fy-HDr">
-                                <rect key="frame" x="145" y="527" width="86" height="42"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bc1-rW-9Na" customClass="EntryButton" customModule="Amble" customModuleProvider="target">
+                                <rect key="frame" x="17" y="522" width="343" height="53"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="Abr-ZQ-nd7"/>
-                                    <constraint firstAttribute="width" constant="86" id="nax-6g-y0P"/>
+                                    <constraint firstAttribute="height" constant="53" id="uer-tL-Nqe"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <state key="normal" title="Sign up"/>
+                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="23"/>
+                                <color key="tintColor" red="0.29803921570000003" green="0.64705882349999999" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Create Account"/>
                                 <connections>
-                                    <segue destination="DTf-mt-3A9" kind="show" id="0jB-ch-Omu"/>
+                                    <segue destination="DTf-mt-3A9" kind="show" id="A8N-Pn-HEZ"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AMBLE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F2Z-86-sLI">
@@ -124,19 +127,20 @@
                                     <constraint firstAttribute="width" constant="139" id="p2M-Oy-slf"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="33"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.26274509800000001" green="0.56862745100000001" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="msX-fy-HDr" firstAttribute="top" secondItem="5bD-oB-No0" secondAttribute="bottom" constant="25" id="7ZD-fu-1gg"/>
                             <constraint firstItem="F2Z-86-sLI" firstAttribute="top" secondItem="qLD-0W-Ifq" secondAttribute="bottom" constant="138" id="CmP-gW-JVA"/>
-                            <constraint firstItem="5bD-oB-No0" firstAttribute="trailing" secondItem="msX-fy-HDr" secondAttribute="trailing" id="Krn-Nh-rS0"/>
-                            <constraint firstItem="F2Z-86-sLI" firstAttribute="centerX" secondItem="msX-fy-HDr" secondAttribute="centerX" id="Vc6-TT-Z3M"/>
-                            <constraint firstItem="5bD-oB-No0" firstAttribute="centerX" secondItem="msX-fy-HDr" secondAttribute="centerX" id="bTf-o0-6K5"/>
-                            <constraint firstItem="Iph-H5-hip" firstAttribute="top" secondItem="msX-fy-HDr" secondAttribute="bottom" constant="98" id="j5W-o3-bvh"/>
-                            <constraint firstItem="5bD-oB-No0" firstAttribute="centerX" secondItem="Ia5-pO-x58" secondAttribute="centerX" id="jcM-lA-6xs"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="aVC-NI-YMx" secondAttribute="trailing" constant="-1" id="LZr-hA-sHt"/>
+                            <constraint firstItem="Iph-H5-hip" firstAttribute="top" secondItem="Bc1-rW-9Na" secondAttribute="bottom" constant="92" id="QHf-cp-chD"/>
+                            <constraint firstItem="Bc1-rW-9Na" firstAttribute="top" secondItem="aVC-NI-YMx" secondAttribute="bottom" constant="20" id="ak8-Vd-v2C"/>
+                            <constraint firstItem="F2Z-86-sLI" firstAttribute="centerX" secondItem="aVC-NI-YMx" secondAttribute="centerX" id="ble-T3-O9j"/>
+                            <constraint firstItem="aVC-NI-YMx" firstAttribute="leading" secondItem="Bc1-rW-9Na" secondAttribute="leading" id="enj-fY-70G"/>
+                            <constraint firstItem="aVC-NI-YMx" firstAttribute="trailing" secondItem="Bc1-rW-9Na" secondAttribute="trailing" id="rnL-Qd-PQH"/>
+                            <constraint firstItem="aVC-NI-YMx" firstAttribute="leading" secondItem="Ia5-pO-x58" secondAttribute="leadingMargin" constant="1" id="wwq-QX-ljw"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xnG-zA-2NI"/>
