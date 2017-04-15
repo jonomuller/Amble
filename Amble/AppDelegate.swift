@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     let vc = storyboard.instantiateViewController(withIdentifier: vcID)
     let navController = UINavigationController(rootViewController: vc)
-//    self.window?.rootViewController = navController
+    self.window?.rootViewController = navController
     
     return true
   }
