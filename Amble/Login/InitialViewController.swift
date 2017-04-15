@@ -13,10 +13,13 @@ class InitialViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     self.view.backgroundColor = GradientColor(.topToBottom,
                                               frame: view.frame,
                                               colors: [.flatGreenDark, .flatForestGreen])
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    self.navigationController?.makeTransparent()
   }
   
   override func didReceiveMemoryWarning() {
