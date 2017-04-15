@@ -30,6 +30,7 @@ class EntryViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     entryButton.alpha = 0.7
+    self.navigationController?.makeTransparent()
     self.view.backgroundColor = GradientColor(.topToBottom,
                                               frame: view.frame,
                                               colors: [.flatGreenDark, .flatForestGreen])
@@ -43,9 +44,6 @@ class EntryViewController: UIViewController {
   }
   
   override func viewWillAppear(_ animated: Bool) {
-    // Set transparent navigation bar
-    self.navigationController?.makeTransparent()
-    
     // Call functions to animate the login button when the keyboard appears/disappears
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
