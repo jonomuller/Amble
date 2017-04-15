@@ -85,7 +85,7 @@
         <!--Initial View Controller-->
         <scene sceneID="mzK-LN-cDT">
             <objects>
-                <viewController id="95L-dV-X0L" customClass="InitialViewController" customModule="Amble" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="initialViewController" id="95L-dV-X0L" customClass="InitialViewController" customModule="Amble" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qLD-0W-Ifq"/>
                         <viewControllerLayoutGuide type="bottom" id="Iph-H5-hip"/>
