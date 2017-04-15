@@ -11,11 +11,22 @@ import ChameleonFramework
 
 class InitialViewController: UIViewController {
   
+  @IBOutlet var logo: UIImageView!
+  @IBOutlet var loginButton: UIButton!
+  @IBOutlet var registerButotn: UIButton!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = GradientColor(.topToBottom,
                                               frame: view.frame,
                                               colors: [.flatGreenDark, .flatForestGreen])
+    
+    UIView.animate(withDuration: 0.5, delay: 0.5, options: [], animations: { 
+      self.logo.transform = CGAffineTransform(translationX: 0, y: -150)
+    }) { (finished) in
+      self.loginButton.isHidden = false
+      self.registerButotn.isHidden = false
+    }
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -28,14 +39,15 @@ class InitialViewController: UIViewController {
   }
   
   
-  /*
+  
    // MARK: - Navigation
    
    // In a storyboard-based application, you will often want to do a little preparation before navigation
    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
    // Get the new view controller using segue.destinationViewController.
    // Pass the selected object to the new view controller.
+    
    }
-   */
+ 
   
 }

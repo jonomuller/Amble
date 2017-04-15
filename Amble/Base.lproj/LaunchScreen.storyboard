@@ -1,7 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,12 +21,36 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-screen-bg" translatesAutoresizingMaskIntoConstraints="NO" id="QeX-XK-p1e">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="amble-logo" translatesAutoresizingMaskIntoConstraints="NO" id="C2k-NG-QQz">
+                                <rect key="frame" x="67" y="303" width="240" height="60"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="QeX-XK-p1e" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="6hg-63-BJs"/>
+                            <constraint firstItem="C2k-NG-QQz" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="51" id="BpE-BC-cwE"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="C2k-NG-QQz" secondAttribute="bottom" constant="304" id="CKY-nm-DQx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="C2k-NG-QQz" secondAttribute="trailing" constant="52" id="GY7-f0-rm7"/>
+                            <constraint firstItem="C2k-NG-QQz" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="S6b-OF-On6"/>
+                            <constraint firstItem="C2k-NG-QQz" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="SPN-r6-Mpi"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="QeX-XK-p1e" secondAttribute="bottom" id="XFb-eK-Lem"/>
+                            <constraint firstItem="C2k-NG-QQz" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="283" id="Ylt-2y-8Yw"/>
+                            <constraint firstItem="QeX-XK-p1e" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="aLc-F9-kmF"/>
+                            <constraint firstAttribute="trailing" secondItem="QeX-XK-p1e" secondAttribute="trailing" id="y02-hT-Nsl"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="amble-logo" width="631" height="114"/>
+        <image name="launch-screen-bg" width="1080" height="1920"/>
+    </resources>
 </document>

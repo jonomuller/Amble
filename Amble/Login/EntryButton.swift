@@ -81,7 +81,7 @@ class EntryButton: UIButton {
                           y: self.frame.midY - self.frame.height / 2,
                           width: width,
                           height: self.frame.height)
-    }) { (success) in
+    }) { (finished) in
       completion?(true)
     }
   }

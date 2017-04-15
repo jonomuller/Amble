@@ -67,7 +67,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DPz-t9-IvH" id="c9Z-dk-u1H">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -94,21 +94,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVC-NI-YMx" customClass="EntryButton" customModule="Amble" customModuleProvider="target">
-                                <rect key="frame" x="17" y="449" width="343" height="53"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="53" id="WsT-8T-zjE"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="23"/>
-                                <color key="tintColor" red="0.29803921570000003" green="0.64705882349999999" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Log In"/>
-                                <connections>
-                                    <segue destination="x3D-js-Adg" kind="show" id="Q7W-v9-0zb"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bc1-rW-9Na" customClass="EntryButton" customModule="Amble" customModuleProvider="target">
-                                <rect key="frame" x="17" y="522" width="343" height="53"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bc1-rW-9Na" customClass="EntryButton" customModule="Amble" customModuleProvider="target">
+                                <rect key="frame" x="16" y="491" width="343" height="53"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="53" id="uer-tL-Nqe"/>
@@ -120,30 +107,45 @@
                                     <segue destination="DTf-mt-3A9" kind="show" id="A8N-Pn-HEZ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AMBLE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F2Z-86-sLI">
-                                <rect key="frame" x="119" y="202" width="139" height="52"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="amble-logo" translatesAutoresizingMaskIntoConstraints="NO" id="Hnk-z6-sJB">
+                                <rect key="frame" x="67" y="305" width="240" height="56"/>
+                            </imageView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVC-NI-YMx" customClass="EntryButton" customModule="Amble" customModuleProvider="target">
+                                <rect key="frame" x="16" y="414" width="343" height="53"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="52" id="8UZ-Dw-WMm"/>
-                                    <constraint firstAttribute="width" constant="139" id="p2M-Oy-slf"/>
+                                    <constraint firstAttribute="height" constant="53" id="WsT-8T-zjE"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="23"/>
+                                <color key="tintColor" red="0.29803921570000003" green="0.64705882349999999" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Log In"/>
+                                <connections>
+                                    <segue destination="x3D-js-Adg" kind="show" id="Q7W-v9-0zb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.26274509800000001" green="0.56862745100000001" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="F2Z-86-sLI" firstAttribute="top" secondItem="qLD-0W-Ifq" secondAttribute="bottom" constant="138" id="CmP-gW-JVA"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="aVC-NI-YMx" secondAttribute="trailing" constant="-1" id="LZr-hA-sHt"/>
-                            <constraint firstItem="Iph-H5-hip" firstAttribute="top" secondItem="Bc1-rW-9Na" secondAttribute="bottom" constant="92" id="QHf-cp-chD"/>
-                            <constraint firstItem="Bc1-rW-9Na" firstAttribute="top" secondItem="aVC-NI-YMx" secondAttribute="bottom" constant="20" id="ak8-Vd-v2C"/>
-                            <constraint firstItem="F2Z-86-sLI" firstAttribute="centerX" secondItem="aVC-NI-YMx" secondAttribute="centerX" id="ble-T3-O9j"/>
+                            <constraint firstItem="Hnk-z6-sJB" firstAttribute="top" secondItem="qLD-0W-Ifq" secondAttribute="bottom" constant="241" id="BOv-tM-mHh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="aVC-NI-YMx" secondAttribute="trailing" id="LZr-hA-sHt"/>
+                            <constraint firstItem="aVC-NI-YMx" firstAttribute="top" secondItem="Hnk-z6-sJB" secondAttribute="bottom" constant="53" id="NdY-1o-cmX"/>
+                            <constraint firstItem="Iph-H5-hip" firstAttribute="top" secondItem="Bc1-rW-9Na" secondAttribute="bottom" constant="123" id="QHf-cp-chD"/>
+                            <constraint firstItem="Hnk-z6-sJB" firstAttribute="centerY" secondItem="Ia5-pO-x58" secondAttribute="centerY" id="UL0-rf-fpY"/>
+                            <constraint firstItem="Bc1-rW-9Na" firstAttribute="top" secondItem="aVC-NI-YMx" secondAttribute="bottom" constant="24" id="ak8-Vd-v2C"/>
                             <constraint firstItem="aVC-NI-YMx" firstAttribute="leading" secondItem="Bc1-rW-9Na" secondAttribute="leading" id="enj-fY-70G"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Hnk-z6-sJB" secondAttribute="trailing" constant="52" id="heX-2k-RZb"/>
                             <constraint firstItem="aVC-NI-YMx" firstAttribute="trailing" secondItem="Bc1-rW-9Na" secondAttribute="trailing" id="rnL-Qd-PQH"/>
-                            <constraint firstItem="aVC-NI-YMx" firstAttribute="leading" secondItem="Ia5-pO-x58" secondAttribute="leadingMargin" constant="1" id="wwq-QX-ljw"/>
+                            <constraint firstItem="Hnk-z6-sJB" firstAttribute="centerX" secondItem="Ia5-pO-x58" secondAttribute="centerX" id="wXC-8r-exT"/>
+                            <constraint firstItem="aVC-NI-YMx" firstAttribute="leading" secondItem="Ia5-pO-x58" secondAttribute="leadingMargin" id="wwq-QX-ljw"/>
+                            <constraint firstItem="Hnk-z6-sJB" firstAttribute="leading" secondItem="Ia5-pO-x58" secondAttribute="leadingMargin" constant="51" id="z9a-Rp-qmK"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xnG-zA-2NI"/>
+                    <connections>
+                        <outlet property="loginButton" destination="aVC-NI-YMx" id="Fsj-N7-IWj"/>
+                        <outlet property="logo" destination="Hnk-z6-sJB" id="4Aq-eE-f9O"/>
+                        <outlet property="registerButotn" destination="Bc1-rW-9Na" id="v3Q-x1-zuZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lxb-uu-Cjw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -430,4 +432,7 @@
             <point key="canvasLocation" x="-335.19999999999999" y="871.21439280359823"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="amble-logo" width="631" height="114"/>
+    </resources>
 </document>
