@@ -10,6 +10,7 @@
 		7204470B8051FCC5CEEE6459 /* Pods_AmbleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 348203B5C8EA213896DA5AAE /* Pods_AmbleUITests.framework */; };
 		88EE76DBC5696FC15D7E5495 /* Pods_AmbleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D237977E13A3EAC68F34EF6 /* Pods_AmbleTests.framework */; };
 		A7CE88F14F7B8B94A64D307B /* Pods_Amble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4CC062BD44A8FBFF103D039 /* Pods_Amble.framework */; };
+		AF2D9D8C1EA4149100EDCF53 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2D9D8B1EA4149100EDCF53 /* SettingsTableViewController.swift */; };
 		AF67D9231EA2516D003BE7CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF67D9211EA2516D003BE7CF /* LaunchScreen.storyboard */; };
 		AF67D9641EA2539F003BE7CF /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9601EA2539F003BE7CF /* APIManager.swift */; };
 		AF67D9651EA2539F003BE7CF /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9611EA2539F003BE7CF /* APIResponse.swift */; };
@@ -62,6 +63,7 @@
 		7C656D15E3813D1C0CE4DFF5 /* Pods-AmbleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AmbleUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AmbleUITests/Pods-AmbleUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		95B3FA09704FADAA09A0C0AE /* Pods-AmbleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AmbleUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AmbleUITests/Pods-AmbleUITests.release.xcconfig"; sourceTree = "<group>"; };
 		AC60661AA3809FEE8F7437A2 /* Pods-Amble.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Amble.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Amble/Pods-Amble.debug.xcconfig"; sourceTree = "<group>"; };
+		AF2D9D8B1EA4149100EDCF53 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		AF67D9151EA2516D003BE7CF /* Amble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Amble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF67D9221EA2516D003BE7CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF67D9291EA2516D003BE7CF /* AmbleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AmbleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,6 +155,7 @@
 				AF67D9761EA253C4003BE7CF /* Login */,
 				AF67D9681EA253A9003BE7CF /* FirstViewController.swift */,
 				AF67D9691EA253A9003BE7CF /* ProfileViewController.swift */,
+				AF2D9D8B1EA4149100EDCF53 /* SettingsTableViewController.swift */,
 				AF67D96A1EA253A9003BE7CF /* User.swift */,
 				AF67D9871EA254EB003BE7CF /* Main.storyboard */,
 				AF67D9211EA2516D003BE7CF /* LaunchScreen.storyboard */,
@@ -549,6 +552,7 @@
 				AF67D9821EA253C4003BE7CF /* RegisterViewController.swift in Sources */,
 				AF67D9651EA2539F003BE7CF /* APIResponse.swift in Sources */,
 				AF67D9741EA253B7003BE7CF /* UIButton+KeyboardAnimation.swift in Sources */,
+				AF2D9D8C1EA4149100EDCF53 /* SettingsTableViewController.swift in Sources */,
 				AF67D96E1EA253A9003BE7CF /* User.swift in Sources */,
 				AF67D9751EA253B7003BE7CF /* UIColor+Image.swift in Sources */,
 			);
