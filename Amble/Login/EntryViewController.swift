@@ -134,7 +134,7 @@ extension EntryViewController: UITableViewDataSource, UITableViewDelegate {
 extension EntryViewController: UIScrollViewDelegate {
   
   func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-    self.navigationController?.navigationBar.shadowImage = UIColor.flatWhite.generateImage()
+    self.navigationController?.navigationBar.shadowImage = nil
   }
   
   func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -230,7 +230,7 @@ extension EntryViewController {
       }
       
       let storyboard = UIStoryboard(name: "Main", bundle: nil)
-      let vc = storyboard.instantiateViewController(withIdentifier: "profileViewController")
+      let vc = storyboard.instantiateViewController(withIdentifier: "ProfileViewController")
       let navController = UINavigationController(rootViewController: vc)
       
       self.present(navController, animated: true, completion: nil)

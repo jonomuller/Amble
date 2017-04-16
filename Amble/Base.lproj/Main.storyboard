@@ -32,7 +32,7 @@
         <!--Profile View Controller-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
-                <viewController storyboardIdentifier="profileViewController" id="8rJ-Kc-sve" customClass="ProfileViewController" customModule="Amble" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileViewController" id="8rJ-Kc-sve" customClass="ProfileViewController" customModule="Amble" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="L7p-HK-0SC"/>
                         <viewControllerLayoutGuide type="bottom" id="Djb-ko-YwX"/>
@@ -67,7 +67,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DPz-t9-IvH" id="c9Z-dk-u1H">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -85,7 +85,7 @@
         <!--Initial View Controller-->
         <scene sceneID="mzK-LN-cDT">
             <objects>
-                <viewController storyboardIdentifier="initialViewController" id="95L-dV-X0L" customClass="InitialViewController" customModule="Amble" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InitialViewController" id="95L-dV-X0L" customClass="InitialViewController" customModule="Amble" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qLD-0W-Ifq"/>
                         <viewControllerLayoutGuide type="bottom" id="Iph-H5-hip"/>
