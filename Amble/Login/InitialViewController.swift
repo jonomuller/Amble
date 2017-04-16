@@ -25,6 +25,12 @@ class InitialViewController: UIViewController {
     animateLogo()
     self.setCustomBackButton(image: UIImage(named: "back-button"))
   }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    if self.navigationController?.navigationBar.shadowImage == nil {
+      self.navigationController?.navigationBar.shadowImage = UIImage()
+    }
+  }
 }
 
 // MARK: - Private helper functions

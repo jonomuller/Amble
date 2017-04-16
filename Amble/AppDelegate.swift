@@ -19,9 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let vcID: String!
     
     if Locksmith.loadDataForUserAccount(userAccount: "Amble") != nil {
-      vcID = "initialViewController"
+      vcID = "InitialViewController"
     } else {
-      vcID = "profileViewController"
+      vcID = "ProfileViewController"
     }
     
     let vc = storyboard.instantiateViewController(withIdentifier: vcID)
