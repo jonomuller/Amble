@@ -159,8 +159,8 @@
 				AF67D96A1EA253A9003BE7CF /* User.swift */,
 				AF67D9871EA254EB003BE7CF /* Main.storyboard */,
 				AF67D9211EA2516D003BE7CF /* LaunchScreen.storyboard */,
-				AFF37AA51EA2A09000D57E8D /* Assets.xcassets */,
 				AF67D9891EA25550003BE7CF /* Info.plist */,
+				AFF37AA51EA2A09000D57E8D /* Assets.xcassets */,
 			);
 			path = Amble;
 			sourceTree = "<group>";

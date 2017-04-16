@@ -18,10 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     let vcID: String!
     
+    // If user's details are in keychain, log them in
     if Locksmith.loadDataForUserAccount(userAccount: "Amble") != nil {
-      vcID = "InitialViewController"
-    } else {
       vcID = "ProfileViewController"
+    } else {
+      vcID = "InitialViewController"
     }
     
     let vc = storyboard.instantiateViewController(withIdentifier: vcID)

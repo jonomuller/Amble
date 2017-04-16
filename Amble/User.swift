@@ -14,10 +14,10 @@ struct User: ReadableSecureStorable, CreateableSecureStorable, DeleteableSecureS
   let username: String
   let jwt: String
   
-  let service: String = "Amble"
+  let service: String = Bundle.main.infoDictionary![String(kCFBundleIdentifierKey)] as? String ?? "Amble"
   
   var account: String {
-    return service
+    return "Amble"
   }
   
   var data: [String : Any] {
