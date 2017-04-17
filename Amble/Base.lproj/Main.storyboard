@@ -54,20 +54,20 @@
             </objects>
             <point key="canvasLocation" x="1688.8" y="1109.5952023988007"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Settings Table View Controller-->
         <scene sceneID="JtE-db-hQy">
             <objects>
-                <tableViewController id="cR5-R1-LdG" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="UFR-HI-fUk">
+                <tableViewController id="cR5-R1-LdG" customClass="SettingsTableViewController" customModule="Amble" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="UFR-HI-fUk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="DPz-t9-IvH">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingsCell" id="DPz-t9-IvH">
+                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DPz-t9-IvH" id="c9Z-dk-u1H">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -126,18 +126,16 @@
                         </subviews>
                         <color key="backgroundColor" red="0.26274509800000001" green="0.56862745100000001" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="Hnk-z6-sJB" firstAttribute="top" secondItem="qLD-0W-Ifq" secondAttribute="bottom" constant="241" id="BOv-tM-mHh"/>
+                            <constraint firstItem="aVC-NI-YMx" firstAttribute="top" secondItem="Hnk-z6-sJB" secondAttribute="bottom" constant="53" id="5Se-9C-THn"/>
                             <constraint firstAttribute="trailingMargin" secondItem="aVC-NI-YMx" secondAttribute="trailing" id="LZr-hA-sHt"/>
-                            <constraint firstItem="aVC-NI-YMx" firstAttribute="top" secondItem="Hnk-z6-sJB" secondAttribute="bottom" constant="53" id="NdY-1o-cmX"/>
                             <constraint firstItem="Iph-H5-hip" firstAttribute="top" secondItem="Bc1-rW-9Na" secondAttribute="bottom" constant="123" id="QHf-cp-chD"/>
-                            <constraint firstItem="Hnk-z6-sJB" firstAttribute="centerY" secondItem="Ia5-pO-x58" secondAttribute="centerY" id="UL0-rf-fpY"/>
                             <constraint firstItem="Bc1-rW-9Na" firstAttribute="top" secondItem="aVC-NI-YMx" secondAttribute="bottom" constant="24" id="ak8-Vd-v2C"/>
                             <constraint firstItem="aVC-NI-YMx" firstAttribute="leading" secondItem="Bc1-rW-9Na" secondAttribute="leading" id="enj-fY-70G"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Hnk-z6-sJB" secondAttribute="trailing" constant="52" id="heX-2k-RZb"/>
+                            <constraint firstItem="Hnk-z6-sJB" firstAttribute="centerX" secondItem="aVC-NI-YMx" secondAttribute="centerX" id="gdK-5o-Rpc"/>
                             <constraint firstItem="aVC-NI-YMx" firstAttribute="trailing" secondItem="Bc1-rW-9Na" secondAttribute="trailing" id="rnL-Qd-PQH"/>
-                            <constraint firstItem="Hnk-z6-sJB" firstAttribute="centerX" secondItem="Ia5-pO-x58" secondAttribute="centerX" id="wXC-8r-exT"/>
+                            <constraint firstItem="Hnk-z6-sJB" firstAttribute="leading" secondItem="Ia5-pO-x58" secondAttribute="leadingMargin" constant="51" id="tOQ-mC-XVo"/>
+                            <constraint firstItem="Hnk-z6-sJB" firstAttribute="centerY" secondItem="Ia5-pO-x58" secondAttribute="centerY" id="vYZ-3i-9kC"/>
                             <constraint firstItem="aVC-NI-YMx" firstAttribute="leading" secondItem="Ia5-pO-x58" secondAttribute="leadingMargin" id="wwq-QX-ljw"/>
-                            <constraint firstItem="Hnk-z6-sJB" firstAttribute="leading" secondItem="Ia5-pO-x58" secondAttribute="leadingMargin" constant="51" id="z9a-Rp-qmK"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xnG-zA-2NI"/>

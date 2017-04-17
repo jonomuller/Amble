@@ -89,7 +89,7 @@ extension EntryViewController: EntryView {
   }
 }
 
-// MARK: - Table view data source + delegate
+// MARK: - Table view data source
 
 extension EntryViewController: UITableViewDataSource, UITableViewDelegate {
   

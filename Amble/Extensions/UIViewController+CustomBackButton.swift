@@ -13,5 +13,6 @@ extension UIViewController {
     self.navigationController?.navigationBar.backIndicatorImage = image
     self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = image
     self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    self.navigationController?.navigationBar.tintColor = .white
   }
 }
