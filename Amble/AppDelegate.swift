@@ -15,19 +15,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    let vcID: String!
+    let storyboardID: String!
     
     // If user's details are in keychain, log them in
     if Locksmith.loadDataForUserAccount(userAccount: "Amble") != nil {
-      vcID = "ProfileViewController"
+      storyboardID = "Main"
     } else {
-      vcID = "InitialViewController"
+      storyboardID = "Login"
     }
     
-    let vc = storyboard.instantiateViewController(withIdentifier: vcID)
-    let navController = UINavigationController(rootViewController: vc)
-    self.window?.rootViewController = navController
+    let storyboard = UIStoryboard(name: storyboardID, bundle: nil)
+    self.window?.rootViewController = storyboard.instantiateInitialViewController()
     
     return true
   }

@@ -11,6 +11,8 @@
 		88EE76DBC5696FC15D7E5495 /* Pods_AmbleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D237977E13A3EAC68F34EF6 /* Pods_AmbleTests.framework */; };
 		A7CE88F14F7B8B94A64D307B /* Pods_Amble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4CC062BD44A8FBFF103D039 /* Pods_Amble.framework */; };
 		AF2D9D8C1EA4149100EDCF53 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2D9D8B1EA4149100EDCF53 /* SettingsTableViewController.swift */; };
+		AF2D9D8E1EA515B200EDCF53 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF2D9D8D1EA515B200EDCF53 /* Login.storyboard */; };
+		AF2D9D901EA517F300EDCF53 /* UIViewController+RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2D9D8F1EA517F300EDCF53 /* UIViewController+RootView.swift */; };
 		AF67D9231EA2516D003BE7CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF67D9211EA2516D003BE7CF /* LaunchScreen.storyboard */; };
 		AF67D9641EA2539F003BE7CF /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9601EA2539F003BE7CF /* APIManager.swift */; };
 		AF67D9651EA2539F003BE7CF /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9611EA2539F003BE7CF /* APIResponse.swift */; };
@@ -63,6 +65,8 @@
 		95B3FA09704FADAA09A0C0AE /* Pods-AmbleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AmbleUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AmbleUITests/Pods-AmbleUITests.release.xcconfig"; sourceTree = "<group>"; };
 		AC60661AA3809FEE8F7437A2 /* Pods-Amble.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Amble.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Amble/Pods-Amble.debug.xcconfig"; sourceTree = "<group>"; };
 		AF2D9D8B1EA4149100EDCF53 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		AF2D9D8D1EA515B200EDCF53 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		AF2D9D8F1EA517F300EDCF53 /* UIViewController+RootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+RootView.swift"; sourceTree = "<group>"; };
 		AF67D9151EA2516D003BE7CF /* Amble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Amble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF67D9221EA2516D003BE7CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF67D9291EA2516D003BE7CF /* AmbleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AmbleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,6 +161,7 @@
 				AF2D9D8B1EA4149100EDCF53 /* SettingsTableViewController.swift */,
 				AF67D96A1EA253A9003BE7CF /* User.swift */,
 				AF67D9871EA254EB003BE7CF /* Main.storyboard */,
+				AF2D9D8D1EA515B200EDCF53 /* Login.storyboard */,
 				AF67D9211EA2516D003BE7CF /* LaunchScreen.storyboard */,
 				AF67D9891EA25550003BE7CF /* Info.plist */,
 				AFF37AA51EA2A09000D57E8D /* Assets.xcassets */,
@@ -208,6 +213,7 @@
 				AF67D9721EA253B7003BE7CF /* UIColor+Image.swift */,
 				AF67D98B1EA2728A003BE7CF /* UINavigationController+Transparent.swift */,
 				AFF37AA91EA2D8BD00D57E8D /* UIViewController+CustomBackButton.swift */,
+				AF2D9D8F1EA517F300EDCF53 /* UIViewController+RootView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -369,6 +375,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF2D9D8E1EA515B200EDCF53 /* Login.storyboard in Resources */,
 				AF67D9881EA254EB003BE7CF /* Main.storyboard in Resources */,
 				AFF37AA61EA2A09000D57E8D /* Assets.xcassets in Resources */,
 				AF67D9231EA2516D003BE7CF /* LaunchScreen.storyboard in Resources */,
@@ -547,6 +554,7 @@
 				AF67D9641EA2539F003BE7CF /* APIManager.swift in Sources */,
 				AF67D9661EA2539F003BE7CF /* Router.swift in Sources */,
 				AF67D9731EA253B7003BE7CF /* UIButton+BackgroundColor.swift in Sources */,
+				AF2D9D901EA517F300EDCF53 /* UIViewController+RootView.swift in Sources */,
 				AF67D9821EA253C4003BE7CF /* RegisterViewController.swift in Sources */,
 				AF67D9651EA2539F003BE7CF /* APIResponse.swift in Sources */,
 				AF67D9741EA253B7003BE7CF /* UIButton+KeyboardAnimation.swift in Sources */,
