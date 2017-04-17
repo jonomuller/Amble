@@ -31,7 +31,6 @@
 		AF67D9841EA25483003BE7CF /* APIManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9831EA25483003BE7CF /* APIManagerTests.swift */; };
 		AF67D9861EA254AC003BE7CF /* AmbleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9851EA254AC003BE7CF /* AmbleUITests.swift */; };
 		AF67D9881EA254EB003BE7CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF67D9871EA254EB003BE7CF /* Main.storyboard */; };
-		AF67D98A1EA25550003BE7CF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF67D9891EA25550003BE7CF /* Info.plist */; };
 		AF67D98C1EA2728A003BE7CF /* UINavigationController+Transparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D98B1EA2728A003BE7CF /* UINavigationController+Transparent.swift */; };
 		AFF37AA61EA2A09000D57E8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFF37AA51EA2A09000D57E8D /* Assets.xcassets */; };
 		AFF37AAA1EA2D8BD00D57E8D /* UIViewController+CustomBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF37AA91EA2D8BD00D57E8D /* UIViewController+CustomBackButton.swift */; };
@@ -370,7 +369,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF67D98A1EA25550003BE7CF /* Info.plist in Resources */,
 				AF67D9881EA254EB003BE7CF /* Main.storyboard in Resources */,
 				AFF37AA61EA2A09000D57E8D /* Assets.xcassets in Resources */,
 				AF67D9231EA2516D003BE7CF /* LaunchScreen.storyboard in Resources */,

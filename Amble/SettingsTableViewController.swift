@@ -13,7 +13,7 @@ import Locksmith
 class SettingsTableViewController: UITableViewController {
   
   fileprivate let SETTINGS_CELL_IDENTIFIER = "settingsCell"
-  fileprivate let sections = [["Log out"]]
+  fileprivate let sections = [["Log Out"]]
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -39,6 +39,10 @@ extension SettingsTableViewController {
     
     cell.textLabel?.text = sections[indexPath.section][indexPath.row]
     
+    if indexPath.section == sections.count - 1 {
+      cell.textLabel?.textColor = .red
+    }
+    
     return cell
   }
 }
@@ -47,9 +51,8 @@ extension SettingsTableViewController {
 
 extension SettingsTableViewController {
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let section = sections[indexPath.section]
     
-    if section[indexPath.row] == "Log out" {
+    if indexPath.section == sections.count - 1 {
       displayLogoutAlert()
     }
   }
@@ -62,13 +65,13 @@ extension SettingsTableViewController {
   func displayLogoutAlert() {
     let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     
-    alert.addAction(UIAlertAction(title: "Log out", style: .destructive, handler: { (action) in
+    alert.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { (action) in
       self.logout()
     }))
     
     alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
       if let indexPath = self.tableView.indexPathForSelectedRow {
-        self.tableView.deselectRow(at: indexPath, animated: true)
+        self.tableView.deselectRow(at: indexPath, animated: false)
       }
     }))
     
