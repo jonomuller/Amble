@@ -9,25 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Walks-->
-        <scene sceneID="hNz-n2-bh7">
-            <objects>
-                <viewController id="9pv-A4-QxB" customClass="FirstViewController" customModule="Amble" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
-                        <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Walks" id="acW-dT-cKf"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1690" y="-372"/>
-        </scene>
         <!--Profile View Controller-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
@@ -51,7 +32,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2714" y="1110"/>
+            <point key="canvasLocation" x="2676" y="800"/>
         </scene>
         <!--Settings Table View Controller-->
         <scene sceneID="JtE-db-hQy">
@@ -79,7 +60,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UOo-im-9aV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3724" y="1110"/>
+            <point key="canvasLocation" x="3678" y="799"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -93,7 +74,6 @@
                     </tabBar>
                     <connections>
                         <segue destination="yuE-vw-iTF" kind="relationship" relationship="viewControllers" id="DA9-Uu-cQs"/>
-                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="Y0U-XG-ZO6" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                     </connections>
                 </tabBarController>
@@ -101,7 +81,7 @@
             </objects>
             <point key="canvasLocation" x="750" y="355"/>
         </scene>
-        <!--Track Walk View Controller-->
+        <!--Track Walk-->
         <scene sceneID="5t2-k2-Zts">
             <objects>
                 <viewController id="kKb-6N-S5f" customClass="TrackWalkViewController" customModule="Amble" customModuleProvider="target" sceneMemberID="viewController">
@@ -115,6 +95,9 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="eME-c0-KKd">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <connections>
+                                    <outlet property="delegate" destination="kKb-6N-S5f" id="Dcs-mp-NHD"/>
+                                </connections>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -125,11 +108,14 @@
                             <constraint firstAttribute="trailing" secondItem="eME-c0-KKd" secondAttribute="trailing" id="hJy-cO-0ek"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Jip-er-vK2"/>
+                    <navigationItem key="navigationItem" title="Track Walk" id="Jip-er-vK2"/>
+                    <connections>
+                        <outlet property="mapView" destination="eME-c0-KKd" id="sXj-ad-ygO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W3X-Ct-AKS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2629.5999999999999" y="354.87256371814095"/>
+            <point key="canvasLocation" x="2630" y="-188"/>
         </scene>
         <!--Profile-->
         <scene sceneID="WnN-fK-dUX">
@@ -148,7 +134,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jf7-8t-dCS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1690" y="1110"/>
+            <point key="canvasLocation" x="1732" y="801"/>
         </scene>
         <!--Track-->
         <scene sceneID="N68-8b-uuj">
@@ -167,7 +153,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Alu-rT-4VH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1690.4000000000001" y="354.87256371814095"/>
+            <point key="canvasLocation" x="1732" y="-188"/>
         </scene>
     </scenes>
 </document>
