@@ -60,7 +60,7 @@ extension SettingsTableViewController {
 
 // MARK: - Private helper methods
 
-extension SettingsTableViewController {
+private extension SettingsTableViewController {
   
   func displayLogoutAlert() {
     let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)

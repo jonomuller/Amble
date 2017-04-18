@@ -92,8 +92,8 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
+                        <segue destination="yuE-vw-iTF" kind="relationship" relationship="viewControllers" id="DA9-Uu-cQs"/>
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
-                        <segue destination="kKb-6N-S5f" kind="relationship" relationship="viewControllers" id="DA9-Uu-cQs"/>
                         <segue destination="Y0U-XG-ZO6" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                     </connections>
                 </tabBarController>
@@ -101,10 +101,10 @@
             </objects>
             <point key="canvasLocation" x="750" y="355"/>
         </scene>
-        <!--Track-->
+        <!--Track Walk View Controller-->
         <scene sceneID="5t2-k2-Zts">
             <objects>
-                <viewController id="kKb-6N-S5f" sceneMemberID="viewController">
+                <viewController id="kKb-6N-S5f" customClass="TrackWalkViewController" customModule="Amble" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VzG-aA-QuK"/>
                         <viewControllerLayoutGuide type="bottom" id="D7a-aZ-Cfl"/>
@@ -112,13 +112,24 @@
                     <view key="view" contentMode="scaleToFill" id="uJn-8B-g8C">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="eME-c0-KKd">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="eME-c0-KKd" firstAttribute="top" secondItem="uJn-8B-g8C" secondAttribute="top" id="37R-S3-WZO"/>
+                            <constraint firstAttribute="bottom" secondItem="eME-c0-KKd" secondAttribute="bottom" id="91T-RN-j9m"/>
+                            <constraint firstItem="eME-c0-KKd" firstAttribute="leading" secondItem="uJn-8B-g8C" secondAttribute="leading" id="Rlj-JM-lOu"/>
+                            <constraint firstAttribute="trailing" secondItem="eME-c0-KKd" secondAttribute="trailing" id="hJy-cO-0ek"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Track" id="jkK-ha-OUO"/>
+                    <navigationItem key="navigationItem" id="Jip-er-vK2"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W3X-Ct-AKS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1690.4000000000001" y="354.87256371814095"/>
+            <point key="canvasLocation" x="2629.5999999999999" y="354.87256371814095"/>
         </scene>
         <!--Profile-->
         <scene sceneID="WnN-fK-dUX">
@@ -138,6 +149,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jf7-8t-dCS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1690" y="1110"/>
+        </scene>
+        <!--Track-->
+        <scene sceneID="N68-8b-uuj">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yuE-vw-iTF" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Track" id="jkK-ha-OUO"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="H6P-Vq-V7Q">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="kKb-6N-S5f" kind="relationship" relationship="rootViewController" id="NQy-vM-S3q"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Alu-rT-4VH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1690.4000000000001" y="354.87256371814095"/>
         </scene>
     </scenes>
 </document>
