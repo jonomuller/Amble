@@ -31,6 +31,8 @@ class TrackWalkViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    self.navigationController?.hidesNavigationBarHairline = true
+    
     let locationButton = MKUserTrackingBarButtonItem(mapView:self.mapView)
     self.navigationItem.leftBarButtonItem = locationButton
     
