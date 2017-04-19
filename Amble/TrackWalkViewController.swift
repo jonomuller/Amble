@@ -26,13 +26,22 @@ class TrackWalkViewController: UIViewController {
     locationManager.activityType = .fitness
     locationManager.desiredAccuracy = kCLLocationAccuracyBest
     
+    // Sets background location tracking
+    // Note: should be set when user starts tracking a walk instead of viewDidLoad()
+    // Note: need to add a user preference for this in the future
+    locationManager.allowsBackgroundLocationUpdates = true
+    
     requestLocation()
   }
   
   override func viewDidAppear(_ animated: Bool) {
-    if CLLocationManager.authorizationStatus() == .authorizedAlways {
+    if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
       startTracking()
     }
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    locationManager.stopUpdatingLocation()
   }
 }
 
@@ -41,8 +50,10 @@ class TrackWalkViewController: UIViewController {
 extension TrackWalkViewController: CLLocationManagerDelegate {
   
   func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-    if status == .authorizedAlways {
+    if status == .authorizedWhenInUse {
       startTracking()
+    } else if status == .denied {
+      print("Denied")
     }
   }
   
@@ -76,11 +87,10 @@ private extension TrackWalkViewController {
     
     // Request user's location, if permission is denied then display error
     if status == .notDetermined {
-      locationManager.requestAlwaysAuthorization()
+      locationManager.requestWhenInUseAuthorization()
     } else if status == .denied {
       displayLocationError()
     }
-    
   }
   
   func startTracking() {
