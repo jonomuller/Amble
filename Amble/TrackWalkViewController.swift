@@ -21,12 +21,12 @@ class TrackWalkViewController: UIViewController {
   fileprivate let TIME_INTERVAL = 1.0
   
   fileprivate var locationManager: CLLocationManager!
+  fileprivate var locations: [CLLocation] = []
   fileprivate var timer = Timer()
   fileprivate var walkStarted = false
   fileprivate var time = 0
   fileprivate var distance = 0.0
   fileprivate var calories = 0.0
-  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -78,7 +78,13 @@ extension TrackWalkViewController: CLLocationManagerDelegate {
   }
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    print(locations[0].coordinate)
+    for location in locations {
+      if self.locations.count > 0 {
+        distance += location.distance(from: self.locations.last!)
+      }
+      
+      self.locations.append(location)
+    }
   }
 }
 
@@ -149,6 +155,7 @@ extension TrackWalkViewController {
     }
     
     timeLabel.text = timeText
+    distanceLabel.text = String(format: "%.2f", distance / 1000.0)
   }
 }
 
