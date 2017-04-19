@@ -60,7 +60,7 @@ extension SettingsTableViewController {
 
 // MARK: - Private helper methods
 
-extension SettingsTableViewController {
+private extension SettingsTableViewController {
   
   func displayLogoutAlert() {
     let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -87,9 +87,6 @@ extension SettingsTableViewController {
     }
     
     // Return to initial view controller
-    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    let vc = storyboard.instantiateViewController(withIdentifier: "InitialViewController")
-    let navController = UINavigationController(rootViewController: vc)
-    self.present(navController, animated: true, completion: nil)
+    self.setRootView(to: "Login")
   }
 }

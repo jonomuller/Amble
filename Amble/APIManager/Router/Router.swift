@@ -11,7 +11,7 @@ import Alamofire
 
 enum Router: URLRequestConvertible {
   
-  static let baseURLPath = "http://amble-api.herokuapp.com/api"
+  static let baseURLPath = "http://ambleapp.herokuapp.com/api"
   
   case login(details: Parameters)
   case register(details: Parameters)

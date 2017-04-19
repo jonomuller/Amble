@@ -229,11 +229,8 @@ extension EntryViewController {
         print("Error saving to keychain: \(error)")
       }
       
-      let storyboard = UIStoryboard(name: "Main", bundle: nil)
-      let vc = storyboard.instantiateViewController(withIdentifier: "ProfileViewController")
-      let navController = UINavigationController(rootViewController: vc)
-      
-      self.present(navController, animated: true, completion: nil)
+      // Go to logged in view
+      self.setRootView(to: "Main")
     case .failure(let error):
       let alertView = UIAlertController(title: error.localizedDescription, message: error.localizedFailureReason, preferredStyle: .alert)
       alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
