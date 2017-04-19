@@ -13,9 +13,20 @@ import CoreLocation
 class TrackWalkViewController: UIViewController {
   
   @IBOutlet var mapView: MKMapView!
-  fileprivate var locationManager: CLLocationManager!
+  @IBOutlet var statsView: UIView!
+  @IBOutlet var timeLabel: UILabel!
+  @IBOutlet var distanceLabel: UILabel!
+  @IBOutlet var calorieLabel: UILabel!
   
-  fileprivate var walkStarted: Bool = false
+  fileprivate let TIME_INTERVAL = 1.0
+  
+  fileprivate var locationManager: CLLocationManager!
+  fileprivate var timer = Timer()
+  fileprivate var walkStarted = false
+  fileprivate var time = 0
+  fileprivate var distance = 0.0
+  fileprivate var calories = 0.0
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -106,9 +117,32 @@ extension TrackWalkViewController {
       // Sets background location tracking
       // Note: need to add a user preference for this in the future
       locationManager.allowsBackgroundLocationUpdates = true
+      
+      time = 0
+      distance = 0.0
+      calories = 0.0
+      timer = Timer.scheduledTimer(timeInterval: TIME_INTERVAL,
+                                   target: self,
+                                   selector: #selector(timerTick),
+                                   userInfo: nil,
+                                   repeats: true)
     }
     
     walkStarted = !walkStarted
+  }
+  
+  func timerTick() {
+    time += 1
+    let hours = time / 3600
+    let minutes = (time / 60) % 60
+    let seconds = time % 60
+    var timeText = String(format: "%02i:%02i", minutes, seconds)
+    
+    if hours > 0 {
+      timeText = String(format: "%02i:", hours) + timeText
+    }
+    
+    timeLabel.text = timeText
   }
 }
 
