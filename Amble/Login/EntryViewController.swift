@@ -185,7 +185,6 @@ extension EntryViewController: UITextFieldDelegate {
 extension EntryViewController {
   
   @IBAction func entryButtonPressed(_ sender: Any) {
-    self.view.endEditing(true)
     entryButton.collapse() { (success) in
       self.entryButtonPressed(details: self.getDataFromCells())
     }
