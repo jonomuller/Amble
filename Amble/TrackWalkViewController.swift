@@ -111,6 +111,8 @@ extension TrackWalkViewController {
       
       self.navigationItem.rightBarButtonItem?.title = "Start"
       locationManager.allowsBackgroundLocationUpdates = false
+      transformStatsView(transform: .identity)
+      timer.invalidate()
     } else {
       // Start walk
       
@@ -120,9 +122,11 @@ extension TrackWalkViewController {
       // Note: need to add a user preference for this in the future
       locationManager.allowsBackgroundLocationUpdates = true
       
+      transformStatsView(transform: CGAffineTransform(translationX: 0, y: statsView.frame.height))
       time = 0
       distance = 0.0
       calories = 0.0
+      timeLabel.text = "00:00"
       timer = Timer.scheduledTimer(timeInterval: TIME_INTERVAL,
                                    target: self,
                                    selector: #selector(timerTick),
@@ -172,5 +176,11 @@ private extension TrackWalkViewController {
     locationManager.startUpdatingLocation()
     mapView.showsUserLocation = true
     mapView.userTrackingMode = .follow
+  }
+  
+  func transformStatsView(transform: CGAffineTransform) {
+    UIView.animate(withDuration: 0.3) { 
+      self.statsView.transform = transform
+    }
   }
 }
