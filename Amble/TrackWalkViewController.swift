@@ -31,21 +31,7 @@ class TrackWalkViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    let line = UIView(frame: CGRect(x: statsView.frame.width / 3 - 1,
-                                    y: 12.5,
-                                    width: 1,
-                                    height: statsView.frame.height - 25))
-    
-    let line2 = UIView(frame: CGRect(x: 2 * statsView.frame.width / 3 - 1,
-                                    y: 12.5,
-                                    width: 1,
-                                    height: statsView.frame.height - 25))
-    
-    line.backgroundColor = .white
-    line2.backgroundColor = .white
-    statsView.addSubview(line)
-    statsView.addSubview(line2)
-    
+    self.setSeparatorLinesInStatsView(width: 1.0)
     distanceLabel.attributedText = self.getDistanceLabel(distance: 0)
     
     self.navigationController?.hidesNavigationBarHairline = true
@@ -216,5 +202,20 @@ private extension TrackWalkViewController {
     distanceText.addAttributes(attributes, range: range)
     
     return distanceText
+  }
+  
+  func setSeparatorLinesInStatsView(width: CGFloat) {
+    let viewWidth = statsView.frame.width
+    var xPos = viewWidth / 3
+    let yPos: CGFloat = 12.5
+    while xPos < viewWidth {
+      let line = UIView(frame: CGRect(x: xPos - width / 2,
+                                      y: yPos,
+                                      width: width,
+                                      height: statsView.frame.height - yPos * 2))
+      line.backgroundColor = .white
+      statsView.addSubview(line)
+      xPos += xPos
+    }
   }
 }
