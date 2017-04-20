@@ -6,12 +6,14 @@
 //  Copyright © 2017 Jonathan Muller. All rights reserved.
 //
 
-import XCTest
+import Quick
+import Nimble
 import SwiftyJSON
 import Mockingjay
+
 @testable import Amble
 
-class APIManagerTests: XCTestCase {
+class APIManagerTests: QuickSpec {
   
   struct TestUser {
     var username: String

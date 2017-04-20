@@ -11,7 +11,9 @@ PODS:
     - URITemplate (~> 2.0)
   - Mockingjay/XCTest (2.0.0):
     - Mockingjay/Core
+  - Nimble (6.1.0)
   - NVActivityIndicatorView (3.6.0)
+  - Quick (1.1.0)
   - SwiftyJSON (3.1.4)
   - URITemplate (2.0.1)
 
@@ -20,7 +22,9 @@ DEPENDENCIES:
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
   - Locksmith
   - Mockingjay
+  - Nimble
   - NVActivityIndicatorView
+  - Quick
   - SwiftyJSON
 
 EXTERNAL SOURCES:
@@ -37,10 +41,12 @@ SPEC CHECKSUMS:
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Locksmith: 310b4cc5031af5728bf4db5d4de547a5100c6a3b
   Mockingjay: 7122a3fc0597aa63438e4cd9b71b7bc8aac05b87
+  Nimble: c53e6903fee94041b90ded74f135820437d8bf59
   NVActivityIndicatorView: c7c1c4300b418bd9ed06459e78d4df859ddbe31f
+  Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   URITemplate: 720b8a56a281494d7c2d31ee33183986eaed2c67
 
-PODFILE CHECKSUM: 20f9c03f8abf549e2cfb9387b9a145984d1e8b04
+PODFILE CHECKSUM: 91d02a3fffdb133c119838e151fac425a8254572
 
 COCOAPODS: 1.2.1
