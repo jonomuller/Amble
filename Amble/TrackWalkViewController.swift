@@ -31,6 +31,23 @@ class TrackWalkViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    let line = UIView(frame: CGRect(x: statsView.frame.width / 3 - 1,
+                                    y: 12.5,
+                                    width: 1,
+                                    height: statsView.frame.height - 25))
+    
+    let line2 = UIView(frame: CGRect(x: 2 * statsView.frame.width / 3 - 1,
+                                    y: 12.5,
+                                    width: 1,
+                                    height: statsView.frame.height - 25))
+    
+    line.backgroundColor = .white
+    line2.backgroundColor = .white
+    statsView.addSubview(line)
+    statsView.addSubview(line2)
+    
+    distanceLabel.attributedText = self.getDistanceLabel(distance: 0)
+    
     self.navigationController?.hidesNavigationBarHairline = true
     
     let locationButton = MKUserTrackingBarButtonItem(mapView:self.mapView)
@@ -155,7 +172,7 @@ extension TrackWalkViewController {
     }
     
     timeLabel.text = timeText
-    distanceLabel.text = String(format: "%.2f", distance / 1000.0)
+    distanceLabel.attributedText = self.getDistanceLabel(distance: distance)
   }
 }
 
@@ -189,5 +206,15 @@ private extension TrackWalkViewController {
     UIView.animate(withDuration: 0.3) { 
       self.statsView.transform = transform
     }
+  }
+  
+  func getDistanceLabel(distance: Double) -> NSAttributedString {
+    let distanceString = String(format: "%.2f km", distance / 1000.0)
+    let attributes = [NSFontAttributeName: UIFont(name: "Avenir-Black", size: 16) as Any]
+    let range = NSString(string: distanceString).range(of: " km")
+    let distanceText = NSMutableAttributedString(string: distanceString)
+    distanceText.addAttributes(attributes, range: range)
+    
+    return distanceText
   }
 }
