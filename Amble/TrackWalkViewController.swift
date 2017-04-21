@@ -101,7 +101,7 @@ extension TrackWalkViewController: CLLocationManagerDelegate {
         // Increment total distance value
         distance += location.distance(from: self.locations.last!)
       } else {
-        self.dropPin(location: location, name: "Start")
+        self.dropPin(location: location, name: "start")
       }
       
       self.locations.append(location)
@@ -133,6 +133,22 @@ extension TrackWalkViewController: MKMapViewDelegate {
     
     return MKPolylineRenderer()
   }
+  
+  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+    if let pin = annotation as? WalkPin {
+      let pinID = "pin"
+      if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: pinID) {
+        annotationView.annotation = annotation
+        return annotationView
+      } else {
+        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: pinID)
+        annotationView.image = UIImage(named: pin.imageName)
+        return annotationView
+      }
+    }
+    
+    return nil
+  }
 }
 
 // MARK: - Button methods
@@ -149,7 +165,7 @@ extension TrackWalkViewController {
       // Stop walk
       
       if let location = self.locations.last {
-        self.dropPin(location: location, name: "End")
+        self.dropPin(location: location, name: "finish")
       }
       
       self.navigationItem.rightBarButtonItem?.title = "Start"
@@ -255,9 +271,8 @@ private extension TrackWalkViewController {
   }
   
   func dropPin(location: CLLocation, name: String) {
-    let annotation = MKPointAnnotation()
-    annotation.coordinate = location.coordinate
-    annotation.title = name
-    mapView.addAnnotation(annotation)
+    let pin = WalkPin(type: name)
+    pin.coordinate = location.coordinate
+    mapView.addAnnotation(pin)
   }
 }
