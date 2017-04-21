@@ -82,6 +82,11 @@ extension TrackWalkViewController: CLLocationManagerDelegate {
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     for location in locations {
+      // Ignore location if it is not accurate to 10 metres
+      if location.horizontalAccuracy < 0 || location.horizontalAccuracy > 10 {
+        return
+      }
+      
       if self.locations.count > 0 {
         distance += location.distance(from: self.locations.last!)
       }
