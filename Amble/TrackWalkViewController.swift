@@ -219,6 +219,7 @@ private extension TrackWalkViewController {
   func transformStatsView(transform: CGAffineTransform) {
     UIView.animate(withDuration: 0.3) { 
       self.statsView.transform = transform
+      self.mapView.layoutMargins = UIEdgeInsets(top: transform.ty, left: 0, bottom: 0, right: 0)
     }
   }
   
