@@ -32,7 +32,7 @@
 		AF67D9801EA253C4003BE7CF /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D97A1EA253C4003BE7CF /* InitialViewController.swift */; };
 		AF67D9811EA253C4003BE7CF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D97B1EA253C4003BE7CF /* LoginViewController.swift */; };
 		AF67D9821EA253C4003BE7CF /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D97C1EA253C4003BE7CF /* RegisterViewController.swift */; };
-		AF67D9841EA25483003BE7CF /* APIManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9831EA25483003BE7CF /* APIManagerTests.swift */; };
+		AF67D9841EA25483003BE7CF /* APIManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9831EA25483003BE7CF /* APIManagerSpec.swift */; };
 		AF67D9861EA254AC003BE7CF /* AmbleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9851EA254AC003BE7CF /* AmbleUITests.swift */; };
 		AF67D9881EA254EB003BE7CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF67D9871EA254EB003BE7CF /* Main.storyboard */; };
 		AF67D98C1EA2728A003BE7CF /* UINavigationController+Transparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D98B1EA2728A003BE7CF /* UINavigationController+Transparent.swift */; };
@@ -93,7 +93,7 @@
 		AF67D97A1EA253C4003BE7CF /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		AF67D97B1EA253C4003BE7CF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AF67D97C1EA253C4003BE7CF /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
-		AF67D9831EA25483003BE7CF /* APIManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManagerTests.swift; sourceTree = "<group>"; };
+		AF67D9831EA25483003BE7CF /* APIManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManagerSpec.swift; sourceTree = "<group>"; };
 		AF67D9851EA254AC003BE7CF /* AmbleUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbleUITests.swift; sourceTree = "<group>"; };
 		AF67D9871EA254EB003BE7CF /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AF67D9891EA25550003BE7CF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -178,7 +178,7 @@
 		AF67D92C1EA2516D003BE7CF /* AmbleTests */ = {
 			isa = PBXGroup;
 			children = (
-				AF67D9831EA25483003BE7CF /* APIManagerTests.swift */,
+				AF67D9831EA25483003BE7CF /* APIManagerSpec.swift */,
 				AF67D92F1EA2516D003BE7CF /* Info.plist */,
 			);
 			path = AmbleTests;
@@ -584,7 +584,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF67D9841EA25483003BE7CF /* APIManagerTests.swift in Sources */,
+				AF67D9841EA25483003BE7CF /* APIManagerSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -723,6 +723,7 @@
 			baseConfigurationReference = AC60661AA3809FEE8F7437A2 /* Pods-Amble.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = QJQGH9NF7F;
 				INFOPLIST_FILE = Amble/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -737,6 +738,7 @@
 			baseConfigurationReference = 776B27DE5882A78F23E64C23 /* Pods-Amble.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = QJQGH9NF7F;
 				INFOPLIST_FILE = Amble/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

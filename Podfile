@@ -14,6 +14,8 @@ target 'Amble' do
     inherit! :search_paths
     # Pods for testing
     pod 'Mockingjay'
+    pod 'Quick'
+    pod 'Nimble'
   end
   
   target 'AmbleUITests' do
