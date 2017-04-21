@@ -81,6 +81,11 @@ extension TrackWalkViewController: CLLocationManagerDelegate {
   }
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    // We do not need to update locations if the walk has not started
+    if !walkStarted {
+      return
+    }
+    
     for location in locations {
       // Ignore location if it is not accurate to 10 metres
       if location.horizontalAccuracy < 0 || location.horizontalAccuracy > 10 {
@@ -88,6 +93,12 @@ extension TrackWalkViewController: CLLocationManagerDelegate {
       }
       
       if self.locations.count > 0 {
+        // Draw line on map as the user moves
+        let points = [self.locations.last!.coordinate, location.coordinate]
+        let polyLine = MKPolyline(coordinates: points, count: points.count)
+        mapView.add(polyLine)
+        
+        // Increment total distance value
         distance += location.distance(from: self.locations.last!)
       }
       
@@ -99,6 +110,7 @@ extension TrackWalkViewController: CLLocationManagerDelegate {
 // MARK: - Map view delegate
 
 extension TrackWalkViewController: MKMapViewDelegate {
+  
   func mapView(_ mapView: MKMapView, didChange mode: MKUserTrackingMode, animated: Bool) {
     if CLLocationManager.authorizationStatus() == .denied {
       mapView.userTrackingMode = .none
@@ -107,6 +119,17 @@ extension TrackWalkViewController: MKMapViewDelegate {
         self.displayLocationError()
       }
     }
+  }
+  
+  func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+    if overlay is MKPolyline {
+      let polyLineRenderer = MKPolylineRenderer(overlay: overlay)
+      polyLineRenderer.strokeColor = .flatForestGreen
+      polyLineRenderer.lineWidth = 5
+      return polyLineRenderer
+    }
+    
+    return MKPolylineRenderer()
   }
 }
 
