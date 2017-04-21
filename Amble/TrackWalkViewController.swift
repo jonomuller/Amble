@@ -100,6 +100,8 @@ extension TrackWalkViewController: CLLocationManagerDelegate {
         
         // Increment total distance value
         distance += location.distance(from: self.locations.last!)
+      } else {
+        self.dropPin(location: location, name: "Start")
       }
       
       self.locations.append(location)
@@ -145,6 +147,10 @@ extension TrackWalkViewController {
     
     if walkStarted {
       // Stop walk
+      
+      if let location = self.locations.last {
+        self.dropPin(location: location, name: "End")
+      }
       
       self.navigationItem.rightBarButtonItem?.title = "Start"
       locationManager.allowsBackgroundLocationUpdates = false
@@ -217,7 +223,7 @@ private extension TrackWalkViewController {
   }
   
   func transformStatsView(transform: CGAffineTransform) {
-    UIView.animate(withDuration: 0.3) { 
+    UIView.animate(withDuration: 0.3) {
       self.statsView.transform = transform
       self.mapView.layoutMargins = UIEdgeInsets(top: transform.ty, left: 0, bottom: 0, right: 0)
     }
@@ -246,5 +252,12 @@ private extension TrackWalkViewController {
       statsView.addSubview(line)
       xPos += xPos
     }
+  }
+  
+  func dropPin(location: CLLocation, name: String) {
+    let annotation = MKPointAnnotation()
+    annotation.coordinate = location.coordinate
+    annotation.title = name
+    mapView.addAnnotation(annotation)
   }
 }
