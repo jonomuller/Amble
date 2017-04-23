@@ -220,7 +220,13 @@ extension EntryViewController {
     
     switch response {
     case .success(let json):
-      let user = User(username: (json["user"].stringValue), jwt: json["jwt"].stringValue)
+      let userJSON = json["user"]
+      let user = User(id: userJSON["id"].stringValue,
+                      username: userJSON["username"].stringValue,
+                      email: userJSON["email"].stringValue,
+                      firstName: userJSON["firstName"].stringValue,
+                      lastName: userJSON["lastName"].stringValue,
+                      jwt: json["jwt"].stringValue)
       
       // Save user data to keychain
       do {

@@ -11,7 +11,11 @@ import Locksmith
 
 struct User: ReadableSecureStorable, CreateableSecureStorable, DeleteableSecureStorable, GenericPasswordSecureStorable {
   
+  let id: String
   let username: String
+  let email: String
+  let firstName: String
+  let lastName: String
   let jwt: String
   
   let service: String = Bundle.main.infoDictionary![String(kCFBundleIdentifierKey)] as? String ?? "Amble"
@@ -21,7 +25,11 @@ struct User: ReadableSecureStorable, CreateableSecureStorable, DeleteableSecureS
   }
   
   var data: [String : Any] {
-    return ["username": username,
+    return ["id": id,
+            "username": username,
+            "email": email,
+            "firstName": firstName,
+            "lastName": lastName,
             "jwt": jwt]
   }
 }
