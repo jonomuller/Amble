@@ -10,13 +10,9 @@ import MapKit
 
 class WalkPin: MKPointAnnotation {
   
-  let type: String
   let imageName: String
   
   init(type: String) {
-    self.type = type
     self.imageName = type + "_pin"
   }
-  
-  
 }
