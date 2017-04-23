@@ -13,12 +13,28 @@ import CoreLocation
 class TrackWalkViewController: UIViewController {
   
   @IBOutlet var mapView: MKMapView!
-  fileprivate var locationManager: CLLocationManager!
+  @IBOutlet var statsView: UIView!
+  @IBOutlet var timeLabel: UILabel!
+  @IBOutlet var distanceLabel: UILabel!
+  @IBOutlet var calorieLabel: UILabel!
   
-  fileprivate var walkStarted: Bool = false
+  fileprivate let TIME_INTERVAL = 1.0
+  
+  fileprivate var locationManager: CLLocationManager!
+  fileprivate var locations: [CLLocation] = []
+  fileprivate var timer = Timer()
+  fileprivate var walkStarted = false
+  fileprivate var time = 0
+  fileprivate var distance = 0.0
+  fileprivate var calories = 0.0
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    self.setSeparatorLinesInStatsView(width: 1.0)
+    distanceLabel.attributedText = self.getDistanceLabel(distance: 0)
+    
+    self.navigationController?.hidesNavigationBarHairline = true
     
     let locationButton = MKUserTrackingBarButtonItem(mapView:self.mapView)
     self.navigationItem.leftBarButtonItem = locationButton
@@ -65,13 +81,38 @@ extension TrackWalkViewController: CLLocationManagerDelegate {
   }
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    print(locations[0].coordinate)
+    // We do not need to update locations if the walk has not started
+    if !walkStarted {
+      return
+    }
+    
+    for location in locations {
+      // Ignore location if it is not accurate to 10 metres
+      if location.horizontalAccuracy < 0 || location.horizontalAccuracy > 10 {
+        return
+      }
+      
+      if self.locations.count > 0 {
+        // Draw line on map as the user moves
+        let points = [self.locations.last!.coordinate, location.coordinate]
+        let polyLine = MKPolyline(coordinates: points, count: points.count)
+        mapView.add(polyLine)
+        
+        // Increment total distance value
+        distance += location.distance(from: self.locations.last!)
+      } else {
+        self.dropPin(location: location, name: "start")
+      }
+      
+      self.locations.append(location)
+    }
   }
 }
 
 // MARK: - Map view delegate
 
 extension TrackWalkViewController: MKMapViewDelegate {
+  
   func mapView(_ mapView: MKMapView, didChange mode: MKUserTrackingMode, animated: Bool) {
     if CLLocationManager.authorizationStatus() == .denied {
       mapView.userTrackingMode = .none
@@ -80,6 +121,33 @@ extension TrackWalkViewController: MKMapViewDelegate {
         self.displayLocationError()
       }
     }
+  }
+  
+  func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+    if overlay is MKPolyline {
+      let polyLineRenderer = MKPolylineRenderer(overlay: overlay)
+      polyLineRenderer.strokeColor = .flatForestGreen
+      polyLineRenderer.lineWidth = 5
+      return polyLineRenderer
+    }
+    
+    return MKPolylineRenderer()
+  }
+  
+  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+    if let pin = annotation as? WalkPin {
+      let pinID = "pin"
+      if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: pinID) {
+        annotationView.annotation = annotation
+        return annotationView
+      } else {
+        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: pinID)
+        annotationView.image = UIImage(named: pin.imageName)
+        return annotationView
+      }
+    }
+    
+    return nil
   }
 }
 
@@ -96,8 +164,14 @@ extension TrackWalkViewController {
     if walkStarted {
       // Stop walk
       
+      if let location = self.locations.last {
+        self.dropPin(location: location, name: "finish")
+      }
+      
       self.navigationItem.rightBarButtonItem?.title = "Start"
       locationManager.allowsBackgroundLocationUpdates = false
+      transformStatsView(transform: .identity)
+      timer.invalidate()
     } else {
       // Start walk
       
@@ -106,9 +180,35 @@ extension TrackWalkViewController {
       // Sets background location tracking
       // Note: need to add a user preference for this in the future
       locationManager.allowsBackgroundLocationUpdates = true
+      
+      transformStatsView(transform: CGAffineTransform(translationX: 0, y: statsView.frame.height))
+      time = 0
+      distance = 0.0
+      calories = 0.0
+      timeLabel.text = "00:00"
+      timer = Timer.scheduledTimer(timeInterval: TIME_INTERVAL,
+                                   target: self,
+                                   selector: #selector(timerTick),
+                                   userInfo: nil,
+                                   repeats: true)
     }
     
     walkStarted = !walkStarted
+  }
+  
+  func timerTick() {
+    time += 1
+    let hours = time / 3600
+    let minutes = (time / 60) % 60
+    let seconds = time % 60
+    var timeText = String(format: "%02i:%02i", minutes, seconds)
+    
+    if hours > 0 {
+      timeText = String(format: "%02i:", hours) + timeText
+    }
+    
+    timeLabel.text = timeText
+    distanceLabel.attributedText = self.getDistanceLabel(distance: distance)
   }
 }
 
@@ -136,5 +236,43 @@ private extension TrackWalkViewController {
     locationManager.startUpdatingLocation()
     mapView.showsUserLocation = true
     mapView.userTrackingMode = .follow
+  }
+  
+  func transformStatsView(transform: CGAffineTransform) {
+    UIView.animate(withDuration: 0.3) {
+      self.statsView.transform = transform
+      self.mapView.layoutMargins = UIEdgeInsets(top: transform.ty, left: 0, bottom: 0, right: 0)
+    }
+  }
+  
+  func getDistanceLabel(distance: Double) -> NSAttributedString {
+    let distanceString = String(format: "%.2f km", distance / 1000.0)
+    let attributes = [NSFontAttributeName: UIFont(name: "Avenir-Black", size: 16) as Any]
+    let range = NSString(string: distanceString).range(of: " km")
+    let distanceText = NSMutableAttributedString(string: distanceString)
+    distanceText.addAttributes(attributes, range: range)
+    
+    return distanceText
+  }
+  
+  func setSeparatorLinesInStatsView(width: CGFloat) {
+    let viewWidth = statsView.frame.width
+    var xPos = viewWidth / 3
+    let yPos: CGFloat = 12.5
+    while xPos < viewWidth {
+      let line = UIView(frame: CGRect(x: xPos - width / 2,
+                                      y: yPos,
+                                      width: width,
+                                      height: statsView.frame.height - yPos * 2))
+      line.backgroundColor = .white
+      statsView.addSubview(line)
+      xPos += xPos
+    }
+  }
+  
+  func dropPin(location: CLLocation, name: String) {
+    let pin = WalkPin(type: name)
+    pin.coordinate = location.coordinate
+    mapView.addAnnotation(pin)
   }
 }
