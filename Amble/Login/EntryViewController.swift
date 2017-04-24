@@ -221,7 +221,7 @@ extension EntryViewController {
     switch response {
     case .success(let json):
       let userJSON = json["user"]
-      User.sharedInstance.userInfo = UserInfo(id: userJSON["id"].stringValue,
+      User.sharedInstance.userInfo = UserInfo(id: userJSON["_id"].stringValue,
                                           username: userJSON["username"].stringValue,
                                           email: userJSON["email"].stringValue,
                                           firstName: userJSON["firstName"].stringValue,

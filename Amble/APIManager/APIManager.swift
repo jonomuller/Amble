@@ -78,8 +78,13 @@ class APIManager: NSObject {
   
   // MARK: - /walks API calls
   
-  public func createWalk(name: String, owner: String, coordinates: [CLLocationCoordinate2D], completion: @escaping (APIResponse) -> Void) {
-    let details = ["name": name, "owner": owner, "coordinates": coordinates] as [String : Any]
+  public func createWalk(name: String, owner: String, locations: [CLLocation], completion: @escaping (APIResponse) -> Void) {
+    var coordinates: [[Double]] = []
+    for location in locations {
+      coordinates.append([location.coordinate.longitude, location.coordinate.latitude])
+    }
+    
+    let details = ["name": name, "owner": owner, "coordinates": coordinates.description] as [String : Any]
     request(router: .createWalk(details: details)) { (response) in
       completion(response)
     }
