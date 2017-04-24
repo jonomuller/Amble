@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import Locksmith
 
 enum Router: URLRequestConvertible {
   
@@ -40,7 +41,7 @@ enum Router: URLRequestConvertible {
     }
   }
   
-  var parameters: [String: Any] {
+  var parameters: [String: Any]? {
     switch self {
     case .login(let details):
       return details
@@ -49,13 +50,30 @@ enum Router: URLRequestConvertible {
     case .createWalk(let details):
       return details
     default:
-      return [:]
+      return nil
+    }
+  }
+  
+  var requiresJWTAuth: Bool {
+    switch self {
+    case .createWalk, .getWalk:
+      return true
+    default:
+      return false
     }
   }
   
   func asURLRequest() throws -> URLRequest {
     let url = try Router.baseURLPath.asURL();
-    let urlRequest = try URLRequest(url: url.appendingPathComponent(path), method: method)
+    var urlRequest = try URLRequest(url: url.appendingPathComponent(path), method: method)
+    
+    if requiresJWTAuth {
+      // Retrieve JWT from keychain
+      if let user = Locksmith.loadDataForUserAccount(userAccount: "Amble") {
+        let jwt = user["jwt"] as! String
+        urlRequest.setValue("JWT \(jwt)", forHTTPHeaderField: "Authorization")
+      }
+    }
     
     return try URLEncoding.default.encode(urlRequest, with: parameters)
   }
