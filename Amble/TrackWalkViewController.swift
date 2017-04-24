@@ -172,6 +172,9 @@ extension TrackWalkViewController {
       locationManager.allowsBackgroundLocationUpdates = false
       transformStatsView(transform: .identity)
       timer.invalidate()
+      
+//      if let user =
+//      APIManager.sharedInstance.createWalk(name: "Test walk", owner: <#T##String#>, coordinates: <#T##[CLLocationCoordinate2D]#>, completion: <#T##(APIResponse) -> Void#>)
     } else {
       // Start walk
       
