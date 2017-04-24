@@ -173,8 +173,17 @@ extension TrackWalkViewController {
       transformStatsView(transform: .identity)
       timer.invalidate()
       
-//      if let user =
-//      APIManager.sharedInstance.createWalk(name: "Test walk", owner: <#T##String#>, coordinates: <#T##[CLLocationCoordinate2D]#>, completion: <#T##(APIResponse) -> Void#>)
+      APIManager.sharedInstance.createWalk(name: "Test walk", owner: User.sharedInstance.userInfo!.id, locations: locations, completion: { (response) in
+        switch response {
+        case .success(let json):
+          print("Successfully saved walk")
+          print(json)
+        case .failure(let error):
+          let alertView = UIAlertController(title: error.localizedDescription, message: error.localizedFailureReason, preferredStyle: .alert)
+          alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+          self.present(alertView, animated: true, completion: nil)
+        }
+      })
     } else {
       // Start walk
       
