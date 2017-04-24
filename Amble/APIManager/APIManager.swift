@@ -9,10 +9,13 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import CoreLocation
 
 class APIManager: NSObject {
   
   public static let sharedInstance = APIManager()
+  
+  // MARK: - Private helper functions
   
   private func request(router: Router, completion: @escaping (APIResponse) -> Void) {
     if let error = containsEmptyElement(details: router.parameters as! [String: String]) {
@@ -52,13 +55,11 @@ class APIManager: NSObject {
     return nil
   }
   
-  // MARK: /auth API calls
+  // MARK: - /auth API calls
   
   public func login(username: String, password: String, completion: @escaping (APIResponse) -> Void) {
-    let details = ["username": username,
-                   "password": password]
-    
-    request(router: Router.login(details: details)) { (response) in
+    let details = ["username": username, "password": password]
+    request(router: .login(details: details)) { (response) in
       completion(response)
     }
   }
@@ -70,9 +71,23 @@ class APIManager: NSObject {
                    "firstName": firstName,
                    "lastName": lastName]
     
-    request(router: Router.register(details: details)) { (response) in
+    request(router: .register(details: details)) { (response) in
       completion(response)
     }
   }
   
+  // MARK: - /walks API calls
+  
+  public func createWalk(name: String, owner: String, coordinates: [CLLocationCoordinate2D], completion: @escaping (APIResponse) -> Void) {
+    let details = ["name": name, "owner": owner, "coordinates": coordinates] as [String : Any]
+    request(router: .createWalk(details: details)) { (response) in
+      completion(response)
+    }
+  }
+  
+  public func getWalk(id: String, completion: @escaping (APIResponse) -> Void) {
+    request(router: .getWalk(id: id)) { (response) in
+      completion(response)
+    }
+  }
 }
