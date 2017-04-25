@@ -179,14 +179,12 @@ extension TrackWalkViewController {
       confirmEndAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
       
       confirmEndAlert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action) in
-        self.endWalk()
         self.showSaveWalkAlert()
       }))
       
       confirmEndAlert.addAction(UIAlertAction(title: "Discard", style: .destructive, handler: { (action) in
         self.endWalk()
-        self.mapView.removeOverlays(self.mapView.overlays)
-        self.mapView.removeAnnotations(self.mapView.annotations)
+        self.removeMapOverlays()
       }))
       
       self.present(confirmEndAlert, animated: true, completion: nil)
@@ -304,16 +302,24 @@ private extension TrackWalkViewController {
       self.dropPin(location: location, name: "finish")
     }
     
-    walkStarted = !walkStarted
-    
     self.navigationItem.rightBarButtonItem?.title = "Start"
     self.transformStatsView(transform: .identity)
     locationManager.allowsBackgroundLocationUpdates = false
+    walkStarted = !walkStarted
     locations = []
     timer.invalidate()
   }
   
   func showSaveWalkAlert() {
+    if locations.count < 2 {
+      let shortWalkErrorView = UIAlertController(title: "Walk too short", message: "Please walk further to save your walk.", preferredStyle: .alert)
+      shortWalkErrorView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+      self.present(shortWalkErrorView, animated: true, completion: nil)
+      return
+    }
+    
+    self.endWalk()
+    
     let nameAlert = UIAlertController(title: "Save Walk",
                                       message: "Please enter a name for the walk",
                                       preferredStyle: .alert)
@@ -327,7 +333,7 @@ private extension TrackWalkViewController {
     })
     
     nameAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
-      self.clearMapOverlays()
+      self.removeMapOverlays()
     }))
     
     saveWalkAction = UIAlertAction(title: "Save", style: .default) { (action) in
@@ -348,7 +354,7 @@ private extension TrackWalkViewController {
       case .success(let json):
         print("Successfully saved walk")
         print(json)
-        self.clearMapOverlays()
+        self.removeMapOverlays()
         // Display walk detail controller (not implemented yet)
       case .failure(let error):
         let alertView = UIAlertController(title: error.localizedDescription, message: error.localizedFailureReason, preferredStyle: .alert)
@@ -358,7 +364,7 @@ private extension TrackWalkViewController {
     })
   }
   
-  func clearMapOverlays() {
+  func removeMapOverlays() {
     self.mapView.removeOverlays(self.mapView.overlays)
     self.mapView.removeAnnotations(self.mapView.annotations)
   }
