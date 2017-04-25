@@ -173,17 +173,43 @@ extension TrackWalkViewController {
       transformStatsView(transform: .identity)
       timer.invalidate()
       
-      APIManager.sharedInstance.createWalk(name: "Test walk", owner: User.sharedInstance.userInfo!.id, locations: locations, completion: { (response) in
-        switch response {
-        case .success(let json):
-          print("Successfully saved walk")
-          print(json)
-        case .failure(let error):
-          let alertView = UIAlertController(title: error.localizedDescription, message: error.localizedFailureReason, preferredStyle: .alert)
-          alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-          self.present(alertView, animated: true, completion: nil)
+      let nameAlert = UIAlertController(title: "Save Walk",
+                                        message: "Please enter a name for the walk",
+                                        preferredStyle: .alert)
+      
+      nameAlert.addTextField(configurationHandler: { (field) in
+        field.returnKeyType = .done
+        field.enablesReturnKeyAutomatically = true
+        field.placeholder = "walk name"
+      })
+      
+      nameAlert.addAction(UIAlertAction(title: "Discard", style: .destructive, handler: { (action) in
+        self.mapView.removeOverlays(self.mapView.overlays)
+        self.mapView.removeAnnotations(self.mapView.annotations)
+      }))
+      
+      let saveAction = UIAlertAction(title: "Save", style: .default, handler: { (action) in
+        if let name = nameAlert.textFields?[0].text {
+          APIManager.sharedInstance.createWalk(name: name, owner: User.sharedInstance.userInfo!.id, locations: self.locations, completion: { (response) in
+            switch response {
+            case .success(let json):
+              print("Successfully saved walk")
+              print(json)
+              self.mapView.removeOverlays(self.mapView.overlays)
+              self.mapView.removeAnnotations(self.mapView.annotations)
+              // Display walk detail controller (not implemented yet)
+            case .failure(let error):
+              let alertView = UIAlertController(title: error.localizedDescription, message: error.localizedFailureReason, preferredStyle: .alert)
+              alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+              self.present(alertView, animated: true, completion: nil)
+            }
+          })
         }
       })
+      
+      nameAlert.addAction(saveAction)
+      self.present(nameAlert, animated: true, completion: nil)
+      
     } else {
       // Start walk
       
