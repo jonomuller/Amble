@@ -175,11 +175,18 @@ extension TrackWalkViewController {
     if walkStarted {
       // End walk
       
-      let confirmEndAlert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+      let confirmEndAlert = UIAlertController(title: "End Walk", message: nil, preferredStyle: .actionSheet)
       confirmEndAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
       
-      confirmEndAlert.addAction(UIAlertAction(title: "End Walk", style: .default, handler: { (action) in
+      confirmEndAlert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action) in
         self.endWalk()
+        self.showSaveWalkAlert()
+      }))
+      
+      confirmEndAlert.addAction(UIAlertAction(title: "Discard", style: .destructive, handler: { (action) in
+        self.endWalk()
+        self.mapView.removeOverlays(self.mapView.overlays)
+        self.mapView.removeAnnotations(self.mapView.annotations)
       }))
       
       self.present(confirmEndAlert, animated: true, completion: nil)
@@ -304,7 +311,9 @@ private extension TrackWalkViewController {
     locationManager.allowsBackgroundLocationUpdates = false
     locations = []
     timer.invalidate()
-    
+  }
+  
+  func showSaveWalkAlert() {
     let nameAlert = UIAlertController(title: "Save Walk",
                                       message: "Please enter a name for the walk",
                                       preferredStyle: .alert)
@@ -317,9 +326,8 @@ private extension TrackWalkViewController {
       field.placeholder = "walk name"
     })
     
-    nameAlert.addAction(UIAlertAction(title: "Discard", style: .destructive, handler: { (action) in
-      self.mapView.removeOverlays(self.mapView.overlays)
-      self.mapView.removeAnnotations(self.mapView.annotations)
+    nameAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+      self.clearMapOverlays()
     }))
     
     saveWalkAction = UIAlertAction(title: "Save", style: .default) { (action) in
@@ -331,6 +339,7 @@ private extension TrackWalkViewController {
     saveWalkAction.isEnabled = false
     nameAlert.addAction(saveWalkAction)
     self.present(nameAlert, animated: true, completion: nil)
+    
   }
   
   func saveWalk(name: String) {
@@ -339,8 +348,7 @@ private extension TrackWalkViewController {
       case .success(let json):
         print("Successfully saved walk")
         print(json)
-        self.mapView.removeOverlays(self.mapView.overlays)
-        self.mapView.removeAnnotations(self.mapView.annotations)
+        self.clearMapOverlays()
         // Display walk detail controller (not implemented yet)
       case .failure(let error):
         let alertView = UIAlertController(title: error.localizedDescription, message: error.localizedFailureReason, preferredStyle: .alert)
@@ -348,5 +356,10 @@ private extension TrackWalkViewController {
         self.present(alertView, animated: true, completion: nil)
       }
     })
+  }
+  
+  func clearMapOverlays() {
+    self.mapView.removeOverlays(self.mapView.overlays)
+    self.mapView.removeAnnotations(self.mapView.annotations)
   }
 }
