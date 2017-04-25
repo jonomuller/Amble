@@ -136,13 +136,13 @@ extension TrackWalkViewController: MKMapViewDelegate {
   
   func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
     if let pin = annotation as? WalkPin {
-      let pinID = "pin"
+      let pinID = pin.imageName
       if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: pinID) {
         annotationView.annotation = annotation
         return annotationView
       } else {
         let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: pinID)
-        annotationView.image = UIImage(named: pin.imageName)
+        annotationView.image = UIImage(named: pinID)
         return annotationView
       }
     }
