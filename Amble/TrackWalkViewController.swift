@@ -22,6 +22,7 @@ class TrackWalkViewController: UIViewController {
   
   fileprivate var locationManager: CLLocationManager!
   fileprivate var locations: [CLLocation] = []
+  fileprivate var saveWalkAction: UIAlertAction!
   fileprivate var timer = Timer()
   fileprivate var walkStarted = false
   fileprivate var time = 0
@@ -151,7 +152,17 @@ extension TrackWalkViewController: MKMapViewDelegate {
   }
 }
 
-// MARK: - Button methods
+// MARK: - Text field delegate
+
+extension TrackWalkViewController: UITextFieldDelegate {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    self.saveWalk(name: textField.text!)
+    self.dismiss(animated: true, completion: nil)
+    return false
+  }
+}
+
+// MARK: - Action methods
 
 extension TrackWalkViewController {
   
@@ -172,7 +183,6 @@ extension TrackWalkViewController {
       }))
       
       self.present(confirmEndAlert, animated: true, completion: nil)
-      
     } else {
       // Start walk
       
@@ -210,6 +220,11 @@ extension TrackWalkViewController {
     
     timeLabel.text = timeText
     distanceLabel.attributedText = self.getDistanceLabel(distance: distance)
+  }
+  
+  func textFieldDidChange(_ sender: Any) {
+    let textField = sender as! UITextField
+    saveWalkAction.isEnabled = !(textField.text?.isEmpty)!
   }
 }
 
@@ -295,6 +310,8 @@ private extension TrackWalkViewController {
                                       preferredStyle: .alert)
     
     nameAlert.addTextField(configurationHandler: { (field) in
+      field.delegate = self
+      field.addTarget(self, action: #selector(self.textFieldDidChange), for: .editingChanged)
       field.returnKeyType = .done
       field.enablesReturnKeyAutomatically = true
       field.placeholder = "walk name"
@@ -305,26 +322,31 @@ private extension TrackWalkViewController {
       self.mapView.removeAnnotations(self.mapView.annotations)
     }))
     
-    let saveAction = UIAlertAction(title: "Save", style: .default, handler: { (action) in
+    saveWalkAction = UIAlertAction(title: "Save", style: .default) { (action) in
       if let name = nameAlert.textFields?[0].text {
-        APIManager.sharedInstance.createWalk(name: name, owner: User.sharedInstance.userInfo!.id, locations: self.locations, completion: { (response) in
-          switch response {
-          case .success(let json):
-            print("Successfully saved walk")
-            print(json)
-            self.mapView.removeOverlays(self.mapView.overlays)
-            self.mapView.removeAnnotations(self.mapView.annotations)
-          // Display walk detail controller (not implemented yet)
-          case .failure(let error):
-            let alertView = UIAlertController(title: error.localizedDescription, message: error.localizedFailureReason, preferredStyle: .alert)
-            alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alertView, animated: true, completion: nil)
-          }
-        })
+        self.saveWalk(name: name)
+      }
+    }
+    
+    saveWalkAction.isEnabled = false
+    nameAlert.addAction(saveWalkAction)
+    self.present(nameAlert, animated: true, completion: nil)
+  }
+  
+  func saveWalk(name: String) {
+    APIManager.sharedInstance.createWalk(name: name, owner: User.sharedInstance.userInfo!.id, locations: self.locations, completion: { (response) in
+      switch response {
+      case .success(let json):
+        print("Successfully saved walk")
+        print(json)
+        self.mapView.removeOverlays(self.mapView.overlays)
+        self.mapView.removeAnnotations(self.mapView.annotations)
+        // Display walk detail controller (not implemented yet)
+      case .failure(let error):
+        let alertView = UIAlertController(title: error.localizedDescription, message: error.localizedFailureReason, preferredStyle: .alert)
+        alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alertView, animated: true, completion: nil)
       }
     })
-    
-    nameAlert.addAction(saveAction)
-    self.present(nameAlert, animated: true, completion: nil)
   }
 }
