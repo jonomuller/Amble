@@ -49,7 +49,7 @@ enum Router: URLRequestConvertible {
     case .createWalk(let details):
       return details
     default:
-      return nil
+      return [:]
     }
   }
   
