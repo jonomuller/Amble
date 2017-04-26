@@ -13,7 +13,7 @@ struct Walk {
   
   let name: String
   let coordinates: [CLLocationCoordinate2D]
-  let time: Double
+  let time: Int
   let distance: Double
   let calories: Double
   

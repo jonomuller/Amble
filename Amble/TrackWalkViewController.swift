@@ -195,6 +195,7 @@ extension TrackWalkViewController {
       locationManager.allowsBackgroundLocationUpdates = true
       
       transformStatsView(transform: CGAffineTransform(translationX: 0, y: statsView.frame.height))
+      locations = []
       time = 0
       distance = 0.0
       calories = 0.0
@@ -288,7 +289,6 @@ private extension TrackWalkViewController {
     self.transformStatsView(transform: .identity)
     locationManager.allowsBackgroundLocationUpdates = false
     walkStarted = !walkStarted
-    locations = []
     timer.invalidate()
   }
   
@@ -334,15 +334,27 @@ private extension TrackWalkViewController {
     APIManager.sharedInstance.createWalk(name: name, owner: User.sharedInstance.userInfo!.id, locations: self.locations, completion: { (response) in
       switch response {
       case .success(let json):
-        print("Successfully saved walk")
-        print(json)
         self.removeMapOverlays()
-        // Display walk detail controller (not implemented yet)
+        var coordinates: [CLLocationCoordinate2D] = []
+        
+        for location in self.locations {
+          coordinates.append(location.coordinate)
+        }
+        
+        let walk = Walk(name: json["name"].stringValue,
+                        coordinates: coordinates,
+                        time: self.time,
+                        distance: self.distance,
+                        calories: self.calories)
+        
+        self.presentWalkDetailView(walk: walk, id: json["walk"]["_id"].stringValue)
       case .failure(let error):
         let alertView = UIAlertController(title: error.localizedDescription, message: error.localizedFailureReason, preferredStyle: .alert)
+        
         alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
           self.present(self.nameAlert, animated: true, completion: nil)
         }))
+        
         self.present(alertView, animated: true, completion: nil)
       }
     })
@@ -351,5 +363,14 @@ private extension TrackWalkViewController {
   func removeMapOverlays() {
     self.mapView.removeOverlays(self.mapView.overlays)
     self.mapView.removeAnnotations(self.mapView.annotations)
+  }
+  
+  func presentWalkDetailView(walk: Walk, id: String) {
+    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    let vc = storyboard.instantiateViewController(withIdentifier: "WalkDetailViewController") as! WalkDetailViewController
+    vc.walk = walk
+    vc.walkID = id
+    let navController = UINavigationController(rootViewController: vc)
+    self.present(navController, animated: true, completion: nil)
   }
 }
