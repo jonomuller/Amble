@@ -16,12 +16,15 @@ class WalkDetailViewController: UIViewController {
   @IBOutlet var statsView: StatsView!
   
   var walkID: String?
-  var coordinates: [CLLocationCoordinate2D] = []
+  var walk: Walk?
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     self.returnIfNoIDPassed()
+    
+    if walk == nil {
+      walk = getWalkFromAPI()
+    }
   }
 }
 
@@ -42,5 +45,9 @@ private extension WalkDetailViewController {
       
       self.present(noIDAlertView, animated: true, completion: nil)
     }
+  }
+  
+  func getWalkFromAPI() -> Walk {
+    return Walk(name: "", coordinates: [], time: 0, distance: 0, calories: 0)
   }
 }

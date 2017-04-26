@@ -13,6 +13,7 @@
 		AF0D36E21EAA7B7E00643BA7 /* WalkPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D36E11EAA7B7E00643BA7 /* WalkPin.swift */; };
 		AF0D36E41EB02F1100643BA7 /* WalkDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D36E31EB02F1000643BA7 /* WalkDetailViewController.swift */; };
 		AF0D36E81EB0F78E00643BA7 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D36E71EB0F78E00643BA7 /* StatsView.swift */; };
+		AF0D36EA1EB1065F00643BA7 /* Walk.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D36E91EB1065F00643BA7 /* Walk.swift */; };
 		AF2D9D8C1EA4149100EDCF53 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2D9D8B1EA4149100EDCF53 /* SettingsTableViewController.swift */; };
 		AF2D9D8E1EA515B200EDCF53 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF2D9D8D1EA515B200EDCF53 /* Login.storyboard */; };
 		AF2D9D901EA517F300EDCF53 /* UIViewController+RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2D9D8F1EA517F300EDCF53 /* UIViewController+RootView.swift */; };
@@ -72,6 +73,7 @@
 		AF0D36E11EAA7B7E00643BA7 /* WalkPin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkPin.swift; sourceTree = "<group>"; };
 		AF0D36E31EB02F1000643BA7 /* WalkDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkDetailViewController.swift; sourceTree = "<group>"; };
 		AF0D36E71EB0F78E00643BA7 /* StatsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		AF0D36E91EB1065F00643BA7 /* Walk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Walk.swift; sourceTree = "<group>"; };
 		AF2D9D8B1EA4149100EDCF53 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		AF2D9D8D1EA515B200EDCF53 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Login.storyboard; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
 		AF2D9D8F1EA517F300EDCF53 /* UIViewController+RootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+RootView.swift"; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				AF2D9D931EA53DA800EDCF53 /* TrackWalkViewController.swift */,
 				AF0D36E71EB0F78E00643BA7 /* StatsView.swift */,
 				AF0D36E31EB02F1000643BA7 /* WalkDetailViewController.swift */,
+				AF0D36E91EB1065F00643BA7 /* Walk.swift */,
 				AF67D96A1EA253A9003BE7CF /* User.swift */,
 				AF0D36E11EAA7B7E00643BA7 /* WalkPin.swift */,
 			);
@@ -579,6 +582,7 @@
 				AF0D36E21EAA7B7E00643BA7 /* WalkPin.swift in Sources */,
 				AF0D36E81EB0F78E00643BA7 /* StatsView.swift in Sources */,
 				AF2D9D8C1EA4149100EDCF53 /* SettingsTableViewController.swift in Sources */,
+				AF0D36EA1EB1065F00643BA7 /* Walk.swift in Sources */,
 				AF67D96E1EA253A9003BE7CF /* User.swift in Sources */,
 				AF67D9751EA253B7003BE7CF /* UIColor+Image.swift in Sources */,
 			);
