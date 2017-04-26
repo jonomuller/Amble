@@ -95,6 +95,8 @@ private extension WalkDetailViewController {
   func addMapOverlays() {
     let polyLine = MKPolyline(coordinates: (walk?.coordinates)!, count: (walk?.coordinates.count)!)
     mapView.add(polyLine)
-    print(mapView.overlays)
+    mapView.setVisibleMapRect(polyLine.boundingMapRect,
+                              edgePadding: UIEdgeInsetsMake(50, 50, 50, 50),
+                              animated: true)
   }
 }

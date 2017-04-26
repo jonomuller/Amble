@@ -84,8 +84,6 @@ class APIManager: NSObject {
       coordinates.append([location.coordinate.longitude, location.coordinate.latitude])
     }
     
-    print(coordinates)
-    
     let details = ["name": name, "owner": owner, "coordinates": coordinates.description] as [String : Any]
     request(router: .createWalk(details: details)) { (response) in
       completion(response)
