@@ -23,6 +23,7 @@ class WalkDetailViewController: UIViewController {
     
     self.navigationController?.navigationBar.barTintColor = .flatGreenDark
     self.navigationController?.navigationBar.tintColor = .white
+    self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
     self.navigationController?.navigationBar.isTranslucent = false
     self.navigationController?.hidesNavigationBarHairline = true
     self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonPressed))
@@ -30,7 +31,7 @@ class WalkDetailViewController: UIViewController {
     if walk == nil {
       self.getWalk()
     } else {
-      self.addMapOverlays()
+      self.setupView()
     }
   }
 }
@@ -108,13 +109,13 @@ private extension WalkDetailViewController {
           coordinates.append(CLLocationCoordinate2D(latitude: point[1], longitude: point[0]))
         }
         
-        self.walk = Walk(name: json["name"].stringValue,
+        self.walk = Walk(name: json["walk"]["name"].stringValue,
                          coordinates: coordinates,
                          time: 0,
                          distance: 0,
                          calories: 0)
         
-        self.addMapOverlays()
+        self.setupView()
       case .failure(let error):
         let alertView = UIAlertController(title: error.localizedDescription, message: error.localizedFailureReason, preferredStyle: .alert)
         alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -123,7 +124,20 @@ private extension WalkDetailViewController {
     }
   }
   
-  func addMapOverlays() {
+  func setupView() {
+    self.navigationItem.title = walk?.name
+    
+    let hours = (walk?.time)! / 3600
+    let minutes = ((walk?.time)! / 60) % 60
+    let seconds = (walk?.time)! % 60
+    var timeText = String(format: "%02i:%02i", minutes, seconds)
+    
+    if hours > 0 {
+      timeText = String(format: "%02i:", hours) + timeText
+    }
+    
+    statsView.timeLabel.text = timeText
+    statsView.distanceLabel.text = walk?.distance.description
     let polyLine = MKPolyline(coordinates: (walk?.coordinates)!, count: (walk?.coordinates.count)!)
     mapView.add(polyLine)
     mapView.setVisibleMapRect(polyLine.boundingMapRect,

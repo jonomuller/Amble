@@ -308,10 +308,11 @@ private extension TrackWalkViewController {
     
     nameAlert.addTextField(configurationHandler: { (field) in
       field.delegate = self
-      field.addTarget(self, action: #selector(self.textFieldDidChange), for: .editingChanged)
       field.returnKeyType = .done
       field.enablesReturnKeyAutomatically = true
       field.placeholder = "walk name"
+      field.autocapitalizationType = .words
+      field.addTarget(self, action: #selector(self.textFieldDidChange), for: .editingChanged)
     })
     
     nameAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
@@ -341,7 +342,7 @@ private extension TrackWalkViewController {
           coordinates.append(location.coordinate)
         }
         
-        let walk = Walk(name: json["name"].stringValue,
+        let walk = Walk(name: json["walk"]["name"].stringValue,
                         coordinates: coordinates,
                         time: self.time,
                         distance: self.distance,

@@ -286,6 +286,11 @@
                                         <constraint firstItem="CeK-oS-gww" firstAttribute="leading" secondItem="Xo3-qh-Thi" secondAttribute="trailing" constant="19" id="r1l-AM-wnu"/>
                                         <constraint firstItem="rjt-AK-nmJ" firstAttribute="centerX" secondItem="ohS-yg-gHt" secondAttribute="centerX" id="vzq-WO-nSu"/>
                                     </constraints>
+                                    <connections>
+                                        <outlet property="calorieLabel" destination="eDs-1Y-22W" id="OYj-tH-Elw"/>
+                                        <outlet property="distanceLabel" destination="CeK-oS-gww" id="2n7-Mb-2in"/>
+                                        <outlet property="timeLabel" destination="Xo3-qh-Thi" id="4PP-TA-uZR"/>
+                                    </connections>
                                 </view>
                             </tableView>
                         </subviews>
