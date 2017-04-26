@@ -21,6 +21,12 @@ class WalkDetailViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    self.navigationController?.navigationBar.barTintColor = .flatGreenDark
+    self.navigationController?.navigationBar.tintColor = .white
+    self.navigationController?.navigationBar.isTranslucent = false
+    self.navigationController?.hidesNavigationBarHairline = true
+    self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonPressed))
+    
     if walk == nil {
       self.getWalk()
     } else {
@@ -58,6 +64,14 @@ extension WalkDetailViewController: MKMapViewDelegate {
     }
     
     return nil
+  }
+}
+
+// MARK: - Action methods
+
+extension WalkDetailViewController {
+  func doneButtonPressed() {
+    self.dismiss(animated: true, completion: nil)
   }
 }
 

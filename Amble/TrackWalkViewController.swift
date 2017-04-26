@@ -30,8 +30,6 @@ class TrackWalkViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    statsView.distanceLabel.attributedText = self.getDistanceLabel(distance: 0)
-    
     self.navigationController?.hidesNavigationBarHairline = true
     
     let locationButton = MKUserTrackingBarButtonItem(mapView:self.mapView)
@@ -200,6 +198,8 @@ extension TrackWalkViewController {
       distance = 0.0
       calories = 0.0
       statsView.timeLabel.text = "00:00"
+      statsView.distanceLabel.attributedText = self.getDistanceLabel(distance: 0)
+      statsView.calorieLabel.text = "0"
       timer = Timer.scheduledTimer(timeInterval: TIME_INTERVAL,
                                    target: self,
                                    selector: #selector(timerTick),
