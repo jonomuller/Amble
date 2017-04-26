@@ -22,6 +22,7 @@ class TrackWalkViewController: UIViewController {
   
   fileprivate var locationManager: CLLocationManager!
   fileprivate var locations: [CLLocation] = []
+  fileprivate var nameAlert: UIAlertController!
   fileprivate var saveWalkAction: UIAlertAction!
   fileprivate var timer = Timer()
   fileprivate var walkStarted = false
@@ -320,7 +321,7 @@ private extension TrackWalkViewController {
     
     self.endWalk()
     
-    let nameAlert = UIAlertController(title: "Save Walk",
+    nameAlert = UIAlertController(title: "Save Walk",
                                       message: "Please enter a name for the walk",
                                       preferredStyle: .alert)
     
@@ -337,7 +338,7 @@ private extension TrackWalkViewController {
     }))
     
     saveWalkAction = UIAlertAction(title: "Save", style: .default) { (action) in
-      if let name = nameAlert.textFields?[0].text {
+      if let name = self.nameAlert.textFields?[0].text {
         self.saveWalk(name: name)
       }
     }
@@ -358,7 +359,9 @@ private extension TrackWalkViewController {
         // Display walk detail controller (not implemented yet)
       case .failure(let error):
         let alertView = UIAlertController(title: error.localizedDescription, message: error.localizedFailureReason, preferredStyle: .alert)
-        alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+          self.present(self.nameAlert, animated: true, completion: nil)
+        }))
         self.present(alertView, animated: true, completion: nil)
       }
     })
