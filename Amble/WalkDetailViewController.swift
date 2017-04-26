@@ -32,6 +32,7 @@ class WalkDetailViewController: UIViewController {
 // MARK: - Map view delegate
 
 extension WalkDetailViewController: MKMapViewDelegate {
+  
   func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
     if overlay is MKPolyline {
       let polyLineRenderer = MKPolylineRenderer(overlay: overlay)
@@ -41,6 +42,22 @@ extension WalkDetailViewController: MKMapViewDelegate {
     }
     
     return MKPolylineRenderer()
+  }
+  
+  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+    if let pin = annotation as? WalkPin {
+      let pinID = pin.imageName
+      if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: pinID) {
+        annotationView.annotation = annotation
+        return annotationView
+      } else {
+        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: pinID)
+        annotationView.image = UIImage(named: pinID)
+        return annotationView
+      }
+    }
+    
+    return nil
   }
 }
 
@@ -98,5 +115,13 @@ private extension WalkDetailViewController {
     mapView.setVisibleMapRect(polyLine.boundingMapRect,
                               edgePadding: UIEdgeInsetsMake(50, 50, 50, 50),
                               animated: true)
+    self.dropPin(coordinate: (walk?.coordinates.first)!, name: "start")
+    self.dropPin(coordinate: (walk?.coordinates.last)!, name: "finish")
+  }
+  
+  func dropPin(coordinate: CLLocationCoordinate2D, name: String) {
+    let pin = WalkPin(type: name)
+    pin.coordinate = coordinate
+    mapView.addAnnotation(pin)
   }
 }
