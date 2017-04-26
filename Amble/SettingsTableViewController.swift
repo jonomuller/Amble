@@ -81,7 +81,8 @@ private extension SettingsTableViewController {
   func logout() {
     // Delete user's details from keychain
     do {
-      try Locksmith.deleteDataForUserAccount(userAccount: "Amble")
+      try User.sharedInstance.userInfo?.deleteFromSecureStore()
+      User.sharedInstance.userInfo = nil
     } catch {
       print("Error deleting in keychain: \(error)")
     }

@@ -140,9 +140,9 @@
 				AF67D9171EA2516D003BE7CF /* Amble */,
 				AF67D92C1EA2516D003BE7CF /* AmbleTests */,
 				AF67D9371EA2516D003BE7CF /* AmbleUITests */,
-				AF67D9161EA2516D003BE7CF /* Products */,
-				BE26845C43C8E99F72D54EDC /* Pods */,
 				BD4AD5D3F79908AFB7992CD6 /* Frameworks */,
+				BE26845C43C8E99F72D54EDC /* Pods */,
+				AF67D9161EA2516D003BE7CF /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -163,17 +163,17 @@
 				AF67D95F1EA2539F003BE7CF /* APIManager */,
 				AF67D96F1EA253B7003BE7CF /* Extensions */,
 				AF67D9761EA253C4003BE7CF /* Login */,
+				AFF37AA51EA2A09000D57E8D /* Assets.xcassets */,
 				AF67D9681EA253A9003BE7CF /* FirstViewController.swift */,
-				AF2D9D931EA53DA800EDCF53 /* TrackWalkViewController.swift */,
-				AF0D36E11EAA7B7E00643BA7 /* WalkPin.swift */,
+				AF67D9891EA25550003BE7CF /* Info.plist */,
+				AF67D9211EA2516D003BE7CF /* LaunchScreen.storyboard */,
+				AF2D9D8D1EA515B200EDCF53 /* Login.storyboard */,
+				AF67D9871EA254EB003BE7CF /* Main.storyboard */,
 				AF67D9691EA253A9003BE7CF /* ProfileViewController.swift */,
 				AF2D9D8B1EA4149100EDCF53 /* SettingsTableViewController.swift */,
+				AF2D9D931EA53DA800EDCF53 /* TrackWalkViewController.swift */,
 				AF67D96A1EA253A9003BE7CF /* User.swift */,
-				AF67D9871EA254EB003BE7CF /* Main.storyboard */,
-				AF2D9D8D1EA515B200EDCF53 /* Login.storyboard */,
-				AF67D9211EA2516D003BE7CF /* LaunchScreen.storyboard */,
-				AF67D9891EA25550003BE7CF /* Info.plist */,
-				AFF37AA51EA2A09000D57E8D /* Assets.xcassets */,
+				AF0D36E11EAA7B7E00643BA7 /* WalkPin.swift */,
 			);
 			path = Amble;
 			sourceTree = "<group>";
@@ -201,17 +201,9 @@
 			children = (
 				AF67D9601EA2539F003BE7CF /* APIManager.swift */,
 				AF67D9611EA2539F003BE7CF /* APIResponse.swift */,
-				AF67D9621EA2539F003BE7CF /* Router */,
-			);
-			path = APIManager;
-			sourceTree = "<group>";
-		};
-		AF67D9621EA2539F003BE7CF /* Router */ = {
-			isa = PBXGroup;
-			children = (
 				AF67D9631EA2539F003BE7CF /* Router.swift */,
 			);
-			path = Router;
+			path = APIManager;
 			sourceTree = "<group>";
 		};
 		AF67D96F1EA253B7003BE7CF /* Extensions */ = {
@@ -622,6 +614,7 @@
 				AF67D9221EA2516D003BE7CF /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -9,7 +9,7 @@
 import Foundation
 import Locksmith
 
-struct User: ReadableSecureStorable, CreateableSecureStorable, DeleteableSecureStorable, GenericPasswordSecureStorable {
+struct UserInfo: ReadableSecureStorable, CreateableSecureStorable, DeleteableSecureStorable, GenericPasswordSecureStorable {
   
   let id: String
   let username: String
@@ -32,4 +32,9 @@ struct User: ReadableSecureStorable, CreateableSecureStorable, DeleteableSecureS
             "lastName": lastName,
             "jwt": jwt]
   }
+}
+
+class User {
+  static let sharedInstance = User()
+  var userInfo: UserInfo?
 }

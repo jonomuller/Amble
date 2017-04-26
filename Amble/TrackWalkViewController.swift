@@ -22,6 +22,8 @@ class TrackWalkViewController: UIViewController {
   
   fileprivate var locationManager: CLLocationManager!
   fileprivate var locations: [CLLocation] = []
+  fileprivate var nameAlert: UIAlertController!
+  fileprivate var saveWalkAction: UIAlertAction!
   fileprivate var timer = Timer()
   fileprivate var walkStarted = false
   fileprivate var time = 0
@@ -136,13 +138,13 @@ extension TrackWalkViewController: MKMapViewDelegate {
   
   func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
     if let pin = annotation as? WalkPin {
-      let pinID = "pin"
+      let pinID = pin.imageName
       if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: pinID) {
         annotationView.annotation = annotation
         return annotationView
       } else {
         let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: pinID)
-        annotationView.image = UIImage(named: pin.imageName)
+        annotationView.image = UIImage(named: pinID)
         return annotationView
       }
     }
@@ -151,7 +153,17 @@ extension TrackWalkViewController: MKMapViewDelegate {
   }
 }
 
-// MARK: - Button methods
+// MARK: - Text field delegate
+
+extension TrackWalkViewController: UITextFieldDelegate {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    self.saveWalk(name: textField.text!)
+    self.dismiss(animated: true, completion: nil)
+    return false
+  }
+}
+
+// MARK: - Action methods
 
 extension TrackWalkViewController {
   
@@ -162,20 +174,25 @@ extension TrackWalkViewController {
     }
     
     if walkStarted {
-      // Stop walk
+      // End walk
       
-      if let location = self.locations.last {
-        self.dropPin(location: location, name: "finish")
-      }
+      let confirmEndAlert = UIAlertController(title: "End Walk", message: nil, preferredStyle: .actionSheet)
+      confirmEndAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
       
-      self.navigationItem.rightBarButtonItem?.title = "Start"
-      locationManager.allowsBackgroundLocationUpdates = false
-      transformStatsView(transform: .identity)
-      timer.invalidate()
+      confirmEndAlert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action) in
+        self.showSaveWalkAlert()
+      }))
+      
+      confirmEndAlert.addAction(UIAlertAction(title: "Discard", style: .destructive, handler: { (action) in
+        self.endWalk()
+        self.removeMapOverlays()
+      }))
+      
+      self.present(confirmEndAlert, animated: true, completion: nil)
     } else {
       // Start walk
       
-      self.navigationItem.rightBarButtonItem?.title = "Stop"
+      self.navigationItem.rightBarButtonItem?.title = "End"
       
       // Sets background location tracking
       // Note: need to add a user preference for this in the future
@@ -191,9 +208,9 @@ extension TrackWalkViewController {
                                    selector: #selector(timerTick),
                                    userInfo: nil,
                                    repeats: true)
+      
+      walkStarted = !walkStarted
     }
-    
-    walkStarted = !walkStarted
   }
   
   func timerTick() {
@@ -209,6 +226,11 @@ extension TrackWalkViewController {
     
     timeLabel.text = timeText
     distanceLabel.attributedText = self.getDistanceLabel(distance: distance)
+  }
+  
+  func textFieldDidChange(_ sender: Any) {
+    let textField = sender as! UITextField
+    saveWalkAction.isEnabled = !(textField.text?.isEmpty)!
   }
 }
 
@@ -274,5 +296,79 @@ private extension TrackWalkViewController {
     let pin = WalkPin(type: name)
     pin.coordinate = location.coordinate
     mapView.addAnnotation(pin)
+  }
+  
+  func endWalk() {
+    if let location = self.locations.last {
+      self.dropPin(location: location, name: "finish")
+    }
+    
+    self.navigationItem.rightBarButtonItem?.title = "Start"
+    self.transformStatsView(transform: .identity)
+    locationManager.allowsBackgroundLocationUpdates = false
+    walkStarted = !walkStarted
+    locations = []
+    timer.invalidate()
+  }
+  
+  func showSaveWalkAlert() {
+    if locations.count < 2 {
+      let shortWalkErrorView = UIAlertController(title: "Walk too short", message: "Please walk further to save your walk.", preferredStyle: .alert)
+      shortWalkErrorView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+      self.present(shortWalkErrorView, animated: true, completion: nil)
+      return
+    }
+    
+    self.endWalk()
+    
+    nameAlert = UIAlertController(title: "Save Walk",
+                                      message: "Please enter a name for the walk",
+                                      preferredStyle: .alert)
+    
+    nameAlert.addTextField(configurationHandler: { (field) in
+      field.delegate = self
+      field.addTarget(self, action: #selector(self.textFieldDidChange), for: .editingChanged)
+      field.returnKeyType = .done
+      field.enablesReturnKeyAutomatically = true
+      field.placeholder = "walk name"
+    })
+    
+    nameAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+      self.removeMapOverlays()
+    }))
+    
+    saveWalkAction = UIAlertAction(title: "Save", style: .default) { (action) in
+      if let name = self.nameAlert.textFields?[0].text {
+        self.saveWalk(name: name)
+      }
+    }
+    
+    saveWalkAction.isEnabled = false
+    nameAlert.addAction(saveWalkAction)
+    self.present(nameAlert, animated: true, completion: nil)
+    
+  }
+  
+  func saveWalk(name: String) {
+    APIManager.sharedInstance.createWalk(name: name, owner: User.sharedInstance.userInfo!.id, locations: self.locations, completion: { (response) in
+      switch response {
+      case .success(let json):
+        print("Successfully saved walk")
+        print(json)
+        self.removeMapOverlays()
+        // Display walk detail controller (not implemented yet)
+      case .failure(let error):
+        let alertView = UIAlertController(title: error.localizedDescription, message: error.localizedFailureReason, preferredStyle: .alert)
+        alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+          self.present(self.nameAlert, animated: true, completion: nil)
+        }))
+        self.present(alertView, animated: true, completion: nil)
+      }
+    })
+  }
+  
+  func removeMapOverlays() {
+    self.mapView.removeOverlays(self.mapView.overlays)
+    self.mapView.removeAnnotations(self.mapView.annotations)
   }
 }

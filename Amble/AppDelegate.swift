@@ -18,7 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let storyboardID: String!
     
     // If user's details are in keychain, log them in
-    if Locksmith.loadDataForUserAccount(userAccount: "Amble") != nil {
+    if let user = Locksmith.loadDataForUserAccount(userAccount: "Amble") {
+      User.sharedInstance.userInfo = UserInfo(id: user["id"] as! String,
+                                          username: user["username"] as! String,
+                                          email: user["email"] as! String,
+                                          firstName: user["firstName"] as! String,
+                                          lastName: user["lastName"] as! String,
+                                          jwt: user["jwt"] as! String)
       storyboardID = "Main"
     } else {
       storyboardID = "Login"
