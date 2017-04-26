@@ -95,13 +95,13 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="eME-c0-KKd">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="eME-c0-KKd">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <connections>
                                     <outlet property="delegate" destination="kKb-6N-S5f" id="Dcs-mp-NHD"/>
                                 </connections>
                             </mapView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ist-uO-nbD">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ist-uO-nbD" customClass="StatsView" customModule="Amble" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="-79" width="375" height="79"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="ZO5-Sg-NmH">
@@ -168,6 +168,11 @@
                                     <constraint firstItem="oz5-7O-RU4" firstAttribute="centerX" secondItem="RIe-DV-qeh" secondAttribute="centerX" id="wpj-Ke-EGl"/>
                                     <constraint firstItem="oz5-7O-RU4" firstAttribute="centerX" secondItem="Ist-uO-nbD" secondAttribute="centerX" id="xfx-wR-Q8C"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="calorieLabel" destination="JTy-lz-Zwm" id="wrb-f7-pEE"/>
+                                    <outlet property="distanceLabel" destination="RIe-DV-qeh" id="J8O-OQ-OQk"/>
+                                    <outlet property="timeLabel" destination="ZO5-Sg-NmH" id="rxS-W1-1OL"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -184,11 +189,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Track Walk" id="Jip-er-vK2"/>
                     <connections>
-                        <outlet property="calorieLabel" destination="JTy-lz-Zwm" id="9Wa-de-kAn"/>
-                        <outlet property="distanceLabel" destination="RIe-DV-qeh" id="w5T-Xc-dgk"/>
                         <outlet property="mapView" destination="eME-c0-KKd" id="sXj-ad-ygO"/>
                         <outlet property="statsView" destination="Ist-uO-nbD" id="CDe-K3-ics"/>
-                        <outlet property="timeLabel" destination="ZO5-Sg-NmH" id="mCV-HH-8Y3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W3X-Ct-AKS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -210,7 +212,7 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="z5s-mZ-JNY">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                             </mapView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ohS-yg-gHt">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ohS-yg-gHt" customClass="StatsView" customModule="Amble" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="294" width="375" height="79"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="Xo3-qh-Thi">
@@ -301,6 +303,7 @@
                     </view>
                     <connections>
                         <outlet property="mapView" destination="z5s-mZ-JNY" id="wpb-vI-5yT"/>
+                        <outlet property="statsView" destination="ohS-yg-gHt" id="s2X-xV-3gR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K5R-ZM-AW4" userLabel="First Responder" sceneMemberID="firstResponder"/>

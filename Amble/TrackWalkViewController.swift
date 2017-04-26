@@ -13,10 +13,7 @@ import CoreLocation
 class TrackWalkViewController: UIViewController {
   
   @IBOutlet var mapView: MKMapView!
-  @IBOutlet var statsView: UIView!
-  @IBOutlet var timeLabel: UILabel!
-  @IBOutlet var distanceLabel: UILabel!
-  @IBOutlet var calorieLabel: UILabel!
+  @IBOutlet var statsView: StatsView!
   
   fileprivate let TIME_INTERVAL = 1.0
   
@@ -33,8 +30,7 @@ class TrackWalkViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.setSeparatorLinesInStatsView(width: 1.0)
-    distanceLabel.attributedText = self.getDistanceLabel(distance: 0)
+    statsView.distanceLabel.attributedText = self.getDistanceLabel(distance: 0)
     
     self.navigationController?.hidesNavigationBarHairline = true
     
@@ -202,7 +198,7 @@ extension TrackWalkViewController {
       time = 0
       distance = 0.0
       calories = 0.0
-      timeLabel.text = "00:00"
+      statsView.timeLabel.text = "00:00"
       timer = Timer.scheduledTimer(timeInterval: TIME_INTERVAL,
                                    target: self,
                                    selector: #selector(timerTick),
@@ -224,8 +220,8 @@ extension TrackWalkViewController {
       timeText = String(format: "%02i:", hours) + timeText
     }
     
-    timeLabel.text = timeText
-    distanceLabel.attributedText = self.getDistanceLabel(distance: distance)
+    statsView.timeLabel.text = timeText
+    statsView.distanceLabel.attributedText = self.getDistanceLabel(distance: distance)
   }
   
   func textFieldDidChange(_ sender: Any) {
@@ -275,21 +271,6 @@ private extension TrackWalkViewController {
     distanceText.addAttributes(attributes, range: range)
     
     return distanceText
-  }
-  
-  func setSeparatorLinesInStatsView(width: CGFloat) {
-    let viewWidth = statsView.frame.width
-    var xPos = viewWidth / 3
-    let yPos: CGFloat = 12.5
-    while xPos < viewWidth {
-      let line = UIView(frame: CGRect(x: xPos - width / 2,
-                                      y: yPos,
-                                      width: width,
-                                      height: statsView.frame.height - yPos * 2))
-      line.backgroundColor = .white
-      statsView.addSubview(line)
-      xPos += xPos
-    }
   }
   
   func dropPin(location: CLLocation, name: String) {

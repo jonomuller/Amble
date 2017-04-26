@@ -12,6 +12,9 @@ import MapKit
 class WalkDetailViewController: UIViewController {
   
   @IBOutlet var mapView: MKMapView!
+  @IBOutlet var statsView: StatsView!
+  
+  var walkID: String!
   
   override func viewDidLoad() {
     super.viewDidLoad()
