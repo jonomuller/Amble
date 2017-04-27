@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class TrackWalkViewController: UIViewController {
+class TrackWalkViewController: WalkViewController {
   
   @IBOutlet var mapView: MKMapView!
   @IBOutlet var statsView: StatsView!
@@ -107,8 +107,7 @@ extension TrackWalkViewController: CLLocationManagerDelegate {
 
 // MARK: - Map view delegate
 
-extension TrackWalkViewController: MKMapViewDelegate {
-  
+extension TrackWalkViewController {
   func mapView(_ mapView: MKMapView, didChange mode: MKUserTrackingMode, animated: Bool) {
     if CLLocationManager.authorizationStatus() == .denied {
       mapView.userTrackingMode = .none
@@ -117,33 +116,6 @@ extension TrackWalkViewController: MKMapViewDelegate {
         self.displayLocationError()
       }
     }
-  }
-  
-  func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-    if overlay is MKPolyline {
-      let polyLineRenderer = MKPolylineRenderer(overlay: overlay)
-      polyLineRenderer.strokeColor = .flatForestGreen
-      polyLineRenderer.lineWidth = 5
-      return polyLineRenderer
-    }
-    
-    return MKPolylineRenderer()
-  }
-  
-  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-    if let pin = annotation as? WalkPin {
-      let pinID = pin.imageName
-      if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: pinID) {
-        annotationView.annotation = annotation
-        return annotationView
-      } else {
-        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: pinID)
-        annotationView.image = UIImage(named: pinID)
-        return annotationView
-      }
-    }
-    
-    return nil
   }
 }
 
@@ -198,7 +170,7 @@ extension TrackWalkViewController {
       distance = 0.0
       calories = 0.0
       statsView.timeLabel.text = "00:00"
-      statsView.distanceLabel.attributedText = self.getDistanceLabel(distance: 0)
+      statsView.distanceLabel.attributedText = self.getDistanceLabelText(distance: 0)
       statsView.calorieLabel.text = "0"
       timer = Timer.scheduledTimer(timeInterval: TIME_INTERVAL,
                                    target: self,
@@ -212,17 +184,8 @@ extension TrackWalkViewController {
   
   func timerTick() {
     time += 1
-    let hours = time / 3600
-    let minutes = (time / 60) % 60
-    let seconds = time % 60
-    var timeText = String(format: "%02i:%02i", minutes, seconds)
-    
-    if hours > 0 {
-      timeText = String(format: "%02i:", hours) + timeText
-    }
-    
-    statsView.timeLabel.text = timeText
-    statsView.distanceLabel.attributedText = self.getDistanceLabel(distance: distance)
+    statsView.timeLabel.text = self.getTimeLabelText(time: time)
+    statsView.distanceLabel.attributedText = self.getDistanceLabelText(distance: distance)
   }
   
   func textFieldDidChange(_ sender: Any) {
@@ -262,16 +225,6 @@ private extension TrackWalkViewController {
       self.statsView.transform = transform
       self.mapView.layoutMargins = UIEdgeInsets(top: transform.ty, left: 0, bottom: 0, right: 0)
     }
-  }
-  
-  func getDistanceLabel(distance: Double) -> NSAttributedString {
-    let distanceString = String(format: "%.2f km", distance / 1000.0)
-    let attributes = [NSFontAttributeName: UIFont(name: "Avenir-Black", size: 16) as Any]
-    let range = NSString(string: distanceString).range(of: " km")
-    let distanceText = NSMutableAttributedString(string: distanceString)
-    distanceText.addAttributes(attributes, range: range)
-    
-    return distanceText
   }
   
   func dropPin(location: CLLocation, name: String) {

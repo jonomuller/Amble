@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class WalkDetailViewController: UIViewController {
+class WalkDetailViewController: WalkViewController {
   
   @IBOutlet var mapView: MKMapView!
   @IBOutlet var statsView: StatsView!
@@ -33,38 +33,6 @@ class WalkDetailViewController: UIViewController {
     } else {
       self.setupView()
     }
-  }
-}
-
-// MARK: - Map view delegate
-
-extension WalkDetailViewController: MKMapViewDelegate {
-  
-  func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-    if overlay is MKPolyline {
-      let polyLineRenderer = MKPolylineRenderer(overlay: overlay)
-      polyLineRenderer.strokeColor = .flatForestGreen
-      polyLineRenderer.lineWidth = 5
-      return polyLineRenderer
-    }
-    
-    return MKPolylineRenderer()
-  }
-  
-  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-    if let pin = annotation as? WalkPin {
-      let pinID = pin.imageName
-      if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: pinID) {
-        annotationView.annotation = annotation
-        return annotationView
-      } else {
-        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: pinID)
-        annotationView.image = UIImage(named: pinID)
-        return annotationView
-      }
-    }
-    
-    return nil
   }
 }
 
@@ -97,6 +65,7 @@ private extension WalkDetailViewController {
   
   func getWalk() {
     self.returnIfNoIDPassed()
+    
     APIManager.sharedInstance.getWalk(id: walkID!) { (response) in
       switch response {
       case .success(let json):
@@ -126,18 +95,9 @@ private extension WalkDetailViewController {
   
   func setupView() {
     self.navigationItem.title = walk?.name
+    statsView.timeLabel.text = self.getTimeLabelText(time: (walk?.time)!)
+    statsView.distanceLabel.attributedText = self.getDistanceLabelText(distance: (walk?.distance)!)
     
-    let hours = (walk?.time)! / 3600
-    let minutes = ((walk?.time)! / 60) % 60
-    let seconds = (walk?.time)! % 60
-    var timeText = String(format: "%02i:%02i", minutes, seconds)
-    
-    if hours > 0 {
-      timeText = String(format: "%02i:", hours) + timeText
-    }
-    
-    statsView.timeLabel.text = timeText
-    statsView.distanceLabel.text = walk?.distance.description
     let polyLine = MKPolyline(coordinates: (walk?.coordinates)!, count: (walk?.coordinates.count)!)
     mapView.add(polyLine)
     mapView.setVisibleMapRect(polyLine.boundingMapRect,
