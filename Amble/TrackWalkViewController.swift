@@ -12,9 +12,6 @@ import CoreLocation
 
 class TrackWalkViewController: WalkViewController {
   
-  @IBOutlet var mapView: MKMapView!
-  @IBOutlet var statsView: StatsView!
-  
   fileprivate let TIME_INTERVAL = 1.0
   
   fileprivate var locationManager: CLLocationManager!
@@ -97,7 +94,7 @@ extension TrackWalkViewController: CLLocationManagerDelegate {
         // Increment total distance value
         distance += location.distance(from: self.locations.last!)
       } else {
-        self.dropPin(location: location, name: "start")
+        self.dropPin(coordinate: location.coordinate, name: "start")
       }
       
       self.locations.append(location)
@@ -227,15 +224,9 @@ private extension TrackWalkViewController {
     }
   }
   
-  func dropPin(location: CLLocation, name: String) {
-    let pin = WalkPin(type: name)
-    pin.coordinate = location.coordinate
-    mapView.addAnnotation(pin)
-  }
-  
   func endWalk() {
     if let location = self.locations.last {
-      self.dropPin(location: location, name: "finish")
+      self.dropPin(coordinate: location.coordinate, name: "finish")
     }
     
     self.navigationItem.rightBarButtonItem?.title = "Start"

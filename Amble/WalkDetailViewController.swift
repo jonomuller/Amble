@@ -12,9 +12,6 @@ import CoreLocation
 
 class WalkDetailViewController: WalkViewController {
   
-  @IBOutlet var mapView: MKMapView!
-  @IBOutlet var statsView: StatsView!
-  
   var walkID: String?
   var walk: Walk?
   
@@ -101,15 +98,10 @@ private extension WalkDetailViewController {
     let polyLine = MKPolyline(coordinates: (walk?.coordinates)!, count: (walk?.coordinates.count)!)
     mapView.add(polyLine)
     mapView.setVisibleMapRect(polyLine.boundingMapRect,
-                              edgePadding: UIEdgeInsetsMake(50, 50, 50, 50),
+                              edgePadding: UIEdgeInsetsMake(75, 75, 75, 75),
                               animated: true)
+    
     self.dropPin(coordinate: (walk?.coordinates.first)!, name: "start")
     self.dropPin(coordinate: (walk?.coordinates.last)!, name: "finish")
-  }
-  
-  func dropPin(coordinate: CLLocationCoordinate2D, name: String) {
-    let pin = WalkPin(type: name)
-    pin.coordinate = coordinate
-    mapView.addAnnotation(pin)
   }
 }

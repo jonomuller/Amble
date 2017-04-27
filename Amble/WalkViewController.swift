@@ -11,9 +11,9 @@ import MapKit
 
 class WalkViewController: UIViewController {
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-  }
+  @IBOutlet var mapView: MKMapView!
+  @IBOutlet var statsView: StatsView!
+  
 }
 
 // MARK: - Map view delegate
@@ -75,5 +75,11 @@ extension WalkViewController {
     distanceText.addAttributes(attributes, range: range)
     
     return distanceText
+  }
+  
+  func dropPin(coordinate: CLLocationCoordinate2D, name: String) {
+    let pin = WalkPin(type: name)
+    pin.coordinate = coordinate
+    mapView.addAnnotation(pin)
   }
 }
