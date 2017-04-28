@@ -34,14 +34,18 @@ extension WalkViewController: MKMapViewDelegate {
   func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
     if let pin = annotation as? WalkPin {
       let pinID = pin.imageName
+      var view: MKAnnotationView
+      
       if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: pinID) {
-        annotationView.annotation = annotation
-        return annotationView
+        view = annotationView
+        view.annotation = annotation
       } else {
-        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: pinID)
-        annotationView.image = UIImage(named: pinID)
-        return annotationView
+        view = MKAnnotationView(annotation: annotation, reuseIdentifier: pinID)
+        view.image = UIImage(named: pinID)
       }
+
+      view.canShowCallout = true
+      return view
     }
     
     return nil
