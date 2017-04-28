@@ -18,7 +18,7 @@ class APIManager: NSObject {
   // MARK: - Private helper functions
   
   private func request(router: Router, completion: @escaping (APIResponse) -> Void) {
-    if let error = containsEmptyElement(details: router.parameters as! [String: String]) {
+    if let error = containsEmptyElement(details: router.parameters) {
       completion(.failure(error: error))
       return
     }
@@ -43,9 +43,9 @@ class APIManager: NSObject {
     }
   }
   
-  private func containsEmptyElement(details: [String: String]) -> NSError? {
+  private func containsEmptyElement(details: [String: Any]) -> NSError? {
     for (key, value) in details {
-      if value.isEmpty {
+      if String(describing: value).isEmpty {
         return NSError(domain: "Amble",
                        code: 400,
                        userInfo: [NSLocalizedDescriptionKey: "Please enter your \(key)."])
@@ -78,13 +78,19 @@ class APIManager: NSObject {
   
   // MARK: - /walks API calls
   
-  public func createWalk(name: String, owner: String, locations: [CLLocation], completion: @escaping (APIResponse) -> Void) {
+  public func createWalk(name: String, owner: String, locations: [CLLocation], time: Int, distance: Double, steps: Double, completion: @escaping (APIResponse) -> Void) {
     var coordinates: [[Double]] = []
     for location in locations {
       coordinates.append([location.coordinate.longitude, location.coordinate.latitude])
     }
     
-    let details = ["name": name, "owner": owner, "coordinates": coordinates.description] as [String : Any]
+    let details = ["name": name,
+                   "owner": owner,
+                   "coordinates": coordinates.description,
+                   "time": time,
+                   "distance": distance,
+                   "steps": steps] as [String : Any]
+    
     request(router: .createWalk(details: details)) { (response) in
       completion(response)
     }

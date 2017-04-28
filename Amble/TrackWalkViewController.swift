@@ -9,32 +9,30 @@
 import UIKit
 import MapKit
 import CoreLocation
+import NVActivityIndicatorView
 
-class TrackWalkViewController: UIViewController {
-  
-  @IBOutlet var mapView: MKMapView!
-  @IBOutlet var statsView: UIView!
-  @IBOutlet var timeLabel: UILabel!
-  @IBOutlet var distanceLabel: UILabel!
-  @IBOutlet var calorieLabel: UILabel!
+class TrackWalkViewController: WalkViewController {
   
   fileprivate let TIME_INTERVAL = 1.0
   
+  @IBOutlet var spinnerView: UIView!
+  fileprivate var spinner: NVActivityIndicatorView!
+  
   fileprivate var locationManager: CLLocationManager!
   fileprivate var locations: [CLLocation] = []
+  
   fileprivate var nameAlert: UIAlertController!
   fileprivate var saveWalkAction: UIAlertAction!
+  
   fileprivate var timer = Timer()
   fileprivate var walkStarted = false
+  
   fileprivate var time = 0
   fileprivate var distance = 0.0
   fileprivate var calories = 0.0
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    self.setSeparatorLinesInStatsView(width: 1.0)
-    distanceLabel.attributedText = self.getDistanceLabel(distance: 0)
     
     self.navigationController?.hidesNavigationBarHairline = true
     
@@ -53,6 +51,16 @@ class TrackWalkViewController: UIViewController {
     if CLLocationManager.authorizationStatus() == .notDetermined {
       locationManager.requestWhenInUseAuthorization()
     }
+    
+    // Set up spinner loading view to display when walk is being saved
+    spinnerView.layer.cornerRadius = spinnerView.frame.height / 2
+    spinner = NVActivityIndicatorView(frame: CGRect(x: spinnerView.frame.width / 2 - 15,
+                                                    y: spinnerView.frame.height / 2 - 15,
+                                                    width: 30,
+                                                    height: 30),
+                                      type: .ballScaleRippleMultiple,
+                                      color: .flatGreenDark)
+    spinnerView.addSubview(spinner)
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -103,7 +111,7 @@ extension TrackWalkViewController: CLLocationManagerDelegate {
         // Increment total distance value
         distance += location.distance(from: self.locations.last!)
       } else {
-        self.dropPin(location: location, name: "start")
+        self.dropPin(coordinate: location.coordinate, name: "start")
       }
       
       self.locations.append(location)
@@ -113,8 +121,7 @@ extension TrackWalkViewController: CLLocationManagerDelegate {
 
 // MARK: - Map view delegate
 
-extension TrackWalkViewController: MKMapViewDelegate {
-  
+extension TrackWalkViewController {
   func mapView(_ mapView: MKMapView, didChange mode: MKUserTrackingMode, animated: Bool) {
     if CLLocationManager.authorizationStatus() == .denied {
       mapView.userTrackingMode = .none
@@ -123,33 +130,6 @@ extension TrackWalkViewController: MKMapViewDelegate {
         self.displayLocationError()
       }
     }
-  }
-  
-  func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-    if overlay is MKPolyline {
-      let polyLineRenderer = MKPolylineRenderer(overlay: overlay)
-      polyLineRenderer.strokeColor = .flatForestGreen
-      polyLineRenderer.lineWidth = 5
-      return polyLineRenderer
-    }
-    
-    return MKPolylineRenderer()
-  }
-  
-  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-    if let pin = annotation as? WalkPin {
-      let pinID = pin.imageName
-      if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: pinID) {
-        annotationView.annotation = annotation
-        return annotationView
-      } else {
-        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: pinID)
-        annotationView.image = UIImage(named: pinID)
-        return annotationView
-      }
-    }
-    
-    return nil
   }
 }
 
@@ -199,10 +179,13 @@ extension TrackWalkViewController {
       locationManager.allowsBackgroundLocationUpdates = true
       
       transformStatsView(transform: CGAffineTransform(translationX: 0, y: statsView.frame.height))
+      locations = []
       time = 0
       distance = 0.0
       calories = 0.0
-      timeLabel.text = "00:00"
+      statsView.timeLabel.text = "00:00"
+      statsView.distanceLabel.attributedText = self.getDistanceLabelText(distance: 0)
+      statsView.calorieLabel.text = "0"
       timer = Timer.scheduledTimer(timeInterval: TIME_INTERVAL,
                                    target: self,
                                    selector: #selector(timerTick),
@@ -215,17 +198,8 @@ extension TrackWalkViewController {
   
   func timerTick() {
     time += 1
-    let hours = time / 3600
-    let minutes = (time / 60) % 60
-    let seconds = time % 60
-    var timeText = String(format: "%02i:%02i", minutes, seconds)
-    
-    if hours > 0 {
-      timeText = String(format: "%02i:", hours) + timeText
-    }
-    
-    timeLabel.text = timeText
-    distanceLabel.attributedText = self.getDistanceLabel(distance: distance)
+    statsView.timeLabel.text = self.getTimeLabelText(time: time)
+    statsView.distanceLabel.attributedText = self.getDistanceLabelText(distance: distance)
   }
   
   func textFieldDidChange(_ sender: Any) {
@@ -267,47 +241,15 @@ private extension TrackWalkViewController {
     }
   }
   
-  func getDistanceLabel(distance: Double) -> NSAttributedString {
-    let distanceString = String(format: "%.2f km", distance / 1000.0)
-    let attributes = [NSFontAttributeName: UIFont(name: "Avenir-Black", size: 16) as Any]
-    let range = NSString(string: distanceString).range(of: " km")
-    let distanceText = NSMutableAttributedString(string: distanceString)
-    distanceText.addAttributes(attributes, range: range)
-    
-    return distanceText
-  }
-  
-  func setSeparatorLinesInStatsView(width: CGFloat) {
-    let viewWidth = statsView.frame.width
-    var xPos = viewWidth / 3
-    let yPos: CGFloat = 12.5
-    while xPos < viewWidth {
-      let line = UIView(frame: CGRect(x: xPos - width / 2,
-                                      y: yPos,
-                                      width: width,
-                                      height: statsView.frame.height - yPos * 2))
-      line.backgroundColor = .white
-      statsView.addSubview(line)
-      xPos += xPos
-    }
-  }
-  
-  func dropPin(location: CLLocation, name: String) {
-    let pin = WalkPin(type: name)
-    pin.coordinate = location.coordinate
-    mapView.addAnnotation(pin)
-  }
-  
   func endWalk() {
     if let location = self.locations.last {
-      self.dropPin(location: location, name: "finish")
+      self.dropPin(coordinate: location.coordinate, name: "finish")
     }
     
     self.navigationItem.rightBarButtonItem?.title = "Start"
     self.transformStatsView(transform: .identity)
     locationManager.allowsBackgroundLocationUpdates = false
     walkStarted = !walkStarted
-    locations = []
     timer.invalidate()
   }
   
@@ -327,10 +269,11 @@ private extension TrackWalkViewController {
     
     nameAlert.addTextField(configurationHandler: { (field) in
       field.delegate = self
-      field.addTarget(self, action: #selector(self.textFieldDidChange), for: .editingChanged)
       field.returnKeyType = .done
       field.enablesReturnKeyAutomatically = true
       field.placeholder = "walk name"
+      field.autocapitalizationType = .words
+      field.addTarget(self, action: #selector(self.textFieldDidChange), for: .editingChanged)
     })
     
     nameAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
@@ -339,6 +282,8 @@ private extension TrackWalkViewController {
     
     saveWalkAction = UIAlertAction(title: "Save", style: .default) { (action) in
       if let name = self.nameAlert.textFields?[0].text {
+        self.spinnerView.isHidden = false
+        self.spinner.startAnimating()
         self.saveWalk(name: name)
       }
     }
@@ -346,22 +291,36 @@ private extension TrackWalkViewController {
     saveWalkAction.isEnabled = false
     nameAlert.addAction(saveWalkAction)
     self.present(nameAlert, animated: true, completion: nil)
-    
   }
   
   func saveWalk(name: String) {
-    APIManager.sharedInstance.createWalk(name: name, owner: User.sharedInstance.userInfo!.id, locations: self.locations, completion: { (response) in
+    APIManager.sharedInstance.createWalk(name: name, owner: User.sharedInstance.userInfo!.id, locations: locations, time: time, distance: distance, steps: calories, completion: { (response) in
+      self.spinner.stopAnimating()
+      self.spinnerView.isHidden = true
+      
       switch response {
       case .success(let json):
-        print("Successfully saved walk")
-        print(json)
         self.removeMapOverlays()
-        // Display walk detail controller (not implemented yet)
+        var coordinates: [CLLocationCoordinate2D] = []
+        
+        for location in self.locations {
+          coordinates.append(location.coordinate)
+        }
+        
+        let walk = Walk(name: json["walk"]["name"].stringValue,
+                        coordinates: coordinates,
+                        time: self.time,
+                        distance: self.distance,
+                        calories: self.calories)
+        
+        self.presentWalkDetailView(walk: walk, id: json["walk"]["_id"].stringValue)
       case .failure(let error):
         let alertView = UIAlertController(title: error.localizedDescription, message: error.localizedFailureReason, preferredStyle: .alert)
+        
         alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
           self.present(self.nameAlert, animated: true, completion: nil)
         }))
+        
         self.present(alertView, animated: true, completion: nil)
       }
     })
@@ -370,5 +329,14 @@ private extension TrackWalkViewController {
   func removeMapOverlays() {
     self.mapView.removeOverlays(self.mapView.overlays)
     self.mapView.removeAnnotations(self.mapView.annotations)
+  }
+  
+  func presentWalkDetailView(walk: Walk, id: String) {
+    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    let vc = storyboard.instantiateViewController(withIdentifier: "WalkDetailViewController") as! WalkDetailViewController
+    vc.walk = walk
+    vc.walkID = id
+    let navController = UINavigationController(rootViewController: vc)
+    self.present(navController, animated: true, completion: nil)
   }
 }

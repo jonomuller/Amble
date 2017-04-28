@@ -14,5 +14,7 @@ class WalkPin: MKPointAnnotation {
   
   init(type: String) {
     self.imageName = type + "_pin"
+    super.init()
+    self.title = type.capitalized
   }
 }

@@ -40,7 +40,7 @@ enum Router: URLRequestConvertible {
     }
   }
   
-  var parameters: [String: Any]? {
+  var parameters: [String: Any] {
     switch self {
     case .login(let details):
       return details
