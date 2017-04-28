@@ -23,7 +23,7 @@ class WalkDetailViewController: WalkViewController {
     self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
     self.navigationController?.navigationBar.isTranslucent = false
     self.navigationController?.hidesNavigationBarHairline = true
-    self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonPressed))
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonPressed))
     
     if walk == nil {
       self.getWalk()
