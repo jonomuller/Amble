@@ -276,7 +276,7 @@ private extension TrackWalkViewController {
   }
   
   func saveWalk(name: String) {
-    APIManager.sharedInstance.createWalk(name: name, owner: User.sharedInstance.userInfo!.id, locations: self.locations, completion: { (response) in
+    APIManager.sharedInstance.createWalk(name: name, owner: User.sharedInstance.userInfo!.id, locations: locations, time: time, distance: distance, steps: calories, completion: { (response) in
       switch response {
       case .success(let json):
         self.removeMapOverlays()
