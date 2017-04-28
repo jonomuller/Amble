@@ -175,7 +175,7 @@
                                 </connections>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9oQ-Ks-9Kr">
-                                <rect key="frame" x="162" y="276" width="50" height="50"/>
+                                <rect key="frame" x="162" y="244" width="50" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -189,10 +189,10 @@
                             <constraint firstItem="Ist-uO-nbD" firstAttribute="top" secondItem="uJn-8B-g8C" secondAttribute="topMargin" constant="-79" id="Nb5-n1-dj1"/>
                             <constraint firstItem="eME-c0-KKd" firstAttribute="top" secondItem="VzG-aA-QuK" secondAttribute="bottom" id="QkY-Mh-oVo"/>
                             <constraint firstAttribute="bottom" secondItem="eME-c0-KKd" secondAttribute="bottom" id="UEF-4n-hCR"/>
-                            <constraint firstItem="eME-c0-KKd" firstAttribute="centerY" secondItem="9oQ-Ks-9Kr" secondAttribute="centerY" id="gfc-E0-HQj"/>
+                            <constraint firstItem="9oQ-Ks-9Kr" firstAttribute="top" secondItem="VzG-aA-QuK" secondAttribute="bottom" constant="244" id="lgX-Fj-twH"/>
                             <constraint firstItem="eME-c0-KKd" firstAttribute="leading" secondItem="uJn-8B-g8C" secondAttribute="leading" id="oJ0-oU-t4W"/>
                             <constraint firstItem="Ist-uO-nbD" firstAttribute="leading" secondItem="eME-c0-KKd" secondAttribute="leading" id="rbU-pS-KQL"/>
-                            <constraint firstItem="D7a-aZ-Cfl" firstAttribute="top" secondItem="9oQ-Ks-9Kr" secondAttribute="bottom" constant="228" id="x2L-Ka-aTg"/>
+                            <constraint firstItem="D7a-aZ-Cfl" firstAttribute="top" secondItem="9oQ-Ks-9Kr" secondAttribute="bottom" constant="260" id="x2L-Ka-aTg"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Track Walk" id="Jip-er-vK2"/>
@@ -205,24 +205,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W3X-Ct-AKS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2629.5999999999999" y="-188.45577211394306"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="bWR-cg-MMc">
-            <objects>
-                <viewController id="L1F-zJ-aCP" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="mhR-Y5-RuZ"/>
-                        <viewControllerLayoutGuide type="bottom" id="d1s-Sd-Xoy"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="A2P-9y-zwa">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IXh-0i-x4R" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3297" y="-188"/>
         </scene>
         <!--Walk Detail View Controller-->
         <scene sceneID="qol-GL-mYb">
