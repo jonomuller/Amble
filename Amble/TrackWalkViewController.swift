@@ -9,17 +9,24 @@
 import UIKit
 import MapKit
 import CoreLocation
+import NVActivityIndicatorView
 
 class TrackWalkViewController: WalkViewController {
   
   fileprivate let TIME_INTERVAL = 1.0
   
+  @IBOutlet var spinnerView: UIView!
+  fileprivate var spinner: NVActivityIndicatorView!
+  
   fileprivate var locationManager: CLLocationManager!
   fileprivate var locations: [CLLocation] = []
+  
   fileprivate var nameAlert: UIAlertController!
   fileprivate var saveWalkAction: UIAlertAction!
+  
   fileprivate var timer = Timer()
   fileprivate var walkStarted = false
+  
   fileprivate var time = 0
   fileprivate var distance = 0.0
   fileprivate var calories = 0.0
@@ -44,6 +51,16 @@ class TrackWalkViewController: WalkViewController {
     if CLLocationManager.authorizationStatus() == .notDetermined {
       locationManager.requestWhenInUseAuthorization()
     }
+    
+    // Set up spinner loading view to display when walk is being saved
+    spinnerView.layer.cornerRadius = spinnerView.frame.height / 2
+    spinner = NVActivityIndicatorView(frame: CGRect(x: spinnerView.frame.width / 2 - 15,
+                                                    y: spinnerView.frame.height / 2 - 15,
+                                                    width: 30,
+                                                    height: 30),
+                                      type: .ballScaleRippleMultiple,
+                                      color: .flatGreenDark)
+    spinnerView.addSubview(spinner)
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -265,6 +282,8 @@ private extension TrackWalkViewController {
     
     saveWalkAction = UIAlertAction(title: "Save", style: .default) { (action) in
       if let name = self.nameAlert.textFields?[0].text {
+        self.spinnerView.isHidden = false
+        self.spinner.startAnimating()
         self.saveWalk(name: name)
       }
     }
@@ -272,11 +291,13 @@ private extension TrackWalkViewController {
     saveWalkAction.isEnabled = false
     nameAlert.addAction(saveWalkAction)
     self.present(nameAlert, animated: true, completion: nil)
-    
   }
   
   func saveWalk(name: String) {
     APIManager.sharedInstance.createWalk(name: name, owner: User.sharedInstance.userInfo!.id, locations: locations, time: time, distance: distance, steps: calories, completion: { (response) in
+      self.spinner.stopAnimating()
+      self.spinnerView.isHidden = true
+      
       switch response {
       case .success(let json):
         self.removeMapOverlays()
