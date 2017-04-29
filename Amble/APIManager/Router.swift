@@ -13,16 +13,22 @@ enum Router: URLRequestConvertible {
   
   static let baseURLPath = "http://ambleapp.herokuapp.com/api"
   
+  // /auth
   case login(details: Parameters)
   case register(details: Parameters)
+  
+  // /walks
   case createWalk(details: Parameters)
   case getWalk(id: String)
+  
+  // /users
+  case getWalks(id: String)
   
   var method: HTTPMethod {
     switch self {
     case .login, .register, .createWalk:
       return .post
-    case .getWalk:
+    case .getWalk, .getWalks:
       return .get
     }
   }
@@ -37,6 +43,8 @@ enum Router: URLRequestConvertible {
       return "/walks/create"
     case .getWalk(let id):
       return "/walks/\(id)"
+    case .getWalks(let id):
+      return "/users/\(id)/walks"
     }
   }
   
@@ -55,7 +63,7 @@ enum Router: URLRequestConvertible {
   
   var requiresJWTAuth: Bool {
     switch self {
-    case .createWalk, .getWalk:
+    case .createWalk, .getWalk, .getWalks:
       return true
     default:
       return false
