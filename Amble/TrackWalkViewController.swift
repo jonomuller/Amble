@@ -294,7 +294,7 @@ private extension TrackWalkViewController {
   }
   
   func saveWalk(name: String) {
-    APIManager.sharedInstance.createWalk(name: name, owner: User.sharedInstance.userInfo!.id, locations: locations, time: time, distance: distance, steps: calories, completion: { (response) in
+    APIManager.sharedInstance.createWalk(name: name, owner: User.sharedInstance.userInfo!.id, locations: locations, image: nil, time: time, distance: distance, steps: calories, completion: { (response) in
       self.spinner.stopAnimating()
       self.spinnerView.isHidden = true
       

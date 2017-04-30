@@ -19,7 +19,7 @@ class APIManager: NSObject {
   
   public func login(username: String, password: String, completion: @escaping (APIResponse) -> Void) {
     let details = ["username": username, "password": password]
-    request(router: .login(details: details)) { (response) in
+    self.request(router: .login(details: details)) { (response) in
       completion(response)
     }
   }
@@ -31,7 +31,7 @@ class APIManager: NSObject {
                    "firstName": firstName,
                    "lastName": lastName]
     
-    request(router: .register(details: details)) { (response) in
+    self.request(router: .register(details: details)) { (response) in
       completion(response)
     }
   }
@@ -40,7 +40,7 @@ class APIManager: NSObject {
   
   public func createWalk(name: String, owner: String, locations: [CLLocation], image: UIImage?, time: Int, distance: Double, steps: Double, completion: @escaping (APIResponse) -> Void) {
     
-    request(router: .getMapImageURL) { (response) in
+    self.request(router: .getMapImageURL) { (response) in
       switch response {
       case .success(let json):
         let url = json["url"].stringValue
@@ -49,7 +49,7 @@ class APIManager: NSObject {
             switch uploadResponse {
             case .success:
               // Create walk
-              let imageURL = url
+              let imageURL = url // *****************
               self.createWalk(name: name, owner: owner, locations: locations, image: imageURL, time: time, distance: distance, steps: steps, completion: { (createResponse) in
                 completion(createResponse)
               })
@@ -65,7 +65,7 @@ class APIManager: NSObject {
   }
   
   public func getWalk(id: String, completion: @escaping (APIResponse) -> Void) {
-    request(router: .getWalk(id: id)) { (response) in
+    self.request(router: .getWalk(id: id)) { (response) in
       completion(response)
     }
   }
@@ -73,16 +73,17 @@ class APIManager: NSObject {
   // MARK: - /users API calls
   
   public func getWalks(id: String, completion: @escaping (APIResponse) -> Void) {
-    request(router: .getWalks(id: id)) { (response) in
+    self.request(router: .getWalks(id: id)) { (response) in
       completion(response)
     }
   }
+}
+
+// MARK: - Private helper methods
+
+private extension APIManager {
   
-  
-  
-  // MARK: - Private helper functions
-  
-  private func request(router: Router, completion: @escaping (APIResponse) -> Void) {
+  func request(router: Router, completion: @escaping (APIResponse) -> Void) {
     if let error = containsEmptyElement(details: router.parameters) {
       completion(.failure(error: error))
       return
@@ -109,7 +110,7 @@ class APIManager: NSObject {
     }
   }
   
-  public func upload(data: Data, url: String, completion: @escaping (APIResponse) -> Void) {
+  func upload(data: Data, url: String, completion: @escaping (APIResponse) -> Void) {
     Alamofire.upload(data, to: url, method: .put, headers: ["Content-Type":"image/jpeg"])
       .validate()
       .responseString { (response) in
@@ -126,7 +127,7 @@ class APIManager: NSObject {
     }
   }
   
-  private func createWalk(name: String, owner: String, locations: [CLLocation], image: String, time: Int, distance: Double, steps: Double, completion: @escaping (APIResponse) -> Void) {
+  func createWalk(name: String, owner: String, locations: [CLLocation], image: String, time: Int, distance: Double, steps: Double, completion: @escaping (APIResponse) -> Void) {
     var coordinates: [[Double]] = []
     for location in locations {
       coordinates.append([location.coordinate.longitude, location.coordinate.latitude])
@@ -146,7 +147,7 @@ class APIManager: NSObject {
   }
   
   
-  private func containsEmptyElement(details: [String: Any]) -> NSError? {
+  func containsEmptyElement(details: [String: Any]) -> NSError? {
     for (key, value) in details {
       if String(describing: value).isEmpty {
         return NSError(domain: "Amble",
