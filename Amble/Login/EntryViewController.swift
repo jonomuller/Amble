@@ -224,8 +224,8 @@ extension EntryViewController {
       User.sharedInstance.userInfo = UserInfo(id: userJSON["_id"].stringValue,
                                           username: userJSON["username"].stringValue,
                                           email: userJSON["email"].stringValue,
-                                          firstName: userJSON["firstName"].stringValue,
-                                          lastName: userJSON["lastName"].stringValue,
+                                          firstName: userJSON["name"]["firstName"].stringValue,
+                                          lastName: userJSON["name"]["lastName"].stringValue,
                                           jwt: json["jwt"].stringValue)
       
       // Save user data to keychain
