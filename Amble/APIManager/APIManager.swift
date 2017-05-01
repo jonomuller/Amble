@@ -38,18 +38,18 @@ class APIManager: NSObject {
   
   // MARK: - /walks API calls
   
-  public func createWalk(name: String, owner: String, locations: [CLLocation], image: UIImage?, time: Int, distance: Double, steps: Double, completion: @escaping (APIResponse) -> Void) {
+  public func createWalk(name: String, owner: String, locations: [CLLocation], image: UIImage, time: Int, distance: Double, steps: Double, completion: @escaping (APIResponse) -> Void) {
     
     self.request(router: .getMapImageURL) { (response) in
       switch response {
       case .success(let json):
         let url = json["url"].stringValue
-        if let imageData = UIImageJPEGRepresentation(image!, 0.1) {
+        if let imageData = UIImageJPEGRepresentation(image, 1) {
           self.upload(data: imageData, url: url, completion: { (uploadResponse) in
             switch uploadResponse {
             case .success:
               // Create walk
-              let imageURL = url // *****************
+              let imageURL = url.components(separatedBy: "?")[0]
               self.createWalk(name: name, owner: owner, locations: locations, image: imageURL, time: time, distance: distance, steps: steps, completion: { (createResponse) in
                 completion(createResponse)
               })
