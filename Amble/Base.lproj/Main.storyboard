@@ -68,6 +68,7 @@
                                                 </label>
                                             </subviews>
                                         </view>
+                                        <color key="backgroundColor" red="0.19115509089999999" green="0.63786703349999996" blue="0.26147949700000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <size key="customSize" width="150" height="200"/>
                                         <connections>
                                             <outlet property="dateLabel" destination="Svo-nJ-hFA" id="mxo-UZ-Cbh"/>
@@ -78,6 +79,10 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="8rJ-Kc-sve" id="QOf-b4-aVq"/>
+                                    <outlet property="delegate" destination="8rJ-Kc-sve" id="Q3w-1i-5ja"/>
+                                </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OLD-1K-7tv" customClass="StatsView" customModule="Amble" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="76"/>
@@ -165,6 +170,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="collectionView" destination="fnV-54-zCr" id="4gF-YK-KNB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
