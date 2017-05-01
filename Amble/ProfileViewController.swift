@@ -38,7 +38,8 @@ extension ProfileViewController: UICollectionViewDataSource {
     
     cell.nameLabel.text = walk.name
     cell.dateLabel.text = walk.date
-    cell.imageView.layer.cornerRadius = 7.5
+    cell.imageView.layer.cornerRadius = 8
+    cell.imageView.clipsToBounds = true
     do {
       if let url = URL(string: walk.image) {
         try cell.imageView.image = UIImage(data: Data(contentsOf: url))
@@ -56,9 +57,21 @@ extension ProfileViewController: UICollectionViewDataSource {
 extension ProfileViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let cellWidth = (view.frame.width - 20.0 * (CELLS_PER_ROW + 1)) / CELLS_PER_ROW
-    let size = CGSize(width: cellWidth, height: cellWidth)
+    let size = CGSize(width: cellWidth, height: cellWidth + 50)
     return size
   }
+}
+
+// MARK: - Navigation
+
+extension ProfileViewController {
+   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if let vc = segue.destination as? WalkDetailViewController {
+      if let indexPath = collectionView.indexPathsForSelectedItems?[0] {
+        vc.walkID = walks[indexPath.row].id
+      }
+    }
+   }
 }
 
 // MARK: - Private helper methods
