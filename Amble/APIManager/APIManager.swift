@@ -45,7 +45,7 @@ class APIManager: NSObject {
       case .success(let json):
         let url = json["url"].stringValue
         if let imageData = UIImageJPEGRepresentation(image, 1) {
-          self.upload(data: imageData, url: url, completion: { (uploadResponse) in
+          self.upload(data: imageData, to: url, headers: ["Content-Type":"image/jpeg"], completion: { (uploadResponse) in
             switch uploadResponse {
             case .success:
               // Create walk
@@ -110,8 +110,8 @@ private extension APIManager {
     }
   }
   
-  func upload(data: Data, url: String, completion: @escaping (APIResponse) -> Void) {
-    Alamofire.upload(data, to: url, method: .put, headers: ["Content-Type":"image/jpeg"])
+  func upload(data: Data, to url: String, headers: HTTPHeaders, completion: @escaping (APIResponse) -> Void) {
+    Alamofire.upload(data, to: url, method: .put, headers: headers)
       .validate()
       .responseString { (response) in
         print(response)
