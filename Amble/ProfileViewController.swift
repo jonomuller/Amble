@@ -19,7 +19,15 @@ class ProfileViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.getWalks()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    self.getWalks { (walks) in
+      if self.walks.count != walks.count {
+        self.walks = walks
+        self.collectionView.reloadData()
+      }
+    }
   }
 }
 
@@ -77,19 +85,19 @@ extension ProfileViewController {
 // MARK: - Private helper methods
 
 private extension ProfileViewController {
-  func getWalks() {
+  func getWalks(completion: @escaping ([WalkInfo]) -> Void) {
     APIManager.sharedInstance.getWalks(id: (User.sharedInstance.userInfo?.id)!) { (response) in
       switch response {
       case .success(let json):
+        var walks: [WalkInfo] = []
         for (_, subJson): (String, JSON) in json["walks"] {
           let walk = WalkInfo(id: subJson["id"].stringValue,
                               name: subJson["name"].stringValue,
                               image: subJson["image"].stringValue,
                               date: subJson["createdAt"].stringValue)
-          self.walks.append(walk)
+          walks.append(walk)
         }
-        
-        self.collectionView.reloadData()
+        completion(walks)
       case .failure(let error):
         let alertView = UIAlertController(title: error.localizedDescription,
                                           message: error.localizedFailureReason,

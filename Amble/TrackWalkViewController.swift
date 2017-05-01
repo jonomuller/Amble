@@ -295,6 +295,7 @@ private extension TrackWalkViewController {
     let coordinates = convertToCoordinates()
     let polyLine = MKPolyline(coordinates: coordinates, count: coordinates.count)
     let padding = (mapView.frame.height - mapView.frame.width) / 2
+    mapView.showsUserLocation = false
     
     UIView.animate(withDuration: 1.0, animations: {
       self.mapView.setVisibleMapRect(polyLine.boundingMapRect,
@@ -310,6 +311,7 @@ private extension TrackWalkViewController {
       APIManager.sharedInstance.createWalk(name: name, owner: User.sharedInstance.userInfo!.id, locations: locations, image: image, time: time, distance: distance, steps: calories, completion: { (response) in
         self.spinner.stopAnimating()
         self.spinnerView.isHidden = true
+        self.mapView.showsUserLocation = true
         
         switch response {
         case .success(let json):
