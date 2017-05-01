@@ -15,6 +15,7 @@ class ProfileViewController: UIViewController {
   
   fileprivate var walks: [WalkInfo] = []
   fileprivate let WALK_CELL_IDENTIFIER = "WalkCell"
+  fileprivate let CELLS_PER_ROW: CGFloat = 2
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -34,6 +35,16 @@ extension ProfileViewController: UICollectionViewDataSource {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WALK_CELL_IDENTIFIER, for: indexPath) as! WalkCollectionViewCell
     cell.nameLabel.text = "Test"
     return cell
+  }
+}
+
+// MARK: - Collection view flow layout delegate
+
+extension ProfileViewController: UICollectionViewDelegateFlowLayout {
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    let cellWidth = (view.frame.width - 20.0 * (CELLS_PER_ROW + 1)) / CELLS_PER_ROW
+    let size = CGSize(width: cellWidth, height: cellWidth)
+    return size
   }
 }
 
