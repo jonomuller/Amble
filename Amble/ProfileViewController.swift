@@ -28,12 +28,25 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 3
+    return walks.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WALK_CELL_IDENTIFIER, for: indexPath) as! WalkCollectionViewCell
-    cell.nameLabel.text = "Test"
+    
+    let walk = walks[indexPath.row]
+    
+    cell.nameLabel.text = walk.name
+    cell.dateLabel.text = walk.date
+    cell.imageView.layer.cornerRadius = 7.5
+    do {
+      if let url = URL(string: walk.image) {
+        try cell.imageView.image = UIImage(data: Data(contentsOf: url))
+      }
+    } catch {
+      print("Error fetching photo")
+    }
+    
     return cell
   }
 }

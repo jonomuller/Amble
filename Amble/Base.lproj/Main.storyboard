@@ -68,7 +68,6 @@
                                                 </label>
                                             </subviews>
                                         </view>
-                                        <color key="backgroundColor" red="0.19115509089999999" green="0.63786703349999996" blue="0.26147949700000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <size key="customSize" width="150" height="200"/>
                                         <connections>
                                             <outlet property="dateLabel" destination="Svo-nJ-hFA" id="mxo-UZ-Cbh"/>
