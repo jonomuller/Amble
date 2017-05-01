@@ -12,7 +12,6 @@ class WalkCollectionViewCell: UICollectionViewCell {
   
   @IBOutlet var imageView: UIImageView!
   @IBOutlet var nameLabel: UILabel!
-  @IBOutlet var distanceLabel: UILabel!
   @IBOutlet var dateLabel: UILabel!
   
 }

@@ -42,13 +42,17 @@ extension ProfileViewController: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WALK_CELL_IDENTIFIER, for: indexPath) as! WalkCollectionViewCell
-    
     let walk = walks[indexPath.row]
     
     cell.nameLabel.text = walk.name
-    cell.dateLabel.text = walk.date
+    
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "d/M/yy"
+    cell.dateLabel.text = dateFormatter.string(from: walk.date)
+    
     cell.imageView.layer.cornerRadius = 8
     cell.imageView.clipsToBounds = true
+    
     do {
       if let url = URL(string: walk.image) {
         try cell.imageView.image = UIImage(data: Data(contentsOf: url))
@@ -66,7 +70,7 @@ extension ProfileViewController: UICollectionViewDataSource {
 extension ProfileViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let cellWidth = (view.frame.width - 20.0 * (CELLS_PER_ROW + 1)) / CELLS_PER_ROW
-    let size = CGSize(width: cellWidth, height: cellWidth + 50)
+    let size = CGSize(width: cellWidth, height: cellWidth + 30)
     return size
   }
 }
@@ -76,7 +80,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
 extension ProfileViewController {
    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if let vc = segue.destination as? WalkDetailViewController {
-      if let indexPath = collectionView.indexPathsForSelectedItems?[0] {
+      if let indexPath = collectionView.indexPath(for: sender as! WalkCollectionViewCell) {
         vc.walkID = walks[indexPath.row].id
       }
     }
@@ -92,12 +96,18 @@ private extension ProfileViewController {
       case .success(let json):
         var walks: [WalkInfo] = []
         for (_, subJson): (String, JSON) in json["walks"] {
+          let dateFormatter = DateFormatter()
+          dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+          
           let walk = WalkInfo(id: subJson["id"].stringValue,
                               name: subJson["name"].stringValue,
                               image: subJson["image"].stringValue,
-                              date: subJson["createdAt"].stringValue)
+                              date: dateFormatter.date(from: subJson["createdAt"].stringValue)!)
           walks.append(walk)
         }
+        
+        // Order walks by most to least recent
+        walks = walks.sorted(by: { $0.date.compare($1.date) == ComparisonResult.orderedDescending })
         completion(walks)
       case .failure(let error):
         let alertView = UIAlertController(title: error.localizedDescription,

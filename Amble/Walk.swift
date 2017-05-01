@@ -24,6 +24,6 @@ struct WalkInfo {
   let id: String
   let name: String
   let image: String
-  let date: String
+  let date: Date
   
 }
