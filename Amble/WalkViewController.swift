@@ -50,6 +50,13 @@ extension WalkViewController: MKMapViewDelegate {
     
     return nil
   }
+  
+  func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+    self.mapView.removeOverlays(self.mapView.overlays)
+    let coordinates = convertToCoordinates()
+    let polyLine = MKPolyline(coordinates: coordinates, count: coordinates.count)
+    self.mapView.add(polyLine)
+  }
 }
 
 // MARK: - Public helper methods
