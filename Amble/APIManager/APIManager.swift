@@ -114,7 +114,6 @@ private extension APIManager {
     Alamofire.upload(data, to: url, method: .put, headers: headers)
       .validate()
       .responseString { (response) in
-        print(response)
         switch response.result {
         case .success:
           completion(.success(json: JSON("{\"success\": true}")))

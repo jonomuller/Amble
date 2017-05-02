@@ -52,7 +52,7 @@ class TrackWalkViewController: WalkViewController {
     }
     
     // Set up spinner loading view to display when walk is being saved
-    spinner = self.view.createIndicatorView(width: 50, height: 50)
+    spinner = self.mapView.createIndicatorView(width: 50, height: 50)
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -264,7 +264,7 @@ private extension TrackWalkViewController {
       field.returnKeyType = .done
       field.enablesReturnKeyAutomatically = true
       field.placeholder = "walk name"
-      field.autocapitalizationType = .words
+      field.autocapitalizationType = .sentences
       field.addTarget(self, action: #selector(self.textFieldDidChange), for: .editingChanged)
     })
     
@@ -282,19 +282,7 @@ private extension TrackWalkViewController {
     
     saveWalkAction.isEnabled = false
     nameAlert.addAction(saveWalkAction)
-    
-    let coordinates = convertToCoordinates()
-    let polyLine = MKPolyline(coordinates: coordinates, count: coordinates.count)
-    let padding = (mapView.frame.height - mapView.frame.width) / 2
-    mapView.showsUserLocation = false
-    
-    UIView.animate(withDuration: 1.0, animations: {
-      self.mapView.setVisibleMapRect(polyLine.boundingMapRect,
-                                     edgePadding: UIEdgeInsetsMake(padding, 10, padding, 10),
-                                     animated: true)
-    }) { (done) in
-      self.present(self.nameAlert, animated: true, completion: nil)
-    }
+    self.present(self.nameAlert, animated: true, completion: nil)
   }
   
   func saveWalk(name: String) {
@@ -302,7 +290,6 @@ private extension TrackWalkViewController {
       if let mapImage = image {
         APIManager.sharedInstance.createWalk(name: name, owner: User.sharedInstance.userInfo!.id, locations: self.locations, image: mapImage, time: self.time, distance: self.distance, steps: self.calories, completion: { (response) in
           self.spinner.stopAnimating()
-          self.mapView.showsUserLocation = true
           
           switch response {
           case .success(let json):
