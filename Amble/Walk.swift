@@ -18,3 +18,12 @@ struct Walk {
   let calories: Double
   
 }
+
+struct WalkInfo {
+  
+  let id: String
+  let name: String
+  let image: String
+  let date: Date
+  
+}

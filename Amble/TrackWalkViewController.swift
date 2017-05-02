@@ -15,7 +15,6 @@ class TrackWalkViewController: WalkViewController {
   
   fileprivate let TIME_INTERVAL = 1.0
   
-  @IBOutlet var spinnerView: UIView!
   fileprivate var spinner: NVActivityIndicatorView!
   
   fileprivate var locationManager: CLLocationManager!
@@ -47,20 +46,13 @@ class TrackWalkViewController: WalkViewController {
     locationManager.activityType = .fitness
     locationManager.desiredAccuracy = kCLLocationAccuracyBest
     
-    // Ask for permission to use location if first
+    // Ask for permission to use location the first time the app is opened
     if CLLocationManager.authorizationStatus() == .notDetermined {
       locationManager.requestWhenInUseAuthorization()
     }
     
     // Set up spinner loading view to display when walk is being saved
-    spinnerView.layer.cornerRadius = spinnerView.frame.height / 2
-    spinner = NVActivityIndicatorView(frame: CGRect(x: spinnerView.frame.width / 2 - 15,
-                                                    y: spinnerView.frame.height / 2 - 15,
-                                                    width: 30,
-                                                    height: 30),
-                                      type: .ballScaleRippleMultiple,
-                                      color: .flatGreenDark)
-    spinnerView.addSubview(spinner)
+    spinner = self.view.createIndicatorView(width: 50, height: 50)
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -264,8 +256,8 @@ private extension TrackWalkViewController {
     self.endWalk()
     
     nameAlert = UIAlertController(title: "Save Walk",
-                                      message: "Please enter a name for the walk",
-                                      preferredStyle: .alert)
+                                  message: "Please enter a name for the walk",
+                                  preferredStyle: .alert)
     
     nameAlert.addTextField(configurationHandler: { (field) in
       field.delegate = self
@@ -278,11 +270,11 @@ private extension TrackWalkViewController {
     
     nameAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
       self.removeMapOverlays()
+      self.locations = []
     }))
     
     saveWalkAction = UIAlertAction(title: "Save", style: .default) { (action) in
       if let name = self.nameAlert.textFields?[0].text {
-        self.spinnerView.isHidden = false
         self.spinner.startAnimating()
         self.saveWalk(name: name)
       }
@@ -290,40 +282,76 @@ private extension TrackWalkViewController {
     
     saveWalkAction.isEnabled = false
     nameAlert.addAction(saveWalkAction)
-    self.present(nameAlert, animated: true, completion: nil)
+    
+    let coordinates = convertToCoordinates()
+    let polyLine = MKPolyline(coordinates: coordinates, count: coordinates.count)
+    let padding = (mapView.frame.height - mapView.frame.width) / 2
+    mapView.showsUserLocation = false
+    
+    UIView.animate(withDuration: 1.0, animations: {
+      self.mapView.setVisibleMapRect(polyLine.boundingMapRect,
+                                     edgePadding: UIEdgeInsetsMake(padding, 10, padding, 10),
+                                     animated: true)
+    }) { (done) in
+      self.present(self.nameAlert, animated: true, completion: nil)
+    }
   }
   
   func saveWalk(name: String) {
-    APIManager.sharedInstance.createWalk(name: name, owner: User.sharedInstance.userInfo!.id, locations: locations, time: time, distance: distance, steps: calories, completion: { (response) in
-      self.spinner.stopAnimating()
-      self.spinnerView.isHidden = true
-      
-      switch response {
-      case .success(let json):
-        self.removeMapOverlays()
-        var coordinates: [CLLocationCoordinate2D] = []
+    if let image = self.renderMapImage() {
+      APIManager.sharedInstance.createWalk(name: name, owner: User.sharedInstance.userInfo!.id, locations: locations, image: image, time: time, distance: distance, steps: calories, completion: { (response) in
+        self.spinner.stopAnimating()
+        self.mapView.showsUserLocation = true
         
-        for location in self.locations {
-          coordinates.append(location.coordinate)
+        switch response {
+        case .success(let json):
+          self.removeMapOverlays()
+          
+          let coordinates = self.convertToCoordinates()
+          self.locations = []
+          
+          let walk = Walk(name: json["walk"]["name"].stringValue,
+                          coordinates: coordinates,
+                          time: self.time,
+                          distance: self.distance,
+                          calories: self.calories)
+          
+          self.presentWalkDetailView(walk: walk, id: json["walk"]["_id"].stringValue)
+        case .failure(let error):
+          let alertView = UIAlertController(title: error.localizedDescription, message: error.localizedFailureReason, preferredStyle: .alert)
+          
+          alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+            self.present(self.nameAlert, animated: true, completion: nil)
+          }))
+          
+          self.present(alertView, animated: true, completion: nil)
         }
-        
-        let walk = Walk(name: json["walk"]["name"].stringValue,
-                        coordinates: coordinates,
-                        time: self.time,
-                        distance: self.distance,
-                        calories: self.calories)
-        
-        self.presentWalkDetailView(walk: walk, id: json["walk"]["_id"].stringValue)
-      case .failure(let error):
-        let alertView = UIAlertController(title: error.localizedDescription, message: error.localizedFailureReason, preferredStyle: .alert)
-        
-        alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-          self.present(self.nameAlert, animated: true, completion: nil)
-        }))
-        
-        self.present(alertView, animated: true, completion: nil)
-      }
-    })
+      })
+    }
+  }
+  
+  func convertToCoordinates() -> [CLLocationCoordinate2D] {
+    var coordinates: [CLLocationCoordinate2D] = []
+    
+    for location in self.locations {
+      coordinates.append(location.coordinate)
+    }
+    
+    return coordinates
+  }
+  
+  func renderMapImage() -> UIImage? {
+    UIGraphicsBeginImageContext(CGSize(width: mapView.frame.width, height: mapView.frame.width))
+    mapView.drawHierarchy(in: CGRect(x: 0,
+                                     y: mapView.frame.width / 2 - mapView.frame.height / 2,
+                                     width: mapView.frame.width,
+                                     height: mapView.frame.height),
+                          afterScreenUpdates: true)
+    
+    let image = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    
+    return image
   }
   
   func removeMapOverlays() {
