@@ -348,10 +348,13 @@ private extension TrackWalkViewController {
     var image: UIImage?
     let snapshotOptions = MKMapSnapshotOptions()
     let coordinates = convertToCoordinates()
-    let polyLine = MKPolyline(coordinates: coordinates, count: coordinates.count)
     let size = CGSize(width: 200, height: 200)
+    let polyLine = MKPolyline(coordinates: coordinates, count: coordinates.count)
+    var region = MKCoordinateRegionForMapRect(polyLine.boundingMapRect)
+    region.span.latitudeDelta *= 1.2
+    region.span.longitudeDelta *= 1.2
     
-    snapshotOptions.region = MKCoordinateRegionForMapRect(polyLine.boundingMapRect)
+    snapshotOptions.region = region
     snapshotOptions.scale = UIScreen.main.scale
     snapshotOptions.size = size
     snapshotOptions.showsBuildings = true
@@ -365,8 +368,10 @@ private extension TrackWalkViewController {
         snapshot?.image.draw(at: .zero)
         
         if let context = UIGraphicsGetCurrentContext() {
+          
+          // Draw walk route
           context.setLineWidth(5.0)
-          context.setStrokeColor(UIColor.flatGreenDark.cgColor)
+          context.setStrokeColor(UIColor.flatForestGreen.cgColor)
           
           var points: [CGPoint] = []
           for coordinate in coordinates {
@@ -375,6 +380,17 @@ private extension TrackWalkViewController {
           
           context.addLines(between: points)
           context.strokePath()
+          
+          // Draw start and finish pins
+          for annotation in self.mapView.annotations {
+            if let pin = annotation as? WalkPin {
+              var point = (snapshot?.point(for: pin.coordinate))!
+              let pinImage = UIImage(named: pin.imageName)
+              point.x -= (pinImage?.size.width)! / 2
+              point.y -= (pinImage?.size.height)! / 2
+              pinImage?.draw(at: point)
+            }
+          }
         }
         
         image = UIGraphicsGetImageFromCurrentImageContext()
