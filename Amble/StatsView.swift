@@ -12,7 +12,7 @@ class StatsView: UIView {
   
   @IBOutlet var timeLabel: UILabel!
   @IBOutlet var distanceLabel: UILabel!
-  @IBOutlet var calorieLabel: UILabel!
+  @IBOutlet var stepsLabel: UILabel!
   
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)

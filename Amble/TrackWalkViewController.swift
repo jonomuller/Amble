@@ -28,7 +28,7 @@ class TrackWalkViewController: WalkViewController {
   
   fileprivate var time = 0
   fileprivate var distance = 0.0
-  fileprivate var calories = 0.0
+  fileprivate var steps = 0.0
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -174,10 +174,10 @@ extension TrackWalkViewController {
       locations = []
       time = 0
       distance = 0.0
-      calories = 0.0
+      steps = 0.0
       statsView.timeLabel.text = "00:00"
       statsView.distanceLabel.attributedText = self.getDistanceLabelText(distance: 0)
-      statsView.calorieLabel.text = "0"
+      statsView.stepsLabel.text = "0"
       timer = Timer.scheduledTimer(timeInterval: TIME_INTERVAL,
                                    target: self,
                                    selector: #selector(timerTick),
@@ -288,7 +288,7 @@ private extension TrackWalkViewController {
   func saveWalk(name: String) {
     self.renderMapImage { (image) in
       if let mapImage = image {
-        APIManager.sharedInstance.createWalk(name: name, owner: User.sharedInstance.userInfo!.id, locations: self.locations, image: mapImage, time: self.time, distance: self.distance, steps: self.calories, completion: { (response) in
+        APIManager.sharedInstance.createWalk(name: name, owner: User.sharedInstance.userInfo!.id, locations: self.locations, image: mapImage, time: self.time, distance: self.distance, steps: self.steps, completion: { (response) in
           self.spinner.stopAnimating()
           
           switch response {
@@ -302,7 +302,7 @@ private extension TrackWalkViewController {
                             coordinates: coordinates,
                             time: self.time,
                             distance: self.distance,
-                            calories: self.calories)
+                            steps: self.steps)
             
             self.presentWalkDetailView(walk: walk, id: json["walk"]["_id"].stringValue)
           case .failure(let error):

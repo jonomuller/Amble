@@ -79,7 +79,7 @@ private extension WalkDetailViewController {
                          coordinates: coordinates,
                          time: json["walk"]["time"].intValue,
                          distance: json["walk"]["distance"].doubleValue,
-                         calories: json["walk"]["steps"].doubleValue)
+                         steps: json["walk"]["steps"].doubleValue)
         
         self.setupView()
       case .failure(let error):
