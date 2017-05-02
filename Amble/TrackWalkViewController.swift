@@ -46,7 +46,7 @@ class TrackWalkViewController: WalkViewController {
     locationManager.activityType = .fitness
     locationManager.desiredAccuracy = kCLLocationAccuracyBest
     
-    // Ask for permission to use location if first
+    // Ask for permission to use location the first time the app is opened
     if CLLocationManager.authorizationStatus() == .notDetermined {
       locationManager.requestWhenInUseAuthorization()
     }
