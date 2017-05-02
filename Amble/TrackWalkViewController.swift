@@ -52,7 +52,7 @@ class TrackWalkViewController: WalkViewController {
     }
     
     // Set up spinner loading view to display when walk is being saved
-    spinner = self.view.createIndicatorView(width: 50, height: 50)
+    spinner = self.mapView.createIndicatorView(width: 50, height: 50)
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -264,7 +264,7 @@ private extension TrackWalkViewController {
       field.returnKeyType = .done
       field.enablesReturnKeyAutomatically = true
       field.placeholder = "walk name"
-      field.autocapitalizationType = .words
+      field.autocapitalizationType = .sentences
       field.addTarget(self, action: #selector(self.textFieldDidChange), for: .editingChanged)
     })
     
@@ -282,51 +282,42 @@ private extension TrackWalkViewController {
     
     saveWalkAction.isEnabled = false
     nameAlert.addAction(saveWalkAction)
-    
-    let coordinates = convertToCoordinates()
-    let polyLine = MKPolyline(coordinates: coordinates, count: coordinates.count)
-    let padding = (mapView.frame.height - mapView.frame.width) / 2
-    mapView.showsUserLocation = false
-    
-    UIView.animate(withDuration: 1.0, animations: {
-      self.mapView.setVisibleMapRect(polyLine.boundingMapRect,
-                                     edgePadding: UIEdgeInsetsMake(padding, 10, padding, 10),
-                                     animated: true)
-    }) { (done) in
-      self.present(self.nameAlert, animated: true, completion: nil)
-    }
+    self.present(self.nameAlert, animated: true, completion: nil)
   }
   
   func saveWalk(name: String) {
-    if let image = self.renderMapImage() {
-      APIManager.sharedInstance.createWalk(name: name, owner: User.sharedInstance.userInfo!.id, locations: locations, image: image, time: time, distance: distance, steps: calories, completion: { (response) in
-        self.spinner.stopAnimating()
-        self.mapView.showsUserLocation = true
-        
-        switch response {
-        case .success(let json):
-          self.removeMapOverlays()
+    self.renderMapImage { (image) in
+      if let mapImage = image {
+        APIManager.sharedInstance.createWalk(name: name, owner: User.sharedInstance.userInfo!.id, locations: self.locations, image: mapImage, time: self.time, distance: self.distance, steps: self.calories, completion: { (response) in
+          self.spinner.stopAnimating()
           
-          let coordinates = self.convertToCoordinates()
-          self.locations = []
-          
-          let walk = Walk(name: json["walk"]["name"].stringValue,
-                          coordinates: coordinates,
-                          time: self.time,
-                          distance: self.distance,
-                          calories: self.calories)
-          
-          self.presentWalkDetailView(walk: walk, id: json["walk"]["_id"].stringValue)
-        case .failure(let error):
-          let alertView = UIAlertController(title: error.localizedDescription, message: error.localizedFailureReason, preferredStyle: .alert)
-          
-          alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-            self.present(self.nameAlert, animated: true, completion: nil)
-          }))
-          
-          self.present(alertView, animated: true, completion: nil)
-        }
-      })
+          switch response {
+          case .success(let json):
+            self.removeMapOverlays()
+            
+            let coordinates = self.convertToCoordinates()
+            self.locations = []
+            
+            let walk = Walk(name: json["walk"]["name"].stringValue,
+                            coordinates: coordinates,
+                            time: self.time,
+                            distance: self.distance,
+                            calories: self.calories)
+            
+            self.presentWalkDetailView(walk: walk, id: json["walk"]["_id"].stringValue)
+          case .failure(let error):
+            let alertView = UIAlertController(title: error.localizedDescription, message: error.localizedFailureReason, preferredStyle: .alert)
+            
+            alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+              self.present(self.nameAlert, animated: true, completion: nil)
+            }))
+            
+            self.present(alertView, animated: true, completion: nil)
+          }
+        })
+      } else {
+        print("Unable to render image")
+      }
     }
   }
   
@@ -340,18 +331,61 @@ private extension TrackWalkViewController {
     return coordinates
   }
   
-  func renderMapImage() -> UIImage? {
-    UIGraphicsBeginImageContext(CGSize(width: mapView.frame.width, height: mapView.frame.width))
-    mapView.drawHierarchy(in: CGRect(x: 0,
-                                     y: mapView.frame.width / 2 - mapView.frame.height / 2,
-                                     width: mapView.frame.width,
-                                     height: mapView.frame.height),
-                          afterScreenUpdates: true)
+  func renderMapImage(completion: @escaping (UIImage?) -> Void) {
+    var image: UIImage?
+    let snapshotOptions = MKMapSnapshotOptions()
+    let coordinates = convertToCoordinates()
+    let size = CGSize(width: 200, height: 200)
+    let polyLine = MKPolyline(coordinates: coordinates, count: coordinates.count)
+    var region = MKCoordinateRegionForMapRect(polyLine.boundingMapRect)
+    region.span.latitudeDelta *= 1.2
+    region.span.longitudeDelta *= 1.2
     
-    let image = UIGraphicsGetImageFromCurrentImageContext()
-    UIGraphicsEndImageContext()
+    snapshotOptions.region = region
+    snapshotOptions.scale = UIScreen.main.scale
+    snapshotOptions.size = size
+    snapshotOptions.showsBuildings = true
+    snapshotOptions.showsPointsOfInterest = true
     
-    return image
+    let snapShotter = MKMapSnapshotter(options: snapshotOptions)
+    
+    snapShotter.start { (snapshot, error) in
+      if snapshot != nil {
+        UIGraphicsBeginImageContextWithOptions(size, true, 0)
+        snapshot?.image.draw(at: .zero)
+        
+        if let context = UIGraphicsGetCurrentContext() {
+          
+          // Draw walk route
+          context.setLineWidth(5.0)
+          context.setStrokeColor(UIColor.flatForestGreen.cgColor)
+          
+          var points: [CGPoint] = []
+          for coordinate in coordinates {
+            points.append((snapshot?.point(for: coordinate))!)
+          }
+          
+          context.addLines(between: points)
+          context.strokePath()
+          
+          // Draw start and finish pins
+          for annotation in self.mapView.annotations {
+            if let pin = annotation as? WalkPin {
+              var point = (snapshot?.point(for: pin.coordinate))!
+              let pinImage = UIImage(named: pin.imageName)
+              point.x -= (pinImage?.size.width)! / 2
+              point.y -= (pinImage?.size.height)! / 2
+              pinImage?.draw(at: point)
+            }
+          }
+        }
+        
+        image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        completion(image)
+      }
+    }
   }
   
   func removeMapOverlays() {
