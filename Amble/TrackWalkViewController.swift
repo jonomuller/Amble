@@ -15,7 +15,6 @@ class TrackWalkViewController: WalkViewController {
   
   fileprivate let TIME_INTERVAL = 1.0
   
-  @IBOutlet var spinnerView: UIView!
   fileprivate var spinner: NVActivityIndicatorView!
   
   fileprivate var locationManager: CLLocationManager!
@@ -53,14 +52,7 @@ class TrackWalkViewController: WalkViewController {
     }
     
     // Set up spinner loading view to display when walk is being saved
-    spinnerView.layer.cornerRadius = spinnerView.frame.height / 2
-    spinner = NVActivityIndicatorView(frame: CGRect(x: spinnerView.frame.width / 2 - 15,
-                                                    y: spinnerView.frame.height / 2 - 15,
-                                                    width: 30,
-                                                    height: 30),
-                                      type: .ballScaleRippleMultiple,
-                                      color: .flatGreenDark)
-    spinnerView.addSubview(spinner)
+    spinner = self.view.createIndicatorView(width: 50, height: 50)
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -283,7 +275,6 @@ private extension TrackWalkViewController {
     
     saveWalkAction = UIAlertAction(title: "Save", style: .default) { (action) in
       if let name = self.nameAlert.textFields?[0].text {
-        self.spinnerView.isHidden = false
         self.spinner.startAnimating()
         self.saveWalk(name: name)
       }
@@ -310,7 +301,6 @@ private extension TrackWalkViewController {
     if let image = self.renderMapImage() {
       APIManager.sharedInstance.createWalk(name: name, owner: User.sharedInstance.userInfo!.id, locations: locations, image: image, time: time, distance: distance, steps: calories, completion: { (response) in
         self.spinner.stopAnimating()
-        self.spinnerView.isHidden = true
         self.mapView.showsUserLocation = true
         
         switch response {

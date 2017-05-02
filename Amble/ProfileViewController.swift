@@ -24,16 +24,7 @@ class ProfileViewController: UIViewController {
     super.viewDidLoad()
     self.navigationItem.title = (User.sharedInstance.userInfo?.firstName)! + " " + (User.sharedInstance.userInfo?.lastName)!
     
-    spinner = NVActivityIndicatorView(frame: CGRect(x: collectionView.frame.width / 2 - 25,
-                                                    y: collectionView.frame.height / 2 - 25,
-                                                    width: 50,
-                                                    height: 50),
-                                      type: .ballScaleRippleMultiple,
-                                      color: .white,
-                                      padding: 10)
-    spinner.backgroundColor = .flatGreenDark
-    spinner.layer.cornerRadius = spinner.frame.height / 2
-    self.collectionView.addSubview(spinner)
+    spinner = self.collectionView.createIndicatorView(width: 50, height: 50)
     spinner.startAnimating()
   }
   
