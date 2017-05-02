@@ -364,7 +364,23 @@ private extension TrackWalkViewController {
         UIGraphicsBeginImageContextWithOptions(size, true, 0)
         snapshot?.image.draw(at: .zero)
         
-        completion(snapshot?.image)
+        if let context = UIGraphicsGetCurrentContext() {
+          context.setLineWidth(5.0)
+          context.setStrokeColor(UIColor.flatGreenDark.cgColor)
+          
+          var points: [CGPoint] = []
+          for coordinate in coordinates {
+            points.append((snapshot?.point(for: coordinate))!)
+          }
+          
+          context.addLines(between: points)
+          context.strokePath()
+        }
+        
+        image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        completion(image)
       }
     }
   }
