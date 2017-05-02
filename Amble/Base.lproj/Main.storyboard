@@ -25,7 +25,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fnV-54-zCr">
-                                <rect key="frame" x="0.0" y="100" width="375" height="503"/>
+                                <rect key="frame" x="0.0" y="76" width="375" height="527"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="20" id="6x5-hh-qP8">
                                     <size key="itemSize" width="50" height="50"/>
@@ -45,7 +45,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s8r-Dn-YaY">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="s8r-Dn-YaY">
                                                     <rect key="frame" x="0.0" y="155" width="110" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="17"/>
@@ -150,7 +150,7 @@
                             <constraint firstItem="fnV-54-zCr" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" id="PcS-lb-FTB"/>
                             <constraint firstAttribute="trailing" secondItem="fnV-54-zCr" secondAttribute="trailing" id="YYb-lF-hbG"/>
                             <constraint firstAttribute="trailingMargin" secondItem="OLD-1K-7tv" secondAttribute="trailing" constant="-16" id="Z4l-zL-icP"/>
-                            <constraint firstItem="fnV-54-zCr" firstAttribute="top" secondItem="OLD-1K-7tv" secondAttribute="bottom" constant="24" id="ghj-Tj-Ioq"/>
+                            <constraint firstItem="fnV-54-zCr" firstAttribute="top" secondItem="OLD-1K-7tv" secondAttribute="bottom" id="ghj-Tj-Ioq"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2J7-gR-IwL">

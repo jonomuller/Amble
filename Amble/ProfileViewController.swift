@@ -8,10 +8,13 @@
 
 import UIKit
 import SwiftyJSON
+import NVActivityIndicatorView
 
 class ProfileViewController: UIViewController {
   
   @IBOutlet var collectionView: UICollectionView!
+  
+  fileprivate var spinner: NVActivityIndicatorView!
   
   fileprivate var walks: [WalkInfo] = []
   fileprivate let WALK_CELL_IDENTIFIER = "WalkCell"
@@ -20,6 +23,18 @@ class ProfileViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.navigationItem.title = (User.sharedInstance.userInfo?.firstName)! + " " + (User.sharedInstance.userInfo?.lastName)!
+    
+    spinner = NVActivityIndicatorView(frame: CGRect(x: collectionView.frame.width / 2 - 25,
+                                                    y: collectionView.frame.height / 2 - 25,
+                                                    width: 50,
+                                                    height: 50),
+                                      type: .ballScaleRippleMultiple,
+                                      color: .white,
+                                      padding: 10)
+    spinner.backgroundColor = .flatGreenDark
+    spinner.layer.cornerRadius = spinner.frame.height / 2
+    self.collectionView.addSubview(spinner)
+    spinner.startAnimating()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -92,6 +107,7 @@ extension ProfileViewController {
 private extension ProfileViewController {
   func getWalks(completion: @escaping ([WalkInfo]) -> Void) {
     APIManager.sharedInstance.getWalks(id: (User.sharedInstance.userInfo?.id)!) { (response) in
+      self.spinner.stopAnimating()
       switch response {
       case .success(let json):
         var walks: [WalkInfo] = []
