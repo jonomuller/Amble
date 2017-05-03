@@ -64,5 +64,7 @@
 	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location services are required to track your walks.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Motion activity is required to count your steps.</string>
 </dict>
 </plist>
