@@ -99,7 +99,7 @@ private extension WalkDetailViewController {
     let polyLine = MKPolyline(coordinates: (walk?.coordinates)!, count: (walk?.coordinates.count)!)
     mapView.add(polyLine)
     mapView.setVisibleMapRect(polyLine.boundingMapRect,
-                              edgePadding: UIEdgeInsetsMake(75, 75, 75, 75),
+                              edgePadding: UIEdgeInsetsMake(20, 20, 20, 20),
                               animated: true)
     
     self.dropPin(coordinate: (walk?.coordinates.first)!, name: "start")
