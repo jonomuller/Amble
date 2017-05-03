@@ -18,13 +18,6 @@ class WalkDetailViewController: WalkViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.navigationController?.navigationBar.barTintColor = .flatGreenDark
-    self.navigationController?.navigationBar.tintColor = .white
-    self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
-    self.navigationController?.navigationBar.isTranslucent = false
-    self.navigationController?.hidesNavigationBarHairline = true
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonPressed))
-    
     if walk == nil {
       self.getWalk()
     } else {
@@ -36,8 +29,30 @@ class WalkDetailViewController: WalkViewController {
 // MARK: - Action methods
 
 extension WalkDetailViewController {
+  
   func doneButtonPressed() {
     self.dismiss(animated: true, completion: nil)
+  }
+  
+  @IBAction func deleteButtonPressed() {
+    if let id = walkID {
+      APIManager.sharedInstance.deleteWalk(id: id, completion: { (response) in
+        switch response {
+        case .success:
+          if let viewControllers = self.navigationController?.viewControllers {
+            if viewControllers.count > 1 && viewControllers[viewControllers.count - 2] is ProfileViewController {
+              self.navigationController?.popViewController(animated: true)
+            } else {
+              self.dismiss(animated: true, completion: nil)
+            }
+          }
+        case .failure(let error):
+          let deleteError = UIAlertController(title: error.localizedDescription, message: error.localizedFailureReason, preferredStyle: .alert)
+          deleteError.addAction(UIAlertAction(title: "Dimiss", style: .default, handler: nil))
+          self.present(deleteError, animated: true, completion: nil)
+        }
+      })
+    }
   }
 }
 

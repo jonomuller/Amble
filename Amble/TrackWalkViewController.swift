@@ -423,9 +423,15 @@ private extension TrackWalkViewController {
   func presentWalkDetailView(walk: Walk, id: String) {
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     let vc = storyboard.instantiateViewController(withIdentifier: "WalkDetailViewController") as! WalkDetailViewController
+    let navController = UINavigationController(rootViewController: vc)
     vc.walk = walk
     vc.walkID = id
-    let navController = UINavigationController(rootViewController: vc)
+    navController.navigationBar.barTintColor = .flatGreenDark
+    navController.navigationBar.tintColor = .white
+    navController.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+    navController.navigationBar.isTranslucent = false
+    navController.hidesNavigationBarHairline = true
+    vc.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: vc, action: #selector(vc.doneButtonPressed))
     self.present(navController, animated: true, completion: nil)
   }
 }

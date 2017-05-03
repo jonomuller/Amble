@@ -200,7 +200,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingsCell" id="DPz-t9-IvH">
-                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="55" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DPz-t9-IvH" id="c9Z-dk-u1H">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
@@ -463,7 +463,14 @@
                             <constraint firstItem="z5s-mZ-JNY" firstAttribute="leading" secondItem="EpE-Bd-UG2" secondAttribute="leading" id="zfN-GF-hZk"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="GXR-ke-UlG"/>
+                    <navigationItem key="navigationItem" id="GXR-ke-UlG">
+                        <barButtonItem key="rightBarButtonItem" title="Delete" id="lE1-Vv-JBN">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="deleteButtonPressed" destination="Ptt-bC-yPg" id="IEY-bf-Idq"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="z5s-mZ-JNY" id="wpb-vI-5yT"/>
                         <outlet property="statsView" destination="ohS-yg-gHt" id="s2X-xV-3gR"/>
