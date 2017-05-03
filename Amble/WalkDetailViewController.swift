@@ -35,22 +35,13 @@ extension WalkDetailViewController {
   }
   
   @IBAction func deleteButtonPressed() {
-    if let id = walkID {
-      APIManager.sharedInstance.deleteWalk(id: id, completion: { (response) in
-        switch response {
-        case .success:
-          if let viewControllers = self.navigationController?.viewControllers {
-            if viewControllers.count > 1 && viewControllers[viewControllers.count - 2] is ProfileViewController {
-              self.navigationController?.popViewController(animated: true)
-            } else {
-              self.dismiss(animated: true, completion: nil)
-            }
-          }
-        case .failure(let error):
-          self.displayErrorAlert(error: error)
-        }
-      })
-    }
+    // Display confirmation message to delete walk
+    let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+    alert.addAction(UIAlertAction(title: "Delete Walk", style: .destructive, handler: { (action) in
+      self.deleteWalk()
+    }))
+    self.present(alert, animated: true, completion: nil)
   }
 }
 
@@ -113,5 +104,24 @@ private extension WalkDetailViewController {
     
     self.dropPin(coordinate: (walk?.coordinates.first)!, name: "start")
     self.dropPin(coordinate: (walk?.coordinates.last)!, name: "finish")
+  }
+  
+  func deleteWalk() {
+    if let id = walkID {
+      APIManager.sharedInstance.deleteWalk(id: id, completion: { (response) in
+        switch response {
+        case .success:
+          if let viewControllers = self.navigationController?.viewControllers {
+            if viewControllers.count > 1 && viewControllers[viewControllers.count - 2] is ProfileViewController {
+              self.navigationController?.popViewController(animated: true)
+            } else {
+              self.dismiss(animated: true, completion: nil)
+            }
+          }
+        case .failure(let error):
+          self.displayErrorAlert(error: error)
+        }
+      })
+    }
   }
 }
