@@ -238,9 +238,7 @@ extension EntryViewController {
       // Go to logged in view
       self.setRootView(to: "Main")
     case .failure(let error):
-      let alertView = UIAlertController(title: error.localizedDescription, message: error.localizedFailureReason, preferredStyle: .alert)
-      alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-      self.present(alertView, animated: true, completion: nil)
+      self.displayErrorAlert(error: error)
     }
   }
 }

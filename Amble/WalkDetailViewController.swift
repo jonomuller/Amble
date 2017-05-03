@@ -47,9 +47,7 @@ extension WalkDetailViewController {
             }
           }
         case .failure(let error):
-          let deleteError = UIAlertController(title: error.localizedDescription, message: error.localizedFailureReason, preferredStyle: .alert)
-          deleteError.addAction(UIAlertAction(title: "Dimiss", style: .default, handler: nil))
-          self.present(deleteError, animated: true, completion: nil)
+          self.displayErrorAlert(error: error)
         }
       })
     }
@@ -98,9 +96,7 @@ private extension WalkDetailViewController {
         
         self.setupView()
       case .failure(let error):
-        let alertView = UIAlertController(title: error.localizedDescription, message: error.localizedFailureReason, preferredStyle: .alert)
-        alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alertView, animated: true, completion: nil)
+        self.displayErrorAlert(error: error)
       }
     }
   }
