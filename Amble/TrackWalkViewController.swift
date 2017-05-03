@@ -184,11 +184,15 @@ extension TrackWalkViewController {
       statsView.distanceLabel.attributedText = self.getDistanceLabelText(distance: 0)
       statsView.stepsLabel.text = "0"
       
+      // Receive updates from phone's motion data to count number of steps
       if CMPedometer.isStepCountingAvailable() {
         pedometer.startUpdates(from: Date(), withHandler: { (data, error) in
           if let error = error, error._code == Int(CMErrorMotionActivityNotAuthorized.rawValue) {
             self.displayPrivacyError(title: "Motion activity is disabled",
                                      message: "Please enable motion activity in the Settings app in order to count your steps.")
+            DispatchQueue.main.async(execute: { 
+              self.statsView.stepsLabel.text = "-"
+            })
           } else {
             self.steps = (data?.numberOfSteps.intValue)!
             DispatchQueue.main.async(execute: {
@@ -210,8 +214,10 @@ extension TrackWalkViewController {
   
   func timerTick() {
     time += 1
-    statsView.timeLabel.text = self.getTimeLabelText(time: time)
-    statsView.distanceLabel.attributedText = self.getDistanceLabelText(distance: distance)
+    DispatchQueue.main.async {
+      self.statsView.timeLabel.text = self.getTimeLabelText(time: self.time)
+      self.statsView.distanceLabel.attributedText = self.getDistanceLabelText(distance: self.distance)
+    }
   }
   
   func textFieldDidChange(_ sender: Any) {
@@ -261,6 +267,7 @@ private extension TrackWalkViewController {
     self.navigationItem.rightBarButtonItem?.title = "Start"
     self.transformStatsView(transform: .identity)
     locationManager.allowsBackgroundLocationUpdates = false
+    pedometer.stopUpdates()
     walkStarted = false
     timer.invalidate()
   }
