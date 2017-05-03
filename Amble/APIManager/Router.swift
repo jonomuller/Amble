@@ -21,6 +21,7 @@ enum Router: URLRequestConvertible {
   case createWalk(details: Parameters)
   case getMapImageURL
   case getWalk(id: String)
+  case deleteWalk(id: String)
   
   // /users
   case getWalks(id: String)
@@ -31,6 +32,8 @@ enum Router: URLRequestConvertible {
       return .post
     case .getWalk, .getWalks, .getMapImageURL:
       return .get
+    case .deleteWalk:
+      return .delete
     }
   }
   
@@ -45,6 +48,8 @@ enum Router: URLRequestConvertible {
     case .getMapImageURL:
       return "/walks/create/upload"
     case .getWalk(let id):
+      return "/walks/\(id)"
+    case .deleteWalk(let id):
       return "/walks/\(id)"
     case .getWalks(let id):
       return "/users/\(id)/walks"
@@ -66,10 +71,10 @@ enum Router: URLRequestConvertible {
   
   var requiresJWTAuth: Bool {
     switch self {
-    case .createWalk, .getWalk, .getWalks, .getMapImageURL:
-      return true
-    default:
+    case .login, .register:
       return false
+    default:
+      return true
     }
   }
   
