@@ -175,7 +175,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2J7-gR-IwL">
-                        <barButtonItem key="rightBarButtonItem" title="Settings" id="htS-rz-C84">
+                        <barButtonItem key="rightBarButtonItem" image="settings" id="htS-rz-C84">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="cR5-R1-LdG" kind="show" id="US3-p7-cN1"/>
@@ -200,7 +200,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingsCell" id="DPz-t9-IvH">
-                                <rect key="frame" x="0.0" y="55" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DPz-t9-IvH" id="c9Z-dk-u1H">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
@@ -227,6 +227,8 @@
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.19115509089999999" green="0.63786703349999996" blue="0.26147949700000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="selectedImageTintColor" red="0.19115509089999999" green="0.63786703349999996" blue="0.26147949700000001" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="yuE-vw-iTF" kind="relationship" relationship="viewControllers" id="DA9-Uu-cQs"/>
@@ -464,7 +466,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="GXR-ke-UlG">
-                        <barButtonItem key="rightBarButtonItem" title="Delete" id="lE1-Vv-JBN">
+                        <barButtonItem key="rightBarButtonItem" image="trash" id="lE1-Vv-JBN">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="deleteButtonPressed" destination="Ptt-bC-yPg" id="IEY-bf-Idq"/>
@@ -484,7 +486,7 @@
         <scene sceneID="WnN-fK-dUX">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Y0U-XG-ZO6" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="username" id="cPa-gy-q4n"/>
                     <toolbarItems/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
@@ -509,7 +511,7 @@
         <scene sceneID="N68-8b-uuj">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yuE-vw-iTF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Track" id="jkK-ha-OUO"/>
+                    <tabBarItem key="tabBarItem" title="Track" image="person" id="jkK-ha-OUO"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="H6P-Vq-V7Q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -530,4 +532,10 @@
             <point key="canvasLocation" x="1732" y="-188"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="person" width="25" height="25"/>
+        <image name="settings" width="25" height="25"/>
+        <image name="trash" width="25" height="25"/>
+        <image name="username" width="25" height="25"/>
+    </resources>
 </document>
