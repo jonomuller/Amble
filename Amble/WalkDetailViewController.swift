@@ -18,13 +18,6 @@ class WalkDetailViewController: WalkViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.navigationController?.navigationBar.barTintColor = .flatGreenDark
-    self.navigationController?.navigationBar.tintColor = .white
-    self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
-    self.navigationController?.navigationBar.isTranslucent = false
-    self.navigationController?.hidesNavigationBarHairline = true
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonPressed))
-    
     if walk == nil {
       self.getWalk()
     } else {
@@ -36,8 +29,19 @@ class WalkDetailViewController: WalkViewController {
 // MARK: - Action methods
 
 extension WalkDetailViewController {
+  
   func doneButtonPressed() {
     self.dismiss(animated: true, completion: nil)
+  }
+  
+  @IBAction func deleteButtonPressed() {
+    // Display confirmation message to delete walk
+    let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+    alert.addAction(UIAlertAction(title: "Delete Walk", style: .destructive, handler: { (action) in
+      self.deleteWalk()
+    }))
+    self.present(alert, animated: true, completion: nil)
   }
 }
 
@@ -66,8 +70,6 @@ private extension WalkDetailViewController {
     APIManager.sharedInstance.getWalk(id: walkID!) { (response) in
       switch response {
       case .success(let json):
-        print("Successfully retrieved walk")
-        print(json)
         let points = json["walk"]["geometry"]["coordinates"].arrayObject as! [[Double]]
         var coordinates: [CLLocationCoordinate2D] = []
         
@@ -83,9 +85,7 @@ private extension WalkDetailViewController {
         
         self.setupView()
       case .failure(let error):
-        let alertView = UIAlertController(title: error.localizedDescription, message: error.localizedFailureReason, preferredStyle: .alert)
-        alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alertView, animated: true, completion: nil)
+        self.displayErrorAlert(error: error)
       }
     }
   }
@@ -99,10 +99,29 @@ private extension WalkDetailViewController {
     let polyLine = MKPolyline(coordinates: (walk?.coordinates)!, count: (walk?.coordinates.count)!)
     mapView.add(polyLine)
     mapView.setVisibleMapRect(polyLine.boundingMapRect,
-                              edgePadding: UIEdgeInsetsMake(75, 75, 75, 75),
+                              edgePadding: UIEdgeInsetsMake(20, 20, 20, 20),
                               animated: true)
     
     self.dropPin(coordinate: (walk?.coordinates.first)!, name: "start")
     self.dropPin(coordinate: (walk?.coordinates.last)!, name: "finish")
+  }
+  
+  func deleteWalk() {
+    if let id = walkID {
+      APIManager.sharedInstance.deleteWalk(id: id, completion: { (response) in
+        switch response {
+        case .success:
+          if let viewControllers = self.navigationController?.viewControllers {
+            if viewControllers.count > 1 && viewControllers[viewControllers.count - 2] is ProfileViewController {
+              self.navigationController?.popViewController(animated: true)
+            } else {
+              self.dismiss(animated: true, completion: nil)
+            }
+          }
+        case .failure(let error):
+          self.displayErrorAlert(error: error)
+        }
+      })
+    }
   }
 }

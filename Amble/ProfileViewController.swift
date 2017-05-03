@@ -22,6 +22,7 @@ class ProfileViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.setCustomBackButton(image: UIImage(named: "back-button"))
     self.navigationItem.title = (User.sharedInstance.userInfo?.firstName)! + " " + (User.sharedInstance.userInfo?.lastName)!
     
     spinner = self.collectionView.createIndicatorView(width: 50, height: 50)

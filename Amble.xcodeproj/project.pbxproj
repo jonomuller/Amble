@@ -42,6 +42,7 @@
 		AF67D9881EA254EB003BE7CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF67D9871EA254EB003BE7CF /* Main.storyboard */; };
 		AF67D98C1EA2728A003BE7CF /* UINavigationController+Transparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D98B1EA2728A003BE7CF /* UINavigationController+Transparent.swift */; };
 		AFA685361EB810D700F869DF /* UIView+IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA685351EB810D700F869DF /* UIView+IndicatorView.swift */; };
+		AFA685381EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA685371EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift */; };
 		AFDD14251EB5157300274E30 /* WalkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDD14241EB5157300274E30 /* WalkCollectionViewCell.swift */; };
 		AFF37AA61EA2A09000D57E8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFF37AA51EA2A09000D57E8D /* Assets.xcassets */; };
 		AFF37AAA1EA2D8BD00D57E8D /* UIViewController+CustomBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF37AA91EA2D8BD00D57E8D /* UIViewController+CustomBackButton.swift */; };
@@ -111,6 +112,7 @@
 		AF67D9891EA25550003BE7CF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF67D98B1EA2728A003BE7CF /* UINavigationController+Transparent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Transparent.swift"; sourceTree = "<group>"; };
 		AFA685351EB810D700F869DF /* UIView+IndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+IndicatorView.swift"; sourceTree = "<group>"; };
+		AFA685371EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorAlertView.swift"; sourceTree = "<group>"; };
 		AFDD14241EB5157300274E30 /* WalkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkCollectionViewCell.swift; sourceTree = "<group>"; };
 		AFF37AA51EA2A09000D57E8D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AFF37AA91EA2D8BD00D57E8D /* UIViewController+CustomBackButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+CustomBackButton.swift"; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				AF67D98B1EA2728A003BE7CF /* UINavigationController+Transparent.swift */,
 				AFF37AA91EA2D8BD00D57E8D /* UIViewController+CustomBackButton.swift */,
 				AF2D9D8F1EA517F300EDCF53 /* UIViewController+RootView.swift */,
+				AFA685371EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift */,
 				AFA685351EB810D700F869DF /* UIView+IndicatorView.swift */,
 			);
 			path = Extensions;
@@ -595,6 +598,7 @@
 				AF2D9D8C1EA4149100EDCF53 /* SettingsTableViewController.swift in Sources */,
 				AF0D36EA1EB1065F00643BA7 /* Walk.swift in Sources */,
 				AF0D36EC1EB16F3C00643BA7 /* WalkViewController.swift in Sources */,
+				AFA685381EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift in Sources */,
 				AF67D96E1EA253A9003BE7CF /* User.swift in Sources */,
 				AF67D9751EA253B7003BE7CF /* UIColor+Image.swift in Sources */,
 			);

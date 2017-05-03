@@ -70,6 +70,12 @@ class APIManager: NSObject {
     }
   }
   
+  public func deleteWalk(id: String, completion: @escaping (APIResponse) -> Void) {
+    self.request(router: .deleteWalk(id: id)) { (response) in
+      completion(response)
+    }
+  }
+  
   // MARK: - /users API calls
   
   public func getWalks(id: String, completion: @escaping (APIResponse) -> Void) {
