@@ -38,7 +38,7 @@ class APIManager: NSObject {
   
   // MARK: - /walks API calls
   
-  public func createWalk(name: String, owner: String, locations: [CLLocation], image: UIImage, time: Int, distance: Double, steps: Double, completion: @escaping (APIResponse) -> Void) {
+  public func createWalk(name: String, owner: String, locations: [CLLocation], image: UIImage, time: Int, distance: Double, steps: Int, completion: @escaping (APIResponse) -> Void) {
     
     self.request(router: .getMapImageURL) { (response) in
       switch response {
@@ -126,7 +126,7 @@ private extension APIManager {
     }
   }
   
-  func createWalk(name: String, owner: String, locations: [CLLocation], image: String, time: Int, distance: Double, steps: Double, completion: @escaping (APIResponse) -> Void) {
+  func createWalk(name: String, owner: String, locations: [CLLocation], image: String, time: Int, distance: Double, steps: Int, completion: @escaping (APIResponse) -> Void) {
     var coordinates: [[Double]] = []
     for location in locations {
       coordinates.append([location.coordinate.longitude, location.coordinate.latitude])

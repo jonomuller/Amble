@@ -32,7 +32,7 @@ class TrackWalkViewController: WalkViewController {
   
   fileprivate var time = 0
   fileprivate var distance = 0.0
-  fileprivate var steps = 0.0
+  fileprivate var steps = 0
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -179,7 +179,7 @@ extension TrackWalkViewController {
       locations = []
       time = 0
       distance = 0.0
-      steps = 0.0
+      steps = 0
       statsView.timeLabel.text = "00:00"
       statsView.distanceLabel.attributedText = self.getDistanceLabelText(distance: 0)
       statsView.stepsLabel.text = "0"
@@ -190,8 +190,9 @@ extension TrackWalkViewController {
             self.displayPrivacyError(title: "Motion activity is disabled",
                                      message: "Please enable motion activity in the Settings app in order to count your steps.")
           } else {
+            self.steps = (data?.numberOfSteps.intValue)!
             DispatchQueue.main.async(execute: {
-              self.statsView.stepsLabel.text = data?.numberOfSteps.stringValue
+              self.statsView.stepsLabel.text = String(self.steps)
             })
           }
         })

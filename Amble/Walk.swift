@@ -15,7 +15,7 @@ struct Walk {
   let coordinates: [CLLocationCoordinate2D]
   let time: Int
   let distance: Double
-  let steps: Double
+  let steps: Int
   
 }
 
