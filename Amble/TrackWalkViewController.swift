@@ -426,6 +426,7 @@ private extension TrackWalkViewController {
     let navController = UINavigationController(rootViewController: vc)
     vc.walk = walk
     vc.walkID = id
+    navController.navigationBar.isTranslucent = false
     navController.navigationBar.barTintColor = .flatGreenDark
     navController.navigationBar.tintColor = .white
     navController.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]

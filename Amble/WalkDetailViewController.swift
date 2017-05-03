@@ -79,8 +79,6 @@ private extension WalkDetailViewController {
     APIManager.sharedInstance.getWalk(id: walkID!) { (response) in
       switch response {
       case .success(let json):
-        print("Successfully retrieved walk")
-        print(json)
         let points = json["walk"]["geometry"]["coordinates"].arrayObject as! [[Double]]
         var coordinates: [CLLocationCoordinate2D] = []
         
