@@ -9,14 +9,18 @@
 import UIKit
 import MapKit
 import CoreLocation
+import CoreMotion
 import NVActivityIndicatorView
 
 class TrackWalkViewController: WalkViewController {
   
   fileprivate let TIME_INTERVAL = 1.0
+  fileprivate let LOCATION_ERROR_TITLE = "Location services are disabled"
+  fileprivate let LOCATION_ERROR_MESSAGE = "Please enable location services in the Settings app in order to track your walks."
   
   fileprivate var spinner: NVActivityIndicatorView!
   
+  fileprivate var pedometer: CMPedometer!
   fileprivate var locationManager: CLLocationManager!
   fileprivate var locations: [CLLocation] = []
   
@@ -28,7 +32,7 @@ class TrackWalkViewController: WalkViewController {
   
   fileprivate var time = 0
   fileprivate var distance = 0.0
-  fileprivate var calories = 0.0
+  fileprivate var steps = 0
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -41,6 +45,7 @@ class TrackWalkViewController: WalkViewController {
     let startButton = UIBarButtonItem(title: "Start", style: .plain, target: self, action: #selector(startButtonPressed))
     self.navigationItem.rightBarButtonItem = startButton
     
+    pedometer = CMPedometer()
     locationManager = CLLocationManager()
     locationManager.delegate = self
     locationManager.activityType = .fitness
@@ -119,7 +124,7 @@ extension TrackWalkViewController {
       mapView.userTrackingMode = .none
       
       if !(self.navigationController?.visibleViewController?.isKind(of: UIAlertController.self))! {
-        self.displayLocationError()
+        self.displayPrivacyError(title: LOCATION_ERROR_TITLE, message: LOCATION_ERROR_MESSAGE)
       }
     }
   }
@@ -141,7 +146,7 @@ extension TrackWalkViewController {
   
   func startButtonPressed() {
     if CLLocationManager.authorizationStatus() == .denied {
-      self.displayLocationError()
+      self.displayPrivacyError(title: LOCATION_ERROR_TITLE, message: LOCATION_ERROR_MESSAGE)
       return
     }
     
@@ -174,24 +179,45 @@ extension TrackWalkViewController {
       locations = []
       time = 0
       distance = 0.0
-      calories = 0.0
+      steps = 0
       statsView.timeLabel.text = "00:00"
       statsView.distanceLabel.attributedText = self.getDistanceLabelText(distance: 0)
-      statsView.calorieLabel.text = "0"
+      statsView.stepsLabel.text = "0"
+      
+      // Receive updates from phone's motion data to count number of steps
+      if CMPedometer.isStepCountingAvailable() {
+        pedometer.startUpdates(from: Date(), withHandler: { (data, error) in
+          if let error = error, error._code == Int(CMErrorMotionActivityNotAuthorized.rawValue) {
+            self.displayPrivacyError(title: "Motion activity is disabled",
+                                     message: "Please enable motion activity in the Settings app in order to count your steps.")
+            DispatchQueue.main.async(execute: { 
+              self.statsView.stepsLabel.text = "-"
+            })
+          } else {
+            self.steps = (data?.numberOfSteps.intValue)!
+            DispatchQueue.main.async(execute: {
+              self.statsView.stepsLabel.text = String(self.steps)
+            })
+          }
+        })
+      }
+      
       timer = Timer.scheduledTimer(timeInterval: TIME_INTERVAL,
                                    target: self,
                                    selector: #selector(timerTick),
                                    userInfo: nil,
                                    repeats: true)
       
-      walkStarted = !walkStarted
+      walkStarted = true
     }
   }
   
   func timerTick() {
     time += 1
-    statsView.timeLabel.text = self.getTimeLabelText(time: time)
-    statsView.distanceLabel.attributedText = self.getDistanceLabelText(distance: distance)
+    DispatchQueue.main.async {
+      self.statsView.timeLabel.text = self.getTimeLabelText(time: self.time)
+      self.statsView.distanceLabel.attributedText = self.getDistanceLabelText(distance: self.distance)
+    }
   }
   
   func textFieldDidChange(_ sender: Any) {
@@ -204,9 +230,9 @@ extension TrackWalkViewController {
 
 private extension TrackWalkViewController {
   
-  func displayLocationError() {
-    let alert = UIAlertController(title: "Location services are disabled",
-                                  message: "Please enable location services in the Settings app in order to track your walks.",
+  func displayPrivacyError(title: String, message: String) {
+    let alert = UIAlertController(title: title,
+                                  message: message,
                                   preferredStyle: .alert)
     
     alert.addAction(UIAlertAction(title: "Open Settings", style: .default, handler: { (action) in
@@ -241,7 +267,8 @@ private extension TrackWalkViewController {
     self.navigationItem.rightBarButtonItem?.title = "Start"
     self.transformStatsView(transform: .identity)
     locationManager.allowsBackgroundLocationUpdates = false
-    walkStarted = !walkStarted
+    pedometer.stopUpdates()
+    walkStarted = false
     timer.invalidate()
   }
   
@@ -288,7 +315,7 @@ private extension TrackWalkViewController {
   func saveWalk(name: String) {
     self.renderMapImage { (image) in
       if let mapImage = image {
-        APIManager.sharedInstance.createWalk(name: name, owner: User.sharedInstance.userInfo!.id, locations: self.locations, image: mapImage, time: self.time, distance: self.distance, steps: self.calories, completion: { (response) in
+        APIManager.sharedInstance.createWalk(name: name, owner: User.sharedInstance.userInfo!.id, locations: self.locations, image: mapImage, time: self.time, distance: self.distance, steps: self.steps, completion: { (response) in
           self.spinner.stopAnimating()
           
           switch response {
@@ -302,7 +329,7 @@ private extension TrackWalkViewController {
                             coordinates: coordinates,
                             time: self.time,
                             distance: self.distance,
-                            calories: self.calories)
+                            steps: self.steps)
             
             self.presentWalkDetailView(walk: walk, id: json["walk"]["_id"].stringValue)
           case .failure(let error):

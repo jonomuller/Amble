@@ -79,7 +79,7 @@ private extension WalkDetailViewController {
                          coordinates: coordinates,
                          time: json["walk"]["time"].intValue,
                          distance: json["walk"]["distance"].doubleValue,
-                         calories: json["walk"]["steps"].doubleValue)
+                         steps: json["walk"]["steps"].intValue)
         
         self.setupView()
       case .failure(let error):
@@ -94,6 +94,7 @@ private extension WalkDetailViewController {
     self.navigationItem.title = walk?.name
     statsView.timeLabel.text = self.getTimeLabelText(time: (walk?.time)!)
     statsView.distanceLabel.attributedText = self.getDistanceLabelText(distance: (walk?.distance)!)
+    statsView.stepsLabel.text = String((walk?.steps)!)
     
     let polyLine = MKPolyline(coordinates: (walk?.coordinates)!, count: (walk?.coordinates.count)!)
     mapView.add(polyLine)
