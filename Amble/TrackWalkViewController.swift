@@ -79,14 +79,6 @@ class TrackWalkViewController: WalkViewController {
 
 extension TrackWalkViewController: CLLocationManagerDelegate {
   
-  func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-    if status == .authorizedWhenInUse {
-      startTracking()
-    } else if status == .denied {
-      print("Denied")
-    }
-  }
-  
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     // We do not need to update locations if the walk has not started
     if !walkStarted {
@@ -98,7 +90,7 @@ extension TrackWalkViewController: CLLocationManagerDelegate {
       if location.horizontalAccuracy < 0 || location.horizontalAccuracy > 10 {
         return
       }
-      
+
       if self.locations.count > 0 {
         // Draw line on map as the user moves
         let points = [self.locations.last!.coordinate, location.coordinate]
@@ -153,9 +145,12 @@ extension TrackWalkViewController {
     if walkStarted {
       // End walk
       
+      print("Pitch: \(self.mapView.camera.pitch)")
+      print("Altitude: \(self.mapView.camera.altitude)")
+      print("Heading: \(self.mapView.camera.heading)")
+      
       let confirmEndAlert = UIAlertController(title: "End Walk", message: nil, preferredStyle: .actionSheet)
       confirmEndAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-      
       confirmEndAlert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action) in
         self.showSaveWalkAlert()
       }))
@@ -174,6 +169,18 @@ extension TrackWalkViewController {
       // Sets background location tracking
       // Note: need to add a user preference for this in the future
       locationManager.allowsBackgroundLocationUpdates = true
+      
+      //      self.mapView.userTrackingMode = .followWithHeading
+      //      let camera = MKMapCamera(lookingAtCenter: self.mapView.userLocation.coordinate,
+      //                               fromDistance: 200,
+      //                               pitch: 80,
+      //                               heading: 0)
+      let camera = MKMapCamera()
+      camera.centerCoordinate = self.mapView.userLocation.coordinate
+      camera.pitch = 63
+      camera.altitude = 300
+      camera.heading = 0
+      self.mapView.setCamera(camera, animated: false)
       
       transformStatsView(transform: CGAffineTransform(translationX: 0, y: statsView.frame.height))
       locations = []
@@ -264,8 +271,16 @@ private extension TrackWalkViewController {
       self.dropPin(coordinate: location.coordinate, name: "finish")
     }
     
+    self.mapView.userTrackingMode = .follow
+    let camera = MKMapCamera(lookingAtCenter: self.mapView.userLocation.coordinate,
+                             fromDistance: 1000,
+                             pitch: 0,
+                             heading: 0)
+    self.mapView.setCamera(camera, animated: false)
+    
     self.navigationItem.rightBarButtonItem?.title = "Start"
     self.transformStatsView(transform: .identity)
+    
     locationManager.allowsBackgroundLocationUpdates = false
     pedometer.stopUpdates()
     walkStarted = false
