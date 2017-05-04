@@ -220,16 +220,19 @@ extension TrackWalkViewController {
   }
   
   func timerTick() {
-    time += 1
     DispatchQueue.main.async {
       self.statsView.timeLabel.text = self.getTimeLabelText(time: self.time)
       self.statsView.distanceLabel.attributedText = self.getDistanceLabelText(distance: self.distance)
     }
     
-    if time % 10 == 1 {
+    if time % 10 == 0 {
       let request = MKLocalSearchRequest()
-      request.region = MKCoordinateRegionForMapRect(self.mapView.visibleMapRect)
+      let region = MKCoordinateRegionMakeWithDistance(self.mapView.userLocation.coordinate, 500.0, 500.0)
+      let mapRect = self.mapRect(for: region)
+      
+      request.region = region
       request.naturalLanguageQuery = "statue"
+      
       let search = MKLocalSearch(request: request)
       search.start(completionHandler: { (response, error) in
         if error != nil {
@@ -237,8 +240,8 @@ extension TrackWalkViewController {
           return
         }
         
-        for annotation in self.mapView.annotations {
-          if !(annotation is WalkPin) && !(MKMapRectContainsPoint(self.mapView.visibleMapRect, MKMapPointForCoordinate(annotation.coordinate))) {
+        for annotation in self.mapView.annotations where !(annotation is WalkPin) {
+          if !(MKMapRectContainsPoint(mapRect, MKMapPointForCoordinate(annotation.coordinate))) {
             self.mapView.removeAnnotation(annotation)
           }
         }
@@ -246,7 +249,7 @@ extension TrackWalkViewController {
         if let items = response?.mapItems {
           print(items)
           for item in items {
-            if MKMapRectContainsPoint(self.mapView.visibleMapRect, MKMapPointForCoordinate(item.placemark.coordinate)) {
+            if MKMapRectContainsPoint(mapRect, MKMapPointForCoordinate(item.placemark.coordinate)) {
               let pin = MKPointAnnotation()
               pin.coordinate = item.placemark.coordinate
               pin.title = item.name
@@ -258,6 +261,8 @@ extension TrackWalkViewController {
         }
       })
     }
+    
+    time += 1
   }
   
   func textFieldDidChange(_ sender: Any) {
@@ -482,5 +487,17 @@ private extension TrackWalkViewController {
     navController.hidesNavigationBarHairline = true
     vc.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: vc, action: #selector(vc.doneButtonPressed))
     self.present(navController, animated: true, completion: nil)
+  }
+  
+  func mapRect(for region: MKCoordinateRegion) -> MKMapRect {
+    let topLeft = MKMapPointForCoordinate(CLLocationCoordinate2D(latitude: region.center.latitude + (region.span.latitudeDelta/2.0), longitude: region.center.longitude - (region.span.longitudeDelta/2.0)))
+    
+    let bottomRight = MKMapPointForCoordinate(CLLocationCoordinate2D(latitude: region.center.latitude - (region.span.latitudeDelta/2.0), longitude: region.center.longitude + (region.span.longitudeDelta/2.0)))
+    
+    let origin = MKMapPointMake(min(topLeft.x, bottomRight.x), min(topLeft.y, bottomRight.y))
+    let size = MKMapSize(width: fabs(bottomRight.x - topLeft.x),
+                         height: fabs(bottomRight.y - topLeft.y))
+    
+    return MKMapRect(origin: origin, size: size)
   }
 }
