@@ -1,0 +1,16 @@
+language: objective-c
+osx_image: xcode8.3
+
+before_install:
+  - gem install cocoapods
+  - gem install xcpretty --no-document --quiet
+  - pod repo update
+
+script:
+  - set -o pipefail
+  - travis_retry xcodebuild test -workspace Amble.xcworkspace -scheme Amble -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.3' | xcpretty --color
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always
