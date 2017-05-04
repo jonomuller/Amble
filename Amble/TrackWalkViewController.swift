@@ -237,6 +237,12 @@ extension TrackWalkViewController {
           return
         }
         
+        for annotation in self.mapView.annotations {
+          if !(annotation is WalkPin) && !(MKMapRectContainsPoint(self.mapView.visibleMapRect, MKMapPointForCoordinate(annotation.coordinate))) {
+            self.mapView.removeAnnotation(annotation)
+          }
+        }
+        
         if let items = response?.mapItems {
           print(items)
           for item in items {
