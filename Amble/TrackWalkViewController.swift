@@ -225,6 +225,31 @@ extension TrackWalkViewController {
       self.statsView.timeLabel.text = self.getTimeLabelText(time: self.time)
       self.statsView.distanceLabel.attributedText = self.getDistanceLabelText(distance: self.distance)
     }
+    
+    if time % 10 == 1 {
+      let request = MKLocalSearchRequest()
+      request.region = MKCoordinateRegionForMapRect(self.mapView.visibleMapRect)
+      request.naturalLanguageQuery = "statue"
+      let search = MKLocalSearch(request: request)
+      search.start(completionHandler: { (response, error) in
+        if error != nil {
+          print(error)
+          return
+        }
+        
+        if let items = response?.mapItems {
+          print(items)
+          for item in items {
+            let point = MKPointAnnotation()
+            point.coordinate = item.placemark.coordinate
+            point.title = item.name
+            self.mapView.addAnnotation(point)
+          }
+        } else {
+          print("No items found")
+        }
+      })
+    }
   }
   
   func textFieldDidChange(_ sender: Any) {
