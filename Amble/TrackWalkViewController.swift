@@ -240,10 +240,12 @@ extension TrackWalkViewController {
         if let items = response?.mapItems {
           print(items)
           for item in items {
-            let point = MKPointAnnotation()
-            point.coordinate = item.placemark.coordinate
-            point.title = item.name
-            self.mapView.addAnnotation(point)
+            if MKMapRectContainsPoint(self.mapView.visibleMapRect, MKMapPointForCoordinate(item.placemark.coordinate)) {
+              let pin = MKPointAnnotation()
+              pin.coordinate = item.placemark.coordinate
+              pin.title = item.name
+              self.mapView.addAnnotation(pin)
+            }
           }
         } else {
           print("No items found")
