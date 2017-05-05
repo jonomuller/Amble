@@ -90,7 +90,7 @@ extension TrackWalkViewController: CLLocationManagerDelegate {
       if location.horizontalAccuracy < 0 || location.horizontalAccuracy > 10 {
         return
       }
-
+      
       if self.locations.count > 0 {
         // Draw line on map as the user moves
         let points = [self.locations.last!.coordinate, location.coordinate]
@@ -197,7 +197,7 @@ extension TrackWalkViewController {
           if let error = error, error._code == Int(CMErrorMotionActivityNotAuthorized.rawValue) {
             self.displayPrivacyError(title: "Motion activity is disabled",
                                      message: "Please enable motion activity in the Settings app in order to count your steps.")
-            DispatchQueue.main.async(execute: { 
+            DispatchQueue.main.async(execute: {
               self.statsView.stepsLabel.text = "-"
             })
           } else {
@@ -471,73 +471,82 @@ private extension TrackWalkViewController {
   
   func search(for queries: [String], index: Int = 0, responses: [MKMapItem] = []) {
     let query = queries[index]
-//    for query in queries {
-      let request = MKLocalSearchRequest()
+    //    for query in queries {
+    let request = MKLocalSearchRequest()
+    
+    // Define 500m by 500m region around user's current location
+    let region = MKCoordinateRegionMakeWithDistance(self.mapView.userLocation.coordinate, 500.0, 500.0)
+    let mapRect = self.mapRect(for: region)
+    
+    request.region = region
+    request.naturalLanguageQuery = query
+    
+    let search = MKLocalSearch(request: request)
+    search.start(completionHandler: { (response, error) in
+      if error != nil {
+        print(error)
+        return
+      }
       
-      // Define 500m by 500m region around user's current location
-      let region = MKCoordinateRegionMakeWithDistance(self.mapView.userLocation.coordinate, 500.0, 500.0)
-      let mapRect = self.mapRect(for: region)
+      if query == queries[queries.count - 1] {
+        self.displaySearchResults(for: responses, mapRect: mapRect)
+        return
+      }
       
-      request.region = region
-      request.naturalLanguageQuery = query
-      
-      let search = MKLocalSearch(request: request)
-      search.start(completionHandler: { (response, error) in
-        if error != nil {
-          print(error)
-          return
-        }
-        
-        if query == queries[queries.count - 1] {
-          self.displaySearchResults(for: responses, mapRect: mapRect)
-          return
-        }
-        
-        if let items = response?.mapItems {
-          self.search(for: queries, index: index+1, responses: responses + items)
-        } else {
-          print("No items found")
-        }
-      })
-//    }
+      if let items = response?.mapItems {
+        self.search(for: queries, index: index+1, responses: responses + items)
+      } else {
+        print("No items found")
+      }
+    })
+    //    }
   }
   
   func displaySearchResults(for items: [MKMapItem], mapRect: MKMapRect) {
-      // Remove pins not close to user
-      for annotation in self.mapView.annotations where !(annotation is WalkPin) {
-        DispatchQueue.global().async {
-        if !(MKMapRectContainsPoint(mapRect, MKMapPointForCoordinate(annotation.coordinate))) {
+    // Remove pins not close to user
+    for annotation in self.mapView.annotations where !(annotation is WalkPin) {
+      if !(MKMapRectContainsPoint(mapRect, MKMapPointForCoordinate(annotation.coordinate))) {
+        DispatchQueue.main.async(execute: {
           self.mapView.removeAnnotation(annotation)
-        }
-      }
-      
-//      var pins: [MKAnnotation] = []
-      
-      // Add new pins if they have not already been added
-      for item in items {
-        for annotation in self.mapView.annotations where !(annotation is WalkPin) {
-          if item.placemark.coordinate.latitude == annotation.coordinate.latitude && item.placemark.coordinate.longitude == annotation.coordinate.longitude {
-            return
-          }
-          
-          if MKMapRectContainsPoint(mapRect, MKMapPointForCoordinate(item.placemark.coordinate)) {
-            //                print(item)
-            let pin = MKPointAnnotation()
-            pin.coordinate = item.placemark.coordinate
-            pin.title = item.name
-//            pins.append(pin)
-            //            pin.subtitle = query.capitalized
-            DispatchQueue.main.async(execute: {
-              self.mapView.addAnnotation(pin)
-              //      self.mapView.showAnnotations(pins, animated: false)
-            })
-//            print(pin.title)
-//            print(self.mapView.annotations.count)
-          }
-        }
+        })
       }
     }
     
-
+    var pins: [MKAnnotation] = []
+    
+    // Add new pins if they have not already been added
+    DispatchQueue.global().async {
+      for item in items {
+        if self.isItemAlreadyOnMap(item: item) {
+          continue
+        }
+        
+        if MKMapRectContainsPoint(mapRect, MKMapPointForCoordinate(item.placemark.coordinate)) {
+          let pin = MKPointAnnotation()
+          pin.coordinate = item.placemark.coordinate
+          pin.title = item.name
+          pins.append(pin)
+        }
+      }
+      
+      print(pins)
+      
+      DispatchQueue.main.async(execute: {
+        print(self.mapView.annotations.count)
+        self.mapView.addAnnotations(pins)
+      })
+    }
+  }
+  
+  func isItemAlreadyOnMap(item: MKMapItem) -> Bool {
+    var alreadyOnMap = false
+    
+    for annotation in self.mapView.annotations where !(annotation is WalkPin) {
+      if item.placemark.coordinate.latitude == annotation.coordinate.latitude && item.placemark.coordinate.longitude == annotation.coordinate.longitude {
+        alreadyOnMap = true
+      }
+    }
+    
+    return alreadyOnMap
   }
 }
