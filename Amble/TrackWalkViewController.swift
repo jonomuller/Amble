@@ -503,30 +503,41 @@ private extension TrackWalkViewController {
   }
   
   func displaySearchResults(for items: [MKMapItem], mapRect: MKMapRect) {
-    for annotation in self.mapView.annotations where !(annotation is WalkPin) {
       // Remove pins not close to user
-      if !(MKMapRectContainsPoint(mapRect, MKMapPointForCoordinate(annotation.coordinate))) {
-        self.mapView.removeAnnotation(annotation)
+      for annotation in self.mapView.annotations where !(annotation is WalkPin) {
+        DispatchQueue.global().async {
+        if !(MKMapRectContainsPoint(mapRect, MKMapPointForCoordinate(annotation.coordinate))) {
+          self.mapView.removeAnnotation(annotation)
+        }
       }
+      
+//      var pins: [MKAnnotation] = []
       
       // Add new pins if they have not already been added
       for item in items {
-        if item.placemark.coordinate.latitude == annotation.coordinate.latitude && item.placemark.coordinate.longitude == annotation.coordinate.longitude {
-          return
-        }
-        
-        if MKMapRectContainsPoint(mapRect, MKMapPointForCoordinate(item.placemark.coordinate)) {
-          //                print(item)
-          let pin = MKPointAnnotation()
-          pin.coordinate = item.placemark.coordinate
-          pin.title = item.name
-          //            pin.subtitle = query.capitalized
-          self.mapView.addAnnotation(pin)
-          print(pin.title)
-          print(self.mapView.annotations.count)
+        for annotation in self.mapView.annotations where !(annotation is WalkPin) {
+          if item.placemark.coordinate.latitude == annotation.coordinate.latitude && item.placemark.coordinate.longitude == annotation.coordinate.longitude {
+            return
+          }
+          
+          if MKMapRectContainsPoint(mapRect, MKMapPointForCoordinate(item.placemark.coordinate)) {
+            //                print(item)
+            let pin = MKPointAnnotation()
+            pin.coordinate = item.placemark.coordinate
+            pin.title = item.name
+//            pins.append(pin)
+            //            pin.subtitle = query.capitalized
+            DispatchQueue.main.async(execute: {
+              self.mapView.addAnnotation(pin)
+              //      self.mapView.showAnnotations(pins, animated: false)
+            })
+//            print(pin.title)
+//            print(self.mapView.annotations.count)
+          }
         }
       }
-      
     }
+    
+
   }
 }
