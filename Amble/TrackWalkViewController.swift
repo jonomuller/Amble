@@ -227,7 +227,7 @@ extension TrackWalkViewController {
     
     // Search for new places every 30 seconds
     if time % 30 == 0 {
-      self.search(for: ["statue", "monument", "memorial", "stadium", "church", "cemetary", "museum"], index: 0, responses: [])
+      self.search(for: ["statue", "monument", "memorial", "stadium", "church", "cemetary", "museum"])
     }
     
     time += 1
@@ -469,7 +469,7 @@ private extension TrackWalkViewController {
     return MKMapRect(origin: origin, size: size)
   }
   
-  func search(for queries: [String], index: Int, responses: [MKMapItem]) {
+  func search(for queries: [String], index: Int = 0, responses: [MKMapItem] = []) {
     let query = queries[index]
 //    for query in queries {
       let request = MKLocalSearchRequest()
