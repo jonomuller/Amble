@@ -225,8 +225,11 @@ extension TrackWalkViewController {
       self.statsView.distanceLabel.attributedText = self.getDistanceLabelText(distance: self.distance)
     }
     
+    // Search for new places every 10 seconds
     if time % 10 == 0 {
       let request = MKLocalSearchRequest()
+      
+      // Define 500m by 500m region around user's current location
       let region = MKCoordinateRegionMakeWithDistance(self.mapView.userLocation.coordinate, 500.0, 500.0)
       let mapRect = self.mapRect(for: region)
       
@@ -241,23 +244,29 @@ extension TrackWalkViewController {
         }
         
         for annotation in self.mapView.annotations where !(annotation is WalkPin) {
+          // Remove pins not close to user
           if !(MKMapRectContainsPoint(mapRect, MKMapPointForCoordinate(annotation.coordinate))) {
             self.mapView.removeAnnotation(annotation)
           }
-        }
-        
-        if let items = response?.mapItems {
-          print(items)
-          for item in items {
-            if MKMapRectContainsPoint(mapRect, MKMapPointForCoordinate(item.placemark.coordinate)) {
-              let pin = MKPointAnnotation()
-              pin.coordinate = item.placemark.coordinate
-              pin.title = item.name
-              self.mapView.addAnnotation(pin)
+          
+          // Add new pins if they have not already been added
+          if let items = response?.mapItems {
+            for item in items {
+              if item.name == annotation.title! && item.placemark.coordinate.latitude == annotation.coordinate.latitude && item.placemark.coordinate.longitude == annotation.coordinate.longitude {
+                return
+              }
+              
+              if MKMapRectContainsPoint(mapRect, MKMapPointForCoordinate(item.placemark.coordinate)) {
+                print(item)
+                let pin = MKPointAnnotation()
+                pin.coordinate = item.placemark.coordinate
+                pin.title = item.name
+                self.mapView.addAnnotation(pin)
+              }
             }
+          } else {
+            print("No items found")
           }
-        } else {
-          print("No items found")
         }
       })
     }
