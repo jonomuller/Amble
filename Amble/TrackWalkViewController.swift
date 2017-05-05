@@ -482,24 +482,26 @@ private extension TrackWalkViewController {
     request.naturalLanguageQuery = query
     
     let search = MKLocalSearch(request: request)
-    search.start(completionHandler: { (response, error) in
-      if error != nil {
-        print(error)
-        return
-      }
-      
-      if query == queries[queries.count - 1] {
-        self.displaySearchResults(for: responses, mapRect: mapRect)
-        return
-      }
-      
-      if let items = response?.mapItems {
-        self.search(for: queries, index: index+1, responses: responses + items)
-      } else {
-        print("No items found")
-      }
-    })
-    //    }
+    
+    DispatchQueue.global().async {
+      search.start(completionHandler: { (response, error) in
+        if error != nil {
+          print(error)
+          return
+        }
+        
+        if query == queries[queries.count - 1] {
+          self.displaySearchResults(for: responses, mapRect: mapRect)
+          return
+        }
+        
+        if let items = response?.mapItems {
+          self.search(for: queries, index: index+1, responses: responses + items)
+        } else {
+          print("No items found")
+        }
+      })
+    }
   }
   
   func displaySearchResults(for items: [MKMapItem], mapRect: MKMapRect) {
@@ -516,23 +518,18 @@ private extension TrackWalkViewController {
     
     // Add new pins if they have not already been added
     DispatchQueue.global().async {
-      for item in items {
+      for item in items where MKMapRectContainsPoint(mapRect, MKMapPointForCoordinate(item.placemark.coordinate)) {
         if self.isItemAlreadyOnMap(item: item) {
           continue
         }
         
-        if MKMapRectContainsPoint(mapRect, MKMapPointForCoordinate(item.placemark.coordinate)) {
-          let pin = MKPointAnnotation()
-          pin.coordinate = item.placemark.coordinate
-          pin.title = item.name
-          pins.append(pin)
-        }
+        let pin = MKPointAnnotation()
+        pin.coordinate = item.placemark.coordinate
+        pin.title = item.name
+        pins.append(pin)
       }
       
-      print(pins)
-      
       DispatchQueue.main.async(execute: {
-        print(self.mapView.annotations.count)
         self.mapView.addAnnotations(pins)
       })
     }
