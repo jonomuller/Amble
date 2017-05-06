@@ -111,6 +111,8 @@ extension EntryViewController: UITableViewDataSource, UITableViewDelegate {
       cell.textField.keyboardType = .emailAddress
     } else if section == "password" {
       cell.textField.isSecureTextEntry = true
+    } else if section == "first name" || section == "last name" {
+      cell.textField.autocapitalizationType = .words
     }
     
     if indexPath.row == sections.count - 1 {
