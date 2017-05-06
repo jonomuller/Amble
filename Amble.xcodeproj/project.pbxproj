@@ -114,6 +114,7 @@
 		AFA685351EB810D700F869DF /* UIView+IndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+IndicatorView.swift"; sourceTree = "<group>"; };
 		AFA685371EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorAlertView.swift"; sourceTree = "<group>"; };
 		AFDD14241EB5157300274E30 /* WalkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkCollectionViewCell.swift; sourceTree = "<group>"; };
+		AFEED74B1EBD54BD003AA3F4 /* Amble.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Amble.entitlements; sourceTree = "<group>"; };
 		AFF37AA51EA2A09000D57E8D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AFF37AA91EA2D8BD00D57E8D /* UIViewController+CustomBackButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+CustomBackButton.swift"; sourceTree = "<group>"; };
 		D4CC062BD44A8FBFF103D039 /* Pods_Amble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Amble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,6 +174,7 @@
 		AF67D9171EA2516D003BE7CF /* Amble */ = {
 			isa = PBXGroup;
 			children = (
+				AFEED74B1EBD54BD003AA3F4 /* Amble.entitlements */,
 				AF67D9671EA253A9003BE7CF /* AppDelegate.swift */,
 				AF67D95F1EA2539F003BE7CF /* APIManager */,
 				AF67D96F1EA253B7003BE7CF /* Extensions */,
@@ -361,6 +363,9 @@
 								enabled = 1;
 							};
 							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -748,11 +753,12 @@
 			baseConfigurationReference = AC60661AA3809FEE8F7437A2 /* Pods-Amble.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Amble/Amble.entitlements;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = QJQGH9NF7F;
 				INFOPLIST_FILE = Amble/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = jonomuller.Amble;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.ac.imperial.Amble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -763,11 +769,12 @@
 			baseConfigurationReference = 776B27DE5882A78F23E64C23 /* Pods-Amble.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Amble/Amble.entitlements;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = QJQGH9NF7F;
 				INFOPLIST_FILE = Amble/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = jonomuller.Amble;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.ac.imperial.Amble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

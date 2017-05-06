@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 import Locksmith
 
 @UIApplicationMain
@@ -15,6 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .alert, .sound]) { (success, error) in
+      if error != nil {
+        print(error)
+      }
+    }
+    
+    application.registerForRemoteNotifications()
+    
     let storyboardID: String!
     
     // If user's details are in keychain, log them in
