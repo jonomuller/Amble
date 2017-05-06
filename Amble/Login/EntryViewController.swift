@@ -218,7 +218,7 @@ extension EntryViewController {
 
 extension EntryViewController {
   func handleAPIResponse(response: APIResponse) {
-    entryButton.expand(completion: nil)
+    entryButton.expand()
     
     switch response {
     case .success(let json):
