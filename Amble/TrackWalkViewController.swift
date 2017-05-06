@@ -170,7 +170,6 @@ extension TrackWalkViewController {
       // Note: need to add a user preference for this in the future
       locationManager.allowsBackgroundLocationUpdates = true
       
-      //      self.mapView.userTrackingMode = .followWithHeading
       //      let camera = MKMapCamera(lookingAtCenter: self.mapView.userLocation.coordinate,
       //                               fromDistance: 200,
       //                               pitch: 80,
@@ -181,6 +180,7 @@ extension TrackWalkViewController {
       camera.altitude = 300
       camera.heading = 0
       self.mapView.setCamera(camera, animated: false)
+      self.mapView.userTrackingMode = .followWithHeading
       
       transformStatsView(transform: CGAffineTransform(translationX: 0, y: statsView.frame.height))
       locations = []
@@ -277,12 +277,12 @@ private extension TrackWalkViewController {
       self.dropPin(coordinate: location.coordinate, name: "finish")
     }
     
-    self.mapView.userTrackingMode = .follow
     let camera = MKMapCamera(lookingAtCenter: self.mapView.userLocation.coordinate,
                              fromDistance: 1000,
                              pitch: 0,
                              heading: 0)
     self.mapView.setCamera(camera, animated: false)
+    self.mapView.userTrackingMode = .follow
     
     self.navigationItem.rightBarButtonItem?.title = "Start"
     self.transformStatsView(transform: .identity)
@@ -505,6 +505,10 @@ private extension TrackWalkViewController {
   }
   
   func displaySearchResults(for items: [MKMapItem], mapRect: MKMapRect) {
+    if (!walkStarted) {
+      return
+    }
+    
     // Remove pins not close to user
     for annotation in self.mapView.annotations where !(annotation is WalkPin) {
       if !(MKMapRectContainsPoint(mapRect, MKMapPointForCoordinate(annotation.coordinate))) {
