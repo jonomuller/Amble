@@ -60,12 +60,17 @@ extension ProfileViewController: UICollectionViewDataSource {
     cell.imageView.layer.cornerRadius = 8
     cell.imageView.clipsToBounds = true
     
-    do {
-      if let url = URL(string: walk.image) {
-        try cell.imageView.image = UIImage(data: Data(contentsOf: url))
+    DispatchQueue.global().async {
+      do {
+        if let url = URL(string: walk.image) {
+          let walkImage = try UIImage(data: Data(contentsOf: url))
+          DispatchQueue.main.async(execute: {
+            cell.imageView.image = walkImage
+          })
+        }
+      } catch {
+        print("Error fetching photo")
       }
-    } catch {
-      print("Error fetching photo")
     }
     
     return cell
