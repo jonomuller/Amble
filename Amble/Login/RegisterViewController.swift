@@ -14,7 +14,7 @@ class RegisterViewController: EntryViewController {
     return ["username", "email address", "password", "first name", "last name"]
   }
   
-  override func entryButtonPressed(details: [String: String]) {
+  override func entryButtonPressed() {
     APIManager.sharedInstance.register(username: details[sections[0]]!.lowercased(),
                                        email: details[sections[1]]!.lowercased(),
                                        password: details[sections[2]]!,

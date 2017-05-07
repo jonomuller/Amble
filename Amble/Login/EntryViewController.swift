@@ -15,7 +15,7 @@ import ChameleonFramework
  */
 protocol EntryView {
   var sections: [String] { get }
-  func entryButtonPressed(details: [String: String])
+  func entryButtonPressed()
   func isValidTextField(textField: UITextField) -> Bool
 }
 
@@ -26,6 +26,8 @@ class EntryViewController: UIViewController {
   
   fileprivate let ENTRY_CELL_IDENTIFIER = "entryCell"
   fileprivate let FAILURE_STRING = "This method must be overridden"
+  
+  var details: [String: String] = [:]
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -80,7 +82,7 @@ extension EntryViewController: EntryView {
     preconditionFailure(FAILURE_STRING)
   }
   
-  func entryButtonPressed(details: [String: String]) {
+  func entryButtonPressed() {
     preconditionFailure(FAILURE_STRING)
   }
   
@@ -190,7 +192,7 @@ extension EntryViewController {
   
   @IBAction func entryButtonPressed(_ sender: Any) {
     entryButton.collapse() { (success) in
-      self.entryButtonPressed(details: self.getDataFromCells())
+      self.entryButtonPressed()
     }
   }
   
@@ -204,8 +206,11 @@ extension EntryViewController {
       entryButton.alpha = 0.7
     }
     
+    let textField = sender as! UITextField
+    let indexPath = getIndexPathFromTextField(textField: textField)
+    details[textField.placeholder!] = textField.text
+    
     // Enable tick next to text field when not empty
-    let indexPath = getIndexPathFromTextField(textField: sender as! UITextField)
     let cell = tableView.cellForRow(at: indexPath) as! EntryTableViewCell
     
     if isValidTextField(textField: cell.textField) {
@@ -269,18 +274,5 @@ private extension EntryViewController {
     }
     
     return validCells
-  }
-  
-  func getDataFromCells() -> [String: String] {
-    var details: [String: String] = [:]
-    
-    if let indexPaths = tableView.indexPathsForVisibleRows {
-      for indexPath in indexPaths {
-        let cell = tableView.cellForRow(at: indexPath) as! EntryTableViewCell
-        details[cell.textField.placeholder!] = cell.textField.text
-      }
-    }
-    
-    return details
   }
 }
