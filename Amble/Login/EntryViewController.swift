@@ -135,8 +135,10 @@ extension EntryViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension EntryViewController: UIScrollViewDelegate {
   
-  func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-    self.navigationController?.navigationBar.shadowImage = nil
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    if scrollView.contentOffset.y > 0 {
+      self.navigationController?.navigationBar.shadowImage = nil
+    }
   }
   
   func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
