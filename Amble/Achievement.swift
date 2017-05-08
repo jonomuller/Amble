@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Achievement {
+enum AchievementType {
   
   case distance
   case dayStreak(day: Int)
@@ -35,4 +35,9 @@ enum Achievement {
       return "Walk with other people"
     }
   }
+}
+
+struct Achievement {
+  let type: AchievementType
+  let value: Int
 }
