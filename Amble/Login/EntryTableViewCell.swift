@@ -12,7 +12,7 @@ class EntryTableViewCell: UITableViewCell {
   
   @IBOutlet var innerView: UIView!
   @IBOutlet var textField: UITextField!
-  var line: CALayer!
+  var line: CALayer?
   
   /*
    Enum to adjust the colour and thickness of the bottom line of a UITableViewCell
@@ -42,12 +42,12 @@ class EntryTableViewCell: UITableViewCell {
   
   func updateBottomLine(selection: Selection) {
     let height = selection.height
-    self.line.frame = CGRect(x: self.innerView.frame.origin.x,
+    self.line?.frame = CGRect(x: self.innerView.frame.origin.x,
                              y: self.innerView.frame.size.height - height,
                              width: self.innerView.frame.size.width,
                              height: height)
-    self.line.borderColor = selection.color
-    self.line.borderWidth = height
+    self.line?.borderColor = selection.color
+    self.line?.borderWidth = height
   }
   
   func setTextFieldImage(name: String) {

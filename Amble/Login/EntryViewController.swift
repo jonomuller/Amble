@@ -104,9 +104,14 @@ extension EntryViewController: UITableViewDataSource, UITableViewDelegate {
     let section = sections[indexPath.row]
     
     cell.selectionStyle = .none
+    
+    if let line = cell.line {
+      line.removeFromSuperlayer()
+    }
+    
     cell.line = CALayer()
     cell.updateBottomLine(selection: .deselect)
-    cell.layer.addSublayer(cell.line)
+    cell.layer.addSublayer(cell.line!)
     cell.setTextFieldImage(name: section)
     
     if section == "email address" {
