@@ -41,6 +41,7 @@
 		AF67D9861EA254AC003BE7CF /* AmbleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9851EA254AC003BE7CF /* AmbleUITests.swift */; };
 		AF67D9881EA254EB003BE7CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF67D9871EA254EB003BE7CF /* Main.storyboard */; };
 		AF67D98C1EA2728A003BE7CF /* UINavigationController+Transparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D98B1EA2728A003BE7CF /* UINavigationController+Transparent.swift */; };
+		AF97CB5A1EC134FD00D5AF75 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF97CB591EC134FD00D5AF75 /* Achievement.swift */; };
 		AFA685361EB810D700F869DF /* UIView+IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA685351EB810D700F869DF /* UIView+IndicatorView.swift */; };
 		AFA685381EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA685371EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift */; };
 		AFDD14251EB5157300274E30 /* WalkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDD14241EB5157300274E30 /* WalkCollectionViewCell.swift */; };
@@ -111,6 +112,7 @@
 		AF67D9871EA254EB003BE7CF /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AF67D9891EA25550003BE7CF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF67D98B1EA2728A003BE7CF /* UINavigationController+Transparent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Transparent.swift"; sourceTree = "<group>"; };
+		AF97CB591EC134FD00D5AF75 /* Achievement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		AFA685351EB810D700F869DF /* UIView+IndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+IndicatorView.swift"; sourceTree = "<group>"; };
 		AFA685371EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorAlertView.swift"; sourceTree = "<group>"; };
 		AFDD14241EB5157300274E30 /* WalkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				AF2D9D931EA53DA800EDCF53 /* TrackWalkViewController.swift */,
 				AF0D36E31EB02F1000643BA7 /* WalkDetailViewController.swift */,
 				AF0D36E71EB0F78E00643BA7 /* StatsView.swift */,
+				AF97CB591EC134FD00D5AF75 /* Achievement.swift */,
 				AF0D36E91EB1065F00643BA7 /* Walk.swift */,
 				AF67D96A1EA253A9003BE7CF /* User.swift */,
 				AF0D36E11EAA7B7E00643BA7 /* WalkPin.swift */,
@@ -601,6 +604,7 @@
 				AFA685381EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift in Sources */,
 				AF67D96E1EA253A9003BE7CF /* User.swift in Sources */,
 				AF67D9751EA253B7003BE7CF /* UIColor+Image.swift in Sources */,
+				AF97CB5A1EC134FD00D5AF75 /* Achievement.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
