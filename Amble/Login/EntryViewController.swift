@@ -145,11 +145,7 @@ extension EntryViewController: UIScrollViewDelegate {
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     if scrollView.contentOffset.y > 0 {
       self.navigationController?.navigationBar.shadowImage = nil
-    }
-  }
-  
-  func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-    if targetContentOffset.pointee.y <= 0 {
+    } else {
       self.navigationController?.navigationBar.shadowImage = UIImage()
     }
   }
