@@ -15,7 +15,7 @@ import ChameleonFramework
  */
 protocol EntryView {
   var sections: [String] { get }
-  func entryButtonPressed(details: [String: String])
+  func entryButtonPressed()
   func isValidTextField(textField: UITextField) -> Bool
 }
 
@@ -26,6 +26,8 @@ class EntryViewController: UIViewController {
   
   fileprivate let ENTRY_CELL_IDENTIFIER = "entryCell"
   fileprivate let FAILURE_STRING = "This method must be overridden"
+  
+  var details: [String: String] = [:]
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -80,7 +82,7 @@ extension EntryViewController: EntryView {
     preconditionFailure(FAILURE_STRING)
   }
   
-  func entryButtonPressed(details: [String: String]) {
+  func entryButtonPressed() {
     preconditionFailure(FAILURE_STRING)
   }
   
@@ -102,15 +104,22 @@ extension EntryViewController: UITableViewDataSource, UITableViewDelegate {
     let section = sections[indexPath.row]
     
     cell.selectionStyle = .none
+    
+    if let line = cell.line {
+      line.removeFromSuperlayer()
+    }
+    
     cell.line = CALayer()
     cell.updateBottomLine(selection: .deselect)
-    cell.layer.addSublayer(cell.line)
+    cell.layer.addSublayer(cell.line!)
     cell.setTextFieldImage(name: section)
     
     if section == "email address" {
       cell.textField.keyboardType = .emailAddress
     } else if section == "password" {
       cell.textField.isSecureTextEntry = true
+    } else if section == "first name" || section == "last name" {
+      cell.textField.autocapitalizationType = .words
     }
     
     if indexPath.row == sections.count - 1 {
@@ -133,12 +142,10 @@ extension EntryViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension EntryViewController: UIScrollViewDelegate {
   
-  func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-    self.navigationController?.navigationBar.shadowImage = nil
-  }
-  
-  func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-    if targetContentOffset.pointee.y <= 0 {
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    if scrollView.contentOffset.y > 0 {
+      self.navigationController?.navigationBar.shadowImage = nil
+    } else {
       self.navigationController?.navigationBar.shadowImage = UIImage()
     }
   }
@@ -186,7 +193,7 @@ extension EntryViewController {
   
   @IBAction func entryButtonPressed(_ sender: Any) {
     entryButton.collapse() { (success) in
-      self.entryButtonPressed(details: self.getDataFromCells())
+      self.entryButtonPressed()
     }
   }
   
@@ -200,8 +207,11 @@ extension EntryViewController {
       entryButton.alpha = 0.7
     }
     
+    let textField = sender as! UITextField
+    let indexPath = getIndexPathFromTextField(textField: textField)
+    details[textField.placeholder!] = textField.text
+    
     // Enable tick next to text field when not empty
-    let indexPath = getIndexPathFromTextField(textField: sender as! UITextField)
     let cell = tableView.cellForRow(at: indexPath) as! EntryTableViewCell
     
     if isValidTextField(textField: cell.textField) {
@@ -216,7 +226,7 @@ extension EntryViewController {
 
 extension EntryViewController {
   func handleAPIResponse(response: APIResponse) {
-    entryButton.expand(completion: nil)
+    entryButton.expand()
     
     switch response {
     case .success(let json):
@@ -265,18 +275,5 @@ private extension EntryViewController {
     }
     
     return validCells
-  }
-  
-  func getDataFromCells() -> [String: String] {
-    var details: [String: String] = [:]
-    
-    if let indexPaths = tableView.indexPathsForVisibleRows {
-      for indexPath in indexPaths {
-        let cell = tableView.cellForRow(at: indexPath) as! EntryTableViewCell
-        details[cell.textField.placeholder!] = cell.textField.text
-      }
-    }
-    
-    return details
   }
 }
