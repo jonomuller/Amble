@@ -329,7 +329,8 @@ private extension TrackWalkViewController {
                             coordinates: coordinates,
                             time: self.time,
                             distance: self.distance,
-                            steps: self.steps)
+                            steps: self.steps,
+                            achievements: [])
             
             self.presentWalkDetailView(walk: walk, id: json["walk"]["_id"].stringValue)
           case .failure(let error):

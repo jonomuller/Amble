@@ -12,8 +12,12 @@ import CoreLocation
 
 class WalkDetailViewController: WalkViewController {
   
+  @IBOutlet var tableView: UITableView!
+  
   var walkID: String?
   var walk: Walk?
+  
+  fileprivate let ACHIEVEMENT_CELL_IDENTIFIER = "AchievementCell"
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -23,6 +27,29 @@ class WalkDetailViewController: WalkViewController {
     } else {
       self.setupView()
     }
+  }
+}
+
+extension WalkDetailViewController: UITableViewDataSource {
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    if let walk = walk {
+      return walk.achievements.count
+    }
+    
+    return 0
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: ACHIEVEMENT_CELL_IDENTIFIER, for: indexPath)
+    
+    if let walk = walk {
+      let achievement = walk.achievements[indexPath.row]
+      cell.textLabel?.text = achievement.type.description
+      cell.detailTextLabel?.text = "+\(achievement.value)"
+    }
+    
+    return cell
   }
 }
 
@@ -81,7 +108,8 @@ private extension WalkDetailViewController {
                          coordinates: coordinates,
                          time: json["walk"]["time"].intValue,
                          distance: json["walk"]["distance"].doubleValue,
-                         steps: json["walk"]["steps"].intValue)
+                         steps: json["walk"]["steps"].intValue,
+                         achievements: [])
         
         self.setupView()
       case .failure(let error):
@@ -91,6 +119,7 @@ private extension WalkDetailViewController {
   }
   
   func setupView() {
+    tableView.reloadData()
     self.navigationItem.title = walk?.name
     statsView.timeLabel.text = self.getTimeLabelText(time: (walk?.time)!)
     statsView.distanceLabel.attributedText = self.getDistanceLabelText(distance: (walk?.distance)!)
