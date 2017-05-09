@@ -98,7 +98,7 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TIME" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZr-Wc-1rt">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCORE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZr-Wc-1rt">
                                         <rect key="frame" x="0.0" y="8" width="125" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="125" id="KjA-7F-gkN"/>
@@ -184,6 +184,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="fnV-54-zCr" id="4gF-YK-KNB"/>
+                        <outlet property="statsView" destination="yV3-u5-nI9" id="slV-y7-vEt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>

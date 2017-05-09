@@ -69,18 +69,6 @@ extension WalkViewController {
     return timeText
   }
   
-  func getDistanceLabelText(distance: Double) -> NSAttributedString {
-    // Displays distance in km
-    // Note: implement option to user miles in future
-    let distanceString = String(format: "%.2f km", distance / 1000.0)
-    let attributes = [NSFontAttributeName: UIFont(name: "Avenir-Black", size: 16) as Any]
-    let range = NSString(string: distanceString).range(of: " km")
-    let distanceText = NSMutableAttributedString(string: distanceString)
-    distanceText.addAttributes(attributes, range: range)
-    
-    return distanceText
-  }
-  
   func dropPin(coordinate: CLLocationCoordinate2D, name: String) {
     let pin = WalkPin(type: name)
     pin.coordinate = coordinate

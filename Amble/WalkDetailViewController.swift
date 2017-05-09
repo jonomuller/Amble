@@ -122,7 +122,7 @@ private extension WalkDetailViewController {
     tableView.reloadData()
     self.navigationItem.title = walk?.name
     statsView.timeLabel.text = self.getTimeLabelText(time: (walk?.time)!)
-    statsView.distanceLabel.attributedText = self.getDistanceLabelText(distance: (walk?.distance)!)
+    statsView.distanceLabel.attributedText = walk?.distance.distanceLabelText()
     statsView.stepsLabel.text = String((walk?.steps)!)
     
     let polyLine = MKPolyline(coordinates: (walk?.coordinates)!, count: (walk?.coordinates.count)!)

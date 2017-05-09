@@ -181,7 +181,7 @@ extension TrackWalkViewController {
       distance = 0.0
       steps = 0
       statsView.timeLabel.text = "00:00"
-      statsView.distanceLabel.attributedText = self.getDistanceLabelText(distance: 0)
+      statsView.distanceLabel.attributedText = Double(0).distanceLabelText()
       statsView.stepsLabel.text = "0"
       
       // Receive updates from phone's motion data to count number of steps
@@ -216,7 +216,7 @@ extension TrackWalkViewController {
     time += 1
     DispatchQueue.main.async {
       self.statsView.timeLabel.text = self.getTimeLabelText(time: self.time)
-      self.statsView.distanceLabel.attributedText = self.getDistanceLabelText(distance: self.distance)
+      self.statsView.distanceLabel.attributedText = self.distance.distanceLabelText()
     }
   }
   
