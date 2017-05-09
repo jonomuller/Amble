@@ -78,6 +78,12 @@ class APIManager: NSObject {
   
   // MARK: - /users API calls
   
+  public func getInfo(id: String, completion: @escaping (APIResponse) -> Void) {
+    self.request(router: .getInfo(id: id)) { (response) in
+      completion(response)
+    }
+  }
+  
   public func getWalks(id: String, completion: @escaping (APIResponse) -> Void) {
     self.request(router: .getWalks(id: id)) { (response) in
       completion(response)
