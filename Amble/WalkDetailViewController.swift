@@ -104,12 +104,19 @@ private extension WalkDetailViewController {
           coordinates.append(CLLocationCoordinate2D(latitude: point[1], longitude: point[0]))
         }
         
+        let achievementsDict = json["walk"]["achievements"].arrayObject as! [[String: Any]]
+        var achievements: [Achievement] = []
+        
+        for achievement in achievementsDict {
+          achievements.append(Achievement(type: AchievementType(rawValue: achievement["name"] as! String)!, value: achievement["value"] as! Int))
+        }
+        
         self.walk = Walk(name: json["walk"]["name"].stringValue,
                          coordinates: coordinates,
                          time: json["walk"]["time"].intValue,
                          distance: json["walk"]["distance"].doubleValue,
                          steps: json["walk"]["steps"].intValue,
-                         achievements: [])
+                         achievements: achievements)
         
         self.setupView()
       case .failure(let error):

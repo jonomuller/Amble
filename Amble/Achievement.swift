@@ -8,29 +8,18 @@
 
 import Foundation
 
-enum AchievementType {
+enum AchievementType: String {
   
-  case distance
-  case dayStreak(day: Int)
-  case group
-  
-  var rawValue: String {
-    switch self {
-    case .distance:
-      return "DISTANCE"
-    case .dayStreak:
-      return "DAY_STREAK"
-    case .group:
-      return "GROUP"
-    }
-  }
+  case distance = "DISTANCE"
+  case dayStreak = "DAY_STREAK"
+  case group = "GROUP"
   
   var description: String {
     switch self {
     case .distance:
       return "Distance walked"
-    case .dayStreak(let day):
-      return "\(day) day streak"
+    case .dayStreak:
+      return "day streak"
     case .group:
       return "Walk with other people"
     }
