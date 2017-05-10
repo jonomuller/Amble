@@ -59,7 +59,7 @@ extension WalkDetailViewController: UITableViewDataSource {
         cell.detailTextLabel?.text = "+\(totalPoints)"
       } else {
         let achievement = walk.achievements[indexPath.row]
-        cell.textLabel?.text = achievement.type.description
+        cell.textLabel?.text = achievement.description
         cell.detailTextLabel?.text = "+\(achievement.value)"
       }
     }
