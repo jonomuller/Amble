@@ -425,10 +425,14 @@ private extension TrackWalkViewController {
   }
   
   func generateAchivements() -> [Achievement] {
-    let distanceAchievement = Achievement(type: .distance, value: Int(self.distance / 10))
+    var achievements: [Achievement] = []
+    
+    // Create distance achievement
+    achievements.append(Achievement(type: .distance, value: Int(self.distance / 10)))
     
     let userDefaults = UserDefaults.standard
     
+    // Check if there is a day streak achievement
     if let lastUseDate: Date = userDefaults.object(forKey: LAST_USE_DATE_KEY) as? Date {
       var streakCount = userDefaults.integer(forKey: STREAK_COUNT_KEY)
       let components = Calendar.current.dateComponents([.day], from: lastUseDate, to: Date())
@@ -437,18 +441,20 @@ private extension TrackWalkViewController {
         streakCount += 1
         userDefaults.set(Date(), forKey: LAST_USE_DATE_KEY)
         userDefaults.set(streakCount, forKey: STREAK_COUNT_KEY)
-        let streakAchievement = Achievement(type: .dayStreak, value: streakCount)
-        return [distanceAchievement, streakAchievement]
-      } else {
-        userDefaults.set(Date(), forKey: LAST_USE_DATE_KEY)
-        userDefaults.set(1, forKey: STREAK_COUNT_KEY)
+        achievements.append(Achievement(type: .dayStreak, value: streakCount * 100))
+      } else if components.day! > 1 {
+        resetDayStreak(userDefaults: userDefaults)
       }
     } else {
-      userDefaults.set(Date(), forKey: LAST_USE_DATE_KEY)
-      userDefaults.set(1, forKey: STREAK_COUNT_KEY)
+      resetDayStreak(userDefaults: userDefaults)
     }
     
-    return [distanceAchievement]
+    return achievements
+  }
+  
+  func resetDayStreak(userDefaults: UserDefaults) {
+    userDefaults.set(Date(), forKey: LAST_USE_DATE_KEY)
+    userDefaults.set(1, forKey: STREAK_COUNT_KEY)
   }
   
   func presentWalkDetailView(walk: Walk, id: String) {
