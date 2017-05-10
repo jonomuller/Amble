@@ -30,11 +30,13 @@ class WalkDetailViewController: WalkViewController {
   }
 }
 
+// MARK: - Table view data source
+
 extension WalkDetailViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     if let walk = walk {
-      return walk.achievements.count
+      return walk.achievements.count + 1
     }
     
     return 0
@@ -44,9 +46,22 @@ extension WalkDetailViewController: UITableViewDataSource {
     let cell = tableView.dequeueReusableCell(withIdentifier: ACHIEVEMENT_CELL_IDENTIFIER, for: indexPath)
     
     if let walk = walk {
-      let achievement = walk.achievements[indexPath.row]
-      cell.textLabel?.text = achievement.type.description
-      cell.detailTextLabel?.text = "+\(achievement.value)"
+      if indexPath.row == walk.achievements.count {
+        var totalPoints = 0
+        for achievement in walk.achievements {
+          totalPoints += achievement.value
+        }
+        
+        let boldFont = UIFont.boldSystemFont(ofSize: 17.0)
+        cell.textLabel?.font = boldFont
+        cell.detailTextLabel?.font = boldFont
+        cell.textLabel?.text = "Total"
+        cell.detailTextLabel?.text = "+\(totalPoints)"
+      } else {
+        let achievement = walk.achievements[indexPath.row]
+        cell.textLabel?.text = achievement.type.description
+        cell.detailTextLabel?.text = "+\(achievement.value)"
+      }
     }
     
     return cell
