@@ -38,7 +38,7 @@ class APIManager: NSObject {
   
   // MARK: - /walks API calls
   
-  public func createWalk(name: String, owner: String, locations: [CLLocation], image: UIImage, time: Int, distance: Double, steps: Int, completion: @escaping (APIResponse) -> Void) {
+  public func createWalk(name: String, owner: String, locations: [CLLocation], achievements: [Achievement], image: UIImage, time: Int, distance: Double, steps: Int, completion: @escaping (APIResponse) -> Void) {
     
     self.request(router: .getMapImageURL) { (response) in
       switch response {
@@ -50,7 +50,7 @@ class APIManager: NSObject {
             case .success:
               // Create walk
               let imageURL = url.components(separatedBy: "?")[0]
-              self.createWalk(name: name, owner: owner, locations: locations, image: imageURL, time: time, distance: distance, steps: steps, completion: { (createResponse) in
+              self.createWalk(name: name, owner: owner, locations: locations, achievements: achievements, image: imageURL, time: time, distance: distance, steps: steps, completion: { (createResponse) in
                 completion(createResponse)
               })
             case .failure:
@@ -77,6 +77,12 @@ class APIManager: NSObject {
   }
   
   // MARK: - /users API calls
+  
+  public func getInfo(id: String, completion: @escaping (APIResponse) -> Void) {
+    self.request(router: .getInfo(id: id)) { (response) in
+      completion(response)
+    }
+  }
   
   public func getWalks(id: String, completion: @escaping (APIResponse) -> Void) {
     self.request(router: .getWalks(id: id)) { (response) in
@@ -132,22 +138,36 @@ private extension APIManager {
     }
   }
   
-  func createWalk(name: String, owner: String, locations: [CLLocation], image: String, time: Int, distance: Double, steps: Int, completion: @escaping (APIResponse) -> Void) {
+  func createWalk(name: String, owner: String, locations: [CLLocation], achievements: [Achievement], image: String, time: Int, distance: Double, steps: Int, completion: @escaping (APIResponse) -> Void) {
+    
     var coordinates: [[Double]] = []
     for location in locations {
       coordinates.append([location.coordinate.longitude, location.coordinate.latitude])
     }
     
-    let details = ["name": name,
-                   "owner": owner,
-                   "coordinates": coordinates.description,
-                   "image": image,
-                   "time": time,
-                   "distance": distance,
-                   "steps": steps] as [String : Any]
+    var achievementsDict: [[String: Any]] = []
+    for achievement in achievements {
+      achievementsDict.append(["name": achievement.type.rawValue, "value": achievement.value])
+    }
     
-    request(router: .createWalk(details: details)) { (response) in
-      completion(response)
+    let achievementsJSON = JSON(achievementsDict)
+    
+    if let achievementsString = achievementsJSON.rawString(.ascii, options: []) {
+      print(achievementsString)
+      let details = ["name": name,
+                     "owner": owner,
+                     "coordinates": coordinates.description,
+                     "achievements": achievementsString,
+                     "image": image,
+                     "time": time,
+                     "distance": distance,
+                     "steps": steps] as [String : Any]
+      
+      request(router: .createWalk(details: details)) { (response) in
+        completion(response)
+      }
+    } else {
+      completion(.failure(error: NSError(domain: "Amble", code: 500, userInfo: nil)))
     }
   }
   

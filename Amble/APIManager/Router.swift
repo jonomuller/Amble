@@ -24,13 +24,14 @@ enum Router: URLRequestConvertible {
   case deleteWalk(id: String)
   
   // /users
+  case getInfo(id: String)
   case getWalks(id: String)
   
   var method: HTTPMethod {
     switch self {
     case .login, .register, .createWalk:
       return .post
-    case .getWalk, .getWalks, .getMapImageURL:
+    case .getWalk, .getWalks, .getMapImageURL, .getInfo:
       return .get
     case .deleteWalk:
       return .delete
@@ -51,6 +52,8 @@ enum Router: URLRequestConvertible {
       return "/walks/\(id)"
     case .deleteWalk(let id):
       return "/walks/\(id)"
+    case .getInfo(let id):
+      return "/users/\(id)"
     case .getWalks(let id):
       return "/users/\(id)/walks"
     }
