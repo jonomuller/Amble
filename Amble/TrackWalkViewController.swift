@@ -17,6 +17,8 @@ class TrackWalkViewController: WalkViewController {
   fileprivate let TIME_INTERVAL = 1.0
   fileprivate let LOCATION_ERROR_TITLE = "Location services are disabled"
   fileprivate let LOCATION_ERROR_MESSAGE = "Please enable location services in the Settings app in order to track your walks."
+  fileprivate let LAST_USE_DATE_KEY = "LastUseDate"
+  fileprivate let STREAK_COUNT_KEY = "StreakCount"
   
   fileprivate var spinner: NVActivityIndicatorView!
   
@@ -315,9 +317,7 @@ private extension TrackWalkViewController {
   func saveWalk(name: String) {
     self.renderMapImage { (image) in
       if let mapImage = image {
-        let distanceAchievement = Achievement(type: .distance, value: Int(self.distance / 10))
-        let achievements = [distanceAchievement]
-        
+        let achievements = self.generateAchivements()
         APIManager.sharedInstance.createWalk(name: name, owner: User.sharedInstance.userInfo!.id, locations: self.locations, achievements: achievements, image: mapImage, time: self.time, distance: self.distance, steps: self.steps, completion: { (response) in
           self.spinner.stopAnimating()
           
@@ -422,6 +422,33 @@ private extension TrackWalkViewController {
   func removeMapOverlays() {
     self.mapView.removeOverlays(self.mapView.overlays)
     self.mapView.removeAnnotations(self.mapView.annotations)
+  }
+  
+  func generateAchivements() -> [Achievement] {
+    let distanceAchievement = Achievement(type: .distance, value: Int(self.distance / 10))
+    
+    let userDefaults = UserDefaults.standard
+    
+    if let lastUseDate: Date = userDefaults.object(forKey: LAST_USE_DATE_KEY) as? Date {
+      var streakCount = userDefaults.integer(forKey: STREAK_COUNT_KEY)
+      let components = Calendar.current.dateComponents([.day], from: lastUseDate, to: Date())
+      
+      if components.day == 1 {
+        streakCount += 1
+        userDefaults.set(Date(), forKey: LAST_USE_DATE_KEY)
+        userDefaults.set(streakCount, forKey: STREAK_COUNT_KEY)
+        let streakAchievement = Achievement(type: .dayStreak, value: streakCount)
+        return [distanceAchievement, streakAchievement]
+      } else {
+        userDefaults.set(Date(), forKey: LAST_USE_DATE_KEY)
+        userDefaults.set(1, forKey: STREAK_COUNT_KEY)
+      }
+    } else {
+      userDefaults.set(Date(), forKey: LAST_USE_DATE_KEY)
+      userDefaults.set(1, forKey: STREAK_COUNT_KEY)
+    }
+    
+    return [distanceAchievement]
   }
   
   func presentWalkDetailView(walk: Walk, id: String) {
