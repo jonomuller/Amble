@@ -14,6 +14,7 @@ import Locksmith
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
+  fileprivate let DEVICE_TOKEN_KEY = "DeviceToken"
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .alert, .sound]) { (success, error) in
@@ -49,7 +50,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
     let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-    print("APNs device token: \(deviceTokenString)")
+    let userDefaults = UserDefaults.standard
+    
+    if let savedDeviceToken: String = userDefaults.object(forKey: DEVICE_TOKEN_KEY) as? String {
+      if deviceTokenString != savedDeviceToken {
+        self.updateDeviceToken(deviceToken: deviceTokenString, userDefaults: userDefaults)
+      }
+    } else {
+      self.updateDeviceToken(deviceToken: deviceTokenString, userDefaults: userDefaults)
+    }
+  }
+  
+  private func updateDeviceToken(deviceToken: String, userDefaults: UserDefaults) {
+    userDefaults.set(deviceToken, forKey: DEVICE_TOKEN_KEY)
+    
+    if let userInfo = User.sharedInstance.userInfo {
+      APIManager.sharedInstance.registerToken(id: userInfo.id, token: deviceToken, completion: { (response) in
+        switch response {
+        case .success:
+          print("Updated device token")
+        case .failure(let error):
+          print("Failed registering device token: \(error.localizedDescription)")
+        }
+      })
+    }
   }
   
   func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
