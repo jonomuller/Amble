@@ -83,6 +83,19 @@ class APIManager: NSObject {
       completion(response)
     }
   }
+  
+  public func registerToken(id: String, token: String, completion: @escaping (APIResponse) -> Void) {
+    self.request(router: .registerToken(id: id, token: token)) { (response) in
+      completion(response)
+    }
+  }
+  
+  public func invite(id: String, date: Date, completion: @escaping (APIResponse) -> Void) {
+    let details = ["from": User.sharedInstance.userInfo!.id, "date": date]
+    self.request(router: .invite(id: id, details: details)) { (response) in
+      completion(response)
+    }
+  }
 }
 
 // MARK: - Private helper methods

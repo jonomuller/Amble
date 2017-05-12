@@ -25,12 +25,14 @@ enum Router: URLRequestConvertible {
   
   // /users
   case getWalks(id: String)
+  case registerToken(id: String, token: String)
+  case invite(id: String, details: Parameters)
   
   var method: HTTPMethod {
     switch self {
-    case .login, .register, .createWalk:
+    case .login, .register, .createWalk, .invite:
       return .post
-    case .getWalk, .getWalks, .getMapImageURL:
+    case .getWalk, .getWalks, .getMapImageURL, .registerToken:
       return .get
     case .deleteWalk:
       return .delete
@@ -53,6 +55,10 @@ enum Router: URLRequestConvertible {
       return "/walks/\(id)"
     case .getWalks(let id):
       return "/users/\(id)/walks"
+    case .registerToken(let id, let token):
+      return "/users/\(id)/register/\(token)"
+    case .invite(let id, _):
+      return "/users/invite/\(id)"
     }
   }
   
@@ -63,6 +69,8 @@ enum Router: URLRequestConvertible {
     case .register(let details):
       return details
     case .createWalk(let details):
+      return details
+    case .invite(_, let details):
       return details
     default:
       return [:]
