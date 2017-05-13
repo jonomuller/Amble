@@ -12,6 +12,7 @@ import NVActivityIndicatorView
 
 class ProfileViewController: UIViewController {
   
+  @IBOutlet var statsView: StatsView!
   @IBOutlet var collectionView: UICollectionView!
   
   fileprivate var spinner: NVActivityIndicatorView!
@@ -23,6 +24,7 @@ class ProfileViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.setCustomBackButton(image: UIImage(named: "back-button"))
+    self.statsView.distanceLabel.attributedText = Double(0).distanceLabelText()
     self.navigationItem.title = (User.sharedInstance.userInfo?.firstName)! + " " + (User.sharedInstance.userInfo?.lastName)!
     
     spinner = self.collectionView.createIndicatorView(width: 50, height: 50)
@@ -30,6 +32,7 @@ class ProfileViewController: UIViewController {
   }
   
   override func viewWillAppear(_ animated: Bool) {
+    self.getStats()
     self.getWalks { (walks) in
       if self.walks.count != walks.count {
         self.walks = walks
@@ -102,6 +105,22 @@ extension ProfileViewController {
 // MARK: - Private helper methods
 
 private extension ProfileViewController {
+  
+  func getStats() {
+    APIManager.sharedInstance.getInfo(id: (User.sharedInstance.userInfo?.id)!) { (response) in
+      switch response {
+      case .success(let json):
+        DispatchQueue.main.async(execute: { 
+          self.statsView.timeLabel.text = json["user"]["score"].stringValue
+          self.statsView.distanceLabel.attributedText = json["user"]["distance"].doubleValue.distanceLabelText()
+          self.statsView.stepsLabel.text = json["user"]["steps"].stringValue
+        })
+      case .failure(let error):
+        self.displayErrorAlert(error: error)
+      }
+    }
+  }
+  
   func getWalks(completion: @escaping ([WalkInfo]) -> Void) {
     APIManager.sharedInstance.getWalks(id: (User.sharedInstance.userInfo?.id)!) { (response) in
       self.spinner.stopAnimating()
@@ -123,11 +142,7 @@ private extension ProfileViewController {
         walks = walks.sorted(by: { $0.date.compare($1.date) == ComparisonResult.orderedDescending })
         completion(walks)
       case .failure(let error):
-        let alertView = UIAlertController(title: error.localizedDescription,
-                                          message: error.localizedFailureReason,
-                                          preferredStyle: .alert)
-        alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alertView, animated: true, completion: nil)
+        self.displayErrorAlert(error: error)
       }
     }
   }

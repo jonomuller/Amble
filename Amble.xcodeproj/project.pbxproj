@@ -20,6 +20,7 @@
 		AF2D9D901EA517F300EDCF53 /* UIViewController+RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2D9D8F1EA517F300EDCF53 /* UIViewController+RootView.swift */; };
 		AF2D9D921EA538D400EDCF53 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF2D9D911EA538D400EDCF53 /* MapKit.framework */; };
 		AF2D9D941EA53DA800EDCF53 /* TrackWalkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2D9D931EA53DA800EDCF53 /* TrackWalkViewController.swift */; };
+		AF5333B41EC253CB0076EBC0 /* Double+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5333B31EC253CB0076EBC0 /* Double+String.swift */; };
 		AF67D9231EA2516D003BE7CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF67D9211EA2516D003BE7CF /* LaunchScreen.storyboard */; };
 		AF67D9641EA2539F003BE7CF /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9601EA2539F003BE7CF /* APIManager.swift */; };
 		AF67D9651EA2539F003BE7CF /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9611EA2539F003BE7CF /* APIResponse.swift */; };
@@ -41,6 +42,7 @@
 		AF67D9861EA254AC003BE7CF /* AmbleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9851EA254AC003BE7CF /* AmbleUITests.swift */; };
 		AF67D9881EA254EB003BE7CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF67D9871EA254EB003BE7CF /* Main.storyboard */; };
 		AF67D98C1EA2728A003BE7CF /* UINavigationController+Transparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D98B1EA2728A003BE7CF /* UINavigationController+Transparent.swift */; };
+		AF97CB5A1EC134FD00D5AF75 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF97CB591EC134FD00D5AF75 /* Achievement.swift */; };
 		AFA685361EB810D700F869DF /* UIView+IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA685351EB810D700F869DF /* UIView+IndicatorView.swift */; };
 		AFA685381EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA685371EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift */; };
 		AFC4015E1EC7756C00CACAFD /* InvitesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC4015D1EC7756C00CACAFD /* InvitesTableViewController.swift */; };
@@ -85,6 +87,7 @@
 		AF2D9D8F1EA517F300EDCF53 /* UIViewController+RootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+RootView.swift"; sourceTree = "<group>"; };
 		AF2D9D911EA538D400EDCF53 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		AF2D9D931EA53DA800EDCF53 /* TrackWalkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackWalkViewController.swift; sourceTree = "<group>"; };
+		AF5333B31EC253CB0076EBC0 /* Double+String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+String.swift"; sourceTree = "<group>"; };
 		AF67D9151EA2516D003BE7CF /* Amble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Amble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF67D9221EA2516D003BE7CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF67D9291EA2516D003BE7CF /* AmbleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AmbleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +115,7 @@
 		AF67D9871EA254EB003BE7CF /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AF67D9891EA25550003BE7CF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF67D98B1EA2728A003BE7CF /* UINavigationController+Transparent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Transparent.swift"; sourceTree = "<group>"; };
+		AF97CB591EC134FD00D5AF75 /* Achievement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		AFA685351EB810D700F869DF /* UIView+IndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+IndicatorView.swift"; sourceTree = "<group>"; };
 		AFA685371EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorAlertView.swift"; sourceTree = "<group>"; };
 		AFC4015D1EC7756C00CACAFD /* InvitesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitesTableViewController.swift; sourceTree = "<group>"; };
@@ -195,6 +199,7 @@
 				AF2D9D931EA53DA800EDCF53 /* TrackWalkViewController.swift */,
 				AF0D36E31EB02F1000643BA7 /* WalkDetailViewController.swift */,
 				AF0D36E71EB0F78E00643BA7 /* StatsView.swift */,
+				AF97CB591EC134FD00D5AF75 /* Achievement.swift */,
 				AF0D36E91EB1065F00643BA7 /* Walk.swift */,
 				AF67D96A1EA253A9003BE7CF /* User.swift */,
 				AF0D36E11EAA7B7E00643BA7 /* WalkPin.swift */,
@@ -241,6 +246,7 @@
 				AF2D9D8F1EA517F300EDCF53 /* UIViewController+RootView.swift */,
 				AFA685371EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift */,
 				AFA685351EB810D700F869DF /* UIView+IndicatorView.swift */,
+				AF5333B31EC253CB0076EBC0 /* Double+String.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -580,6 +586,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF5333B41EC253CB0076EBC0 /* Double+String.swift in Sources */,
 				AF67D98C1EA2728A003BE7CF /* UINavigationController+Transparent.swift in Sources */,
 				AF67D97E1EA253C4003BE7CF /* EntryTableViewCell.swift in Sources */,
 				AFDD14251EB5157300274E30 /* WalkCollectionViewCell.swift in Sources */,
@@ -610,6 +617,7 @@
 				AFA685381EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift in Sources */,
 				AF67D96E1EA253A9003BE7CF /* User.swift in Sources */,
 				AF67D9751EA253B7003BE7CF /* UIColor+Image.swift in Sources */,
+				AF97CB5A1EC134FD00D5AF75 /* Achievement.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
