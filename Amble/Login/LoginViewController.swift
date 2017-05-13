@@ -14,7 +14,7 @@ class LoginViewController: EntryViewController {
     return ["username", "password"]
   }
   
-  override func entryButtonPressed(details: [String: String]) {
+  override func entryButtonPressed() {
     APIManager.sharedInstance.login(username: details[sections[0]]!.lowercased(), password: details[sections[1]]!) { (response) in
       self.handleAPIResponse(response: response)
     }

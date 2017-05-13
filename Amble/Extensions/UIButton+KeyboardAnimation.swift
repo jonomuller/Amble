@@ -10,7 +10,7 @@ import UIKit
 
 extension UIButton {
   func keyboardWillShow(begin: CGRect, end: CGRect) {
-    if abs(begin.origin.y - end.origin.y) == begin.height {
+    if abs(begin.origin.y - end.origin.y) == begin.height && abs(self.frame.origin.y - begin.origin.y) < 100 {
       let transform = CGAffineTransform(translationX: 0,
                                         y: end.origin.y - self.frame.height - 20 - self.frame.origin.y)
       transformButton(transform: transform)
