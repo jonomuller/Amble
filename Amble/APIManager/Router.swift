@@ -26,14 +26,22 @@ enum Router: URLRequestConvertible {
   // /users
   case getInfo(id: String)
   case getWalks(id: String)
+  case userSearch(info: String)
   case registerToken(id: String, token: String)
   case invite(id: String, details: Parameters)
+  case getSentInvites
+  case getReceivedInvites
+  
+  // /invites
+  case acceptInvite(id: String)
+  case declineInvite(id: String)
   
   var method: HTTPMethod {
     switch self {
     case .login, .register, .createWalk, .invite:
       return .post
-    case .getWalk, .getWalks, .getMapImageURL, .getInfo, .registerToken:
+    case .getWalk, .getWalks, .getMapImageURL, .getInfo, .userSearch, .registerToken,
+         .getSentInvites, .getReceivedInvites, .acceptInvite, .declineInvite:
       return .get
     case .deleteWalk:
       return .delete
@@ -58,10 +66,20 @@ enum Router: URLRequestConvertible {
       return "/users/\(id)"
     case .getWalks(let id):
       return "/users/\(id)/walks"
+    case .userSearch(let info):
+      return "/users/search/\(info)"
     case .registerToken(let id, let token):
       return "/users/\(id)/register/\(token)"
     case .invite(let id, _):
       return "/users/invite/\(id)"
+    case .getSentInvites:
+      return "/users/invites/sent"
+    case .getReceivedInvites:
+      return "/users/invites/received"
+    case .acceptInvite(let id):
+      return "/invites/\(id)/accept"
+    case .declineInvite(let id):
+      return "/invites/\(id)/decline"
     }
   }
   
@@ -82,7 +100,7 @@ enum Router: URLRequestConvertible {
   
   var requiresJWTAuth: Bool {
     switch self {
-    case .login, .register:
+    case .login, .register, .userSearch:
       return false
     default:
       return true

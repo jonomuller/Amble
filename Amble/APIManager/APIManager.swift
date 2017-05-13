@@ -90,6 +90,12 @@ class APIManager: NSObject {
     }
   }
   
+  public func userSearch(info: String, completion: @escaping (APIResponse) -> Void) {
+    self.request(router: .userSearch(info: info)) { (response) in
+      completion(response)
+    }
+  }
+  
   public func registerToken(id: String, token: String, completion: @escaping (APIResponse) -> Void) {
     self.request(router: .registerToken(id: id, token: token)) { (response) in
       completion(response)
@@ -103,6 +109,32 @@ class APIManager: NSObject {
     let details = ["from": User.sharedInstance.userInfo!.id, "date": dateFormatter.string(from: date)]
     
     self.request(router: .invite(id: id, details: details)) { (response) in
+      completion(response)
+    }
+  }
+  
+  public func getSentInvites(completion: @escaping (APIResponse) -> Void) {
+    self.request(router: .getSentInvites) { (response) in
+      completion(response)
+    }
+  }
+  
+  public func getReceivedInvites(completion: @escaping (APIResponse) -> Void) {
+    self.request(router: .getReceivedInvites) { (response) in
+      completion(response)
+    }
+  }
+  
+  // MARK: - /invites API calls
+  
+  public func acceptInvite(id: String, completion: @escaping (APIResponse) -> Void) {
+    self.request(router: .acceptInvite(id: id)) { (response) in
+      completion(response)
+    }
+  }
+  
+  public func declineInvite(id: String, completion: @escaping (APIResponse) -> Void) {
+    self.request(router: .declineInvite(id: id)) { (response) in
       completion(response)
     }
   }
