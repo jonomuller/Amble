@@ -127,10 +127,10 @@ private extension ProfileViewController {
       switch response {
       case .success(let json):
         var walks: [WalkInfo] = []
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        
         for (_, subJson): (String, JSON) in json["walks"] {
-          let dateFormatter = DateFormatter()
-          dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-          
           let walk = WalkInfo(id: subJson["id"].stringValue,
                               name: subJson["name"].stringValue,
                               image: subJson["image"].stringValue,
