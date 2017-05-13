@@ -43,6 +43,7 @@
 		AF67D98C1EA2728A003BE7CF /* UINavigationController+Transparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D98B1EA2728A003BE7CF /* UINavigationController+Transparent.swift */; };
 		AFA685361EB810D700F869DF /* UIView+IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA685351EB810D700F869DF /* UIView+IndicatorView.swift */; };
 		AFA685381EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA685371EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift */; };
+		AFC4015E1EC7756C00CACAFD /* InvitesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC4015D1EC7756C00CACAFD /* InvitesTableViewController.swift */; };
 		AFDD14251EB5157300274E30 /* WalkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDD14241EB5157300274E30 /* WalkCollectionViewCell.swift */; };
 		AFF37AA61EA2A09000D57E8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFF37AA51EA2A09000D57E8D /* Assets.xcassets */; };
 		AFF37AAA1EA2D8BD00D57E8D /* UIViewController+CustomBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF37AA91EA2D8BD00D57E8D /* UIViewController+CustomBackButton.swift */; };
@@ -113,6 +114,7 @@
 		AF67D98B1EA2728A003BE7CF /* UINavigationController+Transparent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Transparent.swift"; sourceTree = "<group>"; };
 		AFA685351EB810D700F869DF /* UIView+IndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+IndicatorView.swift"; sourceTree = "<group>"; };
 		AFA685371EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorAlertView.swift"; sourceTree = "<group>"; };
+		AFC4015D1EC7756C00CACAFD /* InvitesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitesTableViewController.swift; sourceTree = "<group>"; };
 		AFDD14241EB5157300274E30 /* WalkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkCollectionViewCell.swift; sourceTree = "<group>"; };
 		AFEED74B1EBD54BD003AA3F4 /* Amble.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Amble.entitlements; sourceTree = "<group>"; };
 		AFF37AA51EA2A09000D57E8D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				AF67D9211EA2516D003BE7CF /* LaunchScreen.storyboard */,
 				AF2D9D8D1EA515B200EDCF53 /* Login.storyboard */,
 				AF67D9871EA254EB003BE7CF /* Main.storyboard */,
+				AFC4015D1EC7756C00CACAFD /* InvitesTableViewController.swift */,
 				AFDD14241EB5157300274E30 /* WalkCollectionViewCell.swift */,
 				AF67D9691EA253A9003BE7CF /* ProfileViewController.swift */,
 				AF2D9D8B1EA4149100EDCF53 /* SettingsTableViewController.swift */,
@@ -589,6 +592,7 @@
 				AF67D96B1EA253A9003BE7CF /* AppDelegate.swift in Sources */,
 				AF0D36E41EB02F1100643BA7 /* WalkDetailViewController.swift in Sources */,
 				AF67D97F1EA253C4003BE7CF /* EntryViewController.swift in Sources */,
+				AFC4015E1EC7756C00CACAFD /* InvitesTableViewController.swift in Sources */,
 				AF67D9641EA2539F003BE7CF /* APIManager.swift in Sources */,
 				AF67D9661EA2539F003BE7CF /* Router.swift in Sources */,
 				AF67D9731EA253B7003BE7CF /* UIButton+BackgroundColor.swift in Sources */,
