@@ -17,19 +17,28 @@ class APIManager: NSObject {
   
   // MARK: - /auth API calls
   
-  public func login(username: String, password: String, completion: @escaping (APIResponse) -> Void) {
-    let details = ["username": username, "password": password]
+  public func login(username: String, password: String, deviceToken: String?, completion: @escaping (APIResponse) -> Void) {
+    var details = ["username": username, "password": password]
+    
+    if let token = deviceToken {
+      details["deviceToken"] = token
+    }
+    
     self.request(router: .login(details: details)) { (response) in
       completion(response)
     }
   }
   
-  public func register(username: String, email: String, password: String, firstName: String, lastName: String, completion: @escaping (APIResponse) -> Void) {
-    let details = ["username": username,
+  public func register(username: String, email: String, password: String, firstName: String, lastName: String, deviceToken: String?, completion: @escaping (APIResponse) -> Void) {
+    var details = ["username": username,
                    "email": email,
                    "password": password,
                    "firstName": firstName,
                    "lastName": lastName]
+    
+    if let token = deviceToken {
+      details["deviceToken"] = token
+    }
     
     self.request(router: .register(details: details)) { (response) in
       completion(response)
@@ -96,8 +105,8 @@ class APIManager: NSObject {
     }
   }
   
-  public func registerToken(id: String, token: String, completion: @escaping (APIResponse) -> Void) {
-    self.request(router: .registerToken(id: id, token: token)) { (response) in
+  public func registerToken(token: String, completion: @escaping (APIResponse) -> Void) {
+    self.request(router: .registerToken(token: token)) { (response) in
       completion(response)
     }
   }
