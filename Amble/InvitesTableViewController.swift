@@ -17,7 +17,8 @@ class InvitesTableViewController: UITableViewController {
   fileprivate let INVITE_CELL_IDENTIFIER = "InviteCell"
   
   fileprivate var spinner: NVActivityIndicatorView!
-  fileprivate var invites: [Invite] = []
+  fileprivate var sentInvites: [Invite] = []
+  fileprivate var receivedInvites: [Invite] = []
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -27,14 +28,7 @@ class InvitesTableViewController: UITableViewController {
   }
   
   override func viewWillAppear(_ animated: Bool) {
-    self.getInvites { (invites) in
-      if self.invites.count != invites.count {
-        self.invites = invites
-        DispatchQueue.main.async(execute: { 
-          self.tableView.reloadData()
-        })
-      }
-    }
+    self.getInvites()
   }
 }
 
@@ -43,11 +37,30 @@ class InvitesTableViewController: UITableViewController {
 extension InvitesTableViewController {
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return invites.count
+    switch segmentedControl.selectedSegmentIndex {
+    case 0:
+      return sentInvites.count
+    case 1:
+      return receivedInvites.count
+    default:
+      return 0
+    }
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: INVITE_CELL_IDENTIFIER, for: indexPath)
+    
+    var invites: [Invite] = []
+    
+    switch segmentedControl.selectedSegmentIndex {
+    case 0:
+      invites = sentInvites
+    case 1:
+      invites = receivedInvites
+    default:
+      break
+    }
+    
     let invite = invites[indexPath.row]
     
     cell.textLabel?.text = invite.firstName + " " + invite.lastName
@@ -56,33 +69,34 @@ extension InvitesTableViewController {
   }
 }
 
+// MARK: - IBAction methods
+
+extension InvitesTableViewController {
+  @IBAction func segmentedControlValueChanged(_ sender: Any) {
+    self.tableView.reloadData()
+  }
+}
+
 // MARK: - Private helper methods
 
 private extension InvitesTableViewController {
-  func getInvites(completion: @escaping ([Invite]) -> Void) {
-    switch segmentedControl.selectedSegmentIndex {
-    case 0:
-      APIManager.sharedInstance.getSentInvites(completion: { (response) in
-        self.handleAPIResponse(response: response, completion: { (invites) in
-          completion(invites)
-        })
-      })
-    case 1:
-      APIManager.sharedInstance.getReceivedInvites(completion: { (response) in
-        self.handleAPIResponse(response: response, completion: { (invites) in
-          completion(invites)
-        })
-      })
-    default:
-      break
-    }
+  
+  func getInvites() {
+    APIManager.sharedInstance.getSentInvites(completion: { (response) in
+      self.sentInvites = self.handleAPIResponse(response: response)
+    })
+    
+    APIManager.sharedInstance.getReceivedInvites(completion: { (response) in
+      self.receivedInvites = self.handleAPIResponse(response: response)
+    })
   }
   
-  func handleAPIResponse(response: APIResponse, completion: @escaping ([Invite]) -> Void) {
+  func handleAPIResponse(response: APIResponse) -> [Invite] {
+    var invites: [Invite] = []
     self.spinner.stopAnimating()
+    
     switch response {
     case .success(let json):
-      var invites: [Invite] = []
       let dateFormatter = DateFormatter()
       dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
       
@@ -94,9 +108,10 @@ private extension InvitesTableViewController {
         invites.append(invite)
       }
       
-      completion(invites)
     case .failure(let error):
       self.displayErrorAlert(error: error)
     }
+    
+    return invites
   }
 }

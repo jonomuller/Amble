@@ -274,6 +274,9 @@
                                 <segment title="Received"/>
                             </segments>
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="segmentedControlValueChanged:" destination="1sJ-WZ-O9l" eventType="valueChanged" id="9fT-L5-LXG"/>
+                            </connections>
                         </segmentedControl>
                     </navigationItem>
                     <connections>
