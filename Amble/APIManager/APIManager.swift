@@ -17,7 +17,7 @@ class APIManager: NSObject {
   
   // MARK: - /auth API calls
   
-  public func login(username: String, password: String, deviceToken: String?, completion: @escaping (APIResponse) -> Void) {
+  public func login(username: String, password: String, deviceToken: String? = nil, completion: @escaping (APIResponse) -> Void) {
     var details = ["username": username, "password": password]
     
     if let token = deviceToken {
@@ -29,7 +29,7 @@ class APIManager: NSObject {
     }
   }
   
-  public func register(username: String, email: String, password: String, firstName: String, lastName: String, deviceToken: String?, completion: @escaping (APIResponse) -> Void) {
+  public func register(username: String, email: String, password: String, firstName: String, lastName: String, deviceToken: String? = nil, completion: @escaping (APIResponse) -> Void) {
     var details = ["username": username,
                    "email": email,
                    "password": password,
