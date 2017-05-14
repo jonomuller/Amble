@@ -25,7 +25,7 @@ class ProfileViewController: UIViewController {
     super.viewDidLoad()
     self.setCustomBackButton(image: UIImage(named: "back-button"))
     self.statsView.distanceLabel.attributedText = Double(0).distanceLabelText()
-    self.navigationItem.title = (User.sharedInstance.userInfo?.firstName)! + " " + (User.sharedInstance.userInfo?.lastName)!
+    self.navigationItem.title = (User.sharedInstance.userInfo?.user.firstName)! + " " + (User.sharedInstance.userInfo?.user.lastName)!
     
     spinner = self.collectionView.createIndicatorView(width: 50, height: 50)
     spinner.startAnimating()
@@ -107,7 +107,7 @@ extension ProfileViewController {
 private extension ProfileViewController {
   
   func getStats() {
-    APIManager.sharedInstance.getInfo(id: (User.sharedInstance.userInfo?.id)!) { (response) in
+    APIManager.sharedInstance.getInfo(id: (User.sharedInstance.userInfo?.user.id)!) { (response) in
       switch response {
       case .success(let json):
         DispatchQueue.main.async(execute: { 
@@ -122,7 +122,7 @@ private extension ProfileViewController {
   }
   
   func getWalks(completion: @escaping ([WalkInfo]) -> Void) {
-    APIManager.sharedInstance.getWalks(id: (User.sharedInstance.userInfo?.id)!) { (response) in
+    APIManager.sharedInstance.getWalks(id: (User.sharedInstance.userInfo?.user.id)!) { (response) in
       self.spinner.stopAnimating()
       switch response {
       case .success(let json):

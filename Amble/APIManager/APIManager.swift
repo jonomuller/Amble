@@ -106,7 +106,7 @@ class APIManager: NSObject {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm'Z'"
     
-    let details = ["from": User.sharedInstance.userInfo!.id, "date": dateFormatter.string(from: date)]
+    let details = ["from": User.sharedInstance.userInfo!.user.id, "date": dateFormatter.string(from: date)]
     
     self.request(router: .invite(id: id, details: details)) { (response) in
       completion(response)

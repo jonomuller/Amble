@@ -10,9 +10,7 @@ import UIKit
 
 struct Invite {
   
-  let username: String
-  let firstName: String
-  let lastName: String
+  let user: OtherUser
   let date: Date
   
 }

@@ -63,7 +63,7 @@ extension InvitesTableViewController {
     
     let invite = invites[indexPath.row]
     
-    cell.textLabel?.text = invite.firstName + " " + invite.lastName
+    cell.textLabel?.text = invite.user.firstName + " " + invite.user.lastName
     
     return cell
   }
@@ -101,10 +101,15 @@ private extension InvitesTableViewController {
       dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
       
       for (_, subJson): (String, JSON) in json["invites"] {
-        let invite = Invite(username: subJson["username"].stringValue,
-                            firstName: subJson["firstName"].stringValue,
-                            lastName: subJson["lastName"].stringValue,
+        let user = OtherUser(id: subJson["_id"].stringValue,
+                             username: subJson["username"].stringValue,
+                             email: subJson["email"].stringValue,
+                             firstName: subJson["firstName"].stringValue,
+                             lastName: subJson["lastName"].stringValue)
+        
+        let invite = Invite(user: user,
                             date: dateFormatter.date(from: subJson["date"].stringValue)!)
+        
         invites.append(invite)
       }
       

@@ -29,12 +29,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // If user's details are in keychain, log them in
     if let user = Locksmith.loadDataForUserAccount(userAccount: "Amble") {
-      User.sharedInstance.userInfo = UserInfo(id: user["id"] as! String,
-                                          username: user["username"] as! String,
-                                          email: user["email"] as! String,
-                                          firstName: user["firstName"] as! String,
-                                          lastName: user["lastName"] as! String,
-                                          jwt: user["jwt"] as! String)
+      User.sharedInstance.userInfo = UserInfo(user: OtherUser(id: user["id"] as! String,
+                                                              username: user["username"] as! String,
+                                                              email: user["email"] as! String,
+                                                              firstName: user["firstName"] as! String,
+                                                              lastName: user["lastName"] as! String),
+                                              jwt: user["jwt"] as! String)
       storyboardID = "Main"
     } else {
       storyboardID = "Login"
@@ -65,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     userDefaults.set(deviceToken, forKey: DEVICE_TOKEN_KEY)
     
     if let userInfo = User.sharedInstance.userInfo {
-      APIManager.sharedInstance.registerToken(id: userInfo.id, token: deviceToken, completion: { (response) in
+      APIManager.sharedInstance.registerToken(id: userInfo.user.id, token: deviceToken, completion: { (response) in
         switch response {
         case .success:
           print("Updated device token")
