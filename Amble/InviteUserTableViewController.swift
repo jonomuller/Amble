@@ -16,9 +16,15 @@ class InviteUserTableViewController: UITableViewController {
   fileprivate let USER_CELL_IDENTIFIER = "UserCell"
   
   fileprivate var users: [OtherUser] = []
+  fileprivate var selectedUser: OtherUser?
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.navigationController?.navigationBar.tintColor = .white
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Invite",
+                                                             style: .done,
+                                                             target: self,
+                                                             action: #selector(inviteButtonPressed))
   }
 }
 
@@ -42,6 +48,26 @@ extension InviteUserTableViewController {
   }
 }
 
+// MARK: - Table view delegate
+
+extension InviteUserTableViewController {
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    self.navigationItem.rightBarButtonItem?.isEnabled = true
+    self.selectedUser = users[indexPath.row]
+    
+    let cell = tableView.cellForRow(at: indexPath)
+    cell?.accessoryType = .checkmark
+  }
+  
+  override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    self.navigationItem.rightBarButtonItem?.isEnabled = false
+    self.selectedUser = nil
+    
+    let cell = tableView.cellForRow(at: indexPath)
+    cell?.accessoryType = .none
+  }
+}
+
 // MARK: - Search bar delegate
 
 extension InviteUserTableViewController: UISearchBarDelegate {
@@ -61,6 +87,24 @@ extension InviteUserTableViewController: UISearchBarDelegate {
           }
           self.tableView.reloadData()
           self.searchDisplayController?.isActive = false
+        case .failure(let error):
+          self.displayErrorAlert(error: error)
+        }
+      })
+    }
+  }
+}
+
+// MARK: - Action methods
+
+extension InviteUserTableViewController {
+  func inviteButtonPressed() {
+    if let id = selectedUser?.id {
+      APIManager.sharedInstance.invite(id: id, date: Date(), completion: { (response) in
+        switch response {
+        case .success(let json):
+          print(json)
+          self.navigationController?.popViewController(animated: true)
         case .failure(let error):
           self.displayErrorAlert(error: error)
         }
