@@ -1,5 +1,5 @@
 //
-//  InviteUserTableViewController.swift
+//  InviteUserViewController.swift
 //  Amble
 //
 //  Created by Jono Muller on 14/05/2017.
@@ -10,9 +10,10 @@ import UIKit
 import SwiftyJSON
 import NVActivityIndicatorView
 
-class InviteUserTableViewController: UITableViewController {
+class InviteUserViewController: UIViewController {
   
   @IBOutlet var searchBar: UISearchBar!
+  @IBOutlet var tableView: UITableView!
   
   fileprivate let USER_CELL_IDENTIFIER = "UserCell"
   
@@ -34,9 +35,9 @@ class InviteUserTableViewController: UITableViewController {
 
 // MARK: - Table view data source
 
-extension InviteUserTableViewController {
+extension InviteUserViewController: UITableViewDataSource {
   
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     if noResults {
       return 1
     }
@@ -44,7 +45,7 @@ extension InviteUserTableViewController {
     return users.count
   }
   
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = self.tableView.dequeueReusableCell(withIdentifier: USER_CELL_IDENTIFIER, for: indexPath)
     
     cell.accessoryType = .none
@@ -68,8 +69,8 @@ extension InviteUserTableViewController {
 
 // MARK: - Table view delegate
 
-extension InviteUserTableViewController {
-  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+extension InviteUserViewController: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let cell = tableView.cellForRow(at: indexPath)
     
     if cell?.accessoryType == UITableViewCellAccessoryType.none {
@@ -94,7 +95,7 @@ extension InviteUserTableViewController {
 
 // MARK: - Search bar delegate
 
-extension InviteUserTableViewController: UISearchBarDelegate {
+extension InviteUserViewController: UISearchBarDelegate {
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     users = []
     if let userInfo = searchBar.text {
@@ -133,7 +134,7 @@ extension InviteUserTableViewController: UISearchBarDelegate {
 
 // MARK: - Action methods
 
-extension InviteUserTableViewController {
+extension InviteUserViewController {
   func inviteButtonPressed() {
     if selectedUsers.count == 0 {
       return
@@ -164,7 +165,7 @@ extension InviteUserTableViewController {
 
 // MARK: - Private helper methods
 
-private extension InviteUserTableViewController {
+private extension InviteUserViewController {
   func createInviteButton() -> UIBarButtonItem {
     return UIBarButtonItem(title: "Invite",
                            style: .done,

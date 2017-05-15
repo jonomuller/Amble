@@ -42,7 +42,7 @@
 		AF67D9881EA254EB003BE7CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF67D9871EA254EB003BE7CF /* Main.storyboard */; };
 		AF67D98C1EA2728A003BE7CF /* UINavigationController+Transparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D98B1EA2728A003BE7CF /* UINavigationController+Transparent.swift */; };
 		AF6D38631EC7B1A900F7E8EB /* Invite.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6D38621EC7B1A900F7E8EB /* Invite.swift */; };
-		AF6D38651EC8674900F7E8EB /* InviteUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6D38641EC8674900F7E8EB /* InviteUserTableViewController.swift */; };
+		AF6D38651EC8674900F7E8EB /* InviteUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6D38641EC8674900F7E8EB /* InviteUserViewController.swift */; };
 		AF97CB5A1EC134FD00D5AF75 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF97CB591EC134FD00D5AF75 /* Achievement.swift */; };
 		AFA685361EB810D700F869DF /* UIView+IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA685351EB810D700F869DF /* UIView+IndicatorView.swift */; };
 		AFA685381EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA685371EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift */; };
@@ -116,7 +116,7 @@
 		AF67D9891EA25550003BE7CF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF67D98B1EA2728A003BE7CF /* UINavigationController+Transparent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Transparent.swift"; sourceTree = "<group>"; };
 		AF6D38621EC7B1A900F7E8EB /* Invite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Invite.swift; sourceTree = "<group>"; };
-		AF6D38641EC8674900F7E8EB /* InviteUserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteUserTableViewController.swift; sourceTree = "<group>"; };
+		AF6D38641EC8674900F7E8EB /* InviteUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteUserViewController.swift; sourceTree = "<group>"; };
 		AF97CB591EC134FD00D5AF75 /* Achievement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		AFA685351EB810D700F869DF /* UIView+IndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+IndicatorView.swift"; sourceTree = "<group>"; };
 		AFA685371EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorAlertView.swift"; sourceTree = "<group>"; };
@@ -192,7 +192,7 @@
 				AF67D9211EA2516D003BE7CF /* LaunchScreen.storyboard */,
 				AF2D9D8D1EA515B200EDCF53 /* Login.storyboard */,
 				AF67D9871EA254EB003BE7CF /* Main.storyboard */,
-				AF6D38641EC8674900F7E8EB /* InviteUserTableViewController.swift */,
+				AF6D38641EC8674900F7E8EB /* InviteUserViewController.swift */,
 				AFC4015D1EC7756C00CACAFD /* InvitesTableViewController.swift */,
 				AF6D38621EC7B1A900F7E8EB /* Invite.swift */,
 				AFDD14241EB5157300274E30 /* WalkCollectionViewCell.swift */,
@@ -596,7 +596,7 @@
 				AF67D9801EA253C4003BE7CF /* InitialViewController.swift in Sources */,
 				AF6D38631EC7B1A900F7E8EB /* Invite.swift in Sources */,
 				AFF37AAA1EA2D8BD00D57E8D /* UIViewController+CustomBackButton.swift in Sources */,
-				AF6D38651EC8674900F7E8EB /* InviteUserTableViewController.swift in Sources */,
+				AF6D38651EC8674900F7E8EB /* InviteUserViewController.swift in Sources */,
 				AF67D97D1EA253C4003BE7CF /* EntryButton.swift in Sources */,
 				AF67D9811EA253C4003BE7CF /* LoginViewController.swift in Sources */,
 				AF67D96D1EA253A9003BE7CF /* ProfileViewController.swift in Sources */,
