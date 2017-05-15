@@ -17,19 +17,28 @@ class APIManager: NSObject {
   
   // MARK: - /auth API calls
   
-  public func login(username: String, password: String, completion: @escaping (APIResponse) -> Void) {
-    let details = ["username": username, "password": password]
+  public func login(username: String, password: String, deviceToken: String? = nil, completion: @escaping (APIResponse) -> Void) {
+    var details = ["username": username, "password": password]
+    
+    if let token = deviceToken {
+      details["deviceToken"] = token
+    }
+    
     self.request(router: .login(details: details)) { (response) in
       completion(response)
     }
   }
   
-  public func register(username: String, email: String, password: String, firstName: String, lastName: String, completion: @escaping (APIResponse) -> Void) {
-    let details = ["username": username,
+  public func register(username: String, email: String, password: String, firstName: String, lastName: String, deviceToken: String? = nil, completion: @escaping (APIResponse) -> Void) {
+    var details = ["username": username,
                    "email": email,
                    "password": password,
                    "firstName": firstName,
                    "lastName": lastName]
+    
+    if let token = deviceToken {
+      details["deviceToken"] = token
+    }
     
     self.request(router: .register(details: details)) { (response) in
       completion(response)
@@ -86,6 +95,55 @@ class APIManager: NSObject {
   
   public func getWalks(id: String, completion: @escaping (APIResponse) -> Void) {
     self.request(router: .getWalks(id: id)) { (response) in
+      completion(response)
+    }
+  }
+  
+  public func userSearch(info: String, completion: @escaping (APIResponse) -> Void) {
+    self.request(router: .userSearch(info: info)) { (response) in
+      completion(response)
+    }
+  }
+  
+  public func registerToken(token: String, completion: @escaping (APIResponse) -> Void) {
+    self.request(router: .registerToken(token: token)) { (response) in
+      completion(response)
+    }
+  }
+  
+  public func invite(ids: [String], date: Date, completion: @escaping (APIResponse) -> Void) {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm'Z'"
+    
+    let details = ["users": ids.description, "date": dateFormatter.string(from: date)]
+    
+    self.request(router: .invite(details: details)) { (response) in
+      completion(response)
+    }
+  }
+  
+  public func getSentInvites(completion: @escaping (APIResponse) -> Void) {
+    self.request(router: .getSentInvites) { (response) in
+      completion(response)
+    }
+  }
+  
+  public func getReceivedInvites(completion: @escaping (APIResponse) -> Void) {
+    self.request(router: .getReceivedInvites) { (response) in
+      completion(response)
+    }
+  }
+  
+  // MARK: - /invites API calls
+  
+  public func acceptInvite(id: String, completion: @escaping (APIResponse) -> Void) {
+    self.request(router: .acceptInvite(id: id)) { (response) in
+      completion(response)
+    }
+  }
+  
+  public func declineInvite(id: String, completion: @escaping (APIResponse) -> Void) {
+    self.request(router: .declineInvite(id: id)) { (response) in
       completion(response)
     }
   }

@@ -231,12 +231,12 @@ extension EntryViewController {
     switch response {
     case .success(let json):
       let userJSON = json["user"]
-      User.sharedInstance.userInfo = UserInfo(id: userJSON["_id"].stringValue,
-                                          username: userJSON["username"].stringValue,
-                                          email: userJSON["email"].stringValue,
-                                          firstName: userJSON["name"]["firstName"].stringValue,
-                                          lastName: userJSON["name"]["lastName"].stringValue,
-                                          jwt: json["jwt"].stringValue)
+      User.sharedInstance.userInfo = UserInfo(user: OtherUser(id: userJSON["_id"].stringValue,
+                                                              username: userJSON["username"].stringValue,
+                                                              email: userJSON["email"].stringValue,
+                                                              firstName: userJSON["name"]["firstName"].stringValue,
+                                                              lastName: userJSON["name"]["lastName"].stringValue),
+                                              jwt: json["jwt"].stringValue)
       
       // Save user data to keychain
       do {
