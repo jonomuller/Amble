@@ -26,7 +26,6 @@
 		AF67D9651EA2539F003BE7CF /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9611EA2539F003BE7CF /* APIResponse.swift */; };
 		AF67D9661EA2539F003BE7CF /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9631EA2539F003BE7CF /* Router.swift */; };
 		AF67D96B1EA253A9003BE7CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9671EA253A9003BE7CF /* AppDelegate.swift */; };
-		AF67D96C1EA253A9003BE7CF /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9681EA253A9003BE7CF /* FirstViewController.swift */; };
 		AF67D96D1EA253A9003BE7CF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9691EA253A9003BE7CF /* ProfileViewController.swift */; };
 		AF67D96E1EA253A9003BE7CF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D96A1EA253A9003BE7CF /* User.swift */; };
 		AF67D9731EA253B7003BE7CF /* UIButton+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9701EA253B7003BE7CF /* UIButton+BackgroundColor.swift */; };
@@ -100,7 +99,6 @@
 		AF67D9611EA2539F003BE7CF /* APIResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
 		AF67D9631EA2539F003BE7CF /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		AF67D9671EA253A9003BE7CF /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AF67D9681EA253A9003BE7CF /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		AF67D9691EA253A9003BE7CF /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		AF67D96A1EA253A9003BE7CF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		AF67D9701EA253B7003BE7CF /* UIButton+BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+BackgroundColor.swift"; sourceTree = "<group>"; };
@@ -190,7 +188,6 @@
 				AF67D96F1EA253B7003BE7CF /* Extensions */,
 				AF67D9761EA253C4003BE7CF /* Login */,
 				AFF37AA51EA2A09000D57E8D /* Assets.xcassets */,
-				AF67D9681EA253A9003BE7CF /* FirstViewController.swift */,
 				AF67D9891EA25550003BE7CF /* Info.plist */,
 				AF67D9211EA2516D003BE7CF /* LaunchScreen.storyboard */,
 				AF2D9D8D1EA515B200EDCF53 /* Login.storyboard */,
@@ -603,7 +600,6 @@
 				AF67D97D1EA253C4003BE7CF /* EntryButton.swift in Sources */,
 				AF67D9811EA253C4003BE7CF /* LoginViewController.swift in Sources */,
 				AF67D96D1EA253A9003BE7CF /* ProfileViewController.swift in Sources */,
-				AF67D96C1EA253A9003BE7CF /* FirstViewController.swift in Sources */,
 				AF67D96B1EA253A9003BE7CF /* AppDelegate.swift in Sources */,
 				AF0D36E41EB02F1100643BA7 /* WalkDetailViewController.swift in Sources */,
 				AF67D97F1EA253C4003BE7CF /* EntryViewController.swift in Sources */,

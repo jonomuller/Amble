@@ -20,6 +20,7 @@ class InviteUserTableViewController: UITableViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.navigationItem.title = "Invite User"
     self.navigationController?.navigationBar.tintColor = .white
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Invite",
                                                              style: .done,
@@ -43,6 +44,7 @@ extension InviteUserTableViewController {
     
     cell.textLabel?.text = user.firstName + " " + user.lastName
     cell.detailTextLabel?.text = user.username
+    cell.selectionStyle = .none
     
     return cell
   }
@@ -52,7 +54,10 @@ extension InviteUserTableViewController {
 
 extension InviteUserTableViewController {
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    self.navigationItem.rightBarButtonItem?.isEnabled = true
+    if selectedUsers.count == 0 {
+      self.navigationItem.rightBarButtonItem?.isEnabled = true
+    }
+    
     selectedUsers.append(users[indexPath.row])
     
     let cell = tableView.cellForRow(at: indexPath)
@@ -60,7 +65,10 @@ extension InviteUserTableViewController {
   }
   
   override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-    self.navigationItem.rightBarButtonItem?.isEnabled = false
+    if selectedUsers.count == 1 {
+      self.navigationItem.rightBarButtonItem?.isEnabled = false
+    }
+    
     selectedUsers = selectedUsers.filter({ $0.id != users[indexPath.row].id })
     
     let cell = tableView.cellForRow(at: indexPath)

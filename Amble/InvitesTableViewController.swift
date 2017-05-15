@@ -66,6 +66,7 @@ extension InvitesTableViewController {
     let invite = invites[indexPath.row]
     
     cell.textLabel?.text = invite.user.firstName + " " + invite.user.lastName
+    cell.detailTextLabel?.text = invite.user.username
     
     return cell
   }
@@ -94,8 +95,8 @@ private extension InvitesTableViewController {
   }
   
   func handleAPIResponse(response: APIResponse, option: String) -> [Invite] {
-    var invites: [Invite] = []
     self.spinner.stopAnimating()
+    var invites: [Invite] = []
     
     switch response {
     case .success(let json):
