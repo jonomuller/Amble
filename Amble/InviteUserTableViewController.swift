@@ -25,9 +25,12 @@ class InviteUserTableViewController: UITableViewController {
                                                              style: .done,
                                                              target: self,
                                                              action: #selector(inviteButtonPressed))
+    
     self.navigationItem.rightBarButtonItem?.isEnabled = false
     self.navigationController?.hidesNavigationBarHairline = true
-    self.searchBar.becomeFirstResponder()
+    
+    searchBar.becomeFirstResponder()
+    searchBar.backgroundImage = UIImage()
   }
 }
 
