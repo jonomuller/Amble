@@ -74,6 +74,7 @@ extension InviteUserViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = self.tableView.dequeueReusableCell(withIdentifier: USER_CELL_IDENTIFIER, for: indexPath)
     
+    cell.isUserInteractionEnabled = true
     cell.accessoryType = .none
     
     if tableView.numberOfSections > 1 && indexPath.section == 0 {
@@ -82,6 +83,7 @@ extension InviteUserViewController: UITableViewDataSource {
       cell.detailTextLabel?.text = selectedUser.username
       cell.accessoryType = .checkmark
     } else if noResults {
+      cell.isUserInteractionEnabled = false
       cell.textLabel?.text = "No results found."
       cell.detailTextLabel?.text = nil
     } else {
@@ -174,9 +176,9 @@ extension InviteUserViewController {
                                           color: .white,
                                           padding: nil)
     spinner.startAnimating()
+    
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: spinner)
     let ids = selectedUsers.map({ return $0.id })
-    
     APIManager.sharedInstance.invite(ids: ids, date: Date(), completion: { (response) in
       spinner.stopAnimating()
       self.navigationItem.rightBarButtonItem = self.inviteBarButtonItem
