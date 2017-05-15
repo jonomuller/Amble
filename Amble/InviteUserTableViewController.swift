@@ -8,7 +8,7 @@
 
 import UIKit
 import SwiftyJSON
-import ChameleonFramework
+import NVActivityIndicatorView
 
 class InviteUserTableViewController: UITableViewController {
   
@@ -21,11 +21,7 @@ class InviteUserTableViewController: UITableViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Invite",
-                                                             style: .done,
-                                                             target: self,
-                                                             action: #selector(inviteButtonPressed))
-    
+    self.navigationItem.rightBarButtonItem = self.createInviteButton()
     self.navigationItem.rightBarButtonItem?.isEnabled = false
     self.navigationController?.hidesNavigationBarHairline = true
     
@@ -112,19 +108,40 @@ extension InviteUserTableViewController: UISearchBarDelegate {
 
 extension InviteUserTableViewController {
   func inviteButtonPressed() {
-    if selectedUsers.count > 0 {
-      let ids = selectedUsers.map({ (otherUser) -> String in
-        return otherUser.id
-      })
-      APIManager.sharedInstance.invite(ids: ids, date: Date(), completion: { (response) in
-        switch response {
-        case .success(let json):
-          print(json)
-          self.navigationController?.popViewController(animated: true)
-        case .failure(let error):
-          self.displayErrorAlert(error: error)
-        }
-      })
+    if selectedUsers.count == 0 {
+      return
     }
+    
+    let spinner = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20),
+                                          type: .ballScaleRippleMultiple,
+                                          color: .white,
+                                          padding: nil)
+    spinner.startAnimating()
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: spinner)
+    let ids = selectedUsers.map({ return $0.id })
+    
+    APIManager.sharedInstance.invite(ids: ids, date: Date(), completion: { (response) in
+      spinner.stopAnimating()
+      self.navigationItem.rightBarButtonItem = self.createInviteButton()
+      
+      switch response {
+      case .success(let json):
+        print(json)
+        self.navigationController?.popViewController(animated: true)
+      case .failure(let error):
+        self.displayErrorAlert(error: error)
+      }
+    })
+  }
+}
+
+// MARK: - Private helper methods
+
+private extension InviteUserTableViewController {
+  func createInviteButton() -> UIBarButtonItem {
+    return UIBarButtonItem(title: "Invite",
+                           style: .done,
+                           target: self,
+                           action: #selector(self.inviteButtonPressed))
   }
 }
