@@ -28,7 +28,7 @@ enum Router: URLRequestConvertible {
   case getWalks(id: String)
   case userSearch(info: String)
   case registerToken(token: String)
-  case invite(id: String, details: Parameters)
+  case invite(details: Parameters)
   case getSentInvites
   case getReceivedInvites
   
@@ -70,8 +70,8 @@ enum Router: URLRequestConvertible {
       return "/users/search/\(info)"
     case .registerToken(let token):
       return "/users/register/\(token)"
-    case .invite(let id, _):
-      return "/users/invite/\(id)"
+    case .invite:
+      return "/users/invite"
     case .getSentInvites:
       return "/users/invites/sent"
     case .getReceivedInvites:
@@ -91,7 +91,7 @@ enum Router: URLRequestConvertible {
       return details
     case .createWalk(let details):
       return details
-    case .invite(_, let details):
+    case .invite(let details):
       return details
     default:
       return [:]

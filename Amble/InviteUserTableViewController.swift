@@ -16,7 +16,7 @@ class InviteUserTableViewController: UITableViewController {
   fileprivate let USER_CELL_IDENTIFIER = "UserCell"
   
   fileprivate var users: [OtherUser] = []
-  fileprivate var selectedUser: OtherUser?
+  fileprivate var selectedUsers: [OtherUser] = []
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -53,7 +53,7 @@ extension InviteUserTableViewController {
 extension InviteUserTableViewController {
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     self.navigationItem.rightBarButtonItem?.isEnabled = true
-    self.selectedUser = users[indexPath.row]
+    selectedUsers.append(users[indexPath.row])
     
     let cell = tableView.cellForRow(at: indexPath)
     cell?.accessoryType = .checkmark
@@ -61,7 +61,7 @@ extension InviteUserTableViewController {
   
   override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
     self.navigationItem.rightBarButtonItem?.isEnabled = false
-    self.selectedUser = nil
+    selectedUsers = selectedUsers.filter({ $0.id != users[indexPath.row].id })
     
     let cell = tableView.cellForRow(at: indexPath)
     cell?.accessoryType = .none
@@ -99,8 +99,11 @@ extension InviteUserTableViewController: UISearchBarDelegate {
 
 extension InviteUserTableViewController {
   func inviteButtonPressed() {
-    if let id = selectedUser?.id {
-      APIManager.sharedInstance.invite(id: id, date: Date(), completion: { (response) in
+    if selectedUsers.count > 0 {
+      let ids = selectedUsers.map({ (otherUser) -> String in
+        return otherUser.id
+      })
+      APIManager.sharedInstance.invite(ids: ids, date: Date(), completion: { (response) in
         switch response {
         case .success(let json):
           print(json)
