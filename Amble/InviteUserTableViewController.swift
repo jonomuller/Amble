@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import ChameleonFramework
 
 class InviteUserTableViewController: UITableViewController {
   
@@ -20,12 +21,13 @@ class InviteUserTableViewController: UITableViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.navigationItem.title = "Invite User"
-    self.navigationController?.navigationBar.tintColor = .white
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Invite",
                                                              style: .done,
                                                              target: self,
                                                              action: #selector(inviteButtonPressed))
+    self.navigationItem.rightBarButtonItem?.isEnabled = false
+    self.navigationController?.hidesNavigationBarHairline = true
+    self.searchBar.becomeFirstResponder()
   }
 }
 
@@ -44,7 +46,7 @@ extension InviteUserTableViewController {
     
     cell.textLabel?.text = user.firstName + " " + user.lastName
     cell.detailTextLabel?.text = user.username
-    cell.selectionStyle = .none
+//    cell.selectionStyle = .none
     
     return cell
   }
@@ -54,25 +56,25 @@ extension InviteUserTableViewController {
 
 extension InviteUserTableViewController {
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    if selectedUsers.count == 0 {
-      self.navigationItem.rightBarButtonItem?.isEnabled = true
+    let cell = tableView.cellForRow(at: indexPath)
+    
+    if cell?.accessoryType == UITableViewCellAccessoryType.none {
+      if selectedUsers.count == 0 {
+        self.navigationItem.rightBarButtonItem?.isEnabled = true
+      }
+      
+      selectedUsers.append(users[indexPath.row])
+      cell?.accessoryType = UITableViewCellAccessoryType.checkmark
+    } else if cell?.accessoryType == .checkmark {
+      if selectedUsers.count == 1 {
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
+      }
+      
+      selectedUsers = selectedUsers.filter({ $0.id != users[indexPath.row].id })
+      cell?.accessoryType = .none
     }
     
-    selectedUsers.append(users[indexPath.row])
-    
-    let cell = tableView.cellForRow(at: indexPath)
-    cell?.accessoryType = .checkmark
-  }
-  
-  override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-    if selectedUsers.count == 1 {
-      self.navigationItem.rightBarButtonItem?.isEnabled = false
-    }
-    
-    selectedUsers = selectedUsers.filter({ $0.id != users[indexPath.row].id })
-    
-    let cell = tableView.cellForRow(at: indexPath)
-    cell?.accessoryType = .none
+    tableView.deselectRow(at: indexPath, animated: true)
   }
 }
 
@@ -94,7 +96,7 @@ extension InviteUserTableViewController: UISearchBarDelegate {
             self.users.append(user)
           }
           self.tableView.reloadData()
-          self.searchDisplayController?.isActive = false
+          searchBar.resignFirstResponder()
         case .failure(let error):
           self.displayErrorAlert(error: error)
         }
