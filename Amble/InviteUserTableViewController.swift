@@ -18,9 +18,11 @@ class InviteUserTableViewController: UITableViewController {
   
   fileprivate var users: [OtherUser] = []
   fileprivate var selectedUsers: [OtherUser] = []
+  fileprivate var noResults: Bool = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     self.navigationItem.rightBarButtonItem = self.createInviteButton()
     self.navigationItem.rightBarButtonItem?.isEnabled = false
     self.navigationController?.hidesNavigationBarHairline = true
@@ -35,17 +37,30 @@ class InviteUserTableViewController: UITableViewController {
 extension InviteUserTableViewController {
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    if noResults {
+      return 1
+    }
+    
     return users.count
   }
   
-  
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = self.tableView.dequeueReusableCell(withIdentifier: USER_CELL_IDENTIFIER, for: indexPath)
-    let user = users[indexPath.row]
     
-    cell.textLabel?.text = user.firstName + " " + user.lastName
-    cell.detailTextLabel?.text = user.username
-//    cell.selectionStyle = .none
+    cell.accessoryType = .none
+    
+    if noResults {
+      cell.textLabel?.text = "No results found."
+      cell.detailTextLabel?.text = nil
+    } else {
+      let user = users[indexPath.row]
+      cell.textLabel?.text = user.firstName + " " + user.lastName
+      cell.detailTextLabel?.text = user.username
+      
+      if selectedUsers.contains(where: { $0.id == user.id }) {
+        cell.accessoryType = .checkmark
+      }
+    }
     
     return cell
   }
@@ -81,9 +96,14 @@ extension InviteUserTableViewController {
 
 extension InviteUserTableViewController: UISearchBarDelegate {
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-    self.users = []
+    users = []
     if let userInfo = searchBar.text {
+      let spinner = self.view.createIndicatorView(width: 50, height: 50)
+      spinner.startAnimating()
+      
       APIManager.sharedInstance.userSearch(info: userInfo, completion: { (response) in
+        spinner.stopAnimating()
+        
         switch response {
         case .success(let json):
           for (_, subJson): (String, JSON) in json["users"] {
@@ -94,6 +114,13 @@ extension InviteUserTableViewController: UISearchBarDelegate {
                                  lastName: subJson["name"]["lastName"].stringValue)
             self.users.append(user)
           }
+          
+          if self.users.count == 0 {
+            self.noResults = true
+          } else {
+            self.noResults = false
+          }
+          
           self.tableView.reloadData()
           searchBar.resignFirstResponder()
         case .failure(let error):
