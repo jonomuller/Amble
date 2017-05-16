@@ -94,6 +94,49 @@ extension InvitesTableViewController {
   @IBAction func segmentedControlValueChanged(_ sender: Any) {
     self.tableView.reloadData()
   }
+  
+  @IBAction func startWalkButtonPressed(_ sender: Any) {
+    
+  }
+  
+  @IBAction func acceptButtonPressed(_ sender: Any) {
+    if let button = sender as? UIButton, let cell = button.superview?.superview as? ReceivedInviteTableViewCell {
+      cell.isUserInteractionEnabled = false
+      if let indexPath = tableView.indexPath(for: cell) {
+        let id = receivedInvites[indexPath.row].id
+        APIManager.sharedInstance.acceptInvite(id: id, completion: { (response) in
+          cell.isUserInteractionEnabled = true
+          switch response {
+          case .success:
+            print("Accept invite success")
+          case .failure(let error):
+            self.displayErrorAlert(error: error)
+          }
+        })
+      }
+    }
+  }
+  
+  @IBAction func declineButtonPressed(_ sender: Any) {
+    if let button = sender as? UIButton, let cell = button.superview?.superview as? ReceivedInviteTableViewCell {
+      cell.isUserInteractionEnabled = false
+      if let indexPath = tableView.indexPath(for: cell) {
+        let id = receivedInvites[indexPath.row].id
+        APIManager.sharedInstance.declineInvite(id: id, completion: { (response) in
+          cell.isUserInteractionEnabled = true
+          switch response {
+          case .success:
+            self.tableView.beginUpdates()
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+            self.receivedInvites = self.receivedInvites.filter({ $0.id != id })
+            self.tableView.endUpdates()
+          case .failure(let error):
+            self.displayErrorAlert(error: error)
+          }
+        })
+      }
+    }
+  }
 }
 
 // MARK: - Private helper methods
@@ -126,7 +169,8 @@ private extension InvitesTableViewController {
                              firstName: subJson[option]["name"]["firstName"].stringValue,
                              lastName: subJson[option]["name"]["lastName"].stringValue)
         
-        let invite = Invite(user: user,
+        let invite = Invite(id: subJson["_id"].stringValue,
+                            user: user,
                             date: dateFormatter.date(from: subJson["date"].stringValue)!,
                             accepted: subJson["accepted"].boolValue)
         

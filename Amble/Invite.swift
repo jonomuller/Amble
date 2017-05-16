@@ -10,6 +10,7 @@ import UIKit
 
 struct Invite {
   
+  let id: String
   let user: OtherUser
   let date: Date
   let accepted: Bool

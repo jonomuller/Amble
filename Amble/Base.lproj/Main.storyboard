@@ -289,6 +289,9 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="titleShadowColor" red="0.19115509089999999" green="0.63786703349999996" blue="0.26147949700000001" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
+                                            <connections>
+                                                <action selector="startWalkButtonPressed:" destination="1sJ-WZ-O9l" eventType="touchUpInside" id="Pdh-f2-qPI"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
@@ -344,6 +347,9 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="titleShadowColor" red="0.85043728351593018" green="0.21816034615039825" blue="0.15920260548591614" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
+                                            <connections>
+                                                <action selector="declineButtonPressed:" destination="1sJ-WZ-O9l" eventType="touchUpInside" id="2bP-bW-A6P"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IlN-GI-0Oi">
                                             <rect key="frame" x="189" y="15" width="85" height="30"/>
@@ -356,6 +362,9 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="titleShadowColor" red="0.19115509089999999" green="0.63786703349999996" blue="0.26147949700000001" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
+                                            <connections>
+                                                <action selector="acceptButtonPressed:" destination="1sJ-WZ-O9l" eventType="touchUpInside" id="4FW-uW-8ud"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
