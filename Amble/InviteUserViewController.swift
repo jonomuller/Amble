@@ -46,7 +46,7 @@ extension InviteUserViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if selectedUsers.count > 0 && section == 0 {
+    if selectedUsers.count > 0 && section == 1 {
       return selectedUsers.count
     }
     
@@ -62,9 +62,9 @@ extension InviteUserViewController: UITableViewDataSource {
     
     if selectedUsers.count > 0 {
       if section == 0 {
-        title = "Selected Users"
-      } else if section == 1 {
         title = "Search Results"
+      } else if section == 1 {
+        title = "Selected Users"
       }
     }
     
@@ -77,7 +77,7 @@ extension InviteUserViewController: UITableViewDataSource {
     cell.isUserInteractionEnabled = true
     cell.accessoryType = .none
     
-    if tableView.numberOfSections > 1 && indexPath.section == 0 {
+    if tableView.numberOfSections > 1 && indexPath.section == 1 {
       let selectedUser = selectedUsers[indexPath.row]
       cell.textLabel?.text = selectedUser.firstName + " " + selectedUser.lastName
       cell.detailTextLabel?.text = selectedUser.username
@@ -106,18 +106,55 @@ extension InviteUserViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let cell = tableView.cellForRow(at: indexPath)
     
-    if tableView.numberOfSections > 1 && indexPath.section == 0 {
-      self.deselectCell(cell: cell, indexPath: indexPath, u: selectedUsers)
-      self.tableView.reloadData()
-    } else if cell?.accessoryType == UITableViewCellAccessoryType.none {
-      if selectedUsers.count == 0 {
-        self.navigationItem.rightBarButtonItem?.isEnabled = true
+    if tableView.numberOfSections > 1 && indexPath.section == 1 {
+      
+      self.tableView.beginUpdates()
+      self.tableView.deleteRows(at: [indexPath], with: .fade)
+      
+      if selectedUsers.count == 1 {
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
+        self.tableView.deleteSections([indexPath.section], with: .fade)
       }
       
+      self.tableView.reloadSections([indexPath.section - 1], with: .fade)
+      
+      selectedUsers = selectedUsers.filter({ $0.id != selectedUsers[indexPath.row].id })
+      self.tableView.endUpdates()
+      cell?.accessoryType = .none
+      
+    } else if cell?.accessoryType == UITableViewCellAccessoryType.none {
+      
+      self.tableView.beginUpdates()
+      if selectedUsers.count == 0 {
+        self.navigationItem.rightBarButtonItem?.isEnabled = true
+        self.tableView.insertSections([indexPath.section + 1], with: .fade)
+        self.tableView.reloadSections([indexPath.section], with: .fade)
+      }
+      
+      self.tableView.insertRows(at: [IndexPath(row: selectedUsers.count, section: indexPath.section + 1)],
+                                with: .fade)
+      
       selectedUsers.append(users[indexPath.row])
-      cell?.accessoryType = UITableViewCellAccessoryType.checkmark
+      self.tableView.endUpdates()
+      cell?.accessoryType = .checkmark
+      
     } else if cell?.accessoryType == .checkmark {
-      self.deselectCell(cell: cell, indexPath: indexPath, u: self.users)
+
+      self.tableView.beginUpdates()
+      self.tableView.deleteRows(at: [IndexPath(row: selectedUsers.index(where: { $0.id == users[indexPath.row].id })!,
+                                               section: indexPath.section + 1)],
+                                with: .fade)
+      
+      if selectedUsers.count == 1 {
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
+        self.tableView.deleteSections([indexPath.section + 1], with: .fade)
+        self.tableView.reloadSections([indexPath.section], with: .fade)
+      }
+      
+      selectedUsers = selectedUsers.filter({ $0.id != users[indexPath.row].id })
+      self.tableView.endUpdates()
+      cell?.accessoryType = .none
+      
     }
     
     tableView.deselectRow(at: indexPath, animated: true)
@@ -202,14 +239,5 @@ private extension InviteUserViewController {
                            style: .done,
                            target: self,
                            action: #selector(self.inviteButtonPressed))
-  }
-  
-  func deselectCell(cell: UITableViewCell?, indexPath: IndexPath, u: [OtherUser]) {
-    if selectedUsers.count == 1 {
-      self.navigationItem.rightBarButtonItem?.isEnabled = false
-    }
-    
-    cell?.accessoryType = .none
-    selectedUsers = selectedUsers.filter({ $0.id != u[indexPath.row].id })
   }
 }
