@@ -93,6 +93,7 @@ extension InvitesTableViewController {
 extension InvitesTableViewController {
   @IBAction func segmentedControlValueChanged(_ sender: Any) {
     self.tableView.reloadData()
+    self.getInvites()
   }
   
   @IBAction func acceptButtonPressed(_ sender: Any) {
@@ -152,13 +153,19 @@ extension InvitesTableViewController {
 private extension InvitesTableViewController {
   
   func getInvites() {
-    APIManager.sharedInstance.getSentInvites(completion: { (response) in
-      self.sentInvites = self.handleAPIResponse(response: response, option: "to")
-    })
-    
-    APIManager.sharedInstance.getReceivedInvites(completion: { (response) in
-      self.receivedInvites = self.handleAPIResponse(response: response, option: "from")
-    })
+    switch segmentedControl.selectedSegmentIndex {
+    case 0:
+      APIManager.sharedInstance.getSentInvites(completion: { (response) in
+        self.sentInvites = self.handleAPIResponse(response: response, option: "to")
+        self.tableView.reloadData()
+      })
+    case 1:
+      APIManager.sharedInstance.getReceivedInvites(completion: { (response) in
+        self.receivedInvites = self.handleAPIResponse(response: response, option: "from")
+        self.tableView.reloadData()
+      })
+    default: break
+    }
   }
   
   func handleAPIResponse(response: APIResponse, option: String) -> [Invite] {
@@ -169,7 +176,6 @@ private extension InvitesTableViewController {
     case .success(let json):
       let dateFormatter = DateFormatter()
       dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-      print(json)
       for (_, subJson): (String, JSON) in json["invites"] {
         var users: [OtherUser] = []
         
@@ -198,7 +204,6 @@ private extension InvitesTableViewController {
         
         invites.append(invite)
       }
-      self.tableView.reloadData()
     case .failure(let error):
       self.displayErrorAlert(error: error)
     }
