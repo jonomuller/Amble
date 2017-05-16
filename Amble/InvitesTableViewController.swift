@@ -99,9 +99,12 @@ extension InvitesTableViewController {
   @IBAction func acceptButtonPressed(_ sender: Any) {
     if let button = sender as? UIButton, let cell = button.superview?.superview as? ReceivedInviteTableViewCell {
       cell.isUserInteractionEnabled = false
+      
       if let indexPath = tableView.indexPath(for: cell) {
         let id = receivedInvites[indexPath.row].id
+        
         APIManager.sharedInstance.acceptInvite(id: id, completion: { (response) in
+          
           cell.isUserInteractionEnabled = true
           switch response {
           case .success:
@@ -117,9 +120,12 @@ extension InvitesTableViewController {
   @IBAction func declineButtonPressed(_ sender: Any) {
     if let button = sender as? UIButton, let cell = button.superview?.superview as? ReceivedInviteTableViewCell {
       cell.isUserInteractionEnabled = false
+      
       if let indexPath = tableView.indexPath(for: cell) {
         let id = receivedInvites[indexPath.row].id
+        
         APIManager.sharedInstance.declineInvite(id: id, completion: { (response) in
+          
           cell.isUserInteractionEnabled = true
           switch response {
           case .success:

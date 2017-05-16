@@ -20,6 +20,7 @@ class TrackWalkViewController: WalkViewController {
   fileprivate let LAST_USE_DATE_KEY = "LastUseDate"
   fileprivate let STREAK_COUNT_KEY = "StreakCount"
   
+  @IBOutlet var toolbar: UIToolbar!
   fileprivate var spinner: NVActivityIndicatorView!
   
   fileprivate var pedometer: CMPedometer!
@@ -42,8 +43,17 @@ class TrackWalkViewController: WalkViewController {
     
     self.navigationController?.hidesNavigationBarHairline = true
     
-    let locationButton = MKUserTrackingBarButtonItem(mapView:self.mapView)
-    self.navigationItem.leftBarButtonItem = locationButton
+    let locationButton = MKUserTrackingBarButtonItem(mapView: self.mapView)
+    let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+    
+    toolbar.frame = CGRect(x: toolbar.frame.origin.x + 5,
+                           y: toolbar.frame.origin.y - 20,
+                           width: toolbar.frame.height + 15,
+                           height: toolbar.frame.height + 15)
+    
+    toolbar.layer.cornerRadius = toolbar.frame.height / 2
+    toolbar.clipsToBounds = true
+    toolbar.items = [flexibleSpace, locationButton, flexibleSpace]
     
     let startButton = UIBarButtonItem(title: "Start", style: .plain, target: self, action: #selector(startButtonPressed))
     self.navigationItem.rightBarButtonItem = startButton

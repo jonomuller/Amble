@@ -600,6 +600,14 @@
                                     <outlet property="timeLabel" destination="ZO5-Sg-NmH" id="rxS-W1-1OL"/>
                                 </connections>
                             </view>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3kC-0B-kGa">
+                                <rect key="frame" x="0.0" y="510" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem title="Item" id="DM2-5s-0Xa"/>
+                                </items>
+                                <color key="tintColor" red="0.19115509089999999" green="0.63786703349999996" blue="0.26147949700000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -617,6 +625,7 @@
                     <connections>
                         <outlet property="mapView" destination="eME-c0-KKd" id="sXj-ad-ygO"/>
                         <outlet property="statsView" destination="Ist-uO-nbD" id="CDe-K3-ics"/>
+                        <outlet property="toolbar" destination="3kC-0B-kGa" id="3u1-ny-fMK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W3X-Ct-AKS" userLabel="First Responder" sceneMemberID="firstResponder"/>
