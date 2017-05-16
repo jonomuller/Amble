@@ -21,6 +21,9 @@ class ReceivedInviteTableViewCell: UITableViewCell {
     acceptButton.layer.cornerRadius = acceptButton.frame.height / 2
     declineButton.layer.cornerRadius = declineButton.frame.height / 2
     
+    acceptButton.clipsToBounds = true
+    declineButton.clipsToBounds = true
+    
     acceptButton.setBackgroundColor(color: .flatForestGreen, forState: .highlighted)
     declineButton.setBackgroundColor(color: .flatRedDark, forState: .highlighted)
   }

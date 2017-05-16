@@ -257,7 +257,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KOG-2r-Cp0">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="KOG-2r-Cp0">
                                             <rect key="frame" x="8" y="8" width="179" height="27"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -282,7 +282,9 @@
                                             <rect key="frame" x="195" y="16" width="102" height="30"/>
                                             <color key="backgroundColor" red="0.19115509089999999" green="0.63786703349999996" blue="0.26147949700000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="1n7-Dg-DAJ"/>
                                                 <constraint firstAttribute="width" constant="102" id="XtQ-eu-4kh"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="102" id="mzB-fM-QGi"/>
                                             </constraints>
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <state key="normal" title="Start Walk">
@@ -340,6 +342,8 @@
                                             <rect key="frame" x="282" y="15" width="85" height="30"/>
                                             <color key="backgroundColor" red="0.85043728351593018" green="0.21816034615039825" blue="0.15920260548591614" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="85" id="Bcf-7M-KGt"/>
+                                                <constraint firstAttribute="height" constant="30" id="GWG-tS-CvP"/>
                                                 <constraint firstAttribute="width" constant="85" id="mP9-HU-LBK"/>
                                             </constraints>
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -355,7 +359,9 @@
                                             <rect key="frame" x="189" y="15" width="85" height="30"/>
                                             <color key="backgroundColor" red="0.19115509089999999" green="0.63786703349999996" blue="0.26147949700000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="Fzj-SH-bdL"/>
                                                 <constraint firstAttribute="width" constant="85" id="QSO-b4-Foj"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="85" id="yQd-Xb-Hfy"/>
                                             </constraints>
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <state key="normal" title="Accept">

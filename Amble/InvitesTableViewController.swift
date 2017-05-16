@@ -55,7 +55,7 @@ extension InvitesTableViewController {
       let cell = tableView.dequeueReusableCell(withIdentifier: SENT_INVITE_CELL_IDENTIFIER,
                                            for: indexPath) as! SentInviteTableViewCell
       let invite = sentInvites[indexPath.row]
-      cell.nameLabel.text = invite.user.firstName + " " + invite.user.lastName
+      cell.nameLabel.text = invite.users.map({ return "\($0.firstName) \($0.lastName)" }).joined(separator: ", ")
       
       let dateFormatter = DateFormatter()
       dateFormatter.dateFormat = "d/M/yy"
@@ -76,7 +76,7 @@ extension InvitesTableViewController {
                                                for: indexPath) as! ReceivedInviteTableViewCell
       let invite = receivedInvites[indexPath.row]
       
-      cell.fromLabel.text = invite.user.firstName + " " + invite.user.lastName
+      cell.fromLabel.text = invite.users[0].firstName + " " + invite.users[0].lastName
       
       let dateFormatter = DateFormatter()
       dateFormatter.dateFormat = "d/M/yy"
@@ -163,14 +163,28 @@ private extension InvitesTableViewController {
       dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
       print(json)
       for (_, subJson): (String, JSON) in json["invites"] {
-        let user = OtherUser(id: subJson[option]["_id"].stringValue,
-                             username: subJson[option]["username"].stringValue,
-                             email: subJson[option]["email"].stringValue,
-                             firstName: subJson[option]["name"]["firstName"].stringValue,
-                             lastName: subJson[option]["name"]["lastName"].stringValue)
+        var users: [OtherUser] = []
+        
+        if option == "to" {
+          for (_, subsubJson): (String, JSON) in subJson["to"] {
+            let user = OtherUser(id: subsubJson["_id"].stringValue,
+                                   username: subsubJson["username"].stringValue,
+                                   email: subsubJson["email"].stringValue,
+                                   firstName: subsubJson["name"]["firstName"].stringValue,
+                                   lastName: subsubJson["name"]["lastName"].stringValue)
+            users.append(user)
+          }
+        } else {
+          users.append(OtherUser(id: subJson[option]["_id"].stringValue,
+                               username: subJson[option]["username"].stringValue,
+                               email: subJson[option]["email"].stringValue,
+                               firstName: subJson[option]["name"]["firstName"].stringValue,
+                               lastName: subJson[option]["name"]["lastName"].stringValue))
+        }
+        
         
         let invite = Invite(id: subJson["_id"].stringValue,
-                            user: user,
+                            users: users,
                             date: dateFormatter.date(from: subJson["date"].stringValue)!,
                             accepted: subJson["accepted"].boolValue)
         

@@ -18,6 +18,7 @@ class SentInviteTableViewCell: UITableViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     startWalkButton.layer.cornerRadius = startWalkButton.frame.height / 2
+    startWalkButton.clipsToBounds = true
     startWalkButton.setBackgroundColor(color: .flatForestGreen, forState: .highlighted)
   }
   
