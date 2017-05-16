@@ -47,7 +47,7 @@ class APIManager: NSObject {
   
   // MARK: - /walks API calls
   
-  public func createWalk(name: String, owner: String, locations: [CLLocation], achievements: [Achievement], image: UIImage, time: Int, distance: Double, steps: Int, completion: @escaping (APIResponse) -> Void) {
+  public func createWalk(name: String, members: [String]?, locations: [CLLocation], achievements: [Achievement], image: UIImage, time: Int, distance: Double, steps: Int, completion: @escaping (APIResponse) -> Void) {
     
     self.request(router: .getMapImageURL) { (response) in
       switch response {
@@ -59,7 +59,7 @@ class APIManager: NSObject {
             case .success:
               // Create walk
               let imageURL = url.components(separatedBy: "?")[0]
-              self.createWalk(name: name, owner: owner, locations: locations, achievements: achievements, image: imageURL, time: time, distance: distance, steps: steps, completion: { (createResponse) in
+              self.createWalk(name: name, members: members, locations: locations, achievements: achievements, image: imageURL, time: time, distance: distance, steps: steps, completion: { (createResponse) in
                 completion(createResponse)
               })
             case .failure:
@@ -196,7 +196,7 @@ private extension APIManager {
     }
   }
   
-  func createWalk(name: String, owner: String, locations: [CLLocation], achievements: [Achievement], image: String, time: Int, distance: Double, steps: Int, completion: @escaping (APIResponse) -> Void) {
+  func createWalk(name: String, members: [String]?, locations: [CLLocation], achievements: [Achievement], image: String, time: Int, distance: Double, steps: Int, completion: @escaping (APIResponse) -> Void) {
     
     var coordinates: [[Double]] = []
     for location in locations {
@@ -211,15 +211,17 @@ private extension APIManager {
     let achievementsJSON = JSON(achievementsDict)
     
     if let achievementsString = achievementsJSON.rawString(.ascii, options: []) {
-      print(achievementsString)
-      let details = ["name": name,
-                     "owner": owner,
+      var details = ["name": name,
                      "coordinates": coordinates.description,
                      "achievements": achievementsString,
                      "image": image,
                      "time": time,
                      "distance": distance,
                      "steps": steps] as [String : Any]
+      
+      if let members = members {
+        details["members"] = members.description
+      }
       
       request(router: .createWalk(details: details)) { (response) in
         completion(response)

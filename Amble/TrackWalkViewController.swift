@@ -25,6 +25,7 @@ class TrackWalkViewController: WalkViewController {
   fileprivate var pedometer: CMPedometer!
   fileprivate var locationManager: CLLocationManager!
   fileprivate var locations: [CLLocation] = []
+  var members: [String]?
   
   fileprivate var nameAlert: UIAlertController!
   fileprivate var saveWalkAction: UIAlertAction!
@@ -318,7 +319,7 @@ private extension TrackWalkViewController {
     self.renderMapImage { (image) in
       if let mapImage = image {
         let achievements = self.generateAchivements()
-        APIManager.sharedInstance.createWalk(name: name, owner: User.sharedInstance.userInfo!.user.id, locations: self.locations, achievements: achievements, image: mapImage, time: self.time, distance: self.distance, steps: self.steps, completion: { (response) in
+        APIManager.sharedInstance.createWalk(name: name, members: self.members, locations: self.locations, achievements: achievements, image: mapImage, time: self.time, distance: self.distance, steps: self.steps, completion: { (response) in
           self.spinner.stopAnimating()
           
           switch response {

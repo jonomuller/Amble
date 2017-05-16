@@ -292,7 +292,7 @@
                                                 <color key="titleShadowColor" red="0.19115509089999999" green="0.63786703349999996" blue="0.26147949700000001" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <connections>
-                                                <action selector="startWalkButtonPressed:" destination="1sJ-WZ-O9l" eventType="touchUpInside" id="Pdh-f2-qPI"/>
+                                                <segue destination="kKb-6N-S5f" kind="show" id="vmf-19-mA1"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -872,4 +872,7 @@
         <image name="trash" width="25" height="25"/>
         <image name="username" width="25" height="25"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="vmf-19-mA1"/>
+    </inferredMetricsTieBreakers>
 </document>

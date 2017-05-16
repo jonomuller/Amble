@@ -95,10 +95,6 @@ extension InvitesTableViewController {
     self.tableView.reloadData()
   }
   
-  @IBAction func startWalkButtonPressed(_ sender: Any) {
-    
-  }
-  
   @IBAction func acceptButtonPressed(_ sender: Any) {
     if let button = sender as? UIButton, let cell = button.superview?.superview as? ReceivedInviteTableViewCell {
       cell.isUserInteractionEnabled = false
@@ -134,6 +130,18 @@ extension InvitesTableViewController {
             self.displayErrorAlert(error: error)
           }
         })
+      }
+    }
+  }
+}
+
+// MARK: - Navigation
+
+extension InvitesTableViewController {
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if let vc = segue.destination as? TrackWalkViewController {
+      if let button = sender as? UIButton, let cell = button.superview?.superview as? SentInviteTableViewCell, let indexPath = self.tableView.indexPath(for: cell) {
+        vc.members = sentInvites[indexPath.row].users.map({ return $0.id })
       }
     }
   }
