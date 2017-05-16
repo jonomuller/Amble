@@ -51,34 +51,40 @@ extension InvitesTableViewController {
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    var invites: [Invite] = []
-    
-    switch segmentedControl.selectedSegmentIndex {
-    case 0:
+    if segmentedControl.selectedSegmentIndex == 0 {
       let cell = tableView.dequeueReusableCell(withIdentifier: SENT_INVITE_CELL_IDENTIFIER,
                                            for: indexPath) as! SentInviteTableViewCell
       let invite = sentInvites[indexPath.row]
       cell.nameLabel.text = invite.user.firstName + " " + invite.user.lastName
-      cell.dateLabel.text = String(describing: invite.date)
+      
+      let dateFormatter = DateFormatter()
+      dateFormatter.dateFormat = "d/M/yy"
+      
+      cell.dateLabel.text = dateFormatter.string(from: invite.date)
+      
       if invite.accepted {
         cell.acceptedLabel.text = "Accepted"
+        cell.startWalkButton.isHidden = false
       } else {
         cell.acceptedLabel.text = "Pending"
+        cell.startWalkButton.isHidden = true
       }
-    case 1:
-      let cell = tableView.dequeueReusableCell(withIdentifier: RECEIVED_INVITE_CELL_IDENTIFIER, for: indexPath)
-      invites = receivedInvites
-    default:
-      break
+      
+      return cell
+    } else {
+      let cell = tableView.dequeueReusableCell(withIdentifier: RECEIVED_INVITE_CELL_IDENTIFIER,
+                                               for: indexPath) as! ReceivedInviteTableViewCell
+      let invite = receivedInvites[indexPath.row]
+      
+      cell.fromLabel.text = invite.user.firstName + " " + invite.user.lastName
+      
+      let dateFormatter = DateFormatter()
+      dateFormatter.dateFormat = "d/M/yy"
+      
+      cell.dateLabel.text = dateFormatter.string(from: invite.date)
+      
+      return cell
     }
-    
-//    let invite = invites[indexPath.row]
-    
-//    cell.textLabel?.text = invite.user.firstName + " " + invite.user.lastName
-//    cell.detailTextLabel?.text = invite.user.username
-    
-    return tableView.dequeueReusableCell(withIdentifier: SENT_INVITE_CELL_IDENTIFIER,
-                                         for: indexPath)
   }
 }
 
