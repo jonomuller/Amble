@@ -51,27 +51,34 @@ extension InvitesTableViewController {
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    var id: String = ""
     var invites: [Invite] = []
     
     switch segmentedControl.selectedSegmentIndex {
     case 0:
-      id = SENT_INVITE_CELL_IDENTIFIER
-      invites = sentInvites
+      let cell = tableView.dequeueReusableCell(withIdentifier: SENT_INVITE_CELL_IDENTIFIER,
+                                           for: indexPath) as! SentInviteTableViewCell
+      let invite = sentInvites[indexPath.row]
+      cell.nameLabel.text = invite.user.firstName + " " + invite.user.lastName
+      cell.dateLabel.text = String(describing: invite.date)
+      if invite.accepted {
+        cell.acceptedLabel.text = "Accepted"
+      } else {
+        cell.acceptedLabel.text = "Pending"
+      }
     case 1:
-      id = RECEIVED_INVITE_CELL_IDENTIFIER
+      let cell = tableView.dequeueReusableCell(withIdentifier: RECEIVED_INVITE_CELL_IDENTIFIER, for: indexPath)
       invites = receivedInvites
     default:
       break
     }
     
-    let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath)
-    let invite = invites[indexPath.row]
+//    let invite = invites[indexPath.row]
     
-    cell.textLabel?.text = invite.user.firstName + " " + invite.user.lastName
-    cell.detailTextLabel?.text = invite.user.username
+//    cell.textLabel?.text = invite.user.firstName + " " + invite.user.lastName
+//    cell.detailTextLabel?.text = invite.user.username
     
-    return cell
+    return tableView.dequeueReusableCell(withIdentifier: SENT_INVITE_CELL_IDENTIFIER,
+                                         for: indexPath)
   }
 }
 
@@ -114,7 +121,8 @@ private extension InvitesTableViewController {
                              lastName: subJson[option]["name"]["lastName"].stringValue)
         
         let invite = Invite(user: user,
-                            date: dateFormatter.date(from: subJson["date"].stringValue)!)
+                            date: dateFormatter.date(from: subJson["date"].stringValue)!,
+                            accepted: subJson["accepted"].boolValue)
         
         invites.append(invite)
       }

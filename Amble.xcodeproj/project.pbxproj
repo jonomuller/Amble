@@ -43,6 +43,8 @@
 		AF67D98C1EA2728A003BE7CF /* UINavigationController+Transparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D98B1EA2728A003BE7CF /* UINavigationController+Transparent.swift */; };
 		AF6D38631EC7B1A900F7E8EB /* Invite.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6D38621EC7B1A900F7E8EB /* Invite.swift */; };
 		AF6D38651EC8674900F7E8EB /* InviteUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6D38641EC8674900F7E8EB /* InviteUserViewController.swift */; };
+		AF78F13A1ECAFC8300B750DE /* SentInviteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF78F1391ECAFC8300B750DE /* SentInviteTableViewCell.swift */; };
+		AF78F13C1ECAFC8D00B750DE /* ReceivedInviteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF78F13B1ECAFC8D00B750DE /* ReceivedInviteTableViewCell.swift */; };
 		AF97CB5A1EC134FD00D5AF75 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF97CB591EC134FD00D5AF75 /* Achievement.swift */; };
 		AFA685361EB810D700F869DF /* UIView+IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA685351EB810D700F869DF /* UIView+IndicatorView.swift */; };
 		AFA685381EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA685371EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift */; };
@@ -117,6 +119,8 @@
 		AF67D98B1EA2728A003BE7CF /* UINavigationController+Transparent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Transparent.swift"; sourceTree = "<group>"; };
 		AF6D38621EC7B1A900F7E8EB /* Invite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Invite.swift; sourceTree = "<group>"; };
 		AF6D38641EC8674900F7E8EB /* InviteUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteUserViewController.swift; sourceTree = "<group>"; };
+		AF78F1391ECAFC8300B750DE /* SentInviteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentInviteTableViewCell.swift; sourceTree = "<group>"; };
+		AF78F13B1ECAFC8D00B750DE /* ReceivedInviteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceivedInviteTableViewCell.swift; sourceTree = "<group>"; };
 		AF97CB591EC134FD00D5AF75 /* Achievement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		AFA685351EB810D700F869DF /* UIView+IndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+IndicatorView.swift"; sourceTree = "<group>"; };
 		AFA685371EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorAlertView.swift"; sourceTree = "<group>"; };
@@ -192,6 +196,8 @@
 				AF67D9211EA2516D003BE7CF /* LaunchScreen.storyboard */,
 				AF2D9D8D1EA515B200EDCF53 /* Login.storyboard */,
 				AF67D9871EA254EB003BE7CF /* Main.storyboard */,
+				AF78F1391ECAFC8300B750DE /* SentInviteTableViewCell.swift */,
+				AF78F13B1ECAFC8D00B750DE /* ReceivedInviteTableViewCell.swift */,
 				AFC4015D1EC7756C00CACAFD /* InvitesTableViewController.swift */,
 				AF6D38641EC8674900F7E8EB /* InviteUserViewController.swift */,
 				AF6D38621EC7B1A900F7E8EB /* Invite.swift */,
@@ -612,11 +618,13 @@
 				AFA685361EB810D700F869DF /* UIView+IndicatorView.swift in Sources */,
 				AF67D9651EA2539F003BE7CF /* APIResponse.swift in Sources */,
 				AF2D9D941EA53DA800EDCF53 /* TrackWalkViewController.swift in Sources */,
+				AF78F13C1ECAFC8D00B750DE /* ReceivedInviteTableViewCell.swift in Sources */,
 				AF67D9741EA253B7003BE7CF /* UIButton+KeyboardAnimation.swift in Sources */,
 				AF0D36E21EAA7B7E00643BA7 /* WalkPin.swift in Sources */,
 				AF0D36E81EB0F78E00643BA7 /* StatsView.swift in Sources */,
 				AF2D9D8C1EA4149100EDCF53 /* SettingsTableViewController.swift in Sources */,
 				AF0D36EA1EB1065F00643BA7 /* Walk.swift in Sources */,
+				AF78F13A1ECAFC8300B750DE /* SentInviteTableViewCell.swift in Sources */,
 				AF0D36EC1EB16F3C00643BA7 /* WalkViewController.swift in Sources */,
 				AFA685381EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift in Sources */,
 				AF67D96E1EA253A9003BE7CF /* User.swift in Sources */,

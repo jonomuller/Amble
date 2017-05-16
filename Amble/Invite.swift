@@ -12,5 +12,6 @@ struct Invite {
   
   let user: OtherUser
   let date: Date
+  let accepted: Bool
   
 }
