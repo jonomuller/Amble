@@ -58,17 +58,15 @@ extension InviteUserViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    var title: String?
-    
-    if selectedUsers.count > 0 {
+    if users.count > 0 || noResults {
       if section == 0 {
-        title = "Search Results"
+        return "Search Results"
       } else if section == 1 {
-        title = "Selected Users"
+        return "Selected Users"
       }
     }
     
-    return title
+    return nil
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
