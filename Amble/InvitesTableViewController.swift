@@ -14,7 +14,8 @@ class InvitesTableViewController: UITableViewController {
   
   @IBOutlet var segmentedControl: UISegmentedControl!
   
-  fileprivate let INVITE_CELL_IDENTIFIER = "InviteCell"
+  fileprivate let SENT_INVITE_CELL_IDENTIFIER = "SentInviteCell"
+  fileprivate let RECEIVED_INVITE_CELL_IDENTIFIER = "ReceivedInviteCell"
   
   fileprivate var spinner: NVActivityIndicatorView!
   fileprivate var sentInvites: [Invite] = []
@@ -25,7 +26,7 @@ class InvitesTableViewController: UITableViewController {
     
     self.setCustomBackButton(image: UIImage(named: "back-button"))
     
-    spinner = self.tableView.createIndicatorView(width: 50, height: 50)
+    spinner = self.view.createIndicatorView(width: 50, height: 50)
     spinner.startAnimating()
   }
   
@@ -50,19 +51,21 @@ extension InvitesTableViewController {
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: INVITE_CELL_IDENTIFIER, for: indexPath)
-    
+    var id: String = ""
     var invites: [Invite] = []
     
     switch segmentedControl.selectedSegmentIndex {
     case 0:
+      id = SENT_INVITE_CELL_IDENTIFIER
       invites = sentInvites
     case 1:
+      id = RECEIVED_INVITE_CELL_IDENTIFIER
       invites = receivedInvites
     default:
       break
     }
     
+    let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath)
     let invite = invites[indexPath.row]
     
     cell.textLabel?.text = invite.user.firstName + " " + invite.user.lastName
