@@ -46,12 +46,12 @@ class TrackWalkViewController: WalkViewController {
     let locationButton = MKUserTrackingBarButtonItem(mapView: self.mapView)
     let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
     
-    toolbar.frame = CGRect(x: toolbar.frame.origin.x + 5,
-                           y: toolbar.frame.origin.y - 20,
-                           width: toolbar.frame.height + 15,
-                           height: toolbar.frame.height + 15)
+    toolbar.frame = CGRect(x: toolbar.frame.origin.x + 10,
+                           y: toolbar.frame.origin.y - 10,
+                           width: 44,
+                           height: 44)
     
-    toolbar.layer.cornerRadius = toolbar.frame.height / 2
+    toolbar.layer.cornerRadius = 5
     toolbar.clipsToBounds = true
     toolbar.items = [flexibleSpace, locationButton, flexibleSpace]
     
