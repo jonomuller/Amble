@@ -95,6 +95,20 @@ extension InvitesTableViewController {
     self.getInvites()
   }
   
+  @IBAction func startWalkButtonPressed(_ sender: Any) {
+    if let button = sender as? UIButton, let cell = button.superview?.superview as? SentInviteTableViewCell, let indexPath = self.tableView.indexPath(for: cell) {
+      
+      if let vc = self.tabBarController?.viewControllers?[0].childViewControllers[0] as? TrackWalkViewController {
+        vc.members = sentInvites[indexPath.row].users.map({ return $0.id })
+        vc.walkStarted = true
+        
+        UIView.transition(with: self.view.window!, duration: 0.2, options: .transitionCrossDissolve, animations: {
+          self.tabBarController?.selectedIndex = 0
+        }, completion: nil)
+      }
+    }
+  }
+  
   @IBAction func acceptButtonPressed(_ sender: Any) {
     if let button = sender as? UIButton, let cell = button.superview?.superview as? ReceivedInviteTableViewCell {
       cell.isUserInteractionEnabled = false
@@ -103,7 +117,6 @@ extension InvitesTableViewController {
         let id = receivedInvites[indexPath.row].id
         
         APIManager.sharedInstance.acceptInvite(id: id, completion: { (response) in
-          
           cell.isUserInteractionEnabled = true
           
           switch response {
@@ -129,8 +142,8 @@ extension InvitesTableViewController {
         let id = receivedInvites[indexPath.row].id
         
         APIManager.sharedInstance.declineInvite(id: id, completion: { (response) in
-          
           cell.isUserInteractionEnabled = true
+          
           switch response {
           case .success:
             self.tableView.beginUpdates()
@@ -141,18 +154,6 @@ extension InvitesTableViewController {
             self.displayErrorAlert(error: error)
           }
         })
-      }
-    }
-  }
-}
-
-// MARK: - Navigation
-
-extension InvitesTableViewController {
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if let vc = segue.destination as? TrackWalkViewController {
-      if let button = sender as? UIButton, let cell = button.superview?.superview as? SentInviteTableViewCell, let indexPath = self.tableView.indexPath(for: cell) {
-        vc.members = sentInvites[indexPath.row].users.map({ return $0.id })
       }
     }
   }

@@ -32,7 +32,7 @@ class TrackWalkViewController: WalkViewController {
   fileprivate var saveWalkAction: UIAlertAction!
   
   fileprivate var timer = Timer()
-  fileprivate var walkStarted = false
+  var walkStarted = false
   
   fileprivate var time = 0
   fileprivate var distance = 0.0
@@ -82,6 +82,10 @@ class TrackWalkViewController: WalkViewController {
       self.startTracking()
     } else if status == .denied {
       mapView.userTrackingMode = .none
+    }
+    
+    if walkStarted {
+      self.startWalk()
     }
   }
   
@@ -182,47 +186,7 @@ extension TrackWalkViewController {
       
       self.present(confirmEndAlert, animated: true, completion: nil)
     } else {
-      // Start walk
-      
-      self.navigationItem.rightBarButtonItem?.title = "End"
-      
-      // Sets background location tracking
-      // Note: need to add a user preference for this in the future
-      locationManager.allowsBackgroundLocationUpdates = true
-      
-      transformStatsView(transform: CGAffineTransform(translationX: 0, y: statsView.frame.height))
-      locations = []
-      time = 0
-      distance = 0.0
-      steps = 0
-      statsView.timeLabel.text = "00:00"
-      statsView.distanceLabel.attributedText = Double(0).distanceLabelText()
-      statsView.stepsLabel.text = "0"
-      
-      // Receive updates from phone's motion data to count number of steps
-      if CMPedometer.isStepCountingAvailable() {
-        pedometer.startUpdates(from: Date(), withHandler: { (data, error) in
-          if let error = error, error._code == Int(CMErrorMotionActivityNotAuthorized.rawValue) {
-            self.displayPrivacyError(title: "Motion activity is disabled",
-                                     message: "Please enable motion activity in the Settings app in order to count your steps.")
-            DispatchQueue.main.async(execute: { 
-              self.statsView.stepsLabel.text = "-"
-            })
-          } else {
-            self.steps = (data?.numberOfSteps.intValue)!
-            DispatchQueue.main.async(execute: {
-              self.statsView.stepsLabel.text = String(self.steps)
-            })
-          }
-        })
-      }
-      
-      timer = Timer.scheduledTimer(timeInterval: TIME_INTERVAL,
-                                   target: self,
-                                   selector: #selector(timerTick),
-                                   userInfo: nil,
-                                   repeats: true)
-      
+      self.startWalk()
       walkStarted = true
     }
   }
@@ -272,6 +236,49 @@ private extension TrackWalkViewController {
       self.statsView.transform = transform
       self.mapView.layoutMargins = UIEdgeInsets(top: transform.ty, left: 0, bottom: 0, right: 0)
     }
+  }
+  
+  func startWalk() {
+    // Start walk
+    
+    self.navigationItem.rightBarButtonItem?.title = "End"
+    
+    // Sets background location tracking
+    // Note: need to add a user preference for this in the future
+    locationManager.allowsBackgroundLocationUpdates = true
+    
+    transformStatsView(transform: CGAffineTransform(translationX: 0, y: statsView.frame.height))
+    locations = []
+    time = 0
+    distance = 0.0
+    steps = 0
+    statsView.timeLabel.text = "00:00"
+    statsView.distanceLabel.attributedText = Double(0).distanceLabelText()
+    statsView.stepsLabel.text = "0"
+    
+    // Receive updates from phone's motion data to count number of steps
+    if CMPedometer.isStepCountingAvailable() {
+      pedometer.startUpdates(from: Date(), withHandler: { (data, error) in
+        if let error = error, error._code == Int(CMErrorMotionActivityNotAuthorized.rawValue) {
+          self.displayPrivacyError(title: "Motion activity is disabled",
+                                   message: "Please enable motion activity in the Settings app in order to count your steps.")
+          DispatchQueue.main.async(execute: {
+            self.statsView.stepsLabel.text = "-"
+          })
+        } else {
+          self.steps = (data?.numberOfSteps.intValue)!
+          DispatchQueue.main.async(execute: {
+            self.statsView.stepsLabel.text = String(self.steps)
+          })
+        }
+      })
+    }
+    
+    timer = Timer.scheduledTimer(timeInterval: TIME_INTERVAL,
+                                 target: self,
+                                 selector: #selector(timerTick),
+                                 userInfo: nil,
+                                 repeats: true)
   }
   
   func endWalk() {
@@ -340,6 +347,7 @@ private extension TrackWalkViewController {
             
             let coordinates = self.convertToCoordinates()
             self.locations = []
+            self.members = nil
             
             let walk = Walk(name: json["walk"]["name"].stringValue,
                             coordinates: coordinates,
