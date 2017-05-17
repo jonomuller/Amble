@@ -8,10 +8,8 @@
 
 import UIKit
 
-class ReceivedInviteTableViewCell: UITableViewCell {
+class ReceivedInviteTableViewCell: InviteTableViewCell {
   
-  @IBOutlet var fromLabel: UILabel!
-  @IBOutlet var dateLabel: UILabel!
   @IBOutlet var acceptButton: UIButton!
   @IBOutlet var declineButton: UIButton!
   

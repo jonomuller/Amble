@@ -13,6 +13,6 @@ struct Invite {
   let id: String
   let users: [OtherUser]
   let date: Date
-  let accepted: Bool
+  var accepted: Bool
   
 }

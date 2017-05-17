@@ -8,15 +8,13 @@
 
 import UIKit
 
-class SentInviteTableViewCell: UITableViewCell {
+class SentInviteTableViewCell: InviteTableViewCell {
   
-  @IBOutlet var nameLabel: UILabel!
-  @IBOutlet var dateLabel: UILabel!
-  @IBOutlet var acceptedLabel: UILabel!
   @IBOutlet var startWalkButton: UIButton!
   
   override func awakeFromNib() {
     super.awakeFromNib()
+    
     startWalkButton.layer.cornerRadius = startWalkButton.frame.height / 2
     startWalkButton.clipsToBounds = true
     startWalkButton.setBackgroundColor(color: .flatForestGreen, forState: .highlighted)

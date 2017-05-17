@@ -51,6 +51,8 @@ class TrackWalkViewController: WalkViewController {
                            width: 44,
                            height: 44)
     
+    toolbar.layer.borderColor = UIColor.flatGreenDark.cgColor
+    toolbar.layer.borderWidth = 0.5
     toolbar.layer.cornerRadius = 5
     toolbar.clipsToBounds = true
     toolbar.items = [flexibleSpace, locationButton, flexibleSpace]

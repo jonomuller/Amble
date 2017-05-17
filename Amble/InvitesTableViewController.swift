@@ -60,15 +60,10 @@ extension InvitesTableViewController {
       let dateFormatter = DateFormatter()
       dateFormatter.dateFormat = "d/M/yy"
       
-      cell.dateLabel.text = dateFormatter.string(from: invite.date)
+      // cell.dateLabel.text = dateFormatter.string(from: invite.date)
       
-      if invite.accepted {
-        cell.acceptedLabel.text = "Accepted"
-        cell.startWalkButton.isHidden = false
-      } else {
-        cell.acceptedLabel.text = "Pending"
-        cell.startWalkButton.isHidden = true
-      }
+      cell.acceptedLabel.text = invite.accepted ? "Accepted" : "Pending"
+      cell.startWalkButton.isHidden = !invite.accepted
       
       return cell
     } else {
@@ -76,12 +71,16 @@ extension InvitesTableViewController {
                                                for: indexPath) as! ReceivedInviteTableViewCell
       let invite = receivedInvites[indexPath.row]
       
-      cell.fromLabel.text = invite.users[0].firstName + " " + invite.users[0].lastName
+      cell.nameLabel.text = invite.users[0].firstName + " " + invite.users[0].lastName
       
       let dateFormatter = DateFormatter()
       dateFormatter.dateFormat = "d/M/yy"
       
-      cell.dateLabel.text = dateFormatter.string(from: invite.date)
+      cell.acceptButton.isHidden = invite.accepted
+      cell.declineButton.isHidden = invite.accepted
+      cell.acceptedLabel.isHidden = !invite.accepted
+      
+      // cell.dateLabel.text = dateFormat/ter.string(from: invite.date)
       
       return cell
     }
@@ -106,8 +105,13 @@ extension InvitesTableViewController {
         APIManager.sharedInstance.acceptInvite(id: id, completion: { (response) in
           
           cell.isUserInteractionEnabled = true
+          
           switch response {
           case .success:
+            self.tableView.beginUpdates()
+            self.tableView.reloadRows(at: [indexPath], with: .fade)
+            self.receivedInvites[indexPath.row].accepted = true
+            self.tableView.endUpdates()
             print("Accept invite success")
           case .failure(let error):
             self.displayErrorAlert(error: error)
