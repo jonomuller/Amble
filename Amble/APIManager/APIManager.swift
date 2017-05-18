@@ -147,6 +147,12 @@ class APIManager: NSObject {
       completion(response)
     }
   }
+  
+  public func startWalk(id: String, completion: @escaping (APIResponse) -> Void) {
+    self.request(router: .startWalk(id: id)) { (response) in
+      completion(response)
+    }
+  }
 }
 
 // MARK: - Private helper methods

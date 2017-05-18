@@ -97,15 +97,24 @@ extension InvitesTableViewController {
   
   @IBAction func startWalkButtonPressed(_ sender: Any) {
     if let button = sender as? UIButton, let cell = button.superview?.superview as? SentInviteTableViewCell, let indexPath = self.tableView.indexPath(for: cell) {
+      let invite = sentInvites[indexPath.row]
       
-      if let vc = self.tabBarController?.viewControllers?[0].childViewControllers[0] as? TrackWalkViewController {
-        vc.members = sentInvites[indexPath.row].users.map({ return $0.id })
-        vc.walkStarted = true
-        
-        UIView.transition(with: self.view.window!, duration: 0.2, options: .transitionCrossDissolve, animations: {
-          self.tabBarController?.selectedIndex = 0
-        }, completion: nil)
-      }
+      APIManager.sharedInstance.startWalk(id: invite.id, completion: { (response) in
+        switch response {
+        case .success:
+          if let vc = self.tabBarController?.viewControllers?[0].childViewControllers[0] as? TrackWalkViewController {
+            vc.members = invite.users.map({ return $0.id })
+            vc.walkStarted = true
+            
+            UIView.transition(with: self.view.window!, duration: 0.2, options: .transitionCrossDissolve, animations: {
+              self.tabBarController?.selectedIndex = 0
+            }, completion: nil)
+          }
+        case .failure(let error):
+          self.displayErrorAlert(error: error)
+        }
+      })
+
     }
   }
   
