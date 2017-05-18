@@ -1,6 +1,6 @@
 # Amble
 
-[![Build Status](https://travis-ci.com/jonomuller/Amble.svg?token=77dffccSF6M8atNRQtfP&branch=master)](https://travis-ci.com/jonomuller/Amble)
+[![Build Status](https://travis-ci.org/jonomuller/Amble.svg?branch=master)](https://travis-ci.org/jonomuller/Amble)
 
 A social walking app for iOS written in Swift. Created for my final year project at Imperial College London.
 
@@ -12,7 +12,7 @@ A social walking app for iOS written in Swift. Created for my final year project
 
 ## Requirements
 
-- Xcode 8.3}
+- Xcode 8.3
 - Swift 3
 - [Cocoapods](https://cocoapods.org)
 
