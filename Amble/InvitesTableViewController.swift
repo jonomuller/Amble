@@ -125,6 +125,7 @@ extension InvitesTableViewController {
             self.tableView.reloadRows(at: [indexPath], with: .fade)
             self.receivedInvites[indexPath.row].accepted = true
             self.tableView.endUpdates()
+            self.updateBadges(decrement: true)
             print("Accept invite success")
           case .failure(let error):
             self.displayErrorAlert(error: error)
@@ -150,6 +151,7 @@ extension InvitesTableViewController {
             self.tableView.deleteRows(at: [indexPath], with: .fade)
             self.receivedInvites = self.receivedInvites.filter({ $0.id != id })
             self.tableView.endUpdates()
+            self.updateBadges(decrement: true)
           case .failure(let error):
             self.displayErrorAlert(error: error)
           }
@@ -173,6 +175,7 @@ private extension InvitesTableViewController {
     case 1:
       APIManager.sharedInstance.getReceivedInvites(completion: { (response) in
         self.receivedInvites = self.handleAPIResponse(response: response, option: "from")
+        self.updateBadges(decrement: false)
         self.tableView.reloadData()
       })
     default: break
@@ -220,5 +223,14 @@ private extension InvitesTableViewController {
     }
     
     return invites
+  }
+  
+  func updateBadges(decrement: Bool) {
+    if decrement {
+      UIApplication.shared.applicationIconBadgeNumber -= 1
+    }
+    
+    let badgeValue = receivedInvites.filter({ !$0.accepted }).count
+    self.navigationController?.tabBarItem.badgeValue = badgeValue > 0 ? String(badgeValue) : nil
   }
 }
