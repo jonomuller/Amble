@@ -51,16 +51,16 @@ extension InvitesTableViewController {
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "d/M/yy"
+    
     if segmentedControl.selectedSegmentIndex == 0 {
       let cell = tableView.dequeueReusableCell(withIdentifier: SENT_INVITE_CELL_IDENTIFIER,
                                            for: indexPath) as! SentInviteTableViewCell
       let invite = sentInvites[indexPath.row]
+      
       cell.nameLabel.text = invite.users.map({ return "\($0.firstName) \($0.lastName)" }).joined(separator: ", ")
-      
-      let dateFormatter = DateFormatter()
-      dateFormatter.dateFormat = "d/M/yy"
-      
-      // cell.dateLabel.text = dateFormatter.string(from: invite.date)
+      cell.dateLabel.text = dateFormatter.string(from: invite.date)
       
       cell.acceptedLabel.text = invite.accepted ? "Accepted" : "Pending"
       cell.startWalkButton.isHidden = !invite.accepted
@@ -72,15 +72,11 @@ extension InvitesTableViewController {
       let invite = receivedInvites[indexPath.row]
       
       cell.nameLabel.text = invite.users[0].firstName + " " + invite.users[0].lastName
-      
-      let dateFormatter = DateFormatter()
-      dateFormatter.dateFormat = "d/M/yy"
+      cell.dateLabel.text = dateFormatter.string(from: invite.date)
       
       cell.acceptButton.isHidden = invite.accepted
       cell.declineButton.isHidden = invite.accepted
       cell.acceptedLabel.isHidden = !invite.accepted
-      
-      // cell.dateLabel.text = dateFormat/ter.string(from: invite.date)
       
       return cell
     }
@@ -178,12 +174,12 @@ private extension InvitesTableViewController {
     switch segmentedControl.selectedSegmentIndex {
     case 0:
       APIManager.sharedInstance.getSentInvites(completion: { (response) in
-        self.sentInvites = self.handleAPIResponse(response: response, option: "to")
+        self.sentInvites = self.handleAPIResponse(response: response, type: .sent)
         self.tableView.reloadData()
       })
     case 1:
       APIManager.sharedInstance.getReceivedInvites(completion: { (response) in
-        self.receivedInvites = self.handleAPIResponse(response: response, option: "from")
+        self.receivedInvites = self.handleAPIResponse(response: response, type: .received)
         self.updateBadges(decrement: false)
         self.tableView.reloadData()
       })
@@ -191,7 +187,7 @@ private extension InvitesTableViewController {
     }
   }
   
-  func handleAPIResponse(response: APIResponse, option: String) -> [Invite] {
+  func handleAPIResponse(response: APIResponse, type: InviteType) -> [Invite] {
     self.spinner.stopAnimating()
     var invites: [Invite] = []
     
@@ -202,23 +198,14 @@ private extension InvitesTableViewController {
       for (_, subJson): (String, JSON) in json["invites"] {
         var users: [OtherUser] = []
         
-        if option == "to" {
-          for (_, subsubJson): (String, JSON) in subJson["to"] {
-            let user = OtherUser(id: subsubJson["_id"].stringValue,
-                                   username: subsubJson["username"].stringValue,
-                                   email: subsubJson["email"].stringValue,
-                                   firstName: subsubJson["name"]["firstName"].stringValue,
-                                   lastName: subsubJson["name"]["lastName"].stringValue)
-            users.append(user)
+        switch type {
+        case .sent:
+          for (_, subsubJson): (String, JSON) in subJson[type.option] {
+            users.append(self.parseUser(json: subsubJson, path: "user"))
           }
-        } else {
-          users.append(OtherUser(id: subJson[option]["_id"].stringValue,
-                               username: subJson[option]["username"].stringValue,
-                               email: subJson[option]["email"].stringValue,
-                               firstName: subJson[option]["name"]["firstName"].stringValue,
-                               lastName: subJson[option]["name"]["lastName"].stringValue))
+        case .received:
+          users.append(self.parseUser(json: subJson, path: type.option))
         }
-        
         
         let invite = Invite(id: subJson["_id"].stringValue,
                             users: users,
@@ -232,6 +219,14 @@ private extension InvitesTableViewController {
     }
     
     return invites
+  }
+  
+  func parseUser(json: JSON, path: String) -> OtherUser {
+    return OtherUser(id: json[path]["_id"].stringValue,
+                         username: json[path]["username"].stringValue,
+                         email: json[path]["email"].stringValue,
+                         firstName: json[path]["name"]["firstName"].stringValue,
+                         lastName: json[path]["name"]["lastName"].stringValue)
   }
   
   func updateBadges(decrement: Bool) {

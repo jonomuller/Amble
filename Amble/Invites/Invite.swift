@@ -16,3 +16,19 @@ struct Invite {
   var accepted: Bool
   
 }
+
+enum InviteType {
+  
+  case sent
+  case received
+  
+  var option: String {
+    switch self {
+    case .sent:
+      return "to"
+    case .received:
+      return "from"
+    }
+  }
+  
+}
