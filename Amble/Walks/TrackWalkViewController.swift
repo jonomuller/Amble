@@ -470,6 +470,11 @@ private extension TrackWalkViewController {
       resetDayStreak(userDefaults: userDefaults)
     }
     
+    // Check if there is a group achievement
+    if let members = members {
+      achievements.append(Achievement(type: .group, value: members.count * 100))
+    }
+    
     return achievements
   }
   
