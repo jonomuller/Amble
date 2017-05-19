@@ -9,6 +9,7 @@
 import UIKit
 import UserNotifications
 import Locksmith
+import SwiftyJSON
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -36,6 +37,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                               lastName: user["lastName"] as! String),
                                               jwt: user["jwt"] as! String)
       storyboardID = "Main"
+      
+      // Set badge count for invites tab
+      // Value is set to the number of active received invites the user has
+      APIManager.sharedInstance.getReceivedInvites(completion: { (response) in
+        switch response {
+        case .success(let json):
+          var badgeValue = 0
+          
+          for (_, subJson): (String, JSON) in json["invites"] {
+            if !subJson["accepted"].boolValue {
+              badgeValue += 1
+            }
+          }
+          
+          if badgeValue > 0, let tbc = self.window?.rootViewController as? UITabBarController {
+            tbc.viewControllers?[1].tabBarItem.badgeValue = String(badgeValue)
+          }
+        case .failure(let error):
+          print("Could not set invites badge: \(error.localizedDescription)")
+        }
+      })
+      
     } else {
       storyboardID = "Login"
     }

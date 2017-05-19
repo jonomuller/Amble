@@ -35,13 +35,14 @@ enum Router: URLRequestConvertible {
   // /invites
   case acceptInvite(id: String)
   case declineInvite(id: String)
+  case startWalk(id: String)
   
   var method: HTTPMethod {
     switch self {
     case .login, .register, .createWalk, .invite:
       return .post
     case .getWalk, .getWalks, .getMapImageURL, .getInfo, .userSearch, .registerToken,
-         .getSentInvites, .getReceivedInvites, .acceptInvite, .declineInvite:
+         .getSentInvites, .getReceivedInvites, .acceptInvite, .declineInvite, .startWalk:
       return .get
     case .deleteWalk:
       return .delete
@@ -80,6 +81,8 @@ enum Router: URLRequestConvertible {
       return "/invites/\(id)/accept"
     case .declineInvite(let id):
       return "/invites/\(id)/decline"
+    case .startWalk(let id):
+      return "/invites/\(id)/start_walk"
     }
   }
   
