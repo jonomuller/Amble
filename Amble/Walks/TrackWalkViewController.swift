@@ -17,18 +17,22 @@ class TrackWalkViewController: WalkViewController {
   fileprivate let TIME_INTERVAL = 1.0
   fileprivate let LOCATION_ERROR_TITLE = "Location services are disabled"
   fileprivate let LOCATION_ERROR_MESSAGE = "Please enable location services in the Settings app in order to track your walks."
+  fileprivate let LAST_USE_DATE_KEY = "LastUseDate"
+  fileprivate let STREAK_COUNT_KEY = "StreakCount"
   
+  @IBOutlet var toolbar: UIToolbar!
   fileprivate var spinner: NVActivityIndicatorView!
   
   fileprivate var pedometer: CMPedometer!
   fileprivate var locationManager: CLLocationManager!
   fileprivate var locations: [CLLocation] = []
+  var members: [String]?
   
   fileprivate var nameAlert: UIAlertController!
   fileprivate var saveWalkAction: UIAlertAction!
   
   fileprivate var timer = Timer()
-  fileprivate var walkStarted = false
+  var walkStarted = false
   
   fileprivate var time = 0
   fileprivate var distance = 0.0
@@ -39,8 +43,19 @@ class TrackWalkViewController: WalkViewController {
     
     self.navigationController?.hidesNavigationBarHairline = true
     
-    let locationButton = MKUserTrackingBarButtonItem(mapView:self.mapView)
-    self.navigationItem.leftBarButtonItem = locationButton
+    let locationButton = MKUserTrackingBarButtonItem(mapView: self.mapView)
+    let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+    
+    toolbar.frame = CGRect(x: toolbar.frame.origin.x + 10,
+                           y: toolbar.frame.origin.y - 10,
+                           width: 44,
+                           height: 44)
+    
+    toolbar.layer.borderColor = UIColor.flatGreenDark.cgColor
+    toolbar.layer.borderWidth = 0.5
+    toolbar.layer.cornerRadius = 5
+    toolbar.clipsToBounds = true
+    toolbar.items = [flexibleSpace, locationButton, flexibleSpace]
     
     let startButton = UIBarButtonItem(title: "Start", style: .plain, target: self, action: #selector(startButtonPressed))
     self.navigationItem.rightBarButtonItem = startButton
@@ -67,6 +82,10 @@ class TrackWalkViewController: WalkViewController {
       self.startTracking()
     } else if status == .denied {
       mapView.userTrackingMode = .none
+    }
+    
+    if walkStarted {
+      self.startWalk()
     }
   }
   
@@ -167,47 +186,7 @@ extension TrackWalkViewController {
       
       self.present(confirmEndAlert, animated: true, completion: nil)
     } else {
-      // Start walk
-      
-      self.navigationItem.rightBarButtonItem?.title = "End"
-      
-      // Sets background location tracking
-      // Note: need to add a user preference for this in the future
-      locationManager.allowsBackgroundLocationUpdates = true
-      
-      transformStatsView(transform: CGAffineTransform(translationX: 0, y: statsView.frame.height))
-      locations = []
-      time = 0
-      distance = 0.0
-      steps = 0
-      statsView.timeLabel.text = "00:00"
-      statsView.distanceLabel.attributedText = self.getDistanceLabelText(distance: 0)
-      statsView.stepsLabel.text = "0"
-      
-      // Receive updates from phone's motion data to count number of steps
-      if CMPedometer.isStepCountingAvailable() {
-        pedometer.startUpdates(from: Date(), withHandler: { (data, error) in
-          if let error = error, error._code == Int(CMErrorMotionActivityNotAuthorized.rawValue) {
-            self.displayPrivacyError(title: "Motion activity is disabled",
-                                     message: "Please enable motion activity in the Settings app in order to count your steps.")
-            DispatchQueue.main.async(execute: { 
-              self.statsView.stepsLabel.text = "-"
-            })
-          } else {
-            self.steps = (data?.numberOfSteps.intValue)!
-            DispatchQueue.main.async(execute: {
-              self.statsView.stepsLabel.text = String(self.steps)
-            })
-          }
-        })
-      }
-      
-      timer = Timer.scheduledTimer(timeInterval: TIME_INTERVAL,
-                                   target: self,
-                                   selector: #selector(timerTick),
-                                   userInfo: nil,
-                                   repeats: true)
-      
+      self.startWalk()
       walkStarted = true
     }
   }
@@ -216,7 +195,7 @@ extension TrackWalkViewController {
     time += 1
     DispatchQueue.main.async {
       self.statsView.timeLabel.text = self.getTimeLabelText(time: self.time)
-      self.statsView.distanceLabel.attributedText = self.getDistanceLabelText(distance: self.distance)
+      self.statsView.distanceLabel.attributedText = self.distance.distanceLabelText()
     }
   }
   
@@ -257,6 +236,49 @@ private extension TrackWalkViewController {
       self.statsView.transform = transform
       self.mapView.layoutMargins = UIEdgeInsets(top: transform.ty, left: 0, bottom: 0, right: 0)
     }
+  }
+  
+  func startWalk() {
+    // Start walk
+    
+    self.navigationItem.rightBarButtonItem?.title = "End"
+    
+    // Sets background location tracking
+    // Note: need to add a user preference for this in the future
+    locationManager.allowsBackgroundLocationUpdates = true
+    
+    transformStatsView(transform: CGAffineTransform(translationX: 0, y: statsView.frame.height))
+    locations = []
+    time = 0
+    distance = 0.0
+    steps = 0
+    statsView.timeLabel.text = "00:00"
+    statsView.distanceLabel.attributedText = Double(0).distanceLabelText()
+    statsView.stepsLabel.text = "0"
+    
+    // Receive updates from phone's motion data to count number of steps
+    if CMPedometer.isStepCountingAvailable() {
+      pedometer.startUpdates(from: Date(), withHandler: { (data, error) in
+        if let error = error, error._code == Int(CMErrorMotionActivityNotAuthorized.rawValue) {
+          self.displayPrivacyError(title: "Motion activity is disabled",
+                                   message: "Please enable motion activity in the Settings app in order to count your steps.")
+          DispatchQueue.main.async(execute: {
+            self.statsView.stepsLabel.text = "-"
+          })
+        } else {
+          self.steps = (data?.numberOfSteps.intValue)!
+          DispatchQueue.main.async(execute: {
+            self.statsView.stepsLabel.text = String(self.steps)
+          })
+        }
+      })
+    }
+    
+    timer = Timer.scheduledTimer(timeInterval: TIME_INTERVAL,
+                                 target: self,
+                                 selector: #selector(timerTick),
+                                 userInfo: nil,
+                                 repeats: true)
   }
   
   func endWalk() {
@@ -315,7 +337,8 @@ private extension TrackWalkViewController {
   func saveWalk(name: String) {
     self.renderMapImage { (image) in
       if let mapImage = image {
-        APIManager.sharedInstance.createWalk(name: name, owner: User.sharedInstance.userInfo!.id, locations: self.locations, image: mapImage, time: self.time, distance: self.distance, steps: self.steps, completion: { (response) in
+        let achievements = self.generateAchivements()
+        APIManager.sharedInstance.createWalk(name: name, members: self.members, locations: self.locations, achievements: achievements, image: mapImage, time: self.time, distance: self.distance, steps: self.steps, completion: { (response) in
           self.spinner.stopAnimating()
           
           switch response {
@@ -324,12 +347,14 @@ private extension TrackWalkViewController {
             
             let coordinates = self.convertToCoordinates()
             self.locations = []
+            self.members = nil
             
             let walk = Walk(name: json["walk"]["name"].stringValue,
                             coordinates: coordinates,
                             time: self.time,
                             distance: self.distance,
-                            steps: self.steps)
+                            steps: self.steps,
+                            achievements: achievements)
             
             self.presentWalkDetailView(walk: walk, id: json["walk"]["_id"].stringValue)
           case .failure(let error):
@@ -418,6 +443,44 @@ private extension TrackWalkViewController {
   func removeMapOverlays() {
     self.mapView.removeOverlays(self.mapView.overlays)
     self.mapView.removeAnnotations(self.mapView.annotations)
+  }
+  
+  func generateAchivements() -> [Achievement] {
+    var achievements: [Achievement] = []
+    
+    // Create distance achievement
+    achievements.append(Achievement(type: .distance, value: Int(self.distance / 10)))
+    
+    let userDefaults = UserDefaults.standard
+    
+    // Check if there is a day streak achievement
+    if let lastUseDate: Date = userDefaults.object(forKey: LAST_USE_DATE_KEY) as? Date {
+      var streakCount = userDefaults.integer(forKey: STREAK_COUNT_KEY)
+      let components = Calendar.current.dateComponents([.day], from: lastUseDate, to: Date())
+      
+      if components.day == 1 {
+        streakCount += 1
+        userDefaults.set(Date(), forKey: LAST_USE_DATE_KEY)
+        userDefaults.set(streakCount, forKey: STREAK_COUNT_KEY)
+        achievements.append(Achievement(type: .dayStreak, value: streakCount * 100))
+      } else if components.day! > 1 {
+        resetDayStreak(userDefaults: userDefaults)
+      }
+    } else {
+      resetDayStreak(userDefaults: userDefaults)
+    }
+    
+    // Check if there is a group achievement
+    if let members = members {
+      achievements.append(Achievement(type: .group, value: members.count * 100))
+    }
+    
+    return achievements
+  }
+  
+  func resetDayStreak(userDefaults: UserDefaults) {
+    userDefaults.set(Date(), forKey: LAST_USE_DATE_KEY)
+    userDefaults.set(1, forKey: STREAK_COUNT_KEY)
   }
   
   func presentWalkDetailView(walk: Walk, id: String) {

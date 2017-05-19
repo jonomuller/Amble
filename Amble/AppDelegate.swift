@@ -7,25 +7,58 @@
 //
 
 import UIKit
+import UserNotifications
 import Locksmith
+import SwiftyJSON
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
+  public static let DEVICE_TOKEN_KEY = "DeviceToken"
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .alert, .sound]) { (success, error) in
+      if error != nil {
+        print(error)
+      }
+    }
+    
+    application.registerForRemoteNotifications()
+    
     let storyboardID: String!
     
     // If user's details are in keychain, log them in
     if let user = Locksmith.loadDataForUserAccount(userAccount: "Amble") {
-      User.sharedInstance.userInfo = UserInfo(id: user["id"] as! String,
-                                          username: user["username"] as! String,
-                                          email: user["email"] as! String,
-                                          firstName: user["firstName"] as! String,
-                                          lastName: user["lastName"] as! String,
-                                          jwt: user["jwt"] as! String)
+      User.sharedInstance.userInfo = UserInfo(user: OtherUser(id: user["id"] as! String,
+                                                              username: user["username"] as! String,
+                                                              email: user["email"] as! String,
+                                                              firstName: user["firstName"] as! String,
+                                                              lastName: user["lastName"] as! String),
+                                              jwt: user["jwt"] as! String)
       storyboardID = "Main"
+      
+      // Set badge count for invites tab
+      // Value is set to the number of active received invites the user has
+      APIManager.sharedInstance.getReceivedInvites(completion: { (response) in
+        switch response {
+        case .success(let json):
+          var badgeValue = 0
+          
+          for (_, subJson): (String, JSON) in json["invites"] {
+            if !subJson["accepted"].boolValue {
+              badgeValue += 1
+            }
+          }
+          
+          if badgeValue > 0, let tbc = self.window?.rootViewController as? UITabBarController {
+            tbc.viewControllers?[1].tabBarItem.badgeValue = String(badgeValue)
+          }
+        case .failure(let error):
+          print("Could not set invites badge: \(error.localizedDescription)")
+        }
+      })
+      
     } else {
       storyboardID = "Login"
     }
@@ -34,6 +67,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.window?.rootViewController = storyboard.instantiateInitialViewController()
     
     return true
+  }
+  
+  // MARK: - Push notification methods
+  
+  func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+    let userDefaults = UserDefaults.standard
+    
+    if let savedDeviceToken: String = userDefaults.object(forKey: AppDelegate.DEVICE_TOKEN_KEY) as? String {
+      if deviceTokenString != savedDeviceToken {
+        userDefaults.set(deviceToken, forKey: AppDelegate.DEVICE_TOKEN_KEY)
+        
+        if let userInfo = User.sharedInstance.userInfo {
+          APIManager.sharedInstance.registerToken(token: deviceTokenString, completion: { (response) in
+            switch response {
+            case .success:
+              print("Updated device token")
+            case .failure(let error):
+              print("Failed registering device token: \(error.localizedDescription)")
+            }
+          })
+        }
+      }
+    } else {
+      userDefaults.set(deviceToken, forKey: AppDelegate.DEVICE_TOKEN_KEY)
+    }
+  }
+  
+  func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+    print(userInfo)
   }
   
   func applicationWillResignActive(_ application: UIApplication) {

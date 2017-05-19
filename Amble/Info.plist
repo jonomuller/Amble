@@ -25,6 +25,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location services are required to track your walks.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Motion activity is required to count your steps.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>
@@ -62,9 +66,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Location services are required to track your walks.</string>
-	<key>NSMotionUsageDescription</key>
-	<string>Motion activity is required to count your steps.</string>
 </dict>
 </plist>
