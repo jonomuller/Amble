@@ -27,7 +27,7 @@ struct Achievement {
       let day = value / 100
       return "\(day) day streak"
     case .group:
-      return "Walk with other people"
+      return "Group walk"
     }
   }
 }
