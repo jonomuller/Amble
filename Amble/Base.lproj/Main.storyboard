@@ -201,10 +201,10 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingsCell" id="DPz-t9-IvH">
-                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="55" width="375" height="45"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DPz-t9-IvH" id="c9Z-dk-u1H">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -866,7 +866,7 @@
         <scene sceneID="ecv-Qr-y7T">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="AeK-eX-K0h" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Invites" image="checkmark" id="2Ld-Cb-Ebe"/>
+                    <tabBarItem key="tabBarItem" title="Invites" image="invite" id="2Ld-Cb-Ebe"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="8cm-Dg-R2U">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -888,7 +888,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="checkmark" width="25" height="25"/>
+        <image name="invite" width="25" height="25"/>
         <image name="person" width="25" height="25"/>
         <image name="settings" width="25" height="25"/>
         <image name="trash" width="25" height="25"/>
