@@ -62,11 +62,11 @@ class EntryButton: UIButton {
                                   width: self.spinner.frame.width,
                                   height: self.spinner.frame.height)
       self.spinner.startAnimating()
-      completion!(true)
+      completion?(true)
     }
   }
   
-  func expand(completion: ((Bool) -> Void)?) {
+  func expand() {
     self.isEnabled = true
     self.spinner.stopAnimating()
     animateFrame(type: .expand) { (success) in

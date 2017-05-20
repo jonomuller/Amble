@@ -20,12 +20,12 @@
 		AF2D9D901EA517F300EDCF53 /* UIViewController+RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2D9D8F1EA517F300EDCF53 /* UIViewController+RootView.swift */; };
 		AF2D9D921EA538D400EDCF53 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF2D9D911EA538D400EDCF53 /* MapKit.framework */; };
 		AF2D9D941EA53DA800EDCF53 /* TrackWalkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2D9D931EA53DA800EDCF53 /* TrackWalkViewController.swift */; };
+		AF5333B41EC253CB0076EBC0 /* Double+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5333B31EC253CB0076EBC0 /* Double+String.swift */; };
 		AF67D9231EA2516D003BE7CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF67D9211EA2516D003BE7CF /* LaunchScreen.storyboard */; };
 		AF67D9641EA2539F003BE7CF /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9601EA2539F003BE7CF /* APIManager.swift */; };
 		AF67D9651EA2539F003BE7CF /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9611EA2539F003BE7CF /* APIResponse.swift */; };
 		AF67D9661EA2539F003BE7CF /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9631EA2539F003BE7CF /* Router.swift */; };
 		AF67D96B1EA253A9003BE7CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9671EA253A9003BE7CF /* AppDelegate.swift */; };
-		AF67D96C1EA253A9003BE7CF /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9681EA253A9003BE7CF /* FirstViewController.swift */; };
 		AF67D96D1EA253A9003BE7CF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9691EA253A9003BE7CF /* ProfileViewController.swift */; };
 		AF67D96E1EA253A9003BE7CF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D96A1EA253A9003BE7CF /* User.swift */; };
 		AF67D9731EA253B7003BE7CF /* UIButton+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9701EA253B7003BE7CF /* UIButton+BackgroundColor.swift */; };
@@ -41,8 +41,15 @@
 		AF67D9861EA254AC003BE7CF /* AmbleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9851EA254AC003BE7CF /* AmbleUITests.swift */; };
 		AF67D9881EA254EB003BE7CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF67D9871EA254EB003BE7CF /* Main.storyboard */; };
 		AF67D98C1EA2728A003BE7CF /* UINavigationController+Transparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D98B1EA2728A003BE7CF /* UINavigationController+Transparent.swift */; };
+		AF6D38631EC7B1A900F7E8EB /* Invite.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6D38621EC7B1A900F7E8EB /* Invite.swift */; };
+		AF6D38651EC8674900F7E8EB /* InviteUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6D38641EC8674900F7E8EB /* InviteUserViewController.swift */; };
+		AF78F13A1ECAFC8300B750DE /* SentInviteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF78F1391ECAFC8300B750DE /* SentInviteTableViewCell.swift */; };
+		AF78F13C1ECAFC8D00B750DE /* ReceivedInviteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF78F13B1ECAFC8D00B750DE /* ReceivedInviteTableViewCell.swift */; };
+		AF97CB5A1EC134FD00D5AF75 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF97CB591EC134FD00D5AF75 /* Achievement.swift */; };
 		AFA685361EB810D700F869DF /* UIView+IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA685351EB810D700F869DF /* UIView+IndicatorView.swift */; };
 		AFA685381EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA685371EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift */; };
+		AFC4015E1EC7756C00CACAFD /* InvitesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC4015D1EC7756C00CACAFD /* InvitesTableViewController.swift */; };
+		AFC891481ECC723E00EC085E /* InviteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC891471ECC723E00EC085E /* InviteTableViewCell.swift */; };
 		AFDD14251EB5157300274E30 /* WalkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDD14241EB5157300274E30 /* WalkCollectionViewCell.swift */; };
 		AFF37AA61EA2A09000D57E8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFF37AA51EA2A09000D57E8D /* Assets.xcassets */; };
 		AFF37AAA1EA2D8BD00D57E8D /* UIViewController+CustomBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF37AA91EA2D8BD00D57E8D /* UIViewController+CustomBackButton.swift */; };
@@ -84,6 +91,7 @@
 		AF2D9D8F1EA517F300EDCF53 /* UIViewController+RootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+RootView.swift"; sourceTree = "<group>"; };
 		AF2D9D911EA538D400EDCF53 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		AF2D9D931EA53DA800EDCF53 /* TrackWalkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackWalkViewController.swift; sourceTree = "<group>"; };
+		AF5333B31EC253CB0076EBC0 /* Double+String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+String.swift"; sourceTree = "<group>"; };
 		AF67D9151EA2516D003BE7CF /* Amble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Amble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF67D9221EA2516D003BE7CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF67D9291EA2516D003BE7CF /* AmbleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AmbleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,7 +102,6 @@
 		AF67D9611EA2539F003BE7CF /* APIResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
 		AF67D9631EA2539F003BE7CF /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		AF67D9671EA253A9003BE7CF /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AF67D9681EA253A9003BE7CF /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		AF67D9691EA253A9003BE7CF /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		AF67D96A1EA253A9003BE7CF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		AF67D9701EA253B7003BE7CF /* UIButton+BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+BackgroundColor.swift"; sourceTree = "<group>"; };
@@ -111,9 +118,17 @@
 		AF67D9871EA254EB003BE7CF /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AF67D9891EA25550003BE7CF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF67D98B1EA2728A003BE7CF /* UINavigationController+Transparent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Transparent.swift"; sourceTree = "<group>"; };
+		AF6D38621EC7B1A900F7E8EB /* Invite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Invite.swift; sourceTree = "<group>"; };
+		AF6D38641EC8674900F7E8EB /* InviteUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteUserViewController.swift; sourceTree = "<group>"; };
+		AF78F1391ECAFC8300B750DE /* SentInviteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentInviteTableViewCell.swift; sourceTree = "<group>"; };
+		AF78F13B1ECAFC8D00B750DE /* ReceivedInviteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceivedInviteTableViewCell.swift; sourceTree = "<group>"; };
+		AF97CB591EC134FD00D5AF75 /* Achievement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		AFA685351EB810D700F869DF /* UIView+IndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+IndicatorView.swift"; sourceTree = "<group>"; };
 		AFA685371EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorAlertView.swift"; sourceTree = "<group>"; };
+		AFC4015D1EC7756C00CACAFD /* InvitesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitesTableViewController.swift; sourceTree = "<group>"; };
+		AFC891471ECC723E00EC085E /* InviteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteTableViewCell.swift; sourceTree = "<group>"; };
 		AFDD14241EB5157300274E30 /* WalkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkCollectionViewCell.swift; sourceTree = "<group>"; };
+		AFEED74B1EBD54BD003AA3F4 /* Amble.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Amble.entitlements; sourceTree = "<group>"; };
 		AFF37AA51EA2A09000D57E8D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AFF37AA91EA2D8BD00D57E8D /* UIViewController+CustomBackButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+CustomBackButton.swift"; sourceTree = "<group>"; };
 		D4CC062BD44A8FBFF103D039 /* Pods_Amble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Amble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,26 +188,20 @@
 		AF67D9171EA2516D003BE7CF /* Amble */ = {
 			isa = PBXGroup;
 			children = (
-				AF67D9671EA253A9003BE7CF /* AppDelegate.swift */,
 				AF67D95F1EA2539F003BE7CF /* APIManager */,
 				AF67D96F1EA253B7003BE7CF /* Extensions */,
 				AF67D9761EA253C4003BE7CF /* Login */,
+				AFC891491ECDB0C800EC085E /* Invites */,
+				AFC8914A1ECDB0E200EC085E /* Profile */,
+				AFC8914C1ECDB11300EC085E /* Settings */,
+				AFC8914B1ECDB0FD00EC085E /* Walks */,
+				AFEED74B1EBD54BD003AA3F4 /* Amble.entitlements */,
+				AF67D9671EA253A9003BE7CF /* AppDelegate.swift */,
 				AFF37AA51EA2A09000D57E8D /* Assets.xcassets */,
-				AF67D9681EA253A9003BE7CF /* FirstViewController.swift */,
 				AF67D9891EA25550003BE7CF /* Info.plist */,
 				AF67D9211EA2516D003BE7CF /* LaunchScreen.storyboard */,
 				AF2D9D8D1EA515B200EDCF53 /* Login.storyboard */,
 				AF67D9871EA254EB003BE7CF /* Main.storyboard */,
-				AFDD14241EB5157300274E30 /* WalkCollectionViewCell.swift */,
-				AF67D9691EA253A9003BE7CF /* ProfileViewController.swift */,
-				AF2D9D8B1EA4149100EDCF53 /* SettingsTableViewController.swift */,
-				AF0D36EB1EB16F3C00643BA7 /* WalkViewController.swift */,
-				AF2D9D931EA53DA800EDCF53 /* TrackWalkViewController.swift */,
-				AF0D36E31EB02F1000643BA7 /* WalkDetailViewController.swift */,
-				AF0D36E71EB0F78E00643BA7 /* StatsView.swift */,
-				AF0D36E91EB1065F00643BA7 /* Walk.swift */,
-				AF67D96A1EA253A9003BE7CF /* User.swift */,
-				AF0D36E11EAA7B7E00643BA7 /* WalkPin.swift */,
 			);
 			path = Amble;
 			sourceTree = "<group>";
@@ -228,14 +237,15 @@
 		AF67D96F1EA253B7003BE7CF /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				AF5333B31EC253CB0076EBC0 /* Double+String.swift */,
 				AF67D9701EA253B7003BE7CF /* UIButton+BackgroundColor.swift */,
 				AF67D9711EA253B7003BE7CF /* UIButton+KeyboardAnimation.swift */,
 				AF67D9721EA253B7003BE7CF /* UIColor+Image.swift */,
 				AF67D98B1EA2728A003BE7CF /* UINavigationController+Transparent.swift */,
-				AFF37AA91EA2D8BD00D57E8D /* UIViewController+CustomBackButton.swift */,
-				AF2D9D8F1EA517F300EDCF53 /* UIViewController+RootView.swift */,
-				AFA685371EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift */,
 				AFA685351EB810D700F869DF /* UIView+IndicatorView.swift */,
+				AFF37AA91EA2D8BD00D57E8D /* UIViewController+CustomBackButton.swift */,
+				AFA685371EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift */,
+				AF2D9D8F1EA517F300EDCF53 /* UIViewController+RootView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -249,8 +259,53 @@
 				AF67D97A1EA253C4003BE7CF /* InitialViewController.swift */,
 				AF67D97B1EA253C4003BE7CF /* LoginViewController.swift */,
 				AF67D97C1EA253C4003BE7CF /* RegisterViewController.swift */,
+				AF67D96A1EA253A9003BE7CF /* User.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		AFC891491ECDB0C800EC085E /* Invites */ = {
+			isa = PBXGroup;
+			children = (
+				AF6D38621EC7B1A900F7E8EB /* Invite.swift */,
+				AFC891471ECC723E00EC085E /* InviteTableViewCell.swift */,
+				AF6D38641EC8674900F7E8EB /* InviteUserViewController.swift */,
+				AFC4015D1EC7756C00CACAFD /* InvitesTableViewController.swift */,
+				AF78F13B1ECAFC8D00B750DE /* ReceivedInviteTableViewCell.swift */,
+				AF78F1391ECAFC8300B750DE /* SentInviteTableViewCell.swift */,
+			);
+			path = Invites;
+			sourceTree = "<group>";
+		};
+		AFC8914A1ECDB0E200EC085E /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				AF67D9691EA253A9003BE7CF /* ProfileViewController.swift */,
+				AFDD14241EB5157300274E30 /* WalkCollectionViewCell.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		AFC8914B1ECDB0FD00EC085E /* Walks */ = {
+			isa = PBXGroup;
+			children = (
+				AF97CB591EC134FD00D5AF75 /* Achievement.swift */,
+				AF0D36E71EB0F78E00643BA7 /* StatsView.swift */,
+				AF2D9D931EA53DA800EDCF53 /* TrackWalkViewController.swift */,
+				AF0D36E91EB1065F00643BA7 /* Walk.swift */,
+				AF0D36E31EB02F1000643BA7 /* WalkDetailViewController.swift */,
+				AF0D36E11EAA7B7E00643BA7 /* WalkPin.swift */,
+				AF0D36EB1EB16F3C00643BA7 /* WalkViewController.swift */,
+			);
+			path = Walks;
+			sourceTree = "<group>";
+		};
+		AFC8914C1ECDB11300EC085E /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				AF2D9D8B1EA4149100EDCF53 /* SettingsTableViewController.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		BD4AD5D3F79908AFB7992CD6 /* Frameworks */ = {
@@ -361,6 +416,9 @@
 								enabled = 1;
 							};
 							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -572,18 +630,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF5333B41EC253CB0076EBC0 /* Double+String.swift in Sources */,
 				AF67D98C1EA2728A003BE7CF /* UINavigationController+Transparent.swift in Sources */,
 				AF67D97E1EA253C4003BE7CF /* EntryTableViewCell.swift in Sources */,
 				AFDD14251EB5157300274E30 /* WalkCollectionViewCell.swift in Sources */,
 				AF67D9801EA253C4003BE7CF /* InitialViewController.swift in Sources */,
+				AF6D38631EC7B1A900F7E8EB /* Invite.swift in Sources */,
 				AFF37AAA1EA2D8BD00D57E8D /* UIViewController+CustomBackButton.swift in Sources */,
+				AF6D38651EC8674900F7E8EB /* InviteUserViewController.swift in Sources */,
 				AF67D97D1EA253C4003BE7CF /* EntryButton.swift in Sources */,
 				AF67D9811EA253C4003BE7CF /* LoginViewController.swift in Sources */,
 				AF67D96D1EA253A9003BE7CF /* ProfileViewController.swift in Sources */,
-				AF67D96C1EA253A9003BE7CF /* FirstViewController.swift in Sources */,
 				AF67D96B1EA253A9003BE7CF /* AppDelegate.swift in Sources */,
 				AF0D36E41EB02F1100643BA7 /* WalkDetailViewController.swift in Sources */,
 				AF67D97F1EA253C4003BE7CF /* EntryViewController.swift in Sources */,
+				AFC4015E1EC7756C00CACAFD /* InvitesTableViewController.swift in Sources */,
 				AF67D9641EA2539F003BE7CF /* APIManager.swift in Sources */,
 				AF67D9661EA2539F003BE7CF /* Router.swift in Sources */,
 				AF67D9731EA253B7003BE7CF /* UIButton+BackgroundColor.swift in Sources */,
@@ -592,15 +653,19 @@
 				AFA685361EB810D700F869DF /* UIView+IndicatorView.swift in Sources */,
 				AF67D9651EA2539F003BE7CF /* APIResponse.swift in Sources */,
 				AF2D9D941EA53DA800EDCF53 /* TrackWalkViewController.swift in Sources */,
+				AF78F13C1ECAFC8D00B750DE /* ReceivedInviteTableViewCell.swift in Sources */,
 				AF67D9741EA253B7003BE7CF /* UIButton+KeyboardAnimation.swift in Sources */,
 				AF0D36E21EAA7B7E00643BA7 /* WalkPin.swift in Sources */,
 				AF0D36E81EB0F78E00643BA7 /* StatsView.swift in Sources */,
 				AF2D9D8C1EA4149100EDCF53 /* SettingsTableViewController.swift in Sources */,
 				AF0D36EA1EB1065F00643BA7 /* Walk.swift in Sources */,
+				AF78F13A1ECAFC8300B750DE /* SentInviteTableViewCell.swift in Sources */,
 				AF0D36EC1EB16F3C00643BA7 /* WalkViewController.swift in Sources */,
 				AFA685381EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift in Sources */,
 				AF67D96E1EA253A9003BE7CF /* User.swift in Sources */,
 				AF67D9751EA253B7003BE7CF /* UIColor+Image.swift in Sources */,
+				AFC891481ECC723E00EC085E /* InviteTableViewCell.swift in Sources */,
+				AF97CB5A1EC134FD00D5AF75 /* Achievement.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -748,11 +813,12 @@
 			baseConfigurationReference = AC60661AA3809FEE8F7437A2 /* Pods-Amble.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Amble/Amble.entitlements;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = QJQGH9NF7F;
 				INFOPLIST_FILE = Amble/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = jonomuller.Amble;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.ac.imperial.Amble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -763,11 +829,12 @@
 			baseConfigurationReference = 776B27DE5882A78F23E64C23 /* Pods-Amble.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Amble/Amble.entitlements;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = QJQGH9NF7F;
 				INFOPLIST_FILE = Amble/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = jonomuller.Amble;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.ac.imperial.Amble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

@@ -12,6 +12,7 @@ import NVActivityIndicatorView
 
 class ProfileViewController: UIViewController {
   
+  @IBOutlet var statsView: StatsView!
   @IBOutlet var collectionView: UICollectionView!
   
   fileprivate var spinner: NVActivityIndicatorView!
@@ -23,13 +24,15 @@ class ProfileViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.setCustomBackButton(image: UIImage(named: "back-button"))
-    self.navigationItem.title = (User.sharedInstance.userInfo?.firstName)! + " " + (User.sharedInstance.userInfo?.lastName)!
+    self.statsView.distanceLabel.attributedText = Double(0).distanceLabelText()
+    self.navigationItem.title = (User.sharedInstance.userInfo?.user.firstName)! + " " + (User.sharedInstance.userInfo?.user.lastName)!
     
     spinner = self.collectionView.createIndicatorView(width: 50, height: 50)
     spinner.startAnimating()
   }
   
   override func viewWillAppear(_ animated: Bool) {
+    self.getStats()
     self.getWalks { (walks) in
       if self.walks.count != walks.count {
         self.walks = walks
@@ -60,12 +63,17 @@ extension ProfileViewController: UICollectionViewDataSource {
     cell.imageView.layer.cornerRadius = 8
     cell.imageView.clipsToBounds = true
     
-    do {
-      if let url = URL(string: walk.image) {
-        try cell.imageView.image = UIImage(data: Data(contentsOf: url))
+    DispatchQueue.global().async {
+      do {
+        if let url = URL(string: walk.image) {
+          let walkImage = try UIImage(data: Data(contentsOf: url))
+          DispatchQueue.main.async(execute: {
+            cell.imageView.image = walkImage
+          })
+        }
+      } catch {
+        print("Error fetching photo")
       }
-    } catch {
-      print("Error fetching photo")
     }
     
     return cell
@@ -97,16 +105,32 @@ extension ProfileViewController {
 // MARK: - Private helper methods
 
 private extension ProfileViewController {
+  
+  func getStats() {
+    APIManager.sharedInstance.getInfo(id: (User.sharedInstance.userInfo?.user.id)!) { (response) in
+      switch response {
+      case .success(let json):
+        DispatchQueue.main.async(execute: { 
+          self.statsView.timeLabel.text = json["user"]["score"].stringValue
+          self.statsView.distanceLabel.attributedText = json["user"]["distance"].doubleValue.distanceLabelText()
+          self.statsView.stepsLabel.text = json["user"]["steps"].stringValue
+        })
+      case .failure(let error):
+        self.displayErrorAlert(error: error)
+      }
+    }
+  }
+  
   func getWalks(completion: @escaping ([WalkInfo]) -> Void) {
-    APIManager.sharedInstance.getWalks(id: (User.sharedInstance.userInfo?.id)!) { (response) in
+    APIManager.sharedInstance.getWalks(id: (User.sharedInstance.userInfo?.user.id)!) { (response) in
       self.spinner.stopAnimating()
       switch response {
       case .success(let json):
         var walks: [WalkInfo] = []
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        
         for (_, subJson): (String, JSON) in json["walks"] {
-          let dateFormatter = DateFormatter()
-          dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-          
           let walk = WalkInfo(id: subJson["id"].stringValue,
                               name: subJson["name"].stringValue,
                               image: subJson["image"].stringValue,
@@ -118,11 +142,7 @@ private extension ProfileViewController {
         walks = walks.sorted(by: { $0.date.compare($1.date) == ComparisonResult.orderedDescending })
         completion(walks)
       case .failure(let error):
-        let alertView = UIAlertController(title: error.localizedDescription,
-                                          message: error.localizedFailureReason,
-                                          preferredStyle: .alert)
-        alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alertView, animated: true, completion: nil)
+        self.displayErrorAlert(error: error)
       }
     }
   }

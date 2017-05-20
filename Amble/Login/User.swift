@@ -11,11 +11,7 @@ import Locksmith
 
 struct UserInfo: ReadableSecureStorable, CreateableSecureStorable, DeleteableSecureStorable, GenericPasswordSecureStorable {
   
-  let id: String
-  let username: String
-  let email: String
-  let firstName: String
-  let lastName: String
+  let user: OtherUser
   let jwt: String
   
   let service: String = Bundle.main.infoDictionary![String(kCFBundleIdentifierKey)] as? String ?? "Amble"
@@ -25,11 +21,11 @@ struct UserInfo: ReadableSecureStorable, CreateableSecureStorable, DeleteableSec
   }
   
   var data: [String : Any] {
-    return ["id": id,
-            "username": username,
-            "email": email,
-            "firstName": firstName,
-            "lastName": lastName,
+    return ["id": user.id,
+            "username": user.username,
+            "email": user.email,
+            "firstName": user.firstName,
+            "lastName": user.lastName,
             "jwt": jwt]
   }
 }
@@ -37,4 +33,14 @@ struct UserInfo: ReadableSecureStorable, CreateableSecureStorable, DeleteableSec
 class User {
   static let sharedInstance = User()
   var userInfo: UserInfo?
+}
+
+struct OtherUser {
+  
+  let id: String
+  let username: String
+  let email: String
+  let firstName: String
+  let lastName: String
+  
 }

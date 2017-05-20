@@ -16,6 +16,7 @@ struct Walk {
   let time: Int
   let distance: Double
   let steps: Int
+  let achievements: [Achievement]
   
 }
 

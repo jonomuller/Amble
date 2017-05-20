@@ -14,8 +14,9 @@ class LoginViewController: EntryViewController {
     return ["username", "password"]
   }
   
-  override func entryButtonPressed(details: [String: String]) {
-    APIManager.sharedInstance.login(username: details[sections[0]]!.lowercased(), password: details[sections[1]]!) { (response) in
+  override func entryButtonPressed() {
+    let deviceToken = UserDefaults.standard.object(forKey: AppDelegate.DEVICE_TOKEN_KEY) as? String
+    APIManager.sharedInstance.login(username: details[sections[0]]!.lowercased(), password: details[sections[1]]!, deviceToken: deviceToken) { (response) in
       self.handleAPIResponse(response: response)
     }
   }
