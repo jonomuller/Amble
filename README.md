@@ -9,6 +9,8 @@ A social walking app for iOS written in Swift. Created for my final year project
 - Login and create an account
 - Track walks and record information about the time, distance and number of steps
 - Save walks and view them on your profile
+- Earn achievements by tracking walks and generating daily streaks, which count towards your total score
+- Invite other users to go on a walk
 
 ## Requirements
 
