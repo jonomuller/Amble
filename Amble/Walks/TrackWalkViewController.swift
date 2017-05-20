@@ -98,14 +98,6 @@ class TrackWalkViewController: WalkViewController {
 
 extension TrackWalkViewController: CLLocationManagerDelegate {
   
-  func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-    if status == .authorizedWhenInUse {
-      startTracking()
-    } else if status == .denied {
-      print("Denied")
-    }
-  }
-  
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     // We do not need to update locations if the walk has not started
     if !walkStarted {
@@ -172,9 +164,12 @@ extension TrackWalkViewController {
     if walkStarted {
       // End walk
       
+      print("Pitch: \(self.mapView.camera.pitch)")
+      print("Altitude: \(self.mapView.camera.altitude)")
+      print("Heading: \(self.mapView.camera.heading)")
+      
       let confirmEndAlert = UIAlertController(title: "End Walk", message: nil, preferredStyle: .actionSheet)
       confirmEndAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-      
       confirmEndAlert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action) in
         self.showSaveWalkAlert()
       }))
@@ -192,11 +187,17 @@ extension TrackWalkViewController {
   }
   
   func timerTick() {
-    time += 1
     DispatchQueue.main.async {
       self.statsView.timeLabel.text = self.getTimeLabelText(time: self.time)
       self.statsView.distanceLabel.attributedText = self.distance.distanceLabelText()
     }
+    
+    // Search for new places every 30 seconds
+    if time % 30 == 0 {
+      self.search(for: ["statue", "monument", "memorial", "stadium", "church", "cemetary", "museum"])
+    }
+    
+    time += 1
   }
   
   func textFieldDidChange(_ sender: Any) {
@@ -247,6 +248,18 @@ private extension TrackWalkViewController {
     // Note: need to add a user preference for this in the future
     locationManager.allowsBackgroundLocationUpdates = true
     
+    //      let camera = MKMapCamera(lookingAtCenter: self.mapView.userLocation.coordinate,
+    //                               fromDistance: 200,
+    //                               pitch: 80,
+    //                               heading: 0)
+    let camera = MKMapCamera()
+    camera.centerCoordinate = self.mapView.userLocation.coordinate
+    camera.pitch = 63
+    camera.altitude = 300
+    camera.heading = 0
+    self.mapView.setCamera(camera, animated: false)
+    self.mapView.userTrackingMode = .followWithHeading
+    
     transformStatsView(transform: CGAffineTransform(translationX: 0, y: statsView.frame.height))
     locations = []
     time = 0
@@ -286,8 +299,16 @@ private extension TrackWalkViewController {
       self.dropPin(coordinate: location.coordinate, name: "finish")
     }
     
+    let camera = MKMapCamera(lookingAtCenter: self.mapView.userLocation.coordinate,
+                             fromDistance: 1000,
+                             pitch: 0,
+                             heading: 0)
+    self.mapView.setCamera(camera, animated: false)
+    self.mapView.userTrackingMode = .follow
+    
     self.navigationItem.rightBarButtonItem?.title = "Start"
     self.transformStatsView(transform: .identity)
+    
     locationManager.allowsBackgroundLocationUpdates = false
     pedometer.stopUpdates()
     walkStarted = false
@@ -497,5 +518,99 @@ private extension TrackWalkViewController {
     navController.hidesNavigationBarHairline = true
     vc.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: vc, action: #selector(vc.doneButtonPressed))
     self.present(navController, animated: true, completion: nil)
+  }
+  
+  func mapRect(for region: MKCoordinateRegion) -> MKMapRect {
+    let topLeft = MKMapPointForCoordinate(CLLocationCoordinate2D(latitude: region.center.latitude + (region.span.latitudeDelta/2.0), longitude: region.center.longitude - (region.span.longitudeDelta/2.0)))
+    
+    let bottomRight = MKMapPointForCoordinate(CLLocationCoordinate2D(latitude: region.center.latitude - (region.span.latitudeDelta/2.0), longitude: region.center.longitude + (region.span.longitudeDelta/2.0)))
+    
+    let origin = MKMapPointMake(min(topLeft.x, bottomRight.x), min(topLeft.y, bottomRight.y))
+    let size = MKMapSize(width: fabs(bottomRight.x - topLeft.x),
+                         height: fabs(bottomRight.y - topLeft.y))
+    
+    return MKMapRect(origin: origin, size: size)
+  }
+  
+  func search(for queries: [String], index: Int = 0, responses: [MKMapItem] = []) {
+    let query = queries[index]
+    //    for query in queries {
+    let request = MKLocalSearchRequest()
+    
+    // Define 500m by 500m region around user's current location
+    let region = MKCoordinateRegionMakeWithDistance(self.mapView.userLocation.coordinate, 500.0, 500.0)
+    let mapRect = self.mapRect(for: region)
+    
+    request.region = region
+    request.naturalLanguageQuery = query
+    
+    let search = MKLocalSearch(request: request)
+    
+    DispatchQueue.global().async {
+      search.start(completionHandler: { (response, error) in
+        if error != nil {
+          print(error)
+          return
+        }
+        
+        if query == queries[queries.count - 1] {
+          self.displaySearchResults(for: responses, mapRect: mapRect)
+          return
+        }
+        
+        if let items = response?.mapItems {
+          self.search(for: queries, index: index+1, responses: responses + items)
+        } else {
+          print("No items found")
+        }
+      })
+    }
+  }
+  
+  func displaySearchResults(for items: [MKMapItem], mapRect: MKMapRect) {
+    if (!walkStarted) {
+      return
+    }
+    
+    // Remove pins not close to user
+    for annotation in self.mapView.annotations where !(annotation is WalkPin) {
+      if !(MKMapRectContainsPoint(mapRect, MKMapPointForCoordinate(annotation.coordinate))) {
+        DispatchQueue.main.async(execute: {
+          self.mapView.removeAnnotation(annotation)
+        })
+      }
+    }
+    
+    var pins: [MKAnnotation] = []
+    
+    // Add new pins if they have not already been added
+    DispatchQueue.global().async {
+      for item in items where MKMapRectContainsPoint(mapRect, MKMapPointForCoordinate(item.placemark.coordinate)) {
+        if self.isItemAlreadyOnMap(item: item) {
+          continue
+        }
+        
+        let pin = MKPointAnnotation()
+        pin.coordinate = item.placemark.coordinate
+        pin.title = item.name
+        pins.append(pin)
+      }
+      
+      DispatchQueue.main.async(execute: {
+        self.mapView.addAnnotations(pins)
+      })
+    }
+  }
+  
+  func isItemAlreadyOnMap(item: MKMapItem) -> Bool {
+    var alreadyOnMap = false
+    
+    for annotation in self.mapView.annotations where !(annotation is WalkPin) {
+      if item.placemark.coordinate.latitude == annotation.coordinate.latitude && item.placemark.coordinate.longitude == annotation.coordinate.longitude {
+        alreadyOnMap = true
+      }
+    }
+    
+    return alreadyOnMap
   }
 }

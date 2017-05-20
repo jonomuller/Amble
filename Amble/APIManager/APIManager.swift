@@ -172,16 +172,23 @@ private extension APIManager {
         case .success(let value):
           completion(.success(json: JSON(value)))
         case .failure:
-          if let data = response.data {
+          var error = NSError(domain: "Amble",
+                              code: 0,
+                              userInfo: [NSLocalizedDescriptionKey: "Network error",
+                                         NSLocalizedFailureReasonErrorKey: "Please try again later."])
+          
+          if let res = response.response, let data = response.data {
             let json = JSON(data)
             let description = router.path.replacingOccurrences(of: "/auth/", with: "").capitalized + " error"
             let reason = json["error"].stringValue
-            let error = NSError(domain: "Amble",
-                                code: (response.response?.statusCode)!,
-                                userInfo: [NSLocalizedDescriptionKey: description,
-                                           NSLocalizedFailureReasonErrorKey: reason])
-            completion(.failure(error: error))
+            
+            error = NSError(domain: "Amble",
+                            code: res.statusCode,
+                            userInfo: [NSLocalizedDescriptionKey: description,
+                                       NSLocalizedFailureReasonErrorKey: reason])
           }
+          
+          completion(.failure(error: error))
         }
     }
   }
