@@ -105,7 +105,7 @@ extension APIManager {
     }
   }
   
-  public func userSearch(info: String, completion: @escaping (APIResponse) -> Void) {
+  public func searchForUser(info: String, completion: @escaping (APIResponse) -> Void) {
     self.request(router: AmbleRouter.userSearch(info: info)) { (response) in
       completion(response)
     }
@@ -171,9 +171,12 @@ extension APIManager {
     }
   }
   
-  public func getPlaques(between topLeft: CLLocationCoordinate2D, and bottomRight: CLLocationCoordinate2D, completion: @escaping (APIResponse) -> Void) {
-    let topLeftCoord = [topLeft.longitude, topLeft.latitude]
-    let bottomRightCoord = [bottomRight.longitude, bottomRight.latitude]
+  public func searchForPlaques(between topLeft: CLLocationCoordinate2D, and bottomRight: CLLocationCoordinate2D, completion: @escaping (APIResponse) -> Void) {
+    var topLeftCoord = [topLeft.latitude, topLeft.longitude].description
+    var bottomRightCoord = [bottomRight.latitude, bottomRight.longitude].description
+    
+    topLeftCoord = topLeftCoord.replacingOccurrences(of: " ", with: "")
+    bottomRightCoord = bottomRightCoord.replacingOccurrences(of: " ", with: "")
     
     self.request(router: PlaqueRouter.getPlaques(topLeft: topLeftCoord.description, bottomRight: bottomRightCoord.description)) { (response) in
       completion(response)

@@ -55,6 +55,7 @@
 		AFF37AA61EA2A09000D57E8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFF37AA51EA2A09000D57E8D /* Assets.xcassets */; };
 		AFF37AAA1EA2D8BD00D57E8D /* UIViewController+CustomBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF37AA91EA2D8BD00D57E8D /* UIViewController+CustomBackButton.swift */; };
 		AFFD45EC1ED6E9CD00309C22 /* PlaqueRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFD45EB1ED6E9CD00309C22 /* PlaqueRouter.swift */; };
+		AFFD45EE1ED7208100309C22 /* Plaque.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFD45ED1ED7208100309C22 /* Plaque.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +136,7 @@
 		AFF37AA51EA2A09000D57E8D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AFF37AA91EA2D8BD00D57E8D /* UIViewController+CustomBackButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+CustomBackButton.swift"; sourceTree = "<group>"; };
 		AFFD45EB1ED6E9CD00309C22 /* PlaqueRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaqueRouter.swift; sourceTree = "<group>"; };
+		AFFD45ED1ED7208100309C22 /* Plaque.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plaque.swift; sourceTree = "<group>"; };
 		D4CC062BD44A8FBFF103D039 /* Pods_Amble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Amble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -306,6 +308,7 @@
 				AF97CB591EC134FD00D5AF75 /* Achievement.swift */,
 				AF0D36E71EB0F78E00643BA7 /* StatsView.swift */,
 				AF2D9D931EA53DA800EDCF53 /* TrackWalkViewController.swift */,
+				AFFD45ED1ED7208100309C22 /* Plaque.swift */,
 				AF0D36E91EB1065F00643BA7 /* Walk.swift */,
 				AF0D36E31EB02F1000643BA7 /* WalkDetailViewController.swift */,
 				AF0D36E11EAA7B7E00643BA7 /* WalkPin.swift */,
@@ -667,6 +670,7 @@
 				AF67D9821EA253C4003BE7CF /* RegisterViewController.swift in Sources */,
 				AFA685361EB810D700F869DF /* UIView+IndicatorView.swift in Sources */,
 				AF67D9651EA2539F003BE7CF /* APIResponse.swift in Sources */,
+				AFFD45EE1ED7208100309C22 /* Plaque.swift in Sources */,
 				AF2D9D941EA53DA800EDCF53 /* TrackWalkViewController.swift in Sources */,
 				AF78F13C1ECAFC8D00B750DE /* ReceivedInviteTableViewCell.swift in Sources */,
 				AF67D9741EA253B7003BE7CF /* UIButton+KeyboardAnimation.swift in Sources */,

@@ -24,8 +24,8 @@ enum PlaqueRouter: Router {
     switch self {
     case .getPlaque(let id):
       return "/\(id).json"
-    case .getPlaques(let lat, let lon):
-      return ".json?box=\(lat),\(lon)"
+    case .getPlaques(let topLeft, let bottomRight):
+      return ".json?box=\(topLeft),\(bottomRight)"
     }
   }
   
@@ -34,9 +34,7 @@ enum PlaqueRouter: Router {
   }
   
   func asURLRequest() throws -> URLRequest {
-    let url = try AmbleRouter.baseURLPath.asURL();
-    let urlRequest = try URLRequest(url: url.appendingPathComponent(path), method: method)
-    
-    return try URLEncoding.default.encode(urlRequest, with: parameters)
+    let url = try (PlaqueRouter.baseURLPath + path).asURL()
+    return try URLRequest(url: url, method: method)
   }
 }

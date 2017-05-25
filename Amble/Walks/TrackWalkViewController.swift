@@ -11,6 +11,7 @@ import MapKit
 import CoreLocation
 import CoreMotion
 import NVActivityIndicatorView
+import SwiftyJSON
 
 class TrackWalkViewController: WalkViewController {
   
@@ -194,7 +195,7 @@ extension TrackWalkViewController {
     
     // Search for new places every 30 seconds
     if time % 30 == 0 {
-      self.search(for: ["statue", "monument", "memorial", "stadium", "church", "cemetary", "museum"])
+      self.searchForPlaques()
     }
     
     time += 1
@@ -532,42 +533,30 @@ private extension TrackWalkViewController {
     return MKMapRect(origin: origin, size: size)
   }
   
-  func search(for queries: [String], index: Int = 0, responses: [MKMapItem] = []) {
-    let query = queries[index]
-    //    for query in queries {
-    let request = MKLocalSearchRequest()
-    
-    // Define 500m by 500m region around user's current location
+  func searchForPlaques() {
     let region = MKCoordinateRegionMakeWithDistance(self.mapView.userLocation.coordinate, 500.0, 500.0)
+    let topLeft = CLLocationCoordinate2D(latitude: region.center.latitude + (region.span.latitudeDelta/2.0), longitude: region.center.longitude - (region.span.longitudeDelta/2.0))
+    let bottomRight = CLLocationCoordinate2D(latitude: region.center.latitude - (region.span.latitudeDelta/2.0), longitude: region.center.longitude + (region.span.longitudeDelta/2.0))
+    
     let mapRect = self.mapRect(for: region)
     
-    request.region = region
-    request.naturalLanguageQuery = query
-    
-    let search = MKLocalSearch(request: request)
-    
-    DispatchQueue.global().async {
-      search.start(completionHandler: { (response, error) in
-        if error != nil {
-          print(error)
-          return
+    APIManager.sharedInstance.searchForPlaques(between: topLeft, and: bottomRight) { (response) in
+      switch response {
+      case .success(let json):
+        var plaques: [Plaque] = []
+        for (_, subJson): (String, JSON) in json {
+          plaques.append(Plaque(id: subJson["id"].stringValue,
+                                coordinate: CLLocationCoordinate2D(latitude: subJson["latitude"].doubleValue,
+                                                                   longitude: subJson["longitude"].doubleValue)))
         }
-        
-        if query == queries[queries.count - 1] {
-          self.displaySearchResults(for: responses, mapRect: mapRect)
-          return
-        }
-        
-        if let items = response?.mapItems {
-          self.search(for: queries, index: index+1, responses: responses + items)
-        } else {
-          print("No items found")
-        }
-      })
+        self.displaySearchResults(for: plaques, mapRect: mapRect)
+      case .failure(let error):
+        self.displayErrorAlert(error: error)
+      }
     }
   }
   
-  func displaySearchResults(for items: [MKMapItem], mapRect: MKMapRect) {
+  func displaySearchResults(for plaques: [Plaque], mapRect: MKMapRect) {
     if (!walkStarted) {
       return
     }
@@ -585,14 +574,13 @@ private extension TrackWalkViewController {
     
     // Add new pins if they have not already been added
     DispatchQueue.global().async {
-      for item in items where MKMapRectContainsPoint(mapRect, MKMapPointForCoordinate(item.placemark.coordinate)) {
-        if self.isItemAlreadyOnMap(item: item) {
+      for plaque in plaques {
+        if self.isItemAlreadyOnMap(plaque: plaque) {
           continue
         }
         
         let pin = MKPointAnnotation()
-        pin.coordinate = item.placemark.coordinate
-        pin.title = item.name
+        pin.coordinate = plaque.coordinate
         pins.append(pin)
       }
       
@@ -602,11 +590,11 @@ private extension TrackWalkViewController {
     }
   }
   
-  func isItemAlreadyOnMap(item: MKMapItem) -> Bool {
+  func isItemAlreadyOnMap(plaque: Plaque) -> Bool {
     var alreadyOnMap = false
     
     for annotation in self.mapView.annotations where !(annotation is WalkPin) {
-      if item.placemark.coordinate.latitude == annotation.coordinate.latitude && item.placemark.coordinate.longitude == annotation.coordinate.longitude {
+      if plaque.coordinate.latitude == annotation.coordinate.latitude && plaque.coordinate.longitude == annotation.coordinate.longitude {
         alreadyOnMap = true
       }
     }
