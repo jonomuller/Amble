@@ -24,7 +24,7 @@ class APIManager: NSObject {
       details["deviceToken"] = token
     }
     
-    self.request(router: .login(details: details)) { (response) in
+    self.request(router: AmbleRouter.login(details: details)) { (response) in
       completion(response)
     }
   }
@@ -40,7 +40,7 @@ class APIManager: NSObject {
       details["deviceToken"] = token
     }
     
-    self.request(router: .register(details: details)) { (response) in
+    self.request(router: AmbleRouter.register(details: details)) { (response) in
       completion(response)
     }
   }
@@ -49,7 +49,7 @@ class APIManager: NSObject {
   
   public func createWalk(name: String, members: [String]?, locations: [CLLocation], achievements: [Achievement], image: UIImage, time: Int, distance: Double, steps: Int, completion: @escaping (APIResponse) -> Void) {
     
-    self.request(router: .getMapImageURL) { (response) in
+    self.request(router: AmbleRouter.getMapImageURL) { (response) in
       switch response {
       case .success(let json):
         let url = json["url"].stringValue
@@ -74,13 +74,13 @@ class APIManager: NSObject {
   }
   
   public func getWalk(id: String, completion: @escaping (APIResponse) -> Void) {
-    self.request(router: .getWalk(id: id)) { (response) in
+    self.request(router: AmbleRouter.getWalk(id: id)) { (response) in
       completion(response)
     }
   }
   
   public func deleteWalk(id: String, completion: @escaping (APIResponse) -> Void) {
-    self.request(router: .deleteWalk(id: id)) { (response) in
+    self.request(router: AmbleRouter.deleteWalk(id: id)) { (response) in
       completion(response)
     }
   }
@@ -88,25 +88,25 @@ class APIManager: NSObject {
   // MARK: - /users API calls
   
   public func getInfo(id: String, completion: @escaping (APIResponse) -> Void) {
-    self.request(router: .getInfo(id: id)) { (response) in
+    self.request(router: AmbleRouter.getInfo(id: id)) { (response) in
       completion(response)
     }
   }
   
   public func getWalks(id: String, completion: @escaping (APIResponse) -> Void) {
-    self.request(router: .getWalks(id: id)) { (response) in
+    self.request(router: AmbleRouter.getWalks(id: id)) { (response) in
       completion(response)
     }
   }
   
   public func userSearch(info: String, completion: @escaping (APIResponse) -> Void) {
-    self.request(router: .userSearch(info: info)) { (response) in
+    self.request(router: AmbleRouter.userSearch(info: info)) { (response) in
       completion(response)
     }
   }
   
   public func registerToken(token: String, completion: @escaping (APIResponse) -> Void) {
-    self.request(router: .registerToken(token: token)) { (response) in
+    self.request(router: AmbleRouter.registerToken(token: token)) { (response) in
       completion(response)
     }
   }
@@ -117,19 +117,19 @@ class APIManager: NSObject {
     
     let details = ["users": ids.description, "date": dateFormatter.string(from: date)]
     
-    self.request(router: .invite(details: details)) { (response) in
+    self.request(router: AmbleRouter.invite(details: details)) { (response) in
       completion(response)
     }
   }
   
   public func getSentInvites(completion: @escaping (APIResponse) -> Void) {
-    self.request(router: .getSentInvites) { (response) in
+    self.request(router: AmbleRouter.getSentInvites) { (response) in
       completion(response)
     }
   }
   
   public func getReceivedInvites(completion: @escaping (APIResponse) -> Void) {
-    self.request(router: .getReceivedInvites) { (response) in
+    self.request(router: AmbleRouter.getReceivedInvites) { (response) in
       completion(response)
     }
   }
@@ -137,19 +137,19 @@ class APIManager: NSObject {
   // MARK: - /invites API calls
   
   public func acceptInvite(id: String, completion: @escaping (APIResponse) -> Void) {
-    self.request(router: .acceptInvite(id: id)) { (response) in
+    self.request(router: AmbleRouter.acceptInvite(id: id)) { (response) in
       completion(response)
     }
   }
   
   public func declineInvite(id: String, completion: @escaping (APIResponse) -> Void) {
-    self.request(router: .declineInvite(id: id)) { (response) in
+    self.request(router: AmbleRouter.declineInvite(id: id)) { (response) in
       completion(response)
     }
   }
   
   public func startWalk(id: String, completion: @escaping (APIResponse) -> Void) {
-    self.request(router: .startWalk(id: id)) { (response) in
+    self.request(router: AmbleRouter.startWalk(id: id)) { (response) in
       completion(response)
     }
   }
@@ -236,7 +236,7 @@ private extension APIManager {
         details["members"] = members.description
       }
       
-      request(router: .createWalk(details: details)) { (response) in
+      request(router: AmbleRouter.createWalk(details: details)) { (response) in
         completion(response)
       }
     } else {
