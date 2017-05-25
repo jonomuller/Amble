@@ -15,7 +15,13 @@ class APIManager: NSObject {
   
   public static let sharedInstance = APIManager()
   
-  // MARK: - /auth API calls
+}
+
+// MARK: - Amble API calls
+
+extension APIManager {
+
+  // MARK: /auth
   
   public func login(username: String, password: String, deviceToken: String? = nil, completion: @escaping (APIResponse) -> Void) {
     var details = ["username": username, "password": password]
@@ -45,7 +51,7 @@ class APIManager: NSObject {
     }
   }
   
-  // MARK: - /walks API calls
+  // MARK: /walks
   
   public func createWalk(name: String, members: [String]?, locations: [CLLocation], achievements: [Achievement], image: UIImage, time: Int, distance: Double, steps: Int, completion: @escaping (APIResponse) -> Void) {
     
@@ -85,7 +91,7 @@ class APIManager: NSObject {
     }
   }
   
-  // MARK: - /users API calls
+  // MARK: /users
   
   public func getInfo(id: String, completion: @escaping (APIResponse) -> Void) {
     self.request(router: AmbleRouter.getInfo(id: id)) { (response) in
@@ -134,7 +140,7 @@ class APIManager: NSObject {
     }
   }
   
-  // MARK: - /invites API calls
+  // MARK: /invites
   
   public func acceptInvite(id: String, completion: @escaping (APIResponse) -> Void) {
     self.request(router: AmbleRouter.acceptInvite(id: id)) { (response) in
@@ -150,6 +156,26 @@ class APIManager: NSObject {
   
   public func startWalk(id: String, completion: @escaping (APIResponse) -> Void) {
     self.request(router: AmbleRouter.startWalk(id: id)) { (response) in
+      completion(response)
+    }
+  }
+}
+
+// MARK: - Plaque API calls
+
+extension APIManager {
+  
+  public func getPlaque(id: String, completion: @escaping (APIResponse) -> Void) {
+    self.request(router: PlaqueRouter.getPlaque(id: id)) { (response) in
+      completion(response)
+    }
+  }
+  
+  public func getPlaques(between topLeft: CLLocationCoordinate2D, and bottomRight: CLLocationCoordinate2D, completion: @escaping (APIResponse) -> Void) {
+    let topLeftCoord = [topLeft.longitude, topLeft.latitude]
+    let bottomRightCoord = [bottomRight.longitude, bottomRight.latitude]
+    
+    self.request(router: PlaqueRouter.getPlaques(topLeft: topLeftCoord.description, bottomRight: bottomRightCoord.description)) { (response) in
       completion(response)
     }
   }

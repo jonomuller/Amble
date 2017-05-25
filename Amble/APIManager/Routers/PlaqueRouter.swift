@@ -14,7 +14,7 @@ enum PlaqueRouter: Router {
   static var baseURLPath: String = "http://openplaques.org/plaques"
   
   case getPlaque(id: String)
-  case getPlaques(lat: String, lon: String)
+  case getPlaques(topLeft: String, bottomRight: String)
   
   var method: HTTPMethod {
     return .get
