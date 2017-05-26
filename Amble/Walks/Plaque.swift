@@ -13,5 +13,8 @@ struct Plaque {
   
   let id: String
   let coordinate: CLLocationCoordinate2D
+  var title: String?
+  var inscription: String?
+  var imageURL: String?
   
 }

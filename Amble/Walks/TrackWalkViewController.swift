@@ -131,6 +131,7 @@ extension TrackWalkViewController: CLLocationManagerDelegate {
 // MARK: - Map view delegate
 
 extension TrackWalkViewController {
+  
   func mapView(_ mapView: MKMapView, didChange mode: MKUserTrackingMode, animated: Bool) {
     if CLLocationManager.authorizationStatus() == .denied {
       mapView.userTrackingMode = .none
@@ -140,6 +141,42 @@ extension TrackWalkViewController {
       }
     }
   }
+  
+  override func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+    if let pin = annotation as? PlaquePin {
+      let pinID = pin.plaque.id
+      var view: MKAnnotationView
+      
+      if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: pinID) {
+        view = annotationView
+        view.annotation = annotation
+      } else {
+        view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: pinID)
+        view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        DispatchQueue.global().async {
+          do {
+            if let url = URL(string: pin.plaque.imageURL!) {
+              let plaqueImage = try UIImage(data: Data(contentsOf: url))
+              let imageView = UIImageView(image: plaqueImage)
+              imageView.frame = CGRect(origin: .zero, size: CGSize(width: 50, height: 50))
+              DispatchQueue.main.async(execute: {
+                view.leftCalloutAccessoryView = imageView
+              })
+            }
+          } catch {
+            print("Error fetching photo")
+          }
+        }
+      }
+      
+      view.canShowCallout = true
+      return view
+    } else {
+      return super.mapView(mapView, viewFor: annotation)
+    }
+  }
+  
+  
 }
 
 // MARK: - Text field delegate
@@ -545,9 +582,14 @@ private extension TrackWalkViewController {
       case .success(let json):
         var plaques: [Plaque] = []
         for (_, subJson): (String, JSON) in json {
-          plaques.append(Plaque(id: subJson["id"].stringValue,
-                                coordinate: CLLocationCoordinate2D(latitude: subJson["latitude"].doubleValue,
-                                                                   longitude: subJson["longitude"].doubleValue)))
+          var plaque = Plaque(id: subJson["id"].stringValue,
+                              coordinate: CLLocationCoordinate2D(latitude: subJson["latitude"].doubleValue,
+                                                                 longitude: subJson["longitude"].doubleValue),
+                              title: nil,
+                              inscription: nil,
+                              imageURL: nil)
+          
+          plaques.append(plaque)
         }
         self.displaySearchResults(for: plaques, mapRect: mapRect)
       case .failure(let error):
@@ -579,14 +621,31 @@ private extension TrackWalkViewController {
           continue
         }
         
-        let pin = MKPointAnnotation()
-        pin.coordinate = plaque.coordinate
-        pins.append(pin)
+        APIManager.sharedInstance.getPlaque(id: plaque.id, completion: { (response) in
+          switch response {
+          case .success(let json):
+            var newPlaque = plaque
+            newPlaque.title = json["title"].stringValue
+            newPlaque.inscription = json["inscription"].stringValue
+            if json["photographed?"].boolValue {
+              newPlaque.imageURL = json["thumbnail_url"].stringValue
+            }
+            
+            let pin = PlaquePin(plaque: newPlaque)
+            pin.coordinate = newPlaque.coordinate
+            DispatchQueue.main.async(execute: {
+              self.mapView.addAnnotation(pin)
+            })
+//            pins.append(pin)
+          case .failure(let error):
+            print("Could not get plaque detail")
+          }
+        })
       }
       
-      DispatchQueue.main.async(execute: {
-        self.mapView.addAnnotations(pins)
-      })
+//      DispatchQueue.main.async(execute: {
+//        self.mapView.addAnnotations(pins)
+//      })
     }
   }
   

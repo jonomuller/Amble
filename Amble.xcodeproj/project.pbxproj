@@ -51,6 +51,7 @@
 		AFA685381EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA685371EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift */; };
 		AFC4015E1EC7756C00CACAFD /* InvitesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC4015D1EC7756C00CACAFD /* InvitesTableViewController.swift */; };
 		AFC891481ECC723E00EC085E /* InviteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC891471ECC723E00EC085E /* InviteTableViewCell.swift */; };
+		AFC8FA601ED878C300E28EE9 /* PlaquePin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8FA5F1ED878C300E28EE9 /* PlaquePin.swift */; };
 		AFDD14251EB5157300274E30 /* WalkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDD14241EB5157300274E30 /* WalkCollectionViewCell.swift */; };
 		AFF37AA61EA2A09000D57E8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFF37AA51EA2A09000D57E8D /* Assets.xcassets */; };
 		AFF37AAA1EA2D8BD00D57E8D /* UIViewController+CustomBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF37AA91EA2D8BD00D57E8D /* UIViewController+CustomBackButton.swift */; };
@@ -131,6 +132,7 @@
 		AFA685371EBA3D5D00F869DF /* UIViewController+ErrorAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorAlertView.swift"; sourceTree = "<group>"; };
 		AFC4015D1EC7756C00CACAFD /* InvitesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitesTableViewController.swift; sourceTree = "<group>"; };
 		AFC891471ECC723E00EC085E /* InviteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteTableViewCell.swift; sourceTree = "<group>"; };
+		AFC8FA5F1ED878C300E28EE9 /* PlaquePin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaquePin.swift; sourceTree = "<group>"; };
 		AFDD14241EB5157300274E30 /* WalkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkCollectionViewCell.swift; sourceTree = "<group>"; };
 		AFEED74B1EBD54BD003AA3F4 /* Amble.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Amble.entitlements; sourceTree = "<group>"; };
 		AFF37AA51EA2A09000D57E8D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 				AF0D36E91EB1065F00643BA7 /* Walk.swift */,
 				AF0D36E31EB02F1000643BA7 /* WalkDetailViewController.swift */,
 				AF0D36E11EAA7B7E00643BA7 /* WalkPin.swift */,
+				AFC8FA5F1ED878C300E28EE9 /* PlaquePin.swift */,
 				AF0D36EB1EB16F3C00643BA7 /* WalkViewController.swift */,
 			);
 			path = Walks;
@@ -656,6 +659,7 @@
 				AFF37AAA1EA2D8BD00D57E8D /* UIViewController+CustomBackButton.swift in Sources */,
 				AF6D38651EC8674900F7E8EB /* InviteUserViewController.swift in Sources */,
 				AF5725411ED6E5DE00895FED /* Router.swift in Sources */,
+				AFC8FA601ED878C300E28EE9 /* PlaquePin.swift in Sources */,
 				AF67D97D1EA253C4003BE7CF /* EntryButton.swift in Sources */,
 				AF67D9811EA253C4003BE7CF /* LoginViewController.swift in Sources */,
 				AF67D96D1EA253A9003BE7CF /* ProfileViewController.swift in Sources */,
