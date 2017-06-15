@@ -155,7 +155,7 @@ extension TrackWalkViewController {
         view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         DispatchQueue.global().async {
           do {
-            if let url = URL(string: pin.plaque.imageURL!) {
+            if let imageURLString = pin.plaque.imageURL, let url = URL(string: imageURLString) {
               let plaqueImage = try UIImage(data: Data(contentsOf: url))
               let imageView = UIImageView(image: plaqueImage)
               imageView.frame = CGRect(origin: .zero, size: CGSize(width: 50, height: 50))
@@ -176,7 +176,9 @@ extension TrackWalkViewController {
     }
   }
   
-  
+//  func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+//    <#code#>
+//  }
 }
 
 // MARK: - Text field delegate
