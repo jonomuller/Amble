@@ -654,8 +654,8 @@ private extension TrackWalkViewController {
   func isItemAlreadyOnMap(plaque: Plaque) -> Bool {
     var alreadyOnMap = false
     
-    for annotation in self.mapView.annotations where !(annotation is WalkPin) {
-      if plaque.coordinate.latitude == annotation.coordinate.latitude && plaque.coordinate.longitude == annotation.coordinate.longitude {
+    for annotation in self.mapView.annotations {
+      if let pin = annotation as? PlaquePin, plaque.id == pin.plaque.id {
         alreadyOnMap = true
       }
     }
