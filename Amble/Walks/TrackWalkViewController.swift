@@ -33,7 +33,8 @@ class TrackWalkViewController: WalkViewController {
   fileprivate var saveWalkAction: UIAlertAction!
   
   fileprivate var timer = Timer()
-  var walkStarted = false
+  fileprivate var walkStarted = false
+  var beginWalk = false
   
   fileprivate var time = 0
   fileprivate var distance = 0.0
@@ -85,7 +86,7 @@ class TrackWalkViewController: WalkViewController {
       mapView.userTrackingMode = .none
     }
     
-    if walkStarted {
+    if beginWalk {
       self.startWalk()
     }
   }
@@ -159,6 +160,7 @@ extension TrackWalkViewController {
               let plaqueImage = try UIImage(data: Data(contentsOf: url))
               let imageView = UIImageView(image: plaqueImage)
               imageView.frame = CGRect(origin: .zero, size: CGSize(width: 50, height: 50))
+              imageView.contentMode = .scaleAspectFit
               DispatchQueue.main.async(execute: {
                 view.leftCalloutAccessoryView = imageView
               })
@@ -176,9 +178,16 @@ extension TrackWalkViewController {
     }
   }
   
-//  func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-//    <#code#>
-//  }
+  func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    if let pin = view.annotation as? PlaquePin {
+      let storyboard = UIStoryboard(name: "Main", bundle: nil)
+      let vc = storyboard.instantiateViewController(withIdentifier: "PlaqueViewController") as! PlaqueViewController
+      let navController = self.navController(for: vc)
+      
+      vc.plaque = pin.plaque
+      self.present(navController, animated: true, completion: nil)
+    }
+  }
 }
 
 // MARK: - Text field delegate
@@ -227,9 +236,11 @@ extension TrackWalkViewController {
   }
   
   func timerTick() {
-    DispatchQueue.main.async {
-      self.statsView.timeLabel.text = self.getTimeLabelText(time: self.time)
-      self.statsView.distanceLabel.attributedText = self.distance.distanceLabelText()
+    if (self.isViewLoaded && self.view.window != nil) {
+      DispatchQueue.main.async {
+        self.statsView.timeLabel.text = self.getTimeLabelText(time: self.time)
+        self.statsView.distanceLabel.attributedText = self.distance.distanceLabelText()
+      }
     }
     
     // Search for new places every 30 seconds
@@ -547,17 +558,25 @@ private extension TrackWalkViewController {
   func presentWalkDetailView(walk: Walk, id: String) {
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     let vc = storyboard.instantiateViewController(withIdentifier: "WalkDetailViewController") as! WalkDetailViewController
-    let navController = UINavigationController(rootViewController: vc)
+    let navController = self.navController(for: vc)
     vc.walk = walk
     vc.walkID = id
+    
+    vc.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: vc, action: #selector(vc.doneButtonPressed))
+    self.present(navController, animated: true, completion: nil)
+  }
+  
+  func navController(for vc: UIViewController) -> UINavigationController {
+    let navController = UINavigationController(rootViewController: vc)
+    
     navController.navigationBar.isTranslucent = false
     navController.navigationBar.barTintColor = .flatGreenDark
     navController.navigationBar.tintColor = .white
     navController.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
     navController.navigationBar.isTranslucent = false
     navController.hidesNavigationBarHairline = true
-    vc.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: vc, action: #selector(vc.doneButtonPressed))
-    self.present(navController, animated: true, completion: nil)
+    
+    return navController
   }
   
   func mapRect(for region: MKCoordinateRegion) -> MKMapRect {
@@ -638,16 +657,16 @@ private extension TrackWalkViewController {
             DispatchQueue.main.async(execute: {
               self.mapView.addAnnotation(pin)
             })
-//            pins.append(pin)
+          //            pins.append(pin)
           case .failure(let error):
             print("Could not get plaque detail")
           }
         })
       }
       
-//      DispatchQueue.main.async(execute: {
-//        self.mapView.addAnnotations(pins)
-//      })
+      //      DispatchQueue.main.async(execute: {
+      //        self.mapView.addAnnotations(pins)
+      
     }
   }
   

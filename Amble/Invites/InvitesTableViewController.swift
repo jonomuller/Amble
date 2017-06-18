@@ -100,7 +100,7 @@ extension InvitesTableViewController {
         case .success:
           if let vc = self.tabBarController?.viewControllers?[0].childViewControllers[0] as? TrackWalkViewController {
             vc.members = invite.users.map({ return $0.id })
-            vc.walkStarted = true
+            vc.beginWalk = true
             
             UIView.transition(with: self.view.window!, duration: 0.2, options: .transitionCrossDissolve, animations: {
               self.tabBarController?.selectedIndex = 0

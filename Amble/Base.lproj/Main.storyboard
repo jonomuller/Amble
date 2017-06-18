@@ -201,10 +201,10 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingsCell" id="DPz-t9-IvH">
-                                <rect key="frame" x="0.0" y="55" width="375" height="45"/>
+                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DPz-t9-IvH" id="c9Z-dk-u1H">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -644,6 +644,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W3X-Ct-AKS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2676" y="-579"/>
+        </scene>
+        <!--Plaque View Controller-->
+        <scene sceneID="zVv-4W-mWY">
+            <objects>
+                <viewController storyboardIdentifier="PlaqueViewController" id="ulb-Qk-DLU" customClass="PlaqueViewController" customModule="Amble" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Q2y-63-bjk"/>
+                        <viewControllerLayoutGuide type="bottom" id="Jbx-Lf-RAt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GgO-hY-5qL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="K4r-q2-BA6">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="K4r-q2-BA6" firstAttribute="leading" secondItem="GgO-hY-5qL" secondAttribute="leading" id="G3G-Lz-KCY"/>
+                            <constraint firstItem="K4r-q2-BA6" firstAttribute="top" secondItem="GgO-hY-5qL" secondAttribute="top" id="JKL-Xl-6fo"/>
+                            <constraint firstItem="Jbx-Lf-RAt" firstAttribute="top" secondItem="K4r-q2-BA6" secondAttribute="bottom" constant="292" id="XJA-PW-F3A"/>
+                            <constraint firstAttribute="trailing" secondItem="K4r-q2-BA6" secondAttribute="trailing" id="bFG-pW-Ghc"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="CTQ-Q0-SVy">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="mHT-z8-nvB"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="imageView" destination="K4r-q2-BA6" id="1CH-Tw-XXs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XuD-Ob-PUo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4632.8000000000002" y="-579.76011994002999"/>
         </scene>
         <!--Walk Detail View Controller-->
         <scene sceneID="qol-GL-mYb">

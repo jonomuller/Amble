@@ -22,6 +22,7 @@
 		AF2D9D941EA53DA800EDCF53 /* TrackWalkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2D9D931EA53DA800EDCF53 /* TrackWalkViewController.swift */; };
 		AF5333B41EC253CB0076EBC0 /* Double+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5333B31EC253CB0076EBC0 /* Double+String.swift */; };
 		AF5725411ED6E5DE00895FED /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5725401ED6E5DE00895FED /* Router.swift */; };
+		AF5E32C11EF601E6003B5701 /* PlaqueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5E32C01EF601E6003B5701 /* PlaqueViewController.swift */; };
 		AF67D9231EA2516D003BE7CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF67D9211EA2516D003BE7CF /* LaunchScreen.storyboard */; };
 		AF67D9641EA2539F003BE7CF /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9601EA2539F003BE7CF /* APIManager.swift */; };
 		AF67D9651EA2539F003BE7CF /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67D9611EA2539F003BE7CF /* APIResponse.swift */; };
@@ -97,6 +98,7 @@
 		AF2D9D931EA53DA800EDCF53 /* TrackWalkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackWalkViewController.swift; sourceTree = "<group>"; };
 		AF5333B31EC253CB0076EBC0 /* Double+String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+String.swift"; sourceTree = "<group>"; };
 		AF5725401ED6E5DE00895FED /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		AF5E32C01EF601E6003B5701 /* PlaqueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaqueViewController.swift; sourceTree = "<group>"; };
 		AF67D9151EA2516D003BE7CF /* Amble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Amble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF67D9221EA2516D003BE7CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF67D9291EA2516D003BE7CF /* AmbleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AmbleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -310,6 +312,7 @@
 				AF97CB591EC134FD00D5AF75 /* Achievement.swift */,
 				AF0D36E71EB0F78E00643BA7 /* StatsView.swift */,
 				AF2D9D931EA53DA800EDCF53 /* TrackWalkViewController.swift */,
+				AF5E32C01EF601E6003B5701 /* PlaqueViewController.swift */,
 				AFFD45ED1ED7208100309C22 /* Plaque.swift */,
 				AF0D36E91EB1065F00643BA7 /* Walk.swift */,
 				AF0D36E31EB02F1000643BA7 /* WalkDetailViewController.swift */,
@@ -680,6 +683,7 @@
 				AF67D9741EA253B7003BE7CF /* UIButton+KeyboardAnimation.swift in Sources */,
 				AF0D36E21EAA7B7E00643BA7 /* WalkPin.swift in Sources */,
 				AF0D36E81EB0F78E00643BA7 /* StatsView.swift in Sources */,
+				AF5E32C11EF601E6003B5701 /* PlaqueViewController.swift in Sources */,
 				AF2D9D8C1EA4149100EDCF53 /* SettingsTableViewController.swift in Sources */,
 				AF0D36EA1EB1065F00643BA7 /* Walk.swift in Sources */,
 				AF78F13A1ECAFC8300B750DE /* SentInviteTableViewCell.swift in Sources */,
