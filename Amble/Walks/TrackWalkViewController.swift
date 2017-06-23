@@ -608,7 +608,8 @@ private extension TrackWalkViewController {
                                                                  longitude: subJson["longitude"].doubleValue),
                               title: nil,
                               inscription: nil,
-                              imageURL: nil)
+                              imageURL: nil,
+                              people: nil)
           
           plaques.append(plaque)
         }
@@ -648,6 +649,11 @@ private extension TrackWalkViewController {
             var newPlaque = plaque
             newPlaque.title = json["title"].stringValue
             newPlaque.inscription = json["inscription"].stringValue
+            var people: [String] = []
+            for (_, subJson): (String, JSON) in json["people"] {
+              people.append(subJson["full_name"].stringValue)
+            }
+            newPlaque.people = people
             if json["photographed?"].boolValue {
               newPlaque.imageURL = json["thumbnail_url"].stringValue
             }

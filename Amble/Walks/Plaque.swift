@@ -16,5 +16,6 @@ struct Plaque {
   var title: String?
   var inscription: String?
   var imageURL: String?
+  var people: [String]?
   
 }
