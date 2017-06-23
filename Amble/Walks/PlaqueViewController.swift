@@ -21,7 +21,7 @@ class PlaqueViewController: UIViewController {
 //    self.tableView.contentInset = UIEdgeInsets(top: 375, left: 0, bottom: 0, right: 0)
     self.navigationItem.title = plaque?.title
 //    imageView.contentMode = .scaleAspectFill
-    
+    self.setCustomBackButton(image: UIImage(named: "back-button"))
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonPressed))
     
     if plaque == nil {
@@ -46,25 +46,10 @@ class PlaqueViewController: UIViewController {
 
 // MARK: - Table view data source
 
-extension PlaqueViewController: UITableViewDataSource, UITableViewDelegate {
+extension PlaqueViewController: UITableViewDataSource {
   
   func numberOfSections(in tableView: UITableView) -> Int {
     return 2
-  }
-  
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    if indexPath.section == 0 {
-//      let inscrip = NSString(string: (plaque?.inscription!)!)
-//      inscrip.size(attributes: <#T##[String : Any]?#>)
-//      return 80
-      return UITableViewAutomaticDimension
-    }
-    
-    return 44
-  }
-  
-  func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 44
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -112,10 +97,30 @@ extension PlaqueViewController: UITableViewDataSource, UITableViewDelegate {
     
     return cell
   }
+}
+
+extension PlaqueViewController: UITableViewDelegate {
+  
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    if indexPath.section == 0 {
+      return UITableViewAutomaticDimension
+    }
+    
+    return 44
+  }
+  
+  func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 44
+  }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    if indexPath.section == 1, let url = plaque?.people?[indexPath.row].url {
-      UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
+    if indexPath.section == 1, let urlString = plaque?.people?[indexPath.row].url, let url = URL(string: urlString) {
+      let storyboard = UIStoryboard(name: "Main", bundle: nil)
+      let vc = storyboard.instantiateViewController(withIdentifier: "PersonWebViewController") as! PersonWebViewController
+      vc.url = url
+      vc.name = plaque?.people?[indexPath.row].name
+      self.navigationController?.pushViewController(vc, animated: true)
+      self.tableView.deselectRow(at: indexPath, animated: true)
     }
   }
   

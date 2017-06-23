@@ -705,6 +705,37 @@
             </objects>
             <point key="canvasLocation" x="4632.8000000000002" y="-579.76011994002999"/>
         </scene>
+        <!--Person Web View Controller-->
+        <scene sceneID="ufp-Ba-UM4">
+            <objects>
+                <viewController storyboardIdentifier="PersonWebViewController" id="kaC-zP-SFj" customClass="PersonWebViewController" customModule="Amble" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="p5f-ID-Y16"/>
+                        <viewControllerLayoutGuide type="bottom" id="s20-uw-XKd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xo8-s5-zLw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vjY-Mu-abf">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="kaC-zP-SFj" id="Iiw-Xc-dg7"/>
+                                </connections>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="vjY-Mu-abf" id="Q0m-7j-68V"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GaG-1S-bVX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5536.8000000000002" y="-579.76011994002999"/>
+        </scene>
         <!--Walk Detail View Controller-->
         <scene sceneID="qol-GL-mYb">
             <objects>
