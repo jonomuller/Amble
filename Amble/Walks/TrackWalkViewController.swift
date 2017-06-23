@@ -649,9 +649,14 @@ private extension TrackWalkViewController {
             var newPlaque = plaque
             newPlaque.title = json["title"].stringValue
             newPlaque.inscription = json["inscription"].stringValue
-            var people: [String] = []
+            var people: [Person] = []
             for (_, subJson): (String, JSON) in json["people"] {
-              people.append(subJson["full_name"].stringValue)
+              let str = subJson["uri"].stringValue.components(separatedBy: "/").last
+              if let id = str?.components(separatedBy: ".").first {
+                people.append(Person(id: id,
+                                     name: subJson["full_name"].stringValue,
+                                     url: nil))
+              }
             }
             newPlaque.people = people
             if json["photographed?"].boolValue {

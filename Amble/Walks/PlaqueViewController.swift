@@ -93,12 +93,30 @@ extension PlaqueViewController: UITableViewDataSource, UITableViewDelegate {
       cell.textLabel?.lineBreakMode = .byWordWrapping
       cell.accessoryType = .none
     } else {
-      cell.selectionStyle = .default
-      cell.accessoryType = .disclosureIndicator
-      cell.textLabel?.text = plaque?.people?[indexPath.row]
+      DispatchQueue.global().async {
+        APIManager.sharedInstance.getPerson(id: (self.plaque?.people?[indexPath.row].id)!, completion: { (response) in
+          switch response {
+          case .success(let json):
+            self.plaque?.people?[indexPath.row].url = json["default_wikipedia_url"].stringValue
+            cell.selectionStyle = .default
+            cell.accessoryType = .disclosureIndicator
+          case .failure:
+            cell.selectionStyle = .none
+            cell.accessoryType = .none
+          }
+        })
+      }
+      
+      cell.textLabel?.text = plaque?.people?[indexPath.row].name
     }
     
     return cell
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    if indexPath.section == 1, let url = plaque?.people?[indexPath.row].url {
+      UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
+    }
   }
   
 }

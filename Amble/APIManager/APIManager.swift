@@ -182,6 +182,12 @@ extension APIManager {
       completion(response)
     }
   }
+  
+  public func getPerson(id: String, completion: @escaping (APIResponse) -> Void) {
+    self.request(router: PlaqueRouter.getPerson(id: id)) { (response) in
+      completion(response)
+    }
+  }
 }
 
 // MARK: - Private helper methods

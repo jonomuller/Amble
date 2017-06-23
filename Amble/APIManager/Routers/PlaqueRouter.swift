@@ -11,10 +11,11 @@ import Alamofire
 
 enum PlaqueRouter: Router {
   
-  static var baseURLPath: String = "http://openplaques.org/plaques"
+  static var baseURLPath: String = "http://openplaques.org"
   
   case getPlaque(id: String)
   case getPlaques(topLeft: String, bottomRight: String)
+  case getPerson(id: String)
   
   var method: HTTPMethod {
     return .get
@@ -23,9 +24,11 @@ enum PlaqueRouter: Router {
   var path: String {
     switch self {
     case .getPlaque(let id):
-      return "/\(id).json"
+      return "/plaques/\(id).json"
     case .getPlaques(let topLeft, let bottomRight):
-      return ".json?box=\(topLeft),\(bottomRight)"
+      return "/plaques.json?box=\(topLeft),\(bottomRight)"
+    case .getPerson(let id):
+      return "/people/\(id).json"
     }
   }
   
