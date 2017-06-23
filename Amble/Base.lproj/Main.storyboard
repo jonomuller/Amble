@@ -657,12 +657,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K4r-q2-BA6">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rfE-IF-luf">
-                                <rect key="frame" x="0.0" y="375" width="375" height="292"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <view key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" id="Lw8-tZ-g2U">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PlaqueCell" id="Izz-Vi-ujR">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="403" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Izz-Vi-ujR" id="zMe-Ca-ua7">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -675,20 +684,13 @@
                                     <outlet property="delegate" destination="ulb-Qk-DLU" id="2lj-dH-Xpb"/>
                                 </connections>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="K4r-q2-BA6">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Jbx-Lf-RAt" firstAttribute="top" secondItem="K4r-q2-BA6" secondAttribute="bottom" constant="292" id="0o7-xr-eOZ"/>
-                            <constraint firstItem="rfE-IF-luf" firstAttribute="bottom" secondItem="Jbx-Lf-RAt" secondAttribute="top" id="7dx-hv-giy"/>
-                            <constraint firstItem="K4r-q2-BA6" firstAttribute="leading" secondItem="rfE-IF-luf" secondAttribute="leading" id="DjK-9x-aQK"/>
-                            <constraint firstItem="K4r-q2-BA6" firstAttribute="trailing" secondItem="rfE-IF-luf" secondAttribute="trailing" id="KFB-1X-0jR"/>
-                            <constraint firstItem="K4r-q2-BA6" firstAttribute="top" secondItem="GgO-hY-5qL" secondAttribute="top" id="Zbg-Ri-4f3"/>
-                            <constraint firstItem="K4r-q2-BA6" firstAttribute="leading" secondItem="GgO-hY-5qL" secondAttribute="leading" id="dpK-HW-Vs7"/>
-                            <constraint firstItem="rfE-IF-luf" firstAttribute="top" secondItem="K4r-q2-BA6" secondAttribute="top" constant="375" id="sJX-4G-pzw"/>
-                            <constraint firstAttribute="trailing" secondItem="rfE-IF-luf" secondAttribute="trailing" id="xJl-nw-W4P"/>
+                            <constraint firstAttribute="trailing" secondItem="rfE-IF-luf" secondAttribute="trailing" id="PKE-7B-mdg"/>
+                            <constraint firstItem="rfE-IF-luf" firstAttribute="leading" secondItem="GgO-hY-5qL" secondAttribute="leading" id="Z1R-Mz-nVh"/>
+                            <constraint firstItem="rfE-IF-luf" firstAttribute="bottom" secondItem="Jbx-Lf-RAt" secondAttribute="top" id="qY2-Dj-PO9"/>
+                            <constraint firstItem="rfE-IF-luf" firstAttribute="top" secondItem="GgO-hY-5qL" secondAttribute="top" id="wZV-Kc-SYA"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="CTQ-Q0-SVy">

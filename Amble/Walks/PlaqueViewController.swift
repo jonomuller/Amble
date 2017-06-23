@@ -18,8 +18,9 @@ class PlaqueViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+//    self.tableView.contentInset = UIEdgeInsets(top: 375, left: 0, bottom: 0, right: 0)
     self.navigationItem.title = plaque?.title
-    imageView.contentMode = .scaleAspectFill
+//    imageView.contentMode = .scaleAspectFill
     
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonPressed))
     
@@ -53,11 +54,16 @@ extension PlaqueViewController: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     if indexPath.section == 0 {
-//      let inscrip = NSString(string: plaque?.inscription!)
-//      inscrip.size(
-      return 80
+//      let inscrip = NSString(string: (plaque?.inscription!)!)
+//      inscrip.size(attributes: <#T##[String : Any]?#>)
+//      return 80
+      return UITableViewAutomaticDimension
     }
     
+    return 44
+  }
+  
+  func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
     return 44
   }
   
@@ -81,11 +87,13 @@ extension PlaqueViewController: UITableViewDataSource, UITableViewDelegate {
     let cell = tableView.dequeueReusableCell(withIdentifier: "PlaqueCell", for: indexPath)
     
     if indexPath.section == 0 {
+      cell.selectionStyle = .none
       cell.textLabel?.text = plaque?.inscription
       cell.textLabel?.numberOfLines = 0
       cell.textLabel?.lineBreakMode = .byWordWrapping
       cell.accessoryType = .none
     } else {
+      cell.selectionStyle = .default
       cell.accessoryType = .disclosureIndicator
       cell.textLabel?.text = plaque?.people?[indexPath.row]
     }
