@@ -725,10 +725,23 @@
                                     <outlet property="delegate" destination="kaC-zP-SFj" id="Iiw-Xc-dg7"/>
                                 </connections>
                             </webView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="feT-yj-gqe">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem systemItem="flexibleSpace" id="083-Zg-BzB"/>
+                                    <barButtonItem title="Open in Safari" id="WR3-4d-Bk5">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </barButtonItem>
+                                </items>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="barTintColor" red="0.3462324142" green="0.68383836750000004" blue="0.33497992160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="toolbar" destination="feT-yj-gqe" id="88Z-Mm-7tG"/>
                         <outlet property="webView" destination="vjY-Mu-abf" id="Q0m-7j-68V"/>
                     </connections>
                 </viewController>
