@@ -27,7 +27,7 @@ class TrackWalkViewController: WalkViewController {
   fileprivate var pedometer: CMPedometer!
   fileprivate var locationManager: CLLocationManager!
   fileprivate var locations: [CLLocation] = []
-  var members: [String]?
+  var members: [OtherUser]?
   
   fileprivate var nameAlert: UIAlertController!
   fileprivate var saveWalkAction: UIAlertAction!
@@ -86,7 +86,13 @@ class TrackWalkViewController: WalkViewController {
       mapView.userTrackingMode = .none
     }
     
+    if members != nil {
+      self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "username"), style: .plain, target: self, action: #selector(showMembers))
+    }
+    
     if beginWalk {
+      walkStarted = true
+      beginWalk = false
       self.startWalk()
     }
   }
@@ -204,6 +210,17 @@ extension TrackWalkViewController: UITextFieldDelegate {
 
 extension TrackWalkViewController {
   
+  func showMembers() {
+    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    let vc = storyboard.instantiateViewController(withIdentifier: "MembersTableViewController") as! MembersTableViewController
+    let navController = self.navController(for: vc)
+    if let members = members {
+      vc.members = members
+    }
+    
+    self.present(navController, animated: true, completion: nil)
+  }
+  
   func startButtonPressed() {
     if CLLocationManager.authorizationStatus() == .denied {
       self.displayPrivacyError(title: LOCATION_ERROR_TITLE, message: LOCATION_ERROR_MESSAGE)
@@ -247,6 +264,8 @@ extension TrackWalkViewController {
     if time % 30 == 0 {
       self.searchForPlaques()
     }
+    
+    print(time)
     
     time += 1
   }
@@ -410,7 +429,7 @@ private extension TrackWalkViewController {
     self.renderMapImage { (image) in
       if let mapImage = image {
         let achievements = self.generateAchivements()
-        APIManager.sharedInstance.createWalk(name: name, members: self.members, locations: self.locations, achievements: achievements, image: mapImage, time: self.time, distance: self.distance, steps: self.steps, completion: { (response) in
+        APIManager.sharedInstance.createWalk(name: name, members: self.members?.map({ return $0.id }), locations: self.locations, achievements: achievements, image: mapImage, time: self.time, distance: self.distance, steps: self.steps, completion: { (response) in
           self.spinner.stopAnimating()
           
           switch response {
