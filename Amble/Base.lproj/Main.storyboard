@@ -219,6 +219,52 @@
             </objects>
             <point key="canvasLocation" x="2676" y="2112"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="uq4-eT-CNi">
+            <objects>
+                <viewController storyboardIdentifier="LicencesViewController" id="82G-mc-oVB" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tqC-OF-aSE"/>
+                        <viewControllerLayoutGuide type="bottom" id="PIe-nk-Lx5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1jy-xh-E8m">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zhp-GZ-t4j">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Links to all icons used in this app:
+
+User icon: https://icons8.com/icon/23264/user
+
+Lock icon: https://icons8.com/icon/94/lock
+
+Walking icon: https://icons8.com/icon/2244/walking
+
+Settings icon: http://www.flaticon.com/free-icon/setting-gears_81714
+
+Trash icon: https://icons8.com/icon/43949/trash
+
+Invite icon: https://icons8.com/icon/5465/invite</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="zhp-GZ-t4j" secondAttribute="trailing" id="55r-AK-v2U"/>
+                            <constraint firstItem="zhp-GZ-t4j" firstAttribute="top" secondItem="1jy-xh-E8m" secondAttribute="top" id="Nuh-rP-yw3"/>
+                            <constraint firstItem="zhp-GZ-t4j" firstAttribute="bottom" secondItem="PIe-nk-Lx5" secondAttribute="top" id="Y5T-EM-nYf"/>
+                            <constraint firstItem="zhp-GZ-t4j" firstAttribute="leading" secondItem="1jy-xh-E8m" secondAttribute="leading" id="cp4-ve-54f"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nkt-hI-Rwh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3668" y="2111.6941529235382"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>

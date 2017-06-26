@@ -14,11 +14,12 @@ class SettingsTableViewController: UITableViewController {
   
   fileprivate let SETTINGS_CELL_IDENTIFIER = "settingsCell"
   fileprivate let PREFFERED_DISTANCE_UNIT = "PreferredDistanceUnit"
-  fileprivate let sections = [["mi", "km"],["Log Out"]]
+  fileprivate let sections = [["mi", "km"], ["Licences"], ["Log Out"]]
   
   override func viewDidLoad() {
     super.viewDidLoad()
     self.navigationItem.title = "Settings"
+    self.setCustomBackButton(image: UIImage(named: "back-button"))
     self.setStatusBarStyle(UIStatusBarStyleContrast)
   }
 }
@@ -64,6 +65,8 @@ extension SettingsTableViewController {
           cell.accessoryType = .checkmark
         }
       }
+    } else if indexPath.section == 1 {
+      cell.accessoryType = .disclosureIndicator
     } else if indexPath.section == sections.count - 1 {
       cell.textLabel?.textColor = .red
     }
@@ -80,6 +83,10 @@ extension SettingsTableViewController {
     if indexPath.section == 0 {
       UserDefaults.standard.set(sections[indexPath.section][indexPath.row], forKey: PREFFERED_DISTANCE_UNIT)
       self.tableView.reloadData()
+    } else if indexPath.section == 1 {
+      let storyboard = UIStoryboard(name: "Main", bundle: nil)
+      let vc = storyboard.instantiateViewController(withIdentifier: "LicencesViewController")
+      self.navigationController?.pushViewController(vc, animated: true)
     } else if indexPath.section == sections.count - 1 {
       displayLogoutAlert()
     }
