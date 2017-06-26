@@ -11,6 +11,7 @@ import MapKit
 import CoreLocation
 import CoreMotion
 import NVActivityIndicatorView
+import SwiftyJSON
 
 class TrackWalkViewController: WalkViewController {
   
@@ -26,13 +27,14 @@ class TrackWalkViewController: WalkViewController {
   fileprivate var pedometer: CMPedometer!
   fileprivate var locationManager: CLLocationManager!
   fileprivate var locations: [CLLocation] = []
-  var members: [String]?
+  var members: [OtherUser]?
   
   fileprivate var nameAlert: UIAlertController!
   fileprivate var saveWalkAction: UIAlertAction!
   
   fileprivate var timer = Timer()
-  var walkStarted = false
+  fileprivate var walkStarted = false
+  var beginWalk = false
   
   fileprivate var time = 0
   fileprivate var distance = 0.0
@@ -84,7 +86,13 @@ class TrackWalkViewController: WalkViewController {
       mapView.userTrackingMode = .none
     }
     
-    if walkStarted {
+    if members != nil {
+      self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "username"), style: .plain, target: self, action: #selector(showMembers))
+    }
+    
+    if beginWalk {
+      walkStarted = true
+      beginWalk = false
       self.startWalk()
     }
   }
@@ -97,14 +105,6 @@ class TrackWalkViewController: WalkViewController {
 // MARK: - Location manager delegate
 
 extension TrackWalkViewController: CLLocationManagerDelegate {
-  
-  func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-    if status == .authorizedWhenInUse {
-      startTracking()
-    } else if status == .denied {
-      print("Denied")
-    }
-  }
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     // We do not need to update locations if the walk has not started
@@ -138,6 +138,7 @@ extension TrackWalkViewController: CLLocationManagerDelegate {
 // MARK: - Map view delegate
 
 extension TrackWalkViewController {
+  
   func mapView(_ mapView: MKMapView, didChange mode: MKUserTrackingMode, animated: Bool) {
     if CLLocationManager.authorizationStatus() == .denied {
       mapView.userTrackingMode = .none
@@ -145,6 +146,52 @@ extension TrackWalkViewController {
       if !(self.navigationController?.visibleViewController?.isKind(of: UIAlertController.self))! {
         self.displayPrivacyError(title: LOCATION_ERROR_TITLE, message: LOCATION_ERROR_MESSAGE)
       }
+    }
+  }
+  
+  override func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+    if let pin = annotation as? PlaquePin {
+      let pinID = pin.plaque.id
+      var view: MKAnnotationView
+      
+      if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: pinID) {
+        view = annotationView
+        view.annotation = annotation
+      } else {
+        view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: pinID)
+        view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        DispatchQueue.global().async {
+          do {
+            if let imageURLString = pin.plaque.imageURL, let url = URL(string: imageURLString) {
+              let plaqueImage = try UIImage(data: Data(contentsOf: url))
+              let imageView = UIImageView(image: plaqueImage)
+              imageView.frame = CGRect(origin: .zero, size: CGSize(width: 50, height: 50))
+              imageView.contentMode = .scaleAspectFit
+              DispatchQueue.main.async(execute: {
+                view.leftCalloutAccessoryView = imageView
+              })
+            }
+          } catch {
+            print("Error fetching photo")
+          }
+        }
+      }
+      
+      view.canShowCallout = true
+      return view
+    } else {
+      return super.mapView(mapView, viewFor: annotation)
+    }
+  }
+  
+  func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    if let pin = view.annotation as? PlaquePin {
+      let storyboard = UIStoryboard(name: "Main", bundle: nil)
+      let vc = storyboard.instantiateViewController(withIdentifier: "PlaqueViewController") as! PlaqueViewController
+      let navController = self.navController(for: vc)
+      
+      vc.plaque = pin.plaque
+      self.present(navController, animated: true, completion: nil)
     }
   }
 }
@@ -163,6 +210,17 @@ extension TrackWalkViewController: UITextFieldDelegate {
 
 extension TrackWalkViewController {
   
+  func showMembers() {
+    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    let vc = storyboard.instantiateViewController(withIdentifier: "MembersTableViewController") as! MembersTableViewController
+    let navController = self.navController(for: vc)
+    if let members = members {
+      vc.members = members
+    }
+    
+    self.present(navController, animated: true, completion: nil)
+  }
+  
   func startButtonPressed() {
     if CLLocationManager.authorizationStatus() == .denied {
       self.displayPrivacyError(title: LOCATION_ERROR_TITLE, message: LOCATION_ERROR_MESSAGE)
@@ -172,9 +230,12 @@ extension TrackWalkViewController {
     if walkStarted {
       // End walk
       
+      print("Pitch: \(self.mapView.camera.pitch)")
+      print("Altitude: \(self.mapView.camera.altitude)")
+      print("Heading: \(self.mapView.camera.heading)")
+      
       let confirmEndAlert = UIAlertController(title: "End Walk", message: nil, preferredStyle: .actionSheet)
       confirmEndAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-      
       confirmEndAlert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action) in
         self.showSaveWalkAlert()
       }))
@@ -192,11 +253,21 @@ extension TrackWalkViewController {
   }
   
   func timerTick() {
-    time += 1
-    DispatchQueue.main.async {
-      self.statsView.timeLabel.text = self.getTimeLabelText(time: self.time)
-      self.statsView.distanceLabel.attributedText = self.distance.distanceLabelText()
+    if (self.isViewLoaded && self.view.window != nil) {
+      DispatchQueue.main.async {
+        self.statsView.timeLabel.text = self.getTimeLabelText(time: self.time)
+        self.statsView.distanceLabel.attributedText = self.distance.distanceLabelText()
+      }
     }
+    
+    // Search for new places every 30 seconds
+    if time % 30 == 0 {
+      self.searchForPlaques()
+    }
+    
+    print(time)
+    
+    time += 1
   }
   
   func textFieldDidChange(_ sender: Any) {
@@ -247,6 +318,18 @@ private extension TrackWalkViewController {
     // Note: need to add a user preference for this in the future
     locationManager.allowsBackgroundLocationUpdates = true
     
+    //      let camera = MKMapCamera(lookingAtCenter: self.mapView.userLocation.coordinate,
+    //                               fromDistance: 200,
+    //                               pitch: 80,
+    //                               heading: 0)
+    let camera = MKMapCamera()
+    camera.centerCoordinate = self.mapView.userLocation.coordinate
+    camera.pitch = 63
+    camera.altitude = 300
+    camera.heading = 0
+    self.mapView.setCamera(camera, animated: false)
+    self.mapView.userTrackingMode = .followWithHeading
+    
     transformStatsView(transform: CGAffineTransform(translationX: 0, y: statsView.frame.height))
     locations = []
     time = 0
@@ -286,8 +369,16 @@ private extension TrackWalkViewController {
       self.dropPin(coordinate: location.coordinate, name: "finish")
     }
     
+    let camera = MKMapCamera(lookingAtCenter: self.mapView.userLocation.coordinate,
+                             fromDistance: 1000,
+                             pitch: 0,
+                             heading: 0)
+    self.mapView.setCamera(camera, animated: false)
+    self.mapView.userTrackingMode = .follow
+    
     self.navigationItem.rightBarButtonItem?.title = "Start"
     self.transformStatsView(transform: .identity)
+    
     locationManager.allowsBackgroundLocationUpdates = false
     pedometer.stopUpdates()
     walkStarted = false
@@ -338,7 +429,7 @@ private extension TrackWalkViewController {
     self.renderMapImage { (image) in
       if let mapImage = image {
         let achievements = self.generateAchivements()
-        APIManager.sharedInstance.createWalk(name: name, members: self.members, locations: self.locations, achievements: achievements, image: mapImage, time: self.time, distance: self.distance, steps: self.steps, completion: { (response) in
+        APIManager.sharedInstance.createWalk(name: name, members: self.members?.map({ return $0.id }), locations: self.locations, achievements: achievements, image: mapImage, time: self.time, distance: self.distance, steps: self.steps, completion: { (response) in
           self.spinner.stopAnimating()
           
           switch response {
@@ -486,16 +577,138 @@ private extension TrackWalkViewController {
   func presentWalkDetailView(walk: Walk, id: String) {
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     let vc = storyboard.instantiateViewController(withIdentifier: "WalkDetailViewController") as! WalkDetailViewController
-    let navController = UINavigationController(rootViewController: vc)
+    let navController = self.navController(for: vc)
     vc.walk = walk
     vc.walkID = id
+    
+    vc.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: vc, action: #selector(vc.doneButtonPressed))
+    self.present(navController, animated: true, completion: nil)
+  }
+  
+  func navController(for vc: UIViewController) -> UINavigationController {
+    let navController = UINavigationController(rootViewController: vc)
+    
     navController.navigationBar.isTranslucent = false
     navController.navigationBar.barTintColor = .flatGreenDark
     navController.navigationBar.tintColor = .white
     navController.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
     navController.navigationBar.isTranslucent = false
     navController.hidesNavigationBarHairline = true
-    vc.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: vc, action: #selector(vc.doneButtonPressed))
-    self.present(navController, animated: true, completion: nil)
+    
+    return navController
+  }
+  
+  func mapRect(for region: MKCoordinateRegion) -> MKMapRect {
+    let topLeft = MKMapPointForCoordinate(CLLocationCoordinate2D(latitude: region.center.latitude + (region.span.latitudeDelta/2.0), longitude: region.center.longitude - (region.span.longitudeDelta/2.0)))
+    
+    let bottomRight = MKMapPointForCoordinate(CLLocationCoordinate2D(latitude: region.center.latitude - (region.span.latitudeDelta/2.0), longitude: region.center.longitude + (region.span.longitudeDelta/2.0)))
+    
+    let origin = MKMapPointMake(min(topLeft.x, bottomRight.x), min(topLeft.y, bottomRight.y))
+    let size = MKMapSize(width: fabs(bottomRight.x - topLeft.x),
+                         height: fabs(bottomRight.y - topLeft.y))
+    
+    return MKMapRect(origin: origin, size: size)
+  }
+  
+  func searchForPlaques() {
+    let region = MKCoordinateRegionMakeWithDistance(self.mapView.userLocation.coordinate, 500.0, 500.0)
+    let topLeft = CLLocationCoordinate2D(latitude: region.center.latitude + (region.span.latitudeDelta/2.0), longitude: region.center.longitude - (region.span.longitudeDelta/2.0))
+    let bottomRight = CLLocationCoordinate2D(latitude: region.center.latitude - (region.span.latitudeDelta/2.0), longitude: region.center.longitude + (region.span.longitudeDelta/2.0))
+    
+    let mapRect = self.mapRect(for: region)
+    
+    APIManager.sharedInstance.searchForPlaques(between: topLeft, and: bottomRight) { (response) in
+      switch response {
+      case .success(let json):
+        var plaques: [Plaque] = []
+        for (_, subJson): (String, JSON) in json {
+          var plaque = Plaque(id: subJson["id"].stringValue,
+                              coordinate: CLLocationCoordinate2D(latitude: subJson["latitude"].doubleValue,
+                                                                 longitude: subJson["longitude"].doubleValue),
+                              title: nil,
+                              inscription: nil,
+                              imageURL: nil,
+                              people: nil)
+          
+          plaques.append(plaque)
+        }
+        self.displaySearchResults(for: plaques, mapRect: mapRect)
+      case .failure(let error):
+        self.displayErrorAlert(error: error)
+      }
+    }
+  }
+  
+  func displaySearchResults(for plaques: [Plaque], mapRect: MKMapRect) {
+    if (!walkStarted) {
+      return
+    }
+    
+    // Remove pins not close to user
+    for annotation in self.mapView.annotations where !(annotation is WalkPin) {
+      if !(MKMapRectContainsPoint(mapRect, MKMapPointForCoordinate(annotation.coordinate))) {
+        DispatchQueue.main.async(execute: {
+          self.mapView.removeAnnotation(annotation)
+        })
+      }
+    }
+    
+    var pins: [MKAnnotation] = []
+    
+    // Add new pins if they have not already been added
+    DispatchQueue.global().async {
+      for plaque in plaques {
+        if self.isItemAlreadyOnMap(plaque: plaque) {
+          continue
+        }
+        
+        APIManager.sharedInstance.getPlaque(id: plaque.id, completion: { (response) in
+          switch response {
+          case .success(let json):
+            var newPlaque = plaque
+            newPlaque.title = json["title"].stringValue
+            newPlaque.inscription = json["inscription"].stringValue
+            var people: [Person] = []
+            for (_, subJson): (String, JSON) in json["people"] {
+              let str = subJson["uri"].stringValue.components(separatedBy: "/").last
+              if let id = str?.components(separatedBy: ".").first {
+                people.append(Person(id: id,
+                                     name: subJson["full_name"].stringValue,
+                                     url: nil))
+              }
+            }
+            newPlaque.people = people
+            if json["photographed?"].boolValue {
+              newPlaque.imageURL = json["thumbnail_url"].stringValue
+            }
+            
+            let pin = PlaquePin(plaque: newPlaque)
+            pin.coordinate = newPlaque.coordinate
+            DispatchQueue.main.async(execute: {
+              self.mapView.addAnnotation(pin)
+            })
+          //            pins.append(pin)
+          case .failure(let error):
+            print("Could not get plaque detail")
+          }
+        })
+      }
+      
+      //      DispatchQueue.main.async(execute: {
+      //        self.mapView.addAnnotations(pins)
+      
+    }
+  }
+  
+  func isItemAlreadyOnMap(plaque: Plaque) -> Bool {
+    var alreadyOnMap = false
+    
+    for annotation in self.mapView.annotations {
+      if let pin = annotation as? PlaquePin, plaque.id == pin.plaque.id {
+        alreadyOnMap = true
+      }
+    }
+    
+    return alreadyOnMap
   }
 }

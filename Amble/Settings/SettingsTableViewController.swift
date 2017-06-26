@@ -13,11 +13,13 @@ import Locksmith
 class SettingsTableViewController: UITableViewController {
   
   fileprivate let SETTINGS_CELL_IDENTIFIER = "settingsCell"
-  fileprivate let sections = [["Log Out"]]
+  fileprivate let PREFFERED_DISTANCE_UNIT = "PreferredDistanceUnit"
+  fileprivate let sections = [["mi", "km"], ["Licences"], ["Log Out"]]
   
   override func viewDidLoad() {
     super.viewDidLoad()
     self.navigationItem.title = "Settings"
+    self.setCustomBackButton(image: UIImage(named: "back-button"))
     self.setStatusBarStyle(UIStatusBarStyleContrast)
   }
 }
@@ -34,12 +36,38 @@ extension SettingsTableViewController {
     return sections[section].count
   }
   
+  override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    var title: String?
+    
+    if section == 0 {
+      title = "Preferred distance unit"
+    }
+    
+    return title
+  }
+  
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: SETTINGS_CELL_IDENTIFIER, for: indexPath)
     
-    cell.textLabel?.text = sections[indexPath.section][indexPath.row]
+    let value = sections[indexPath.section][indexPath.row]
+    cell.textLabel?.text = value
     
-    if indexPath.section == sections.count - 1 {
+    if indexPath.section == 0 {
+      if let unit = UserDefaults.standard.value(forKey: PREFFERED_DISTANCE_UNIT) as? String {
+        if unit == value {
+          cell.accessoryType = .checkmark
+        } else {
+          cell.accessoryType = .none
+        }
+      } else {
+        UserDefaults.standard.set("km", forKey: PREFFERED_DISTANCE_UNIT)
+        if value == "km" {
+          cell.accessoryType = .checkmark
+        }
+      }
+    } else if indexPath.section == 1 {
+      cell.accessoryType = .disclosureIndicator
+    } else if indexPath.section == sections.count - 1 {
       cell.textLabel?.textColor = .red
     }
     
@@ -52,7 +80,14 @@ extension SettingsTableViewController {
 extension SettingsTableViewController {
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
-    if indexPath.section == sections.count - 1 {
+    if indexPath.section == 0 {
+      UserDefaults.standard.set(sections[indexPath.section][indexPath.row], forKey: PREFFERED_DISTANCE_UNIT)
+      self.tableView.reloadData()
+    } else if indexPath.section == 1 {
+      let storyboard = UIStoryboard(name: "Main", bundle: nil)
+      let vc = storyboard.instantiateViewController(withIdentifier: "LicencesViewController")
+      self.navigationController?.pushViewController(vc, animated: true)
+    } else if indexPath.section == sections.count - 1 {
       displayLogoutAlert()
     }
   }

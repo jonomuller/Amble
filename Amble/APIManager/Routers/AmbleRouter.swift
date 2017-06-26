@@ -1,5 +1,5 @@
 //
-//  Router.swift
+//  AmbleRouter.swift
 //  Amble
 //
 //  Created by Jono Muller on 03/04/2017.
@@ -9,9 +9,9 @@
 import UIKit
 import Alamofire
 
-enum Router: URLRequestConvertible {
+enum AmbleRouter: Router {
   
-  static let baseURLPath = "http://ambleapp.herokuapp.com/api"
+  static var baseURLPath: String = "http://ambleapp.herokuapp.com/api"
   
   // /auth
   case login(details: Parameters)
@@ -111,7 +111,7 @@ enum Router: URLRequestConvertible {
   }
   
   func asURLRequest() throws -> URLRequest {
-    let url = try Router.baseURLPath.asURL();
+    let url = try AmbleRouter.baseURLPath.asURL();
     var urlRequest = try URLRequest(url: url.appendingPathComponent(path), method: method)
     
     if requiresJWTAuth {
