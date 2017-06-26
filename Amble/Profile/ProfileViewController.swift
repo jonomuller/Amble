@@ -133,7 +133,7 @@ private extension ProfileViewController {
         for (_, subJson): (String, JSON) in json["walks"] {
           let walk = WalkInfo(id: subJson["id"].stringValue,
                               name: subJson["name"].stringValue,
-                              image: subJson["image"].stringValue,
+                              image: subJson["imageURL"].stringValue,
                               date: dateFormatter.date(from: subJson["createdAt"].stringValue)!)
           walks.append(walk)
         }
