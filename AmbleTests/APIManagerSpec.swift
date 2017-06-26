@@ -48,7 +48,7 @@ class APIManagerSpec: QuickSpec {
       context("valid") {
         it("should log user in and return JWT") {
           // Mock API call to return successful login
-          let matcher = http(.post, uri: Router.baseURLPath + "/auth/login")
+          let matcher = http(.post, uri: AmbleRouter.baseURLPath + "/auth/login")
           let builder = Mockingjay.json(mockedResponse, status: 200, headers: [:])
           
           self.stub(matcher, builder)
@@ -89,7 +89,7 @@ class APIManagerSpec: QuickSpec {
       context("valid") {
         it("should register user and return JWT") {
           // Mock API call to return successful registration
-          let matcher = http(.post, uri: Router.baseURLPath + "/auth/register")
+          let matcher = http(.post, uri: AmbleRouter.baseURLPath + "/auth/register")
           let builder = Mockingjay.json(mockedResponse, status: 201, headers: [:])
           
           self.stub(matcher, builder)

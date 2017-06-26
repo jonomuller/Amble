@@ -168,7 +168,7 @@ extension InviteUserViewController: UISearchBarDelegate {
       let spinner = self.view.createIndicatorView(width: 50, height: 50)
       spinner.startAnimating()
       
-      APIManager.sharedInstance.userSearch(info: userInfo, completion: { (response) in
+      APIManager.sharedInstance.searchForUser(info: userInfo, completion: { (response) in
         spinner.stopAnimating()
         
         switch response {
@@ -219,8 +219,7 @@ extension InviteUserViewController {
       self.navigationItem.rightBarButtonItem = self.inviteBarButtonItem
       
       switch response {
-      case .success(let json):
-        print(json)
+      case .success:
         self.navigationController?.popViewController(animated: true)
       case .failure(let error):
         self.displayErrorAlert(error: error)
