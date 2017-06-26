@@ -65,7 +65,7 @@ extension APIManager {
             case .success:
               // Create walk
               let imageURL = url.components(separatedBy: "?")[0]
-              self.createWalk(name: name, members: members, locations: locations, achievements: achievements, image: imageURL, time: time, distance: distance, steps: steps, completion: { (createResponse) in
+              self.createWalk(name: name, members: members, locations: locations, achievements: achievements, imageURL: imageURL, time: time, distance: distance, steps: steps, completion: { (createResponse) in
                 completion(createResponse)
               })
             case .failure:
@@ -244,7 +244,7 @@ private extension APIManager {
     }
   }
   
-  func createWalk(name: String, members: [String]?, locations: [CLLocation], achievements: [Achievement], image: String, time: Int, distance: Double, steps: Int, completion: @escaping (APIResponse) -> Void) {
+  func createWalk(name: String, members: [String]?, locations: [CLLocation], achievements: [Achievement], imageURL: String, time: Int, distance: Double, steps: Int, completion: @escaping (APIResponse) -> Void) {
     
     var coordinates: [[Double]] = []
     for location in locations {
@@ -262,7 +262,7 @@ private extension APIManager {
       var details = ["name": name,
                      "coordinates": coordinates.description,
                      "achievements": achievementsString,
-                     "image": image,
+                     "imageURL": imageURL,
                      "time": time,
                      "distance": distance,
                      "steps": steps] as [String : Any]
